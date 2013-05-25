@@ -1,156 +1,33 @@
 <?php
 function v($val)
 {
-    var_dump($val);
+  var_dump($val);
 }
 
 function getDatetime()
 {
-    return date('Y-m-d H:i:s');
-}
-
-function mbStringToArray($sStr, $sEnc = 'UTF-8') {
-    $aRes = array();
-    while ($iLen = mb_strlen($sStr, $sEnc))
-    {
-        array_push($aRes, mb_substr($sStr, 0, 1, $sEnc));
-        $sStr = mb_substr($sStr, 1, $iLen, $sEnc);
-    }
-    return $aRes;
+  return date('Y-m-d H:i:s');
 }
 
 function fmdate($datetime) {
-    return date('Y/m/d', strtotime($datetime));
+  return date('Y/m/d', strtotime($datetime));
 }
 function fmdatetime($datetime) {
-    return date('Y/m/d H:i', strtotime($datetime));
-}
-function format_date($datetime, $format) {
-    return date($format, strtotime($datetime));
+  return date('Y/m/d H:i', strtotime($datetime));
 }
 
 function formatBytes($bytes, $precision = 2) { 
-    $units = array('B', 'KB', 'MB', 'GB', 'TB'); 
+  $units = array('B', 'KB', 'MB', 'GB', 'TB'); 
 
-    $bytes = max($bytes, 0); 
-    $pow = floor(($bytes ? log($bytes) : 0) / log(1024)); 
-    $pow = min($pow, count($units) - 1); 
+  $bytes = max($bytes, 0); 
+  $pow = floor(($bytes ? log($bytes) : 0) / log(1024)); 
+  $pow = min($pow, count($units) - 1); 
 
-    // Uncomment one of the following alternatives
-    $bytes /= pow(1024, $pow);
-    // $bytes /= (1 << (10 * $pow)); 
+  // Uncomment one of the following alternatives
+  $bytes /= pow(1024, $pow);
+  // $bytes /= (1 << (10 * $pow)); 
 
-    return round($bytes, $precision) . ' ' . $units[$pow]; 
-}
-
-//和暦変換用の関数
-function to_wareki($y, $m, $d)
-{
-    //年月日を文字列として結合
-    $ymd = sprintf("%02d%02d%02d", $y, $m, $d);
-    if ($ymd <= "19120729") {
-        $gg = "明治";
-        $yy = $y - 1867;
-    } elseif ($ymd >= "19120730" && $ymd <= "19261224") {
-        $gg = "大正";
-        $yy = $y - 1911;
-    } elseif ($ymd >= "19261225" && $ymd <= "19890107") {
-        $gg = "昭和";
-        $yy = $y - 1925;
-    } elseif ($ymd >= "19890108") {
-        $gg = "平成";
-        $yy = $y - 1988;
-    }
-    $wareki = "{$gg}{$yy}年{$m}月{$d}日";
-    return $wareki;
-}
-function addBusinessDay($day, $current=NULL, $format=NULL) {
-    if($current == NULL){
-        $c = time();
-    }else{
-        if(is_numeric($current)){
-            $c = $current;
-        }else{
-            $c = strtotime($current);
-        }
-    }
-    $t = mktime(date("H", $c), date("i", $c), date("s", $c), date("n", $c), date("j", $c) + $day, date("Y", $c));
-    return ($format ? date($format, $t) : $t);
-}
-function rest_date_text($limitDate, $from=null){
-    if(empty($from)) $from = date('Y-m-d H:i:s');
-    $dayDiff = (strtotime($limitDate) - strtotime($from))/(3600*24);
-
-    $rest_date_text='';
-    if ( strtotime($limitDate) > strtotime($from)) {
-        if($dayDiff > 1){
-            $rest_date_text=floor($dayDiff).'日';
-        }else{
-            $wk = strtotime($limitDate)-strtotime($from);
-            $hour = floor($wk / 3600);
-            $min  = floor(($wk - $hour*3600) / 60);
-            $rest_date_text= $hour.'時間'.$min.'分';
-        }
-    }
-    return $rest_date_text;
-}
-
-function url($path, $withOntimeToken = false)
-{
-    $url = TOP . $path;
-    if ($withOntimeToken) {
-        $url .= '?';
-        if (!empty($_SESSION['onetimeTokenForUser'])) {
-            $url .= '&onetime_token_for_user='.$_SESSION['onetimeTokenForUser'];
-        }
-        if (!empty($_SESSION['onetimeToken'])) {
-            $url .= '&onetime_token='.$_SESSION['onetimeToken'];
-        }
-    }
-    return $url;
-} 
-
-/**
- * User-Agentからフィンガープリントを生成
- * 
- * @return string フィンガープリント(32文字)
- */
-function fingerprintWithUA()
-{
-    return md5($_SERVER['HTTP_USER_AGENT'] . time());
-}
-
-/**
- * 会員ユーザの操作用にワンタイムトークンをセットしたhiddenタグを出力
- * 
- * @return string hiddenタグ
- */
-function onetimetokenHiddenForUser()
-{
-    if (empty($_SESSION['onetimeTokenForUser'])) return;
-    return '<input type="hidden" name="data[onetime_token_for_user]" value="' . $_SESSION['onetimeTokenForUser'] . '" />';
-}
-
-/**
- * 運営画面の操作用にワンタイムトークンをセットしたhiddenタグを出力
- * 
- * @return string hiddenタグ
- */
-function onetimetokenHiddenForOpeStaff()
-{
-    if (empty($_SESSION['OnetimeTokenForOpeStaff'])) return;
-    return '<input type="hidden" name="data[onetime_token_for_ope_staff]" value="' . $_SESSION['OnetimeTokenForOpeStaff'] . '" />';
-}
-
-/**
- * 管理画面の操作用にワンタイムトークンをセットしたhiddenタグを出力
- * 
- * @return string hiddenタグ
- */
-function onetimetokenHidden()
-{
-    if (empty($_SESSION['onetimeToken'])) return;
-    return '<input type="hidden" name="data[onetime_token]" value="' . $_SESSION['onetimeToken'] . '" />';
+  return round($bytes, $precision) . ' ' . $units[$pow]; 
 }
 
 /**
@@ -285,6 +162,7 @@ function extWithMime($mimetype) {
             return "json";
 
         case "image/jpg" :
+        case "image/jpeg" :
             return "jpg";
 
         case "image/png" :
@@ -419,36 +297,6 @@ function read_csv($file)
 }
 
 /**
- * Model->findメソッドで使える、キーワード検索用のconditionsを生成
- *
- * @param string $keyword
- * @param array $fields
- */
-function makeKeywordConditions($keyword, $fields)
-{
-    $keyword = str_replace('/　/', ' ', $keyword);
-    $word_array = preg_split("/ +/", $keyword);
-
-    foreach ($word_array as $k => $v) {
-        if (mb_strpos($v, '-') === 0)
-        {
-            $c = mb_substr($v, 1);
-            foreach ($fields as $field)
-            {
-                $cond[$k]['NOT']['OR']["{$field} LIKE"] = '%'. $c. '%';
-            }
-        } else {
-            foreach ($fields as $field)
-            {
-                $cond[$k]['OR']["{$field} LIKE"] = '%'. $v. '%';
-            }
-        }
-    }
-
-    return $cond;
-}
-
-/**
  * ランダムな文字列を取得
  */
 
@@ -458,14 +306,6 @@ function getRandomString($nLengthRequired = 8){
     $sRes = '';
     for ($i = 0; $i < $nLengthRequired; $i++) $sRes .= $sCharList[mt_rand(0, strlen($sCharList) - 1)];
     return $sRes;
-}
-
-/**
- * 税込金額を算出
- */
-function taxIncluded($price)
-{
-    return floor($price * Configure::read('tax'));
 }
 
 /**
@@ -496,7 +336,6 @@ function floatingMessage($delete = true)
         return false;
     }
 }
-
 
 /**
  * ファイル名から拡張子を取得
