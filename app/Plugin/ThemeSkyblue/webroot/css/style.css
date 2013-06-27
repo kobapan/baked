@@ -1,0 +1,488 @@
+@charset "utf-8";
+
+/*
+---------------------------------------------------------------------------
+■制作元：テンプレートパーティー
+■URL：http://template-party.com/
+---------------------------------------------------------------------------*/
+
+body {
+  color: #333333;
+  margin: 0px;
+  padding: 0px;
+  text-align: center;
+  font: 75%/2 "メイリオ", Meiryo, "ＭＳ Ｐゴシック", Osaka, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro";
+  background: #FFFFFF url(../images/bg.gif) repeat-x center top;  /*左から背景色、背景画像、背景画像をX軸(横軸)にリピート、背景画像を上部に配置する設定*/
+}
+/*トップページでの背景設定*/
+body#top {
+  background: #FFFFFF url(../images/bgtop.gif) repeat-x center top; /*左から背景色、背景画像、背景画像をX軸(横軸)にリピート、背景画像を上部に配置する設定*/
+}
+h1,h2,h3,h4,h5,p,ul,ol,li,dl,dt,dd,form{
+  margin: 0px;
+  padding: 0px;
+}
+ul{
+  list-style-type: none;
+}
+img {
+  border: none;
+}
+input,textarea,select {
+  font-size: 1em;
+}
+form {
+  margin: 0px;
+}
+table {
+  border-collapse:collapse;
+  font-size: 100%;
+  border-spacing: 0;
+}
+
+/*リンク（全般）設定
+---------------------------------------------------------------------------*/
+a {
+  color: #333333;
+}
+a:hover {
+  color: #00ADE6;
+  text-decoration: none;
+}
+
+/*コンテナー（HPを囲むブロック。フッターは除く。）
+---------------------------------------------------------------------------*/
+#container {
+  text-align: left;
+  width: 960px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/*ヘッダー（ロゴなどが入っている最上段ブロック）
+---------------------------------------------------------------------------*/
+#header {
+  text-align: left;
+  height: 96px; /*ヘッダーの高さ*/
+  width: 100%;
+  position: relative;
+}
+/*ロゴ画像設定*/
+#header #bk-logo {
+  position: absolute;
+  left: 30px; /*ヘッダーブロックに対して左から30pxの位置に配置*/
+  top: 21px;  /*ヘッダーブロックに対して上から15pxの位置に配置*/
+}
+#header #bk-logo > a {
+  font-size: 26px;
+  font-weight: bold;
+  color: #00ADE6;
+  text-decoration: none;
+}
+/*TEL画像設定*/
+#header #tel {
+  position: absolute;
+  top: 25px;    /*ヘッダーブロックに対して上から25pxの位置に配置*/
+  right: 30px;  /*ヘッダーブロックに対して右から30pxの位置に配置*/
+}
+#bk-site-caption {
+  font-size: 9px; /*文字サイズ*/
+  line-height: 12px;
+  font-weight: normal;  /*hタグのデフォルトの太字を標準に。太字がいいならこの１行削除。*/
+  color: #00ADE6;     /*文字色*/
+  position: absolute;
+  right: 30px;  /*ヘッダーブロックに対して右から30pxの位置に配置*/
+  top: 10px;    /*ヘッダーブロックに対して上から10pxの位置に配置*/
+}
+#header h1 a {
+  text-decoration: none;
+  color: #00ADE6; /*文字色*/
+}
+
+/*メインメニュー
+---------------------------------------------------------------------------*/
+ul#menu {
+  margin-left: -2px;
+  border-right: 1px solid #ccc;
+  border-left: 1px solid #fff;
+  overflow: hidden;
+}
+ul#menu li {
+  float: left;
+}
+ul#menu li > a {
+  display: block;
+  height: 58px;
+  width: 158px;
+  text-align: center;
+  line-height: 58px;
+  font-size: 12pt;
+  border-right: 1px solid #fff;
+  border-left: 1px solid #ccc;
+  text-decoration: none;
+  text-shadow: 0 1px #fff;
+}
+ul#menu li > a:hover,
+ul#menu li.current a {
+  color: #00ADE6;
+}
+
+/*コンテンツ（左右のブロックを囲むボックス）
+---------------------------------------------------------------------------*/
+#contents {
+  clear: left;
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-top: 4px;
+}
+
+/*メインコンテンツ
+---------------------------------------------------------------------------*/
+#main {
+  float: left;  /*メインコンテンツを左(left)に回り込み*/
+  width: 700px; /*メインコンテンツ幅*/
+  padding: 30px 0px;  /*左から、上下、左右への余白*/
+}
+/*h1タグ設定*/
+#main h1 {
+  font-size: 130%;  /*文字サイズ*/
+  color: #00ADE6;   /*文字色*/
+  clear: both;
+  width: 670px;
+  line-height: 42px;
+  height: 45px;
+  background: url(../images/h2bg.gif) no-repeat;  /*背景画像の読み込み、背景画像をリピートしない(no-repeat)*/
+  padding-left: 30px;
+  overflow: hidden;
+}
+#main h2 {
+  font-size: 130%;  /*文字サイズ*/
+  color: #333;
+  width: 670px;
+  padding-left: 10px;
+  overflow: hidden;
+}
+/*段落タグの余白設定*/
+#main p {
+  padding: 0.5em 10px 1em;  /*左から、上、左右、下への余白*/
+}
+/*段落タグに画像を置いた際、幅一杯使う為の設定*/
+#main p.img {
+  padding: 0.5em 0px 1em;
+}
+
+/*サブコンテンツ
+---------------------------------------------------------------------------*/
+#sub {
+  float: right; /*サブコンテンツを右(right)に回り込み*/
+  width: 240px; /*サブコンテンツ幅*/
+  padding: 30px 0px;  /*左から、上下、左右への余白*/
+}
+/*h3タグ設定*/
+#sub h3 {
+  font-size: 100%;
+  color: #FFFFFF; /*文字色*/
+  background: #434343 url(../images/h3bg.gif) no-repeat center top; /*背景色、背景画像の読み込み、リピートしない＆上部に配置*/
+  padding: 10px;  /*h3内の余白*/
+}
+/*段落タグの余白設定*/
+#sub p {
+  padding: 0.5em 0px 1em; /*左から、上、左右、下への余白*/
+}
+
+/*サブコンテンツ内の物件用ボックス
+---------------------------------------------------------------------------*/
+/*ボックス１個あたりの設定*/
+#sub .box1 {
+  line-height: 1.4; /*行間。通常より少し狭くしている。*/
+  padding: 5px;
+  overflow: hidden;
+  width: 228px;
+  border-right: 1px solid #c9c9c9;  /*右の線の幅、線種、色*/
+  border-bottom: 1px solid #c9c9c9; /*下の線の幅、線種、色*/
+  border-left: 1px solid #c9c9c9;   /*左の線の幅、線種、色*/
+  background: url(../images/bg2.gif) repeat-x bottom; /*背景画像の読み込み＆X軸(横軸)にリピート＆下部に配置*/
+}
+/*h4見出し設定*/
+#sub .box1 h4 {
+  font-size: 90%; /*文字サイズ*/
+  padding-bottom: 3px;
+  color: #00ADE6; /*文字色*/
+}
+#sub .box1 h4 a {
+  color: #00ADE6; /*h4タグのテキストリンクの色*/
+}
+/*段落タグ設定*/
+#sub .box1 p {
+  font-size: 90%; /*文字サイズ*/
+  padding: 0px;
+}
+/*写真配置の設定*/
+#sub .box1 p.img img {
+  float: left;  /*写真を左側に回り込みさせる*/
+  margin-right: 5px;
+  border: 1px solid #cccccc;  /*写真の枠の幅、線種、色*/
+}
+#sub .box1 p.img a:hover img  {
+  border: 1px solid #000000;  /*マウスオン時の写真の枠の幅、線種、色*/
+}
+
+/*サブメニュー
+---------------------------------------------------------------------------*/
+/*サブメニュー全体のブロック設定*/
+ul.submenu {
+  margin-bottom: 1em;
+  background: url(../images/bg1.gif) repeat-x center bottom;  /*背景画像の読み込み＆X軸(横軸)にリピート＆下部に配置*/
+}
+/*サブメニュー１個あたりの設定*/
+ul.submenu li a {
+  display: block;
+  width: 208px;
+  text-decoration: none;
+  border-right: 1px solid #c9c9c9;  /*右の線の幅、線種、色*/
+  border-left: 1px solid #c9c9c9;   /*左の線の幅、線種、色*/
+  border-bottom: 1px solid #c9c9c9; /*下の線の幅、線種、色*/
+  color: #333333;   /*文字色*/
+  padding: 5px 5px 5px 25px;
+  background: url(../images/arrow1.gif) no-repeat 5px center; /*矢印画像の読み込み＆リピートしない＆左から5pxの位置＆上下中央に配置*/
+}
+ul.submenu li.current a,
+ul.submenu li a:hover {
+  color: #00ADE6; /*マウスオン時の文字色*/
+  background: #DAF3FB url(../images/arrow1.gif) no-repeat 6px center; /*マウスオン時の矢印画像。位置をちょっとずらす。*/
+}
+
+/*トップページ内「更新情報・お知らせ」ブロック
+---------------------------------------------------------------------------*/
+#main .new {
+  overflow: auto;
+  height: 150px;
+  width: 690px;
+  padding-left: 10px;
+}
+#main .new dl {
+  clear: left;
+  width: 670px;
+  border-bottom: 1px solid #cccccc; /*日付ごとに入る下線の幅、線種、色*/
+  overflow: hidden;
+}
+#main .new dt {
+  font-weight: bold;
+  float: left;
+  width: 100px;
+}
+#main .new dd {
+  float: left;
+  width: 570px;
+}
+#main .new dd img {
+  vertical-align: middle;
+}
+*html #main .new dd img {
+  margin-top:0.5em;
+  vertical-align: baseline;
+}
+
+/*物件一覧ページ
+---------------------------------------------------------------------------*/
+/*ボックス１個あたりの設定*/
+#main .bukkenbox {
+  line-height: 1.4; /*行間。通常より少し狭くしている。*/
+  clear: both;
+  background: url(../images/bg2.gif) repeat-x bottom; /*背景画像の読み込み＆X軸(横軸)にリピート＆下部に配置*/
+  padding: 10px;  /*ボックス内の余白*/
+  overflow: hidden;
+  width: 678px;
+  border-right: 1px solid #c9c9c9;  /*右の線の幅、線種、色*/
+  border-bottom: 1px solid #c9c9c9; /*下の線の幅、線種、色*/
+  border-left: 1px solid #c9c9c9;   /*左の線の幅、線種、色*/
+}
+/*h4見出し設定*/
+#main .bukkenbox h4 {
+  font-size: 120%;  /*文字サイズ*/
+  padding-bottom: 0.5em;
+  color: #00ADE6;   /*文字色*/
+}
+#main .bukkenbox h4 a {
+  color: #00ADE6; /*h4タグのテキストリンクの色*/
+}
+/*段落タグ設定*/
+#main .bukkenbox p {
+  padding: 0px;
+}
+/*写真配置の設定*/
+#main .bukkenbox .img {
+  float: left;  /*左側に回り込み*/
+  width: 100px;
+  margin-right: 10px;
+}
+
+/*一覧ページの各物件ボックス内のテーブル
+---------------------------------------------------------------------------*/
+.bukkenbox table {
+  font-size: 90%;
+  font-family: "ＭＳ Ｐゴシック", Osaka, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro";
+  background-color: #ffffff;
+}
+.bukkenbox table, .bukkenbox table td, .bukkenbox table th{
+  border: 1px solid #bfbfbf;  /*枠線の幅、線種、色*/
+}
+.bukkenbox table td, .bukkenbox table th{
+  padding: 0;
+  line-height: 1.6;
+}
+.bukkenbox table th{
+  background-color: #f5f5f5;  /*見出し背景色*/
+  width: 90px;
+  text-align: center;
+  font-weight: normal;
+}
+.bukkenbox table td {
+  width: 150px;
+  padding-left: 3px;
+}
+.bukkenbox a img,
+#new a img,
+.b img {
+  border: 1px solid #cccccc !important;
+}
+.bukkenbox a:hover img,
+#new a:hover img,
+.b a:hover img {
+  border: 1px solid #000000 !important;
+}
+
+/*フッターメニュー
+---------------------------------------------------------------------------*/
+/*フッターメニューブロック全体の設定*/
+#footermenu {
+  clear: both;
+  width: 100%;
+  text-align: center; /*文字をセンタリング*/
+  position: relative;
+  height: 40px;
+}
+/*フッターメニュー１個あたりの設定*/
+#footermenu ul li {
+  display: inline;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+/*フッターブロック内にあるPAGETOPボタンの設定*/
+#footermenu #pagetop {
+  position: absolute;
+  right: 0px;   /*フッターメニューブロックに対して右から0pxの位置に配置*/
+  bottom: 0px;  /*フッターメニューブロックに対して下から0pxの位置に配置*/
+}
+
+/*フッター
+---------------------------------------------------------------------------*/
+#footer {
+  text-align: center; /*文字をセンタリング*/
+  color: #FFFFFF;   /*文字色*/
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background: #00ADE6;  /*背景色*/
+}
+#footer a {
+  text-decoration: none;
+  color: #FFFFFF;
+}
+
+/*テーブル１
+---------------------------------------------------------------------------*/
+.ta1 {
+  width: 700px;
+}
+.ta1, .ta1 td, .ta1 th{
+  border: 1px solid #c9c9c9;  /*テーブルの枠線の幅、線種、色*/
+  line-height: 2;
+}
+/*テーブル内の右側*/
+.ta1 td{
+  width: 457px;
+  padding: 10px;
+  vertical-align: top;
+}
+/*テーブル内の左側の見出し部分*/
+.ta1 th{
+  width: 200px;
+  padding: 10px;
+  text-align: center;
+  background-color: #E5E5E5;  /*背景色*/
+}
+/*テーブル１行目に入った見出し部分*/
+.ta1 th.tamidashi{
+  width: auto;
+  text-align: left;
+  color: #FFFFFF; /*文字色*/
+  background: #4CB6E7 url(../images/bg3.gif) repeat-x left top; /*背景色*、背景画像の読み込み＆X軸(横軸)にリピート＆上部に配置*/
+}
+
+/*トップページのスライドショー
+---------------------------------------------------------------------------*/
+#mainimg {
+  position: relative;
+  height: 250px;
+  width: 960px;
+}
+#mainimg .slide_file {
+  display: none;
+}
+#slide_image {
+  z-Index:2;
+  position: absolute;
+  left:0px;
+  top:0px;
+}
+#slide_image2 {
+  z-Index:1;
+  position: absolute;
+  left:0px;
+  top:0px;
+}
+
+/*その他
+---------------------------------------------------------------------------*/
+.look {
+  background-color: #E9E9E9;
+}
+.mb1em {
+  margin-bottom: 1em;
+}
+.clear {
+  clear: both;
+}
+ul.disc {
+  padding: 0em 25px 1em;
+  list-style: disc;
+}
+.color1 {
+  color: #00ADE6;
+}
+.pr {
+  font-size: 10px;
+}
+.btn {
+  font-size: 13px;
+}
+.wl {
+  width: 96%;
+}
+.ws {
+  width: 50%;
+}
+.c {
+  text-align: center;
+}
+.osusume {
+  background-image: url(../images/mark_osusume.gif) !important;
+  background-repeat: no-repeat !important;
+  background-position: right bottom !important;
+}
+.sumi {
+  background-image: url(../images/mark_sumi.gif) !important;
+  background-repeat: no-repeat !important;
+  background-position: right bottom !important;
+}

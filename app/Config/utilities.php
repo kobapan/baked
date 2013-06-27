@@ -16,23 +16,23 @@ function fmdatetime($datetime) {
   return date('Y/m/d H:i', strtotime($datetime));
 }
 
-function formatBytes($bytes, $precision = 2) { 
-  $units = array('B', 'KB', 'MB', 'GB', 'TB'); 
+function formatBytes($bytes, $precision = 2) {
+  $units = array('B', 'KB', 'MB', 'GB', 'TB');
 
-  $bytes = max($bytes, 0); 
-  $pow = floor(($bytes ? log($bytes) : 0) / log(1024)); 
-  $pow = min($pow, count($units) - 1); 
+  $bytes = max($bytes, 0);
+  $pow = floor(($bytes ? log($bytes) : 0) / log(1024));
+  $pow = min($pow, count($units) - 1);
 
   // Uncomment one of the following alternatives
   $bytes /= pow(1024, $pow);
-  // $bytes /= (1 << (10 * $pow)); 
+  // $bytes /= (1 << (10 * $pow));
 
-  return round($bytes, $precision) . ' ' . $units[$pow]; 
+  return round($bytes, $precision) . ' ' . $units[$pow];
 }
 
 /**
  * Mimeタイプを取得
- * 
+ *
  * @param  str $filename
  * @return str Mimeタイプ
  */
@@ -106,7 +106,7 @@ function mime_content_type2($filename) {
 
         case "wav" :
             return "audio/wav";
-            
+
         case "wma" :
             return "audio/x-ms-wma";
 
@@ -146,7 +146,7 @@ function mime_content_type2($filename) {
 
 /**
  * Mimeタイプから拡張子文字を取得
- * 
+ *
  * @param  str $mimetype Mimeタイプ
  * @return str 拡張子
  */
@@ -167,13 +167,13 @@ function extWithMime($mimetype) {
 
         case "image/png" :
             return "png";
-            
+
         case "image/gif" :
             return "gif";
-            
+
         case "image/bmp" :
             return "bmp";
-            
+
         case "image/tiff" :
             return "tiff";
 
@@ -212,7 +212,7 @@ function extWithMime($mimetype) {
 
         case "audio/wav" :
             return "wav";
-            
+
         case "audio/x-ms-wma" :
             return "wma";
 
@@ -243,56 +243,56 @@ function extWithMime($mimetype) {
 
 /**
  * ファイルポインタから行を取得し、CSVフィールドを処理する
- * 
+ *
  * @param  File pointer $handle
  * @param  int          $length
  * @param  String       $d
  * @param  Strinh       $e
- * @return Array		
+ * @return Array
  */
 function fgetcsv_reg(&$handle, $length = null, $d = ',', $e = '"') {
     $d = preg_quote($d);
     $e = preg_quote($e);
     $_line = "";
     $eof = NULL;
-    
+
     while ($eof != true)
     {
         $_line .= (empty($length) ? fgets($handle) : fgets($handle, $length));
         $itemcnt = preg_match_all('/'.$e.'/', $_line, $dummy);
         if ($itemcnt % 2 == 0) $eof = true;
     }
-    
+
     $_csv_line = preg_replace('/(?:\\r\\n|[\\r\\n])?$/', $d, trim($_line));
     $_csv_pattern = '/('.$e.'[^'.$e.']*(?:'.$e.$e.'[^'.$e.']*)*'.$e.'|[^'.$d.']*)'.$d.'/';
     preg_match_all($_csv_pattern, $_csv_line, $_csv_matches);
     $_csv_data = $_csv_matches[1];
-    
+
     for ($_csv_i=0; $_csv_i<count($_csv_data); $_csv_i++)
     {
         $_csv_data[$_csv_i] = preg_replace('/^'.$e.'(.*)'.$e.'$/s','$1',$_csv_data[$_csv_i]);
         $_csv_data[$_csv_i] = str_replace($e.$e, $e, $_csv_data[$_csv_i]);
     }
-    
+
     return empty($_line) ? false : $_csv_data;
 }
 
 function read_csv($file)
 {
     if (!file_exists($file)) return FALSE;
-    
+
     $lines = array();
     $file = file_get_contents($file);
     $file = ereg_replace("\r\n|\r|\n","\n",mb_convert_encoding($file,"UTF-8","SJIS-win"));
     $fp = tmpfile();
     fputs($fp, $file);
     fseek($fp, 0);
-    
+
     $lines = array();
     while ($o = fgetcsv($fp, 1024)) {
         $lines[] = $o;
     }
-    
+
     return $lines;
 }
 
@@ -310,15 +310,15 @@ function getRandomString($nLengthRequired = 8){
 
 /**
  * フローティングメッセージをセット
- * 
+ *
  * @param String $mes メッセージ文
- * @param String $type 'success'又は'error' フローティングメッセージの見た目が変わります 
+ * @param String $type 'success'又は'error' フローティングメッセージの見た目が変わります
  */
 function setFloatingMessage($mes, $type = 'success')
 {
     return $_SESSION['floating_message'] = array(
         'message' => $mes,
-    	'type' => $type,
+      'type' => $type,
     );
 }
 
@@ -342,9 +342,9 @@ function floatingMessage($delete = true)
  */
 function extensionByFilename($filename)
 {
-	$ext = substr($filename, strrpos($filename, '.') + 1);
-    return preg_match("/\//", $ext) ? '' : $ext;    
-} 
+  $ext = substr($filename, strrpos($filename, '.') + 1);
+    return preg_match("/\//", $ext) ? '' : $ext;
+}
 
 
 /**

@@ -22,8 +22,12 @@ mb_language('ja');
 mb_internal_encoding('utf8');
 date_default_timezone_set('Asia/Tokyo');
 
+require_once ROOT.DS.'my.php';
 require_once 'utilities.php';
+
 require_once 'environment.php';
+$environment = new Environment();
+$environment->setup();
 
 /**
  * CakePHP Debug Level:
@@ -38,7 +42,8 @@ require_once 'environment.php';
  * In production mode, flash messages redirect after a time interval.
  * In development mode, you need to click the flash message to continue.
  */
-	Configure::write('debug', (TYPE === 'RELEASE') ? 0 : 2);
+  Configure::write('debug', (!DEVELOPE) ? 0 : 2);
+  Configure::write('debug', 2);
 
 /**
  * Configure the Error handler used to handle errors for your application.  By default
@@ -54,11 +59,11 @@ require_once 'environment.php';
  *
  * @see ErrorHandler for more information on error handling and configuration.
  */
-	Configure::write('Error', array(
-		'handler' => 'ErrorHandler::handleError',
-		'level' => E_ALL & ~E_DEPRECATED,
-		'trace' => true
-	));
+  Configure::write('Error', array(
+    'handler' => 'ErrorHandler::handleError',
+    'level' => E_ALL & ~E_DEPRECATED,
+    'trace' => true
+  ));
 
 /**
  * Configure the Exception handler used for uncaught exceptions.  By default,
@@ -76,16 +81,16 @@ require_once 'environment.php';
  *
  * @see ErrorHandler for more information on exception handling and configuration.
  */
-	Configure::write('Exception', array(
-		'handler' => 'ErrorHandler::handleException',
-		'renderer' => 'ExceptionRenderer',
-		'log' => true
-	));
+  Configure::write('Exception', array(
+    'handler' => 'ErrorHandler::handleException',
+    'renderer' => 'ExceptionRenderer',
+    'log' => true
+  ));
 
 /**
  * Application wide charset encoding
  */
-	Configure::write('App.encoding', 'UTF-8');
+  Configure::write('App.encoding', 'UTF-8');
 
 /**
  * To configure CakePHP *not* to use mod_rewrite and to
@@ -98,7 +103,7 @@ require_once 'environment.php';
  *
  * And uncomment the App.baseUrl below:
  */
-	//Configure::write('App.baseUrl', env('SCRIPT_NAME'));
+  //Configure::write('App.baseUrl', env('SCRIPT_NAME'));
 
 /**
  * Uncomment the define below to use CakePHP prefix routes.
@@ -116,13 +121,13 @@ require_once 'environment.php';
  *	`manager_index()` and `/manager/controller/index`
  *
  */
-	//Configure::write('Routing.prefixes', array('admin'));
+  //Configure::write('Routing.prefixes', array('admin'));
 
 /**
  * Turn off all caching application-wide.
  *
  */
-	//Configure::write('Cache.disable', true);
+  //Configure::write('Cache.disable', true);
 
 /**
  * Enable cache checking.
@@ -133,13 +138,13 @@ require_once 'environment.php';
  * or in each action using $this->cacheAction = true.
  *
  */
-	//Configure::write('Cache.check', true);
+  //Configure::write('Cache.check', true);
 
 /**
  * Defines the default error type when using the log() function. Used for
  * differentiating error logging and debugging. Currently PHP supports LOG_DEBUG.
  */
-	define('LOG_ERROR', LOG_ERR);
+  define('LOG_ERROR', LOG_ERR);
 
 /**
  * Session configuration.
@@ -178,24 +183,25 @@ require_once 'environment.php';
  * the cake shell command: cake schema create Sessions
  *
  */
-	Configure::write('Session', array(
-		'defaults' => 'php'
-	));
+  Configure::write('Session', array(
+    'defaults' => 'php',
+    'timeout' => 1440,
+  ));
 
 /**
  * The level of CakePHP security.
  */
-	Configure::write('Security.level', 'medium');
+  Configure::write('Security.level', 'medium');
 
 /**
  * A random string used in security hashing methods.
  */
-	Configure::write('Security.salt', 'DYhG93b0qyJfIxfs2guVoUubWwvniR2G0FgaC9mi');
+  Configure::write('Security.salt', 'bufoaw89ehf@0ap;fijwvsbpyghefwa;ow');
 
 /**
  * A random numeric string (digits only) used to encrypt/decrypt strings.
  */
-	Configure::write('Security.cipherSeed', '76859309657453542496749683645');
+  Configure::write('Security.cipherSeed', '853748912384756782190982745');
 
 /**
  * Apply timestamps with the last modified time to static assets (js, css, images).
@@ -205,7 +211,7 @@ require_once 'environment.php';
  * Set to `true` to apply timestamps when debug > 0. Set to 'force' to always enable
  * timestamping regardless of debug value.
  */
-	//Configure::write('Asset.timestamp', true);
+  //Configure::write('Asset.timestamp', true);
 
 /**
  * Compress CSS output by removing comments, whitespace, repeating tags, etc.
@@ -214,7 +220,7 @@ require_once 'environment.php';
  *
  * To use, prefix the CSS link URL with '/ccss/' instead of '/css/' or use HtmlHelper::css().
  */
-	//Configure::write('Asset.filter.css', 'css.php');
+  //Configure::write('Asset.filter.css', 'css.php');
 
 /**
  * Plug in your own custom JavaScript compressor by dropping a script in your webroot to handle the
@@ -222,38 +228,38 @@ require_once 'environment.php';
  *
  * To use, prefix your JavaScript link URLs with '/cjs/' instead of '/js/' or use JavaScriptHelper::link().
  */
-	//Configure::write('Asset.filter.js', 'custom_javascript_output_filter.php');
+  //Configure::write('Asset.filter.js', 'custom_javascript_output_filter.php');
 
 /**
  * The classname and database used in CakePHP's
  * access control lists.
  */
-	Configure::write('Acl.classname', 'DbAcl');
-	Configure::write('Acl.database', 'default');
+  Configure::write('Acl.classname', 'DbAcl');
+  Configure::write('Acl.database', 'default');
 
 /**
- * Uncomment this line and correct your server timezone to fix 
+ * Uncomment this line and correct your server timezone to fix
  * any date & time related errors.
  */
-	//date_default_timezone_set('UTC');
+  //date_default_timezone_set('UTC');
 
 /**
  * Pick the caching engine to use.  If APC is enabled use it.
  * If running via cli - apc is disabled by default. ensure it's available and enabled in this case
  *
  * Note: 'default' and other application caches should be configured in app/Config/bootstrap.php.
- *       Please check the comments in boostrap.php for more info on the cache engines available 
+ *       Please check the comments in boostrap.php for more info on the cache engines available
  *       and their setttings.
  */
 $engine = 'File';
 if (extension_loaded('apc') && function_exists('apc_dec') && (php_sapi_name() !== 'cli' || ini_get('apc.enable_cli'))) {
-	$engine = 'Apc';
+  $engine = 'Apc';
 }
 
 // In development mode, caches should expire quickly.
 $duration = '+999 days';
 if (Configure::read('debug') >= 1) {
-	$duration = '+10 seconds';
+  $duration = '+10 seconds';
 }
 
 // Prefix each application on the same server with a different string, to avoid Memcache and APC conflicts.
@@ -264,12 +270,12 @@ $prefix = 'myapp_';
  * object listings, and translation cache files are stored with this configuration.
  */
 Cache::config('_cake_core_', array(
-	'engine' => $engine,
-	'prefix' => $prefix . 'cake_core_',
-	'path' => CACHE . 'persistent' . DS,
-	'serialize' => ($engine === 'File'),
-	'duration' => $duration,
-	'mask' => 0666,
+  'engine' => $engine,
+  'prefix' => $prefix . 'cake_core_',
+  'path' => CACHE . 'persistent' . DS,
+  'serialize' => ($engine === 'File'),
+  'duration' => $duration,
+  'mask' => 0666,
 ));
 
 /**
@@ -277,12 +283,12 @@ Cache::config('_cake_core_', array(
  * is used to store schema descriptions, and table listings in connections.
  */
 Cache::config('_cake_model_', array(
-	'engine' => $engine,
-	'prefix' => $prefix . 'cake_model_',
-	'path' => CACHE . 'models' . DS,
-	'serialize' => ($engine === 'File'),
-	'duration' => $duration,
-	'mask' => 0666,
+  'engine' => $engine,
+  'prefix' => $prefix . 'cake_model_',
+  'path' => CACHE . 'models' . DS,
+  'serialize' => ($engine === 'File'),
+  'duration' => $duration,
+  'mask' => 0666,
 ));
 
 

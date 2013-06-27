@@ -4,39 +4,40 @@ App::uses('Model', 'Model');
 class BaseModel extends Model {
 
     public $actsAs = array('BasicValidation');
-    private $originalFindType = false; 
+    public $addLabelInValidate = TRUE;
+    private $originalFindType = false;
     static $transactionCount = 0; // トランザクション実行回数
     const VALIDATION_MODE_ONLY = 10;
     const VALIDATION_MODE_REQUIRED = 20;
     const VALIDATION_MODE_SKIP = 30;
-    
+
     protected function begin() {
         self::$transactionCount++;
         if (self::$transactionCount != 1) return ;
-    
+
         $db = ConnectionManager::getDataSource($this->useDbConfig);
         $db->begin($this);
     }
-    
+
     protected function commit() {
         self::$transactionCount--;
         if (self::$transactionCount != 0) return ;
-    
+
         $db = ConnectionManager::getDataSource($this->useDbConfig);
         $db->commit($this);
     }
-    
+
     protected function rollback() {
         self::$transactionCount--;
         if (self::$transactionCount != 0) return ;
-    
+
         $db = ConnectionManager::getDataSource($this->useDbConfig);
         $db->rollback($this);
     }
 
 /**
  * 文字列からハッシュ値を取得
- * 
+ *
  * @param string
  * @return string A hash of the string.
  */
@@ -44,10 +45,10 @@ class BaseModel extends Model {
   {
     return hash('sha256', $string);
   }
-  
+
 /**
  * array(ModelName => array(id,column..))からarray(id,column..)に変換
- * 
+ *
  * @param array $data
  * @return array array(id,column)
  */
@@ -55,20 +56,20 @@ class BaseModel extends Model {
     {
         return isset($data[$this->name]) ? $data[$this->name] : $data ;
     }
-    
+
 /**
  * 最後の追加/更新したレコード配列を取得
- * 
+ *
  * @return mixed array/FALSE
  */
     public function getLastInsertData()
     {
         return $this->findById($this->id);
     }
-    
+
 /**
  * レコードの追加/更新
- * 
+ *
  * @param array $data
  * @param bool $update
  * @param sting $useValid
@@ -80,10 +81,10 @@ class BaseModel extends Model {
         try {
             $this->begin();
             $this->create();
-            
+
             if ($validateMode === FALSE)
                 $validateMode = self::VALIDATION_MODE_REQUIRED;
-            
+
             if (!isset($data[$this->name])) {
                 $tmp = $data;
                 $data = array($this->name => $tmp);
@@ -92,7 +93,7 @@ class BaseModel extends Model {
             $updateFields = $this->updateFields;
 
             $this->set($data);
-            
+
             if (($update !== false)
                 && (!empty($this->data[$this->name]['id']) || ($update === true))
             ) {
@@ -104,11 +105,11 @@ class BaseModel extends Model {
                 unset($this->data[$this->name]['id']);
                 $this->useValid = 'add';
             }
-            
+
             if ($useValid) $this->useValid = $useValid;
-            
+
             if (in_array($validateMode, array(self::VALIDATION_MODE_ONLY, self::VALIDATION_MODE_REQUIRED))) {
-                if (!$this->validates()) {
+                if (!$this->validates(array('fieldList'=>$updateFields))) {
                     list($key, $val) = each($this->validationErrors);
                     throw new Exception($val[0]);
                 }
@@ -130,7 +131,7 @@ class BaseModel extends Model {
 
 /**
  * バリデーションルールから入力必須ルールを削除
- * 
+ *
  * @param string $useValid
  */
     public function unableRequiredRule($useValid, $exceptions = array(), $delete = false)
@@ -138,7 +139,7 @@ class BaseModel extends Model {
         if($this->valid == NULL) return;
         foreach ($this->valid[$useValid] as $columnName => &$rule) {
             if (in_array($columnName, $exceptions)) continue;
-            
+
             if (!$delete) {
                 $rule = preg_replace('/required/', 'notEmpty', $rule);
             } else {
@@ -148,13 +149,13 @@ class BaseModel extends Model {
             if ($rule == '') { unset($this->valid[$useValid][$columnName]); }
         }
     }
-    
+
 /**
  * BasicValidationBehaivorによるバリデーションルールの設定
  */
     public function loadValidate() {
         $this->validate = array();
-        
+
         if ($this->useValid == 'update') {
             if (isset($this->valid['add'])){
                 $this->valid['update'] += $this->valid['add'];;
@@ -165,7 +166,7 @@ class BaseModel extends Model {
         if (isset($this->useValid) && !is_null($this->useValid) && isset($this->valid["{$this->useValid}"])) {
             foreach ($this->valid["{$this->useValid}"] as &$rule) {
                 $rule = preg_replace('/super_/', '', $rule);
-                
+
                 if (preg_match('/mustIn\[([^,]*),([^\]]*)\]/', $rule, $matchs)) {
                     $col = $matchs[1];
                     $val = $matchs[2];
@@ -176,7 +177,7 @@ class BaseModel extends Model {
                     }
                 }
             }
-            
+
             $this->setValidate($this->valid["{$this->useValid}"]);
         }
 
@@ -193,15 +194,15 @@ class BaseModel extends Model {
             }
         }
     }
-    
+
     protected function loadModel($modelName)
     {
         if (!isset($this->{$modelName})) $this->{$modelName} = ClassRegistry::init($modelName);
     }
-    
+
 /**
  * そのテーブルで一意となる任意の桁のコードを生成
- * 
+ *
  * @param int $digit 生成するコードの桁数
  * @param int $column コードを保持するテーブルのカラム名
  * @return string Generated code.
@@ -219,10 +220,10 @@ class BaseModel extends Model {
         }
         return $code;
     }
-    
+
 /**
  * Model::findのためのキーワード検索用conditionsを生成
- * 
+ *
  * @param array $keywords 検索キーワードの配列。複数指定でAND検索。
  * @param array $columns 検索対象のカラム名の配列。
  * @param string $mode
@@ -236,7 +237,7 @@ class BaseModel extends Model {
       $keywords = array_unique($keywords);
       $keywords = array_filter($keywords);
     }
-    
+
     $conditions = array();
     foreach ($keywords as $keyword) {
       $condition = array('OR' => array());
@@ -255,7 +256,7 @@ class BaseModel extends Model {
     }
     return $conditions;
   }
-    
+
     function paginateCount2($conditions = null, $recursive = 0, $extra = array()) {
         $parameters = compact('conditions');
         $this->recursive = $recursive;
@@ -265,7 +266,7 @@ class BaseModel extends Model {
         }
         return $count;
     }
-    
+
     public function find2($type = 'first', $query = array())
     {
         if (isset($query['limit'])) {
@@ -274,15 +275,15 @@ class BaseModel extends Model {
         } else {
             #$query['limit'] = 20;
         }
-        
+
         $type = preg_replace('/[a-z0-9-_]+-/i', '', $type);
-        
+
         return parent::find($type, $query);
     }
 
 /**
  * Model::findのためのoptionsを生成
- * 
+ *
  * @param array
  * @param array
  * @return array options
@@ -290,7 +291,7 @@ class BaseModel extends Model {
     public function getOptions($types, $options = array())
     {
         if (is_string($types)) $types = array($types);
-        
+
         // is_deleted=0を条件付与
         if (in_array('only_live', $types)) {
             $options = array_merge_recursive(array(

@@ -3,42 +3,31 @@ App::uses('Controller', 'Controller');
 
 class AppController extends Controller
 {
-  public $requiredSecurityActions = '';
-  
+  public $uses = array('System', 'Page', );
+
   public function beforeFilter()
   {
     parent::beforeFilter();
-    $this->__checkSSL();
+
+    if (!defined('URL')) define('URL', Router::url('/'));
+    if (!defined('BK_URL')) define('BK_URL', Router::url('/'));
+    if (!defined('BK_SITE_NAME')) define('BK_SITE_NAME', $this->System->value(System::KEY_SITE_NAME));
+    if (!defined('BK_SITE_CAPTION')) define('BK_SITE_CAPTION', $this->System->value(System::KEY_SITE_CAPTION));
+
+    if (!defined('EDITTING')) define('EDITTING', !empty($this->request->query['e']));
+
+    $this->_setToken();
   }
-  
-  private function __checkSSL()
+
+  private function _setToken()
   {
-    // SSLチェック
-    if (is_string($this->requiredSecurityActions)) $this->requiredSecurityActions = array($this->requiredSecurityActions);
-    
-    if ($this->requiredSecurityActions !== '' && TYPE !== 'TEST') {
-      // httpアクセス
-      if ($_SERVER['SERVER_PORT'] == 80) {
-        // SSLアクションの場合、httpsプロトコルでリダイレクト
-        if (in_array('*', $this->requiredSecurityActions)
-          || in_array($this->action, $this->requiredSecurityActions)
-        ) {
-          #die("GO HTTPS:".'https://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
-          $this->redirect('https://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
-        }
-      }
-      // httpsアクセス
-      else {
-        // SSLアクションでない場合、httpプロトコルでリダイレクト
-        if (!in_array('*', $this->requiredSecurityActions)
-          && !in_array($this->action, $this->requiredSecurityActions))
-        {
-          #die("GO HTTP:".'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
-          $this->redirect('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
-        }
-      }
-    }
+    session_start();
+    if (empty($_SESSION['token'])) $_SESSION['token'] = getRandomString(32);
+    $this->set(array(
+      '_token' => $_SESSION['token'],
+    ));
   }
-  
+
 }
+
 

@@ -22,13 +22,13 @@
 /**
  * Basic defines for timing functions.
  */
-	define('SECOND', 1);
-	define('MINUTE', 60);
-	define('HOUR', 3600);
-	define('DAY', 86400);
-	define('WEEK', 604800);
-	define('MONTH', 2592000);
-	define('YEAR', 31536000);
+  define('SECOND', 1);
+  define('MINUTE', 60);
+  define('HOUR', 3600);
+  define('DAY', 86400);
+  define('WEEK', 604800);
+  define('MONTH', 2592000);
+  define('YEAR', 31536000);
 
 /**
  * Loads configuration files. Receives a set of configuration files
@@ -41,21 +41,21 @@
  * @link http://book.cakephp.org/2.0/en/core-libraries/global-constants-and-functions.html#config
  */
 function config() {
-	$args = func_get_args();
-	foreach ($args as $arg) {
-		if (file_exists(APP . 'Config' . DS . $arg . '.php')) {
-			include_once APP . 'Config' . DS . $arg . '.php';
+  $args = func_get_args();
+  foreach ($args as $arg) {
+    if (file_exists(APP . 'Config' . DS . $arg . '.php')) {
+      include_once APP . 'Config' . DS . $arg . '.php';
 
-			if (count($args) == 1) {
-				return true;
-			}
-		} else {
-			if (count($args) == 1) {
-				return false;
-			}
-		}
-	}
-	return true;
+      if (count($args) == 1) {
+        return true;
+      }
+    } else {
+      if (count($args) == 1) {
+        return false;
+      }
+    }
+  }
+  return true;
 }
 
 /**
@@ -70,17 +70,17 @@ function config() {
  * @link http://book.cakephp.org/2.0/en/core-libraries/global-constants-and-functions.html#debug
  */
 function debug($var = false, $showHtml = null, $showFrom = true) {
-	if (Configure::read('debug') > 0) {
-		App::uses('Debugger', 'Utility');
-		$file = '';
-		$line = '';
-		$lineInfo = '';
-		if ($showFrom) {
-			$trace = Debugger::trace(array('start' => 1, 'depth' => 2, 'format' => 'array'));
-			$file = str_replace(array(CAKE_CORE_INCLUDE_PATH, ROOT), '', $trace[0]['file']);
-			$line = $trace[0]['line'];
-		}
-		$html = <<<HTML
+  if (Configure::read('debug') > 0) {
+    App::uses('Debugger', 'Utility');
+    $file = '';
+    $line = '';
+    $lineInfo = '';
+    if ($showFrom) {
+      $trace = Debugger::trace(array('start' => 1, 'depth' => 2, 'format' => 'array'));
+      $file = str_replace(array(CAKE_CORE_INCLUDE_PATH, ROOT), '', $trace[0]['file']);
+      $line = $trace[0]['line'];
+    }
+    $html = <<<HTML
 <div class="cake-debug-output">
 %s
 <pre class="cake-debug">
@@ -88,32 +88,32 @@ function debug($var = false, $showHtml = null, $showFrom = true) {
 </pre>
 </div>
 HTML;
-		$text = <<<TEXT
+    $text = <<<TEXT
 %s
 ########## DEBUG ##########
 %s
 ###########################
 TEXT;
-		$template = $html;
-		if (php_sapi_name() == 'cli' || $showHtml === false) {
-			$template = $text;
-			if ($showFrom) {
-				$lineInfo = sprintf('%s (line %s)', $file, $line);
-			}
-		}
-		if ($showHtml === null && $template !== $text) {
-			$showHtml = true;
-		}
-		$var = Debugger::exportVar($var, 25);
-		if ($showHtml) {
-			$template = $html;
-			$var = h($var);
-			if ($showFrom) {
-				$lineInfo = sprintf('<span><strong>%s</strong> (line <strong>%s</strong>)</span>', $file, $line);
-			}
-		}
-		printf($template, $lineInfo, $var);
-	}
+    $template = $html;
+    if (php_sapi_name() == 'cli' || $showHtml === false) {
+      $template = $text;
+      if ($showFrom) {
+        $lineInfo = sprintf('%s (line %s)', $file, $line);
+      }
+    }
+    if ($showHtml === null && $template !== $text) {
+      $showHtml = true;
+    }
+    $var = Debugger::exportVar($var, 25);
+    if ($showHtml) {
+      $template = $html;
+      $var = h($var);
+      if ($showFrom) {
+        $lineInfo = sprintf('<span><strong>%s</strong> (line <strong>%s</strong>)</span>', $file, $line);
+      }
+    }
+    printf($template, $lineInfo, $var);
+  }
 }
 
 if (!function_exists('sortByKey')) {
@@ -128,26 +128,26 @@ if (!function_exists('sortByKey')) {
  * @return mixed Sorted array
  * @link http://book.cakephp.org/2.0/en/core-libraries/global-constants-and-functions.html#sortByKey
  */
-	function sortByKey(&$array, $sortby, $order = 'asc', $type = SORT_NUMERIC) {
-		if (!is_array($array)) {
-			return null;
-		}
+  function sortByKey(&$array, $sortby, $order = 'asc', $type = SORT_NUMERIC) {
+    if (!is_array($array)) {
+      return null;
+    }
 
-		foreach ($array as $key => $val) {
-			$sa[$key] = $val[$sortby];
-		}
+    foreach ($array as $key => $val) {
+      $sa[$key] = $val[$sortby];
+    }
 
-		if ($order == 'asc') {
-			asort($sa, $type);
-		} else {
-			arsort($sa, $type);
-		}
+    if ($order == 'asc') {
+      asort($sa, $type);
+    } else {
+      arsort($sa, $type);
+    }
 
-		foreach ($sa as $key => $val) {
-			$out[] = $array[$key];
-		}
-		return $out;
-	}
+    foreach ($sa as $key => $val) {
+      $out[] = $array[$key];
+    }
+    return $out;
+  }
 
 }
 
@@ -163,33 +163,33 @@ if (!function_exists('sortByKey')) {
  * @link http://book.cakephp.org/2.0/en/core-libraries/global-constants-and-functions.html#h
  */
 function h($text, $double = true, $charset = null) {
-	if (is_array($text)) {
-		$texts = array();
-		foreach ($text as $k => $t) {
-			$texts[$k] = h($t, $double, $charset);
-		}
-		return $texts;
-	} elseif (is_object($text)) {
-		if (method_exists($text, '__toString')) {
-			$text = (string)$text;
-		} else {
-			$text = '(object)' . get_class($text);
-		}
-	} elseif (is_bool($text)) {
-		return $text;
-	}
+  if (is_array($text)) {
+    $texts = array();
+    foreach ($text as $k => $t) {
+      $texts[$k] = h($t, $double, $charset);
+    }
+    return $texts;
+  } elseif (is_object($text)) {
+    if (method_exists($text, '__toString')) {
+      $text = (string)$text;
+    } else {
+      $text = '(object)' . get_class($text);
+    }
+  } elseif (is_bool($text)) {
+    return $text;
+  }
 
-	static $defaultCharset = false;
-	if ($defaultCharset === false) {
-		$defaultCharset = Configure::read('App.encoding');
-		if ($defaultCharset === null) {
-			$defaultCharset = 'UTF-8';
-		}
-	}
-	if (is_string($double)) {
-		$charset = $double;
-	}
-	return htmlspecialchars($text, ENT_QUOTES, ($charset) ? $charset : $defaultCharset, $double);
+  static $defaultCharset = false;
+  if ($defaultCharset === false) {
+    $defaultCharset = Configure::read('App.encoding');
+    if ($defaultCharset === null) {
+      $defaultCharset = 'UTF-8';
+    }
+  }
+  if (is_string($double)) {
+    $charset = $double;
+  }
+  return htmlspecialchars($text, ENT_QUOTES, ($charset) ? $charset : $defaultCharset, $double);
 }
 
 /**
@@ -205,14 +205,14 @@ function h($text, $double = true, $charset = null) {
  * @link http://book.cakephp.org/2.0/en/core-libraries/global-constants-and-functions.html#pluginSplit
  */
 function pluginSplit($name, $dotAppend = false, $plugin = null) {
-	if (strpos($name, '.') !== false) {
-		$parts = explode('.', $name, 2);
-		if ($dotAppend) {
-			$parts[0] .= '.';
-		}
-		return $parts;
-	}
-	return array($plugin, $name);
+  if (strpos($name, '.') !== false) {
+    $parts = explode('.', $name, 2);
+    if ($dotAppend) {
+      $parts[0] .= '.';
+    }
+    return $parts;
+  }
+  return array($plugin, $name);
 }
 
 /**
@@ -224,11 +224,11 @@ function pluginSplit($name, $dotAppend = false, $plugin = null) {
  * @link http://book.cakephp.org/2.0/en/core-libraries/global-constants-and-functions.html#pr
  */
 function pr($var) {
-	if (Configure::read('debug') > 0) {
-		echo '<pre>';
-		print_r($var);
-		echo '</pre>';
-	}
+  if (Configure::read('debug') > 0) {
+    echo '<pre style="background: #fff; font-size: 9pt; text-align: left;">';
+    print_r($var);
+    echo '</pre>';
+  }
 }
 
 /**
@@ -242,15 +242,15 @@ function pr($var) {
  * @link http://book.cakephp.org/2.0/en/development/debugging.html#am
  */
 function am() {
-	$r = array();
-	$args = func_get_args();
-	foreach ($args as $a) {
-		if (!is_array($a)) {
-			$a = array($a);
-		}
-		$r = array_merge($r, $a);
-	}
-	return $r;
+  $r = array();
+  $args = func_get_args();
+  foreach ($args as $a) {
+    if (!is_array($a)) {
+      $a = array($a);
+    }
+    $r = array_merge($r, $a);
+  }
+  return $r;
 }
 
 /**
@@ -264,102 +264,102 @@ function am() {
  * @link http://book.cakephp.org/2.0/en/core-libraries/global-constants-and-functions.html#env
  */
 function env($key) {
-	if ($key === 'HTTPS') {
-		if (isset($_SERVER['HTTPS'])) {
-			return (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off');
-		}
-		return (strpos(env('SCRIPT_URI'), 'https://') === 0);
-	}
+  if ($key === 'HTTPS') {
+    if (isset($_SERVER['HTTPS'])) {
+      return (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off');
+    }
+    return (strpos(env('SCRIPT_URI'), 'https://') === 0);
+  }
 
-	if ($key === 'SCRIPT_NAME') {
-		if (env('CGI_MODE') && isset($_ENV['SCRIPT_URL'])) {
-			$key = 'SCRIPT_URL';
-		}
-	}
+  if ($key === 'SCRIPT_NAME') {
+    if (env('CGI_MODE') && isset($_ENV['SCRIPT_URL'])) {
+      $key = 'SCRIPT_URL';
+    }
+  }
 
-	$val = null;
-	if (isset($_SERVER[$key])) {
-		$val = $_SERVER[$key];
-	} elseif (isset($_ENV[$key])) {
-		$val = $_ENV[$key];
-	} elseif (getenv($key) !== false) {
-		$val = getenv($key);
-	}
+  $val = null;
+  if (isset($_SERVER[$key])) {
+    $val = $_SERVER[$key];
+  } elseif (isset($_ENV[$key])) {
+    $val = $_ENV[$key];
+  } elseif (getenv($key) !== false) {
+    $val = getenv($key);
+  }
 
-	if ($key === 'REMOTE_ADDR' && $val === env('SERVER_ADDR')) {
-		$addr = env('HTTP_PC_REMOTE_ADDR');
-		if ($addr !== null) {
-			$val = $addr;
-		}
-	}
+  if ($key === 'REMOTE_ADDR' && $val === env('SERVER_ADDR')) {
+    $addr = env('HTTP_PC_REMOTE_ADDR');
+    if ($addr !== null) {
+      $val = $addr;
+    }
+  }
 
-	if ($val !== null) {
-		return $val;
-	}
+  if ($val !== null) {
+    return $val;
+  }
 
-	switch ($key) {
-		case 'SCRIPT_FILENAME':
-			if (defined('SERVER_IIS') && SERVER_IIS === true) {
-				return str_replace('\\\\', '\\', env('PATH_TRANSLATED'));
-			}
-			break;
-		case 'DOCUMENT_ROOT':
-			$name = env('SCRIPT_NAME');
-			$filename = env('SCRIPT_FILENAME');
-			$offset = 0;
-			if (!strpos($name, '.php')) {
-				$offset = 4;
-			}
-			return substr($filename, 0, -(strlen($name) + $offset));
-			break;
-		case 'PHP_SELF':
-			return str_replace(env('DOCUMENT_ROOT'), '', env('SCRIPT_FILENAME'));
-			break;
-		case 'CGI_MODE':
-			return (PHP_SAPI === 'cgi');
-			break;
-		case 'HTTP_BASE':
-			$host = env('HTTP_HOST');
-			$parts = explode('.', $host);
-			$count = count($parts);
+  switch ($key) {
+    case 'SCRIPT_FILENAME':
+      if (defined('SERVER_IIS') && SERVER_IIS === true) {
+        return str_replace('\\\\', '\\', env('PATH_TRANSLATED'));
+      }
+      break;
+    case 'DOCUMENT_ROOT':
+      $name = env('SCRIPT_NAME');
+      $filename = env('SCRIPT_FILENAME');
+      $offset = 0;
+      if (!strpos($name, '.php')) {
+        $offset = 4;
+      }
+      return substr($filename, 0, -(strlen($name) + $offset));
+      break;
+    case 'PHP_SELF':
+      return str_replace(env('DOCUMENT_ROOT'), '', env('SCRIPT_FILENAME'));
+      break;
+    case 'CGI_MODE':
+      return (PHP_SAPI === 'cgi');
+      break;
+    case 'HTTP_BASE':
+      $host = env('HTTP_HOST');
+      $parts = explode('.', $host);
+      $count = count($parts);
 
-			if ($count === 1) {
-				return '.' . $host;
-			} elseif ($count === 2) {
-				return '.' . $host;
-			} elseif ($count === 3) {
-				$gTLD = array(
-					'aero',
-					'asia',
-					'biz',
-					'cat',
-					'com',
-					'coop',
-					'edu',
-					'gov',
-					'info',
-					'int',
-					'jobs',
-					'mil',
-					'mobi',
-					'museum',
-					'name',
-					'net',
-					'org',
-					'pro',
-					'tel',
-					'travel',
-					'xxx'
-				);
-				if (in_array($parts[1], $gTLD)) {
-					return '.' . $host;
-				}
-			}
-			array_shift($parts);
-			return '.' . implode('.', $parts);
-			break;
-	}
-	return null;
+      if ($count === 1) {
+        return '.' . $host;
+      } elseif ($count === 2) {
+        return '.' . $host;
+      } elseif ($count === 3) {
+        $gTLD = array(
+          'aero',
+          'asia',
+          'biz',
+          'cat',
+          'com',
+          'coop',
+          'edu',
+          'gov',
+          'info',
+          'int',
+          'jobs',
+          'mil',
+          'mobi',
+          'museum',
+          'name',
+          'net',
+          'org',
+          'pro',
+          'tel',
+          'travel',
+          'xxx'
+        );
+        if (in_array($parts[1], $gTLD)) {
+          return '.' . $host;
+        }
+      }
+      array_shift($parts);
+      return '.' . implode('.', $parts);
+      break;
+  }
+  return null;
 }
 
 /**
@@ -373,45 +373,45 @@ function env($key) {
  * @deprecated Please use Cache::write() instead
  */
 function cache($path, $data = null, $expires = '+1 day', $target = 'cache') {
-	if (Configure::read('Cache.disable')) {
-		return null;
-	}
-	$now = time();
+  if (Configure::read('Cache.disable')) {
+    return null;
+  }
+  $now = time();
 
-	if (!is_numeric($expires)) {
-		$expires = strtotime($expires, $now);
-	}
+  if (!is_numeric($expires)) {
+    $expires = strtotime($expires, $now);
+  }
 
-	switch (strtolower($target)) {
-		case 'cache':
-			$filename = CACHE . $path;
-		break;
-		case 'public':
-			$filename = WWW_ROOT . $path;
-		break;
-		case 'tmp':
-			$filename = TMP . $path;
-		break;
-	}
-	$timediff = $expires - $now;
-	$filetime = false;
+  switch (strtolower($target)) {
+    case 'cache':
+      $filename = CACHE . $path;
+    break;
+    case 'public':
+      $filename = WWW_ROOT . $path;
+    break;
+    case 'tmp':
+      $filename = TMP . $path;
+    break;
+  }
+  $timediff = $expires - $now;
+  $filetime = false;
 
-	if (file_exists($filename)) {
-		$filetime = @filemtime($filename);
-	}
+  if (file_exists($filename)) {
+    $filetime = @filemtime($filename);
+  }
 
-	if ($data === null) {
-		if (file_exists($filename) && $filetime !== false) {
-			if ($filetime + $timediff < $now) {
-				@unlink($filename);
-			} else {
-				$data = @file_get_contents($filename);
-			}
-		}
-	} elseif (is_writable(dirname($filename))) {
-		@file_put_contents($filename, $data, LOCK_EX);
-	}
-	return $data;
+  if ($data === null) {
+    if (file_exists($filename) && $filetime !== false) {
+      if ($filetime + $timediff < $now) {
+        @unlink($filename);
+      } else {
+        $data = @file_get_contents($filename);
+      }
+    }
+  } elseif (is_writable(dirname($filename))) {
+    @file_put_contents($filename, $data, LOCK_EX);
+  }
+  return $data;
 }
 
 /**
@@ -425,55 +425,55 @@ function cache($path, $data = null, $expires = '+1 day', $target = 'cache') {
  * @return true if files found and deleted false otherwise
  */
 function clearCache($params = null, $type = 'views', $ext = '.php') {
-	if (is_string($params) || $params === null) {
-		$params = preg_replace('/\/\//', '/', $params);
-		$cache = CACHE . $type . DS . $params;
+  if (is_string($params) || $params === null) {
+    $params = preg_replace('/\/\//', '/', $params);
+    $cache = CACHE . $type . DS . $params;
 
-		if (is_file($cache . $ext)) {
-			@unlink($cache . $ext);
-			return true;
-		} elseif (is_dir($cache)) {
-			$files = glob($cache . '*');
+    if (is_file($cache . $ext)) {
+      @unlink($cache . $ext);
+      return true;
+    } elseif (is_dir($cache)) {
+      $files = glob($cache . '*');
 
-			if ($files === false) {
-				return false;
-			}
+      if ($files === false) {
+        return false;
+      }
 
-			foreach ($files as $file) {
-				if (is_file($file) && strrpos($file, DS . 'empty') !== strlen($file) - 6) {
-					@unlink($file);
-				}
-			}
-			return true;
-		} else {
-			$cache = array(
-				CACHE . $type . DS . '*' . $params . $ext,
-				CACHE . $type . DS . '*' . $params . '_*' . $ext
-			);
-			$files = array();
-			while ($search = array_shift($cache)) {
-				$results = glob($search);
-				if ($results !== false) {
-					$files = array_merge($files, $results);
-				}
-			}
-			if (empty($files)) {
-				return false;
-			}
-			foreach ($files as $file) {
-				if (is_file($file) && strrpos($file, DS . 'empty') !== strlen($file) - 6) {
-					@unlink($file);
-				}
-			}
-			return true;
-		}
-	} elseif (is_array($params)) {
-		foreach ($params as $file) {
-			clearCache($file, $type, $ext);
-		}
-		return true;
-	}
-	return false;
+      foreach ($files as $file) {
+        if (is_file($file) && strrpos($file, DS . 'empty') !== strlen($file) - 6) {
+          @unlink($file);
+        }
+      }
+      return true;
+    } else {
+      $cache = array(
+        CACHE . $type . DS . '*' . $params . $ext,
+        CACHE . $type . DS . '*' . $params . '_*' . $ext
+      );
+      $files = array();
+      while ($search = array_shift($cache)) {
+        $results = glob($search);
+        if ($results !== false) {
+          $files = array_merge($files, $results);
+        }
+      }
+      if (empty($files)) {
+        return false;
+      }
+      foreach ($files as $file) {
+        if (is_file($file) && strrpos($file, DS . 'empty') !== strlen($file) - 6) {
+          @unlink($file);
+        }
+      }
+      return true;
+    }
+  } elseif (is_array($params)) {
+    foreach ($params as $file) {
+      clearCache($file, $type, $ext);
+    }
+    return true;
+  }
+  return false;
 }
 
 /**
@@ -484,14 +484,14 @@ function clearCache($params = null, $type = 'views', $ext = '.php') {
  * @link http://book.cakephp.org/2.0/en/core-libraries/global-constants-and-functions.html#stripslashes_deep
  */
 function stripslashes_deep($values) {
-	if (is_array($values)) {
-		foreach ($values as $key => $value) {
-			$values[$key] = stripslashes_deep($value);
-		}
-	} else {
-		$values = stripslashes($values);
-	}
-	return $values;
+  if (is_array($values)) {
+    foreach ($values as $key => $value) {
+      $values[$key] = stripslashes_deep($value);
+    }
+  } else {
+    $values = stripslashes($values);
+  }
+  return $values;
 }
 
 /**
@@ -503,18 +503,18 @@ function stripslashes_deep($values) {
  * @link http://book.cakephp.org/2.0/en/core-libraries/global-constants-and-functions.html#__
  */
 function __($singular, $args = null) {
-	if (!$singular) {
-		return;
-	}
+  if (!$singular) {
+    return;
+  }
 
-	App::uses('I18n', 'I18n');
-	$translated = I18n::translate($singular);
-	if ($args === null) {
-		return $translated;
-	} elseif (!is_array($args)) {
-		$args = array_slice(func_get_args(), 1);
-	}
-	return vsprintf($translated, $args);
+  App::uses('I18n', 'I18n');
+  $translated = I18n::translate($singular);
+  if ($args === null) {
+    return $translated;
+  } elseif (!is_array($args)) {
+    $args = array_slice(func_get_args(), 1);
+  }
+  return vsprintf($translated, $args);
 }
 
 /**
@@ -529,18 +529,18 @@ function __($singular, $args = null) {
  * @link http://book.cakephp.org/2.0/en/core-libraries/global-constants-and-functions.html#__n
  */
 function __n($singular, $plural, $count, $args = null) {
-	if (!$singular) {
-		return;
-	}
+  if (!$singular) {
+    return;
+  }
 
-	App::uses('I18n', 'I18n');
-	$translated = I18n::translate($singular, $plural, null, 6, $count);
-	if ($args === null) {
-		return $translated;
-	} elseif (!is_array($args)) {
-		$args = array_slice(func_get_args(), 3);
-	}
-	return vsprintf($translated, $args);
+  App::uses('I18n', 'I18n');
+  $translated = I18n::translate($singular, $plural, null, 6, $count);
+  if ($args === null) {
+    return $translated;
+  } elseif (!is_array($args)) {
+    $args = array_slice(func_get_args(), 3);
+  }
+  return vsprintf($translated, $args);
 }
 
 /**
@@ -553,17 +553,17 @@ function __n($singular, $plural, $count, $args = null) {
  * @link http://book.cakephp.org/2.0/en/core-libraries/global-constants-and-functions.html#__d
  */
 function __d($domain, $msg, $args = null) {
-	if (!$msg) {
-		return;
-	}
-	App::uses('I18n', 'I18n');
-	$translated = I18n::translate($msg, null, $domain);
-	if ($args === null) {
-		return $translated;
-	} elseif (!is_array($args)) {
-		$args = array_slice(func_get_args(), 2);
-	}
-	return vsprintf($translated, $args);
+  if (!$msg) {
+    return;
+  }
+  App::uses('I18n', 'I18n');
+  $translated = I18n::translate($msg, null, $domain);
+  if ($args === null) {
+    return $translated;
+  } elseif (!is_array($args)) {
+    $args = array_slice(func_get_args(), 2);
+  }
+  return vsprintf($translated, $args);
 }
 
 /**
@@ -580,17 +580,17 @@ function __d($domain, $msg, $args = null) {
  * @link http://book.cakephp.org/2.0/en/core-libraries/global-constants-and-functions.html#__dn
  */
 function __dn($domain, $singular, $plural, $count, $args = null) {
-	if (!$singular) {
-		return;
-	}
-	App::uses('I18n', 'I18n');
-	$translated = I18n::translate($singular, $plural, $domain, 6, $count);
-	if ($args === null) {
-		return $translated;
-	} elseif (!is_array($args)) {
-		$args = array_slice(func_get_args(), 4);
-	}
-	return vsprintf($translated, $args);
+  if (!$singular) {
+    return;
+  }
+  App::uses('I18n', 'I18n');
+  $translated = I18n::translate($singular, $plural, $domain, 6, $count);
+  if ($args === null) {
+    return $translated;
+  } elseif (!is_array($args)) {
+    $args = array_slice(func_get_args(), 4);
+  }
+  return vsprintf($translated, $args);
 }
 
 /**
@@ -618,17 +618,17 @@ function __dn($domain, $singular, $plural, $count, $args = null) {
  * @link http://book.cakephp.org/2.0/en/core-libraries/global-constants-and-functions.html#__dc
  */
 function __dc($domain, $msg, $category, $args = null) {
-	if (!$msg) {
-		return;
-	}
-	App::uses('I18n', 'I18n');
-	$translated = I18n::translate($msg, null, $domain, $category);
-	if ($args === null) {
-		return $translated;
-	} elseif (!is_array($args)) {
-		$args = array_slice(func_get_args(), 3);
-	}
-	return vsprintf($translated, $args);
+  if (!$msg) {
+    return;
+  }
+  App::uses('I18n', 'I18n');
+  $translated = I18n::translate($msg, null, $domain, $category);
+  if ($args === null) {
+    return $translated;
+  } elseif (!is_array($args)) {
+    $args = array_slice(func_get_args(), 3);
+  }
+  return vsprintf($translated, $args);
 }
 
 /**
@@ -660,17 +660,17 @@ function __dc($domain, $msg, $category, $args = null) {
  * @link http://book.cakephp.org/2.0/en/core-libraries/global-constants-and-functions.html#__dcn
  */
 function __dcn($domain, $singular, $plural, $count, $category, $args = null) {
-	if (!$singular) {
-		return;
-	}
-	App::uses('I18n', 'I18n');
-	$translated = I18n::translate($singular, $plural, $domain, $category, $count);
-	if ($args === null) {
-		return $translated;
-	} elseif (!is_array($args)) {
-		$args = array_slice(func_get_args(), 5);
-	}
-	return vsprintf($translated, $args);
+  if (!$singular) {
+    return;
+  }
+  App::uses('I18n', 'I18n');
+  $translated = I18n::translate($singular, $plural, $domain, $category, $count);
+  if ($args === null) {
+    return $translated;
+  } elseif (!is_array($args)) {
+    $args = array_slice(func_get_args(), 5);
+  }
+  return vsprintf($translated, $args);
 }
 
 /**
@@ -694,17 +694,17 @@ function __dcn($domain, $singular, $plural, $count, $category, $args = null) {
  * @link http://book.cakephp.org/2.0/en/core-libraries/global-constants-and-functions.html#__c
  */
 function __c($msg, $category, $args = null) {
-	if (!$msg) {
-		return;
-	}
-	App::uses('I18n', 'I18n');
-	$translated = I18n::translate($msg, null, null, $category);
-	if ($args === null) {
-		return $translated;
-	} elseif (!is_array($args)) {
-		$args = array_slice(func_get_args(), 2);
-	}
-	return vsprintf($translated, $args);
+  if (!$msg) {
+    return;
+  }
+  App::uses('I18n', 'I18n');
+  $translated = I18n::translate($msg, null, null, $category);
+  if ($args === null) {
+    return $translated;
+  } elseif (!is_array($args)) {
+    $args = array_slice(func_get_args(), 2);
+  }
+  return vsprintf($translated, $args);
 }
 
 /**
@@ -715,10 +715,10 @@ function __c($msg, $category, $args = null) {
  * @link http://book.cakephp.org/2.0/en/core-libraries/global-constants-and-functions.html#LogError
  */
 function LogError($message) {
-	App::uses('CakeLog', 'Log');
-	$bad = array("\n", "\r", "\t");
-	$good = ' ';
-	CakeLog::write('error', str_replace($bad, $good, $message));
+  App::uses('CakeLog', 'Log');
+  $bad = array("\n", "\r", "\t");
+  $good = ' ';
+  CakeLog::write('error', str_replace($bad, $good, $message));
 }
 
 /**
@@ -729,17 +729,17 @@ function LogError($message) {
  * @link http://book.cakephp.org/2.0/en/core-libraries/global-constants-and-functions.html#fileExistsInPath
  */
 function fileExistsInPath($file) {
-	$paths = explode(PATH_SEPARATOR, ini_get('include_path'));
-	foreach ($paths as $path) {
-		$fullPath = $path . DS . $file;
+  $paths = explode(PATH_SEPARATOR, ini_get('include_path'));
+  foreach ($paths as $path) {
+    $fullPath = $path . DS . $file;
 
-		if (file_exists($fullPath)) {
-			return $fullPath;
-		} elseif (file_exists($file)) {
-			return $file;
-		}
-	}
-	return false;
+    if (file_exists($fullPath)) {
+      return $fullPath;
+    } elseif (file_exists($file)) {
+      return $file;
+    }
+  }
+  return false;
 }
 
 /**
@@ -750,8 +750,8 @@ function fileExistsInPath($file) {
  * @link http://book.cakephp.org/2.0/en/core-libraries/global-constants-and-functions.html#convertSlash
  */
 function convertSlash($string) {
-	$string = trim($string, '/');
-	$string = preg_replace('/\/\//', '/', $string);
-	$string = str_replace('/', '_', $string);
-	return $string;
+  $string = trim($string, '/');
+  $string = preg_replace('/\/\//', '/', $string);
+  $string = str_replace('/', '_', $string);
+  return $string;
 }
