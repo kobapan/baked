@@ -1,6 +1,8 @@
 var Baked = function(){
   var token;
   var base;
+  var showingBlockBox;
+  var pageId;
 };
 
 /**
@@ -50,6 +52,60 @@ Baked.prototype.post = function(url, options){
   });
 };
 
+Baked.prototype.domBlockById = function(blockId){
+  return $('#bk-block-'+blockId);
+};
+
+/**
+ * Add the block.
+ *
+ * @param int pageId
+ * @param string sheet
+ * @param string package
+ * @param int beforeBlockId
+ */
+Baked.prototype.addBlock = function(pageId, sheet, package, beforeBlockId){
+  var self = this;
+
+  this.post('system/api_blocks/add', {
+    data: {
+      'page_id': pageId,
+      sheet: sheet,
+      package: package,
+      'before_block_id': beforeBlockId
+    },
+    ok: function(r){
+      if (beforeBlockId != 0) {
+        $beforeBlock = self.domBlockById(beforeBlockId);
+        $beforeBlock.before(r.html);
+      } else {
+        $('#bk-sheet-'+sheet).append(r.html);
+      }
+    }
+  })
+};
+
+/**
+ * Delete the block.
+ *
+ * @param {Object} blockId
+ */
+Baked.prototype.deleteBlock = function(blockId){
+  var self = this;
+
+  this.post('system/api_blocks/delete', {
+    data: {
+      'block_id': blockId
+    },
+    ok: function(r){
+      $block = self.domBlockById(blockId);
+      $block.slideUp('first', function(){
+        $block.remove();
+      });
+    }
+  })
+};
+
 // 編集エリアを表示
 Baked.prototype.openEditor = function($block){
   this.closeAllEditor();
@@ -69,6 +125,8 @@ Baked.prototype.toggleEditor = function($block){
 Baked.prototype.closeAllEditor = function(){
   $('div.bk-block.bk-open').removeClass('bk-open');
 };
+
+
 
 
 

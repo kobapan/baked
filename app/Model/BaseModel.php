@@ -197,7 +197,7 @@ class BaseModel extends Model {
 
     protected function loadModel($modelName)
     {
-        if (!isset($this->{$modelName})) $this->{$modelName} = ClassRegistry::init($modelName);
+      if (!isset($this->{$modelName})) $this->{$modelName} = ClassRegistry::init($modelName);
     }
 
 /**

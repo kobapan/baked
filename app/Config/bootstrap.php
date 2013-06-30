@@ -24,7 +24,7 @@
  */
 
 CakePlugin::loadAll(array(
-  #array('bootstrap' => TRUE),
+  array('bootstrap' => TRUE),
 ));
 
 Cache::config('default', array('engine' => 'File'));

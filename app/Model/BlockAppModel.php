@@ -4,6 +4,7 @@ App::uses('AppModel', 'Model');
 class BlockAppModel extends AppModel
 {
   public $name = 'BlockAppModel';
+  public $useTable = FALSE;
 
   public function valid($data)
   {
@@ -28,6 +29,27 @@ class BlockAppModel extends AppModel
       $this->rollback();
       return $e;
     }
+  }
+
+/**
+ * Return initiali data
+ *
+ * @return mixed array on success. true to ignore. false to occur error.
+ */
+  public function initialData()
+  {
+    return TRUE;
+  }
+
+/**
+ * Callback before delete.
+ *
+ * @param int $blockId
+ * @return boolean
+ */
+  public function willDelete($blockId)
+  {
+    return TRUE;
   }
 
 }

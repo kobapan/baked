@@ -3,3 +3,17 @@
 div.bk-block {
   margin-bottom: 15px;
 }
+
+ul#bk-available-blocks {
+  display: none;
+  position: absolute;
+  list-style: none;
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+  z-index: 100;
+}
+ul#bk-available-blocks li {
+}
+
+

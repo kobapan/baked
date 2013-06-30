@@ -20,7 +20,9 @@
  * @since         CakePHP(tm) v 0.2.9
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
-  Router::connect('/:plugin/:controller/:action');
+  Router::connect('/system/:controller/:action/*');
+  Router::connect('/:plugin/:controller/:action/*');
+
 
   Router::connect('/', array('controller' => 'display', 'action' => 'show'));
   Router::connect('/*', array('controller' => 'display', 'action' => 'show'));

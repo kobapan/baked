@@ -1,5 +1,5 @@
 $(function(){
-  $(document).on('submit', '[data-block-editor-heading]', function(){
+  $(document).on('submit', '[data-block-editor-photo-galleru]', function(){
     var $form = $(this);
     var $block = $form.parents('div.bk-block');
     var h = $form.find('select.bk-block-input-h > option:selected').val();

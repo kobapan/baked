@@ -20,17 +20,13 @@ class DisplayController extends AppController
 
     $menuList = $this->Page->menu($path, $parentMenu, $currentMenu, $pageId);
 
-    $blocks = $this->Block->find('all', array(
-      CONDITIONS => array(
-        'Block.page_id' => $pageId,
-      ),
-      ORDER => array(
-        'Block.order' => 'asc',
-      ),
+    $options = $this->Block->getOptions(array(Block::OPTION_ORDER_STANDARD), array(
+      CONDITIONS => array('Block.page_id' => $pageId,),
       FIELDS => array(
         'Block.id', 'Block.package', 'Block.sheet', 'Block.order', 'Block.data', 'Block.created', 'Block.modified',
       ),
     ));
+    $blocks = $this->Block->find('all', $options);
     $loadedModels = array();
     foreach ($blocks as $block) {
       if (in_array($block['Block']['package'], $loadedModels)) continue;
@@ -39,14 +35,13 @@ class DisplayController extends AppController
       $this->{$block['Block']['package']}->create();
     }
 
-    $blockEquipments = $this->_setupBlocks();
+    $this->_setupBlocks();
 
     $this->set(array(
       'menuList' => $menuList,
       'parentMenu' => $parentMenu,
       'currentMenu' => $currentMenu,
       'blocks' => $blocks,
-      'blockEquipments' => $blockEquipments,
     ));
 
     $this->render(FALSE);
@@ -62,6 +57,7 @@ class DisplayController extends AppController
     $folder = new Folder(APP.'Plugin');
     list($plugins, $files) = $folder->read();
     $pluginRoot = APP.'Plugin'.DS;
+
     foreach ($plugins as $plugin) {
       if (!preg_match('/^Block/', $plugin)) continue;
       $pluginWebroot = $pluginRoot.$plugin.DS.'webroot'.DS;
@@ -75,7 +71,9 @@ class DisplayController extends AppController
       }
     }
 
-    return $blockEquipments;
+    $this->set(array(
+      'blockEquipments' => $blockEquipments,
+    ));
   }
 
 }

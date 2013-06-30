@@ -14,6 +14,7 @@
 </head>
 
 <body id="top">
+<?php echo $this->Element('Baked/html') ?>
 
 <div id="container">
 

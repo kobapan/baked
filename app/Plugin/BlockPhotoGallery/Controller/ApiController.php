@@ -1,9 +1,9 @@
 <?php
-App::uses('BlockHeadingAppController', 'BlockHeading.Controller');
+App::uses('BlockPhotoGalleryAppController', 'BlockHeading.Controller');
 
-class ApiController extends BlockHeadingAppController
+class ApiController extends BlockPhotoGalleryAppController
 {
-  public $uses = array('Block', 'BlockHeading.BlockHeading');
+  public $uses = array('BlockPhotoGallery.BlockPhotoGallery');
 
   public function update()
   {
