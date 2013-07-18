@@ -40,7 +40,7 @@ class AppController extends Controller
  * @param int $blockId
  * @return html
  */
-  protected function htmlBlock($blockId)
+  protected function _htmlBlock($blockId)
   {
     $block = $this->Block->find('first', array(
       CONDITIONS => array('Block.id' => $blockId),

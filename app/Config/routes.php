@@ -21,6 +21,7 @@
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
   Router::connect('/system/:controller/:action/*');
+  Router::connect('/files/:action/*', array('controller' => 'files'));
   Router::connect('/:plugin/:controller/:action/*');
 
 

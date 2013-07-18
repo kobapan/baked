@@ -17,7 +17,7 @@ class ApiController extends BlockHeadingAppController
     if ($r !== TRUE) $this->Api->ng($r->getMessage());
 
     $this->Api->ok(array(
-      'html' => $this->htmlBlock($this->request->data['block_id']),
+      'html' => $this->_htmlBlock($this->request->data['block_id']),
     ));
   }
 

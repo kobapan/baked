@@ -5,6 +5,8 @@ var Baked = function(){
   var pageId;
 };
 
+Baked.prototype.blocks = {};
+
 /**
  * POST
  *

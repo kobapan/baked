@@ -11,6 +11,11 @@ class BlockAppModel extends AppModel
     return $this->add($data, NULL, NULL, self::VALIDATION_MODE_ONLY);
   }
 
+  public function convert($block)
+  {
+    return $block;
+  }
+
   public function updateData($id, $data)
   {
     try {
@@ -29,6 +34,18 @@ class BlockAppModel extends AppModel
       $this->rollback();
       return $e;
     }
+  }
+
+  public function getData($id)
+  {
+    $this->loadModel('Block');
+    $block = $this->Block->find('first', array(
+      CONDITIONS => array('Block.id' => $id),
+      FIELDS => array('Block.data'),
+    ));
+    if (empty($block)) return FALSE;
+
+    return $block['Block']['data'];
   }
 
 /**

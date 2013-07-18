@@ -30,7 +30,7 @@ class ApiBlocksController extends AppController
     if ($r !== TRUE) $this->Api->ng($r->getMessage());
 
     $this->Api->ok(array(
-      'html' => $this->htmlBlock($addedBlockId),
+      'html' => $this->_htmlBlock($addedBlockId),
     ));
   }
 

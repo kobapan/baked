@@ -1,0 +1,10 @@
+ul.block-photo-gallery {
+  list-style: none;
+  margin-left: -5px;
+  overflow: hidden;
+}
+ul.block-photo-gallery > li {
+  float: left;
+  margin-left: 5px;
+  margin-bottom: 5px;
+}

@@ -1,18 +1,32 @@
+baked.blocks.blockPhotoGallery = {
+  instances: {}
+};
+
 $(function(){
-  $(document).on('submit', '[data-block-editor-photo-galleru]', function(){
-    var $form = $(this);
-    var $block = $form.parents('div.bk-block');
-    var h = $form.find('select.bk-block-input-h > option:selected').val();
-    var text = $form.find('input.bk-block-input-text').val();
-    baked.post('block_heading/api/update', {
+  $(document).on('click', '[data-bk-block-photo-gallery-increase]', function(){
+    var $block = $(this).parents('div.bk-block');
+    var bkBlockId = $block.attr('data-bk-block-id');
+
+    baked.post('block_photo_gallery/api/increase', {
       data: {
-        'block_id': $block.attr('data-bk-block-id'),
-        h: h,
-        text: text
+        'block_id': bkBlockId
       },
       ok: function(r){
-        $block.replaceWith(r.html);
-        baked.closeAllEditor();
+        $block.find('ul.block-photo-gallery').replaceWith($(r.html).find('ul.block-photo-gallery'));
+      }
+    });
+  });
+
+  $(document).on('click', '[data-bk-block-photo-gallery-decrease]', function(){
+    var $block = $(this).parents('div.bk-block');
+    var bkBlockId = $block.attr('data-bk-block-id');
+
+    baked.post('block_photo_gallery/api/decrease', {
+      data: {
+        'block_id': bkBlockId
+      },
+      ok: function(r){
+        $block.find('ul.block-photo-gallery').replaceWith($(r.html).find('ul.block-photo-gallery'));
       }
     });
   });

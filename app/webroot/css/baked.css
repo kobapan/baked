@@ -16,4 +16,12 @@ ul#bk-available-blocks {
 ul#bk-available-blocks li {
 }
 
-
+div.spacer1 {
+  height: 10px;
+}
+div.spacer2 {
+  height: 20px;
+}
+div.spacer3 {
+  height: 30px;
+}

@@ -34,6 +34,9 @@ class DisplayController extends AppController
       $loadedModels[] = $block['Block']['package'];
       $this->{$block['Block']['package']}->create();
     }
+    foreach ($blocks as &$block) {
+      $block = $this->{$block['Block']['package']}->convert($block);
+    }
 
     $this->_setupBlocks();
 
@@ -50,7 +53,8 @@ class DisplayController extends AppController
   private function _setupBlocks()
   {
     $blockEquipments = array(
-      'js' => array(),
+      'js'  => array(),
+      'css' => array(),
     );
 
     App::uses('Folder', 'Utility');
@@ -66,6 +70,21 @@ class DisplayController extends AppController
       if (file_exists($editorJsPath)) {
         $blockEquipments['js'][] = array(
           'file' => sprintf('%s/js/editor.js', $plugin),
+          'editting' => TRUE,
+        );
+      }
+
+      $blockCssPath = $pluginWebroot.'css'.DS.'block.css';
+      if (file_exists($blockCssPath)) {
+        $blockEquipments['css'][] = array(
+          'file' => sprintf('%s/css/block.css', $plugin),
+        );
+      }
+
+      $editorCssPath = $pluginWebroot.'css'.DS.'editor.css';
+      if (file_exists($editorCssPath)) {
+        $blockEquipments['css'][] = array(
+          'file' => sprintf('%s/css/editor.css', $plugin),
           'editting' => TRUE,
         );
       }

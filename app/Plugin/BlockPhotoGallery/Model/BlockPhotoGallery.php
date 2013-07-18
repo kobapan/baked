@@ -6,7 +6,6 @@ class BlockPhotoGallery extends BlockAppModel
   public $name = 'BlockPhotoGallery';
   public $valid = array(
     'add' => array(
-      'text' => 'required | maxLen[50]',
     ),
     'update' => array(
       'id' => 'required | isExist'
@@ -21,6 +20,11 @@ class BlockPhotoGallery extends BlockAppModel
     );
   }
 
+  public function convert($block)
+  {
+    return $block;
+  }
+
 /**
  * Return initiali data
  *
@@ -28,7 +32,10 @@ class BlockPhotoGallery extends BlockAppModel
  */
   public function initialData()
   {
-    return array();
+    return array(
+      'width'  => 80,
+      'photos' => array(),
+    );
   }
 
 /**
@@ -42,7 +49,10 @@ class BlockPhotoGallery extends BlockAppModel
     return TRUE;
   }
 
+  public function insert()
+  {
 
+  }
 
 }
 

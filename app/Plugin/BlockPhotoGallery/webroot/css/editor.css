@@ -1,0 +1,17 @@
+ul.block-photo-gallery-edit-list {
+  list-style: none;
+}
+ul.block-photo-gallery-edit-list > li {
+  background: no-repeat 5px 5px;
+  padding: 10px 10px 10px 75px;
+  margin-bottom: 5px;
+  background-color: #333;
+  cursor: move;
+  min-height: 50px;
+}
+ul.block-photo-gallery-edit-list > li > div.input {
+}
+ul.block-photo-gallery-edit-list > li > div.input label {
+  color: #ddd;
+  width: 100px;
+}

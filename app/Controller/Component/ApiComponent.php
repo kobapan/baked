@@ -84,7 +84,7 @@ class ApiComponent extends Component {
 
         //header('Content-Type: text/javascript; charset=utf-8');
         $s = json_encode($this->_data);
-        $this->log("response:".$s, LOG_INFO);
+        #$this->log("response:".$s, LOG_INFO);
         echo $s;
 
         exit;
