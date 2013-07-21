@@ -42,16 +42,102 @@ class BlockPhotoGallery extends BlockAppModel
  * Callback before delete.
  *
  * @param int $blockId
- * @boolean
+ * @return boolean
  */
-  public function willDelete()
+  public function willDelete($blockId)
   {
-    return TRUE;
+    try {
+      $data = $this->getData($blockId);
+      if (empty($data)) throw new Exception(__('Not found block.'));
+
+      foreach ($data['photos'] as $fileId => $photo) {
+        $r = $this->deletePhoto($blockId, $fileId);
+        if ($r !== TRUE) throw new Exception('Failed to delete photo.');
+      }
+
+      return TRUE;
+    } catch (Exception $e) {
+      return FALSE;
+    }
+  }
+
+/**
+ * Save photos sort.
+ *
+ * @param int $blockId
+ * @param array $fileIds
+ * @return boolean
+ */
+  public function saveSort($blockId, $fileIds)
+  {
+    try {
+      $this->begin();
+      $this->loadModel('File');
+
+      $data = $this->getData($blockId);
+      if (empty($data)) throw new Exception('Not found block.');
+
+      $newPhotos = array();
+      foreach ($fileIds as $fileId) {
+        $newPhotos[$fileId] = $data['photos'][$fileId];
+      }
+      $data['photos'] = $newPhotos;
+
+      $r = $this->updateData($blockId, $data);
+      if ($r !== TRUE) throw $r;
+
+      $this->commit();
+      return TRUE;
+    } catch (Exception $e) {
+      $this->rollback();
+      return FALSE;
+    }
+  }
+
+/**
+ * Delete photo.
+ *
+ * @param int $blockId
+ * @param int $fileId
+ * @return boolean
+ */
+  public function deletePhoto($blockId, $fileId)
+  {
+    try {
+      $this->begin();
+      $this->loadModel('File');
+
+      $data = $this->getData($blockId);
+      $deleted = FALSE;
+
+      foreach ($data['photos'] as $key => $photo) {
+        if ($photo['file_id'] == $fileId) {
+          $r = $this->File->delete($fileId);
+          if ($r === TRUE) {
+            $deleted = TRUE;
+            unset($data['photos'][$key]);
+          }
+          break;
+        }
+      }
+
+      if ($deleted === FALSE) {
+        throw new Exception(__('Failed to delete file.'));
+      }
+
+      $r = $this->updateData($blockId, $data);
+      if ($r !== TRUE) throw $r;
+
+      $this->commit();
+      return TRUE;
+    } catch (Exception $e) {
+      $this->rollback();
+      return FALSE;
+    }
   }
 
   public function insert()
   {
-
   }
 
 }

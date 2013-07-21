@@ -36,6 +36,19 @@ class ApiBlocksController extends AppController
 
 
 /**
+ * Load the block html
+ *
+ * @return void
+ */
+  public function html_block()
+  {
+    $this->tokenFilterApi();
+    $this->Api->ok(array(
+      'html' => $this->_htmlBlock($this->request->data['block_id']),
+    ));
+  }
+
+/**
  * Delete the block.
  *
  * @param int $blockId

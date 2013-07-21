@@ -88,6 +88,24 @@ Baked.prototype.addBlock = function(pageId, sheet, package, beforeBlockId){
 };
 
 /**
+ * Load block html.
+ *
+ * @param {Object} blockId
+ */
+Baked.prototype.loadBlock = function(blockId, callbacks){
+  var self = this;
+
+  this.post('system/api_blocks/html_block', {
+    data: {
+      'block_id': blockId
+    },
+    ok: function(r){
+      if (callbacks && callbacks.ok) callbacks.ok(r);
+    }
+  })
+};
+
+/**
  * Delete the block.
  *
  * @param {Object} blockId

@@ -8,10 +8,29 @@ ul.block-photo-gallery-edit-list > li {
   background-color: #333;
   cursor: move;
   min-height: 50px;
+  position: relative;
 }
 ul.block-photo-gallery-edit-list > li > div.input {
+  height: 30px;
 }
 ul.block-photo-gallery-edit-list > li > div.input label {
   color: #ddd;
-  width: 100px;
+  width: 40px;
+  display: inline-block;
+  text-align: right;
+  padding-right: 10px;
+}
+ul.block-photo-gallery-edit-list > li > div.input input {
+  width: 300px;
+}
+ul.block-photo-gallery-edit-list > li > a.bk-photo-gallery-delete-photo {
+  position: absolute;
+  right: 7px;
+  top: 7px;
+  text-decoration: none;
+  color: #fff;
+  opacity: 0.8;
+}
+ul.block-photo-gallery-edit-list > li > a.bk-photo-gallery-delete-photo:hover {
+  opacity: 1.0;
 }

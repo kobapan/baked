@@ -11,30 +11,47 @@ $uploaderId = sprintf('photo-gallary-uploader-%s', $block['Block']['id']);
 
 <div class="spacer2"></div>
 
-<?php if (!empty($block['Block']['data']['photos'])) : ?>
-  <?php
-  echo $this->Form->create('File', array('type' => 'defailt'));
-  ?>
-  <ul class="block-photo-gallery-edit-list">
-    <?php foreach ($block['Block']['data']['photos'] as $photo) : ?>
+<?php
+echo $this->Form->create('File', array(
+  'default' => FALSE,
+  'class' => 'bk-form-01 bk-photo-gallery-form',
+));
+?>
+<ul class="block-photo-gallery-edit-list" id="bk-block-photo-gallery-edit-list-<?php echo $block['Block']['id'] ?>">
+  <?php foreach (@$block['Block']['data']['photos'] as $photo) : ?>
+    <?php
+    $thumbUrl = sprintf('%sfiles/images/square/70/%s.%s', URL, $photo['file']['code'], $photo['file']['ext']);
+    ?>
+    <li style="background-image: url(<?php echo $thumbUrl ?>)" data-bk-file-id="<?php echo $photo['file_id'] ?>">
+      <a href="javascript:;" class="bk-photo-gallery-delete-photo"><i class="icon-remove-sign icon-large"></i></a>
       <?php
-      $thumbUrl = sprintf('%sfiles/images/square/60/%s.%s', URL, $photo['file']['code'], $photo['file']['ext']);
+      echo $this->Form->input("File.{$photo['file_id']}.title", array(
+        'value' => $photo['title'],
+      ));
+      echo $this->Form->input("File.{$photo['file_id']}.alt", array(
+        'value' => $photo['alt'],
+      ));
       ?>
-      <li style="background-image: url(<?php echo $thumbUrl ?>)">
-        <?php
-        echo $this->Form->input("File.{$photo['file_id']}.title");
-        echo $this->Form->input("File.{$photo['file_id']}.alt");
-        ?>
-      </li>
-    <?php endforeach ; ?>
-  </ul>
-  <div class="spacer2"></div>
-  <button type="submit"><?php echo __('Save') ?></button>
-  <?php
-  echo $this->Form->end();
-  ?>
-  <div class="spacer2"></div>
-<?php endif ; ?>
+    </li>
+  <?php endforeach ; ?>
+
+  <script>
+  $(function(){
+    $('#bk-block-photo-gallery-edit-list-<?php echo $block['Block']['id'] ?>').sortable({
+      axis: 'y',
+      update: function(event, ui) {
+        baked.blocks.blockPhotoGallery.saveSort(<?php echo $block['Block']['id'] ?>);
+      }
+    });
+  });
+  </script>
+</ul>
+<div class="spacer2"></div>
+<button type="submit"><?php echo __('Save') ?></button>
+<?php
+echo $this->Form->end();
+?>
+<div class="spacer2"></div>
 
 <div id="<?php echo $uploaderId ?>">
   <p>Your browser doesn't have Flash, Silverlight, Gears, BrowserPlus or HTML5 support.</p>
@@ -78,10 +95,7 @@ $(function(){
 
       init: {
         UploadComplete: function(up, files) {
-          c(files);
-        },
-        FileUploaded: function(up, file, info) {
-          c(info);
+          baked.blocks.blockPhotoGallery.reload(<?php echo $block['Block']['id'] ?>);
         }
       },
 

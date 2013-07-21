@@ -82,7 +82,16 @@ ul.bk-editor-boxes > li > a:hover {
   padding: 3px;
 }
 
-
+form.bk-form-01 {
+}
+form.bk-form-01 input[type=text],
+form.bk-form-01 input[type=number],
+form.bk-form-01 input[type=password] {
+  color: #666;
+  font-weight: bold;
+  padding: 3px;
+  border-radius: 3px;
+}
 
 
 

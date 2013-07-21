@@ -31,6 +31,9 @@ class AppController extends Controller
 
   protected function tokenFilterApi()
   {
+    if ($_SESSION['token'] !== $this->request->data['token']) {
+      $this->Api->ng(__('Invalid token.'));
+    }
     return TRUE;
   }
 
