@@ -14,7 +14,7 @@
   <script src="<?php echo URL ?>js/plupload/plupload.html4.js"></script>
   <script src="<?php echo URL ?>js/plupload/plupload.html5.js"></script>
   <script src="<?php echo URL ?>js/plupload/jquery.ui.plupload/jquery.ui.plupload.js"></script>
-
+  <script src="<?php echo URL ?>js/ckeditor/ckeditor.js"></script>
 <?php endif ; ?>
 <script>
   baked.base = '<?php echo URL ?>';

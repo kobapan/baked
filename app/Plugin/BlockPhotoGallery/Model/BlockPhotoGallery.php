@@ -1,7 +1,7 @@
 <?php
-App::uses('BlockAppModel', 'Model');
+App::uses('BlockPhotoGalleryAppModel', 'BlockPhotoGallery.Model');
 
-class BlockPhotoGallery extends BlockAppModel
+class BlockPhotoGallery extends BlockPhotoGalleryAppModel
 {
   public $name = 'BlockPhotoGallery';
   public $valid = array(

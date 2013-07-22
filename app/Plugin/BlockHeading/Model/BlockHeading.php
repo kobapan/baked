@@ -1,7 +1,7 @@
 <?php
-App::uses('BlockAppModel', 'Model');
+App::uses('BlockHeadingAppModel', 'BlockHeading.Model');
 
-class BlockHeading extends BlockAppModel
+class BlockHeading extends BlockHeadingAppModel
 {
   public $name = 'BlockHeading';
   public $useTable = FALSE;

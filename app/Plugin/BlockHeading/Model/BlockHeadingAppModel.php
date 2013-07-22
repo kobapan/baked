@@ -1,7 +1,7 @@
 <?php
-App::uses('AppModek', 'Model');
+App::uses('BlockAppModel', 'Model');
 
-class BlockHeadingAppModel extends AppModel
+class BlockHeadingAppModel extends BlockAppModel
 {
 }
 

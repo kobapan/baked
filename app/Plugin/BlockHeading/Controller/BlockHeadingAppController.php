@@ -1,7 +1,8 @@
 <?php
-App::uses('BlockAppController', 'Controller');
+#App::uses('BlockAppController', 'Controller');
+App::uses('AppController', 'Controller');
 
-class BlockHeadingAppController extends BlockAppController
+class BlockHeadingAppController extends AppController
 {
 }
 

@@ -24,24 +24,10 @@
  */
 
 CakePlugin::loadAll(array(
-  array('bootstrap' => TRUE),
+  #array('bootstrap' => TRUE),
 ));
 
 Cache::config('default', array('engine' => 'File'));
-
-App::build(array(
-    'Controller' => array(
-        APP.'Controller'.DS,
-        APP.'Controller'.DS.'Front'.DS,
-        APP.'Controller'.DS.'Admin'.DS,
-    ),
-    'View' => array(
-        APP.'View'.DS,
-        APP.'View'.DS.'Front'.DS,
-        APP.'View'.DS.'Admin'.DS,
-    ),
-));
-
 
 Configure::write('Dispatcher.filters', array(
   'AssetDispatcher',
