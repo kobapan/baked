@@ -10,6 +10,7 @@ class BlockPhotoGalleryApiController extends BlockAppController
     $this->tokenFilterApi();
 
     try {
+      $this->BlockPhotoGallery->begin();
       $r = $this->File->saveWithFilePost($_FILES['file'], 'image');
       if ($r !== TRUE) throw $r;
 
@@ -30,7 +31,9 @@ class BlockPhotoGalleryApiController extends BlockAppController
       $data['photos'][$file['File']['id']] = $photo;
       $r = $this->BlockPhotoGallery->updateData($this->request->data['block_id'], $data);
       if ($r !== TRUE) throw $r;
+      $this->BlockPhotoGallery->commit();
     } catch (Exception $e) {
+      $this->BlockPhotoGallery->rollback();
       $this->Api->ng($e->getMessage());
     }
 

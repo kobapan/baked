@@ -16,7 +16,6 @@ class BlockTextApiController extends BlockAppController
     if ($r !== TRUE) $this->Api->ng($r->getMessage());
 
     $this->Api->ok(array(
-      't' => 'OK',
       'html' => $this->_htmlBlock($this->request->data['block_id']),
     ));
   }

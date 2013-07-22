@@ -110,6 +110,31 @@ class File extends AppModel
     return $this->addFile($file['tmp_name'], $file['type'], $useValid);
   }
 
+  public function delete($id = null, $cascade = true)
+  {
+    try {
+      $this->begin();
+
+      $file = $this->find('first', array(
+        CONDITIONS => array('File.id' => $id),
+        FIELDS => array('File.path'),
+      ));
+      if (empty($file)) throw new Exception(__('Not found file recode.'));
+
+      $r = unlink($file['File']['absolute_path']);
+      if ($r !== TRUE) throw new Exception(__('Failed to delete file source.'));
+
+      $r = parent::delete($id, $cascade);
+      if ($r !== TRUE) throw new Exception(__('Failed to delete file recode.'));
+
+      $this->commit();
+      return TRUE;
+    } catch (Exception $e) {
+      $this->rollback();
+      return FALSE;
+    }
+  }
+
 /**
  * バリデーションルール
  * 画像ファイルかどうか

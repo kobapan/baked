@@ -155,6 +155,7 @@ class Block extends AppModel
       if (empty($block)) throw new Exception(__('Not found block'));
 
       $data += $block['Block']['data'];
+
       $modelData = array(
         'id'   => $id,
         'data' => $data,

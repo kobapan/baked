@@ -5,7 +5,7 @@ class FilesController extends AppController
 {
   public $uses = array('File');
   public static $MIN_IMAGE_SIZE = 20;
-  public static $MAX_IMAGE_SIZE = 600;
+  public static $MAX_IMAGE_SIZE = 1000;
   public static $STEP_IMAGE_SIZE = 10;
 
   public function images($type, $size, $name)

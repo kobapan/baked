@@ -50,6 +50,10 @@ class AppController extends Controller
     $block = $this->Block->find('first', array(
       CONDITIONS => array('Block.id' => $blockId),
     ));
+
+    $this->uses[] = "{$block['Block']['package']}.{$block['Block']['package']}";
+    $this->{$block['Block']['package']}->create();
+
     $view = new View();
     return $view->element('Baked/block', array(
       'block' => $block,
