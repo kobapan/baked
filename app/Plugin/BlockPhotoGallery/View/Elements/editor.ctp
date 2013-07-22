@@ -65,7 +65,7 @@ $(function(){
     $('#<?php echo $uploaderId ?>').plupload({
       // General settings
       runtimes : 'html5,flash,browserplus,silverlight,gears,html4',
-      url : '<?php echo URL ?>block_photo_gallery/api/upload',
+      url : '<?php echo URL ?>block_photo_gallery/block_photo_gallery_api/upload',
       max_file_size : '1000mb',
       max_file_count: 20, // user can add no more then 20 files at a time
       //chunk_size : '1mb',

@@ -1,7 +1,7 @@
 <?php
-App::uses('BlockTextAppModel', 'BlockText.Model');
+App::uses('BlockAppModel', 'Model');
 
-class BlockText extends BlockTextAppModel
+class BlockText extends BlockAppModel
 {
   public $name = 'BlockText';
   public $useTable = FALSE;

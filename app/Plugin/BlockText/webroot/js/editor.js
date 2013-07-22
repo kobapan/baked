@@ -8,7 +8,7 @@ $(function(){
     });
     params['block_id'] = blockId;
 
-    baked.post('block_text/api/update', {
+    baked.post('block_text/block_text_api/update', {
       data: params,
       ok: function(r){
         $block.find('div.bk-block-text-content').replaceWith($(r.html).find('div.bk-block-text-content'));

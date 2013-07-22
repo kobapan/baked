@@ -20,7 +20,7 @@ baked.blocks.blockPhotoGallery = {
         fileIds.push($(this).attr('data-bk-file-id'));
       });
 
-      baked.post('block_photo_gallery/api/save_sort', {
+      baked.post('block_photo_gallery/block_photo_gallery_api/save_sort', {
         data: {
           'block_id': blockId,
           'file_ids': fileIds
@@ -38,7 +38,7 @@ $(function(){
     var $block = $(this).parents('div.bk-block');
     var bkBlockId = $block.attr('data-bk-block-id');
 
-    baked.post('block_photo_gallery/api/increase', {
+    baked.post('block_photo_gallery/block_photo_gallery_api/increase', {
       data: {
         'block_id': bkBlockId
       },
@@ -52,7 +52,7 @@ $(function(){
     var $block = $(this).parents('div.bk-block');
     var bkBlockId = $block.attr('data-bk-block-id');
 
-    baked.post('block_photo_gallery/api/decrease', {
+    baked.post('block_photo_gallery/block_photo_gallery_api/decrease', {
       data: {
         'block_id': bkBlockId
       },
@@ -71,7 +71,7 @@ $(function(){
       params[v.name] = v.value;
     });
     params['block_id'] = bkBlockId;
-    baked.post('block_photo_gallery/api/update', {
+    baked.post('block_photo_gallery/block_photo_gallery_api/update', {
       data: params,
       ok: function(r){
         $block.find('ul.block-photo-gallery').replaceWith($(r.html).find('ul.block-photo-gallery'));
@@ -85,7 +85,7 @@ $(function(){
     var $photo = $(this).parent();
     var fileId = $photo.attr('data-bk-file-id');
 
-    baked.post('block_photo_gallery/api/delete_photo', {
+    baked.post('block_photo_gallery/block_photo_gallery_api/delete_photo', {
       data: {
         'block_id': bkBlockId,
         'file_id': fileId
