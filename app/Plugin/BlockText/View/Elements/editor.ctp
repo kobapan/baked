@@ -22,6 +22,8 @@ echo $this->Form->end();
 
 <script>
 $(function(){
-  CKEDITOR.replace('<?php echo $id ?>');
+  CKEDITOR.replace('<?php echo $id ?>', {
+    enterMode : CKEDITOR.ENTER_BR
+  });
 });
 </script>

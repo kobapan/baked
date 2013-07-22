@@ -1,16 +1,16 @@
 <?php
 App::uses('BlockAppController', 'Controller');
 
-class BlockPhotoApiController extends BlockAppController
+class BlockTextPhotoApiController extends BlockAppController
 {
-  public $uses = array('BlockPhoto.BlockPhoto', 'File');
+  public $uses = array('BlockTextPhoto.BlockTextPhoto', 'File');
 
   public function upload()
   {
     $this->tokenFilterApi();
 
     try {
-      $this->BlockPhoto->begin();
+      $this->BlockTextPhoto->begin();
 
       $r = $this->File->saveWithFilePost($_FILES['file'], 'image');
       if ($r !== TRUE) throw $r;
@@ -19,7 +19,7 @@ class BlockPhotoApiController extends BlockAppController
         CONDITIONS => array('File.id' => $this->File->id),
       ));
 
-      $data = $this->BlockPhoto->getData($this->request->data['block_id']);
+      $data = $this->BlockTextPhoto->getData($this->request->data['block_id']);
       if (!empty($data['photo'])) {
         $r = $this->File->delete($data['photo']['id']);
         if ($r !== TRUE) throw new Exception(__('Failed to delete old photo.'));
@@ -27,11 +27,11 @@ class BlockPhotoApiController extends BlockAppController
 
       if ($data === FALSE) throw new Exception(__('Not found block'));
       $data['photo'] = $file['File'];
-      $r = $this->BlockPhoto->updateData($this->request->data['block_id'], $data);
+      $r = $this->BlockTextPhoto->updateData($this->request->data['block_id'], $data);
       if ($r !== TRUE) throw $r;
-      $this->BlockPhoto->commit();
+      $this->BlockTextPhoto->commit();
     } catch (Exception $e) {
-      $this->BlockPhoto->rollback();
+      $this->BlockTextPhoto->rollback();
       $this->Api->ng($e->getMessage());
     }
 
@@ -44,11 +44,9 @@ class BlockPhotoApiController extends BlockAppController
   {
     $this->tokenFilterApi();
 
-    $data = arrayWithKeys($this->request->data, array('align', 'size'));
-    if (isset($data['size'])) {
-      $data['size'] = round($data['size'], -1);
-    }
-    $r = $this->BlockPhoto->updateData(@$this->request->data['block_id'], $data);
+    $data = arrayWithKeys($this->request->data, array('text', 'align', 'size'));
+    if (isset($data['size'])) $data['size'] = round($data['size'], -1);
+    $r = $this->BlockTextPhoto->updateData(@$this->request->data['block_id'], $data);
     if ($r !== TRUE) $this->Api->ng($r->getMessage());
 
     $this->Api->ok(array(

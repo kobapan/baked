@@ -6,7 +6,6 @@ div.bk-block-photo-box > .outer {
 }
 div.bk-block-photo-box > .outer > img {
   width: 100%;
-  height: 100%;
 }
 div.bk-block-photo-box .ui-icon-gripsmall-diagonal-se {
   background: url(../../img/icons/resize.png);
