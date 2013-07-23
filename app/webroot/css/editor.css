@@ -9,6 +9,32 @@ div.bk-block {
 div.bk-block:hover,
 div.bk-block.bk-open {
   border-color: #ccc;
+  background: #f6f6f6;
+}
+a.bk-block-move-handle {
+  background: url(../img/icons/bg-move-handle.png);
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: block;
+  min-width: 100px;
+  width: 25%;
+  cursor: move;
+  z-index: 1001;
+  text-decoration: none;
+  display: none;
+  border-left: 1px solid #ccc;
+}
+div.bk-block:hover a.bk-block-move-handle {
+  display: block;
+}
+div.bk-block.bk-open a.bk-block-move-handle {
+  display: none;
+}
+a.bk-block-move-handle > div.inner {
+  background: url(../img/icons/move.png) no-repeat center;
+  height: 100%;
 }
 a.bk-editor-opener {
   position: absolute;
@@ -33,11 +59,14 @@ div.bk-block.bk-open > div.bk-editor {
 
 ul.bk-controller {
   display: none;
-  background: #f2f2f2;
+  background: #f6f6f6;
   width: 30px;
   position: absolute;
   top: -1px;
   left: -31px;
+  padding: 5px 0;
+  border: 1px solid #ccc;
+  border-right: 0;
 }
 div.bk-block:hover > ul.bk-controller,
 div.bk-block.bk-open > ul.bk-controller {
@@ -47,6 +76,9 @@ ul.bk-controller li {
 }
 ul.bk-controller li > a {
   display: block;
+  text-decoration: none;
+  text-align: center;
+  padding: 5px 0;
 }
 
 ul.bk-editor-boxes {

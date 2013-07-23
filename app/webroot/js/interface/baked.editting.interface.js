@@ -1,5 +1,8 @@
 $(function(){
 
+  baked.setupCkeditor();
+  baked.sortableBlocks();
+
   $(document).on('click', '[data-bk-editor-opener]', function(){
     var $block = $(this).parent();
     baked.openEditor($block);
@@ -11,7 +14,6 @@ $(function(){
   });
 
   $(document).on('click', '[data-bk-add-block]', function(){
-    c("ADDDD!");
     var $ul = $('#bk-available-blocks');
     var package = $(this).attr('data-bk-add-block');
     var sheet = $ul.attr('data-bk-sheet');
@@ -49,8 +51,7 @@ $(function(){
 
     var attr = $(e.target).attr('data-bk-show-block-list');
     if ('undefined' != typeof attr) return;
-
-    //if ($(e.target).parents('#bk-available-blocks').length > 0) return;
+    if ($(e.target).parents('[data-bk-show-block-list]').length > 0) return;
 
     $('#bk-available-blocks').hide();
     baked.showingBlockBox = false;

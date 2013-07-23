@@ -115,6 +115,12 @@ echo $this->element('Baked/sheet', array(
 echo $this->Element('sub_navigation');
 ?>
 
+<?php
+echo $this->element('Baked/sheet', array(
+  'sheet' => 'sub',
+));
+?>
+
 <h3>おすすめ物件</h3>
 
 <div class="box1">

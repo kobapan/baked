@@ -20,6 +20,8 @@ class ApiBlocksController extends AppController
  */
   public function add()
   {
+    $this->tokenFilterApi();
+
     $r = $this->Block->addByPackage(
       @$this->request->data['page_id'],
       @$this->request->data['package'],
@@ -48,6 +50,26 @@ class ApiBlocksController extends AppController
     ));
   }
 
+  public function save_sort()
+  {
+    $this->tokenFilterApi();
+
+    foreach ($this->request->data['sorted_ids'] as $sheet => $ids) {
+      $sort = 0;
+      foreach ($ids as $id) {
+        $data = array(
+          'id' => $id,
+          'sheet' => $sheet,
+          'order' => $sort,
+        );
+        $r = $this->Block->add($data, TRUE);
+        $sort++;
+      }
+    }
+
+    $this->Api->ok();
+  }
+
 /**
  * Delete the block.
  *
@@ -56,6 +78,8 @@ class ApiBlocksController extends AppController
  */
   public function delete()
   {
+    $this->tokenFilterApi();
+
     $r = $this->Block->delete(@$this->request->data['block_id'], TRUE);
     if ($r !== TRUE) $this->Api->ng($r->getMessage());
 

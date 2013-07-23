@@ -1,4 +1,4 @@
-<div id="bk-sheet-<?php echo $sheet; ?>" class="bk-sheet">
+<div id="bk-sheet-<?php echo $sheet; ?>" class="bk-sheet" data-bk-sheet="<?php echo $sheet; ?>">
   <?php foreach ($blocks as $block) : ?>
     <?php
     if ($block['Block']['sheet'] != $sheet) continue;

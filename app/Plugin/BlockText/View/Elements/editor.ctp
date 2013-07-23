@@ -12,6 +12,7 @@ echo $this->Form->input('Block.text', array(
   'label' => FALSE,
   'value' => $block['Block']['data']['text'],
   'default' => FALSE,
+  'class' => 'ckeditor-textarea',
 ));
 ?>
 <div class="spacer1"></div>
@@ -19,11 +20,3 @@ echo $this->Form->input('Block.text', array(
 <?php
 echo $this->Form->end();
 ?>
-
-<script>
-$(function(){
-  CKEDITOR.replace('<?php echo $id ?>', {
-    enterMode : CKEDITOR.ENTER_BR
-  });
-});
-</script>

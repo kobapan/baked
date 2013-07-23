@@ -2,6 +2,7 @@ var Baked = function(){
   var token;
   var base;
   var showingBlockBox;
+  var saveBlockSortTimer;
   var pageId;
 };
 
@@ -103,6 +104,57 @@ Baked.prototype.loadBlock = function(blockId, callbacks){
       if (callbacks && callbacks.ok) callbacks.ok(r);
     }
   })
+};
+
+Baked.prototype.setupCkeditor = function(){
+  $('.ckeditor-textarea').ckeditor({
+    enterMode : CKEDITOR.ENTER_BR
+  });
+};
+
+Baked.prototype.sortableBlocks = function(){
+  var self = this;
+  $('.bk-sheet').sortable({
+    zIndex: 2000,
+    handle: 'a.bk-block-move-handle',
+    connectWith: '.bk-sheet',
+    revert: true,
+    tolerance: 'pointer',
+    start: function () {
+      $('.ckeditor-textarea').each(function () {
+        $(this).ckeditorGet().destroy();
+      });
+    },
+    stop: function(){
+      self.setupCkeditor();
+    },
+    update: function(){
+      self.saveSort();
+    }
+  });
+  $('.bk-sheet').disableSelection();
+};
+
+Baked.prototype.saveSort = function(){
+  var self = this;
+  clearTimeout(self.saveBlockSortTimer);
+  self.saveBlockSortTimer = setTimeout(function(){
+    var sortedIds = {};
+    $('.bk-sheet').each(function(){
+      var sheet = $(this).attr('data-bk-sheet');
+      sortedIds[sheet] = [];
+      $('.bk-block', this).each(function(){
+        var blockId = $(this).attr('data-bk-block-id');
+        sortedIds[sheet].push(blockId);
+      });
+    });
+    self.post('system/api_blocks/save_sort', {
+      data: {
+        'page_id': this.pageId,
+        'sorted_ids': sortedIds
+      }
+    });
+  }, 500);
 };
 
 /**

@@ -5,20 +5,12 @@ echo $this->Form->create('Block', array(
   'data-block-editor-text-photo',
 ));
 ?>
-<textarea name="text" id="<?php echo $id ?>"><?php echo $block['Block']['data']['text'] ?></textarea>
+<textarea name="text" id="<?php echo $id ?>" class="ckeditor-textarea"><?php echo $block['Block']['data']['text'] ?></textarea>
 <div class="spacer1"></div>
 <button type="submit" class="bk-btn-mini"><?php echo __('Save') ?></button>
 <?php
 echo $this->Form->end();
 ?>
-
-<script>
-$(function(){
-  CKEDITOR.replace('<?php echo $id ?>', {
-    enterMode : CKEDITOR.ENTER_BR
-  });
-});
-</script>
 
 <div class="spacer1"></div>
 
