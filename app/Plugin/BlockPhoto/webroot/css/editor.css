@@ -1,14 +1,17 @@
-div.bk-block-photo-box {
-}
 div.bk-block-photo-box > .outer {
   display: inline-block;
-  background: #f2f2f2;
 }
 div.bk-block-photo-box > .outer > img {
   width: 100%;
 }
-div.bk-block-photo-box .ui-icon-gripsmall-diagonal-se {
-  background: url(../../img/icons/resize.png);
-  width: 32px;
-  height: 32px;
+div.bk-block div.bk-block-photo-box .ui-resizable-s {
+  display: none !important;
+}
+div.bk-block.bk-open div.bk-block-photo-box .ui-resizable-s {
+  display: block !important;
+}
+div.bk-block-photo-box .ui-resizable-s {
+  background: url(../../img/icons/resize.png) no-repeat center;
+  height: 24px;
+  bottom: 0;
 }

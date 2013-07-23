@@ -18,6 +18,7 @@ a.bk-editor-opener {
   left: 0;
   display: block;
   cursor: pointer;
+  z-index: 1001;
 }
 div.bk-block.bk-open > a.bk-editor-opener {
   display: none;

@@ -11,6 +11,7 @@ $(function(){
   });
 
   $(document).on('click', '[data-bk-add-block]', function(){
+    c("ADDDD!");
     var $ul = $('#bk-available-blocks');
     var package = $(this).attr('data-bk-add-block');
     var sheet = $ul.attr('data-bk-sheet');

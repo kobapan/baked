@@ -16,7 +16,7 @@
     $(function(){
       $('#<?php echo $photoBoxId ?>').resizable({
         aspectRatio: true,
-        handles: "se",
+        handles: "s",
         minWidth: 40,
         minHeight: 40,
         maxWidth: 1000,

@@ -17,7 +17,7 @@ $boxId = "bk-block-photo-image-{$block['Block']['id']}";
   $(function(){
     $('#<?php echo $boxId ?> > .outer').resizable({
       aspectRatio: true,
-      handles: "se",
+      handles: "s",
       minWidth: 40,
       minHeight: 40,
       maxWidth: 1000,
