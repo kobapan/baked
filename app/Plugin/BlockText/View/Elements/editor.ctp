@@ -20,3 +20,9 @@ echo $this->Form->input('Block.text', array(
 <?php
 echo $this->Form->end();
 ?>
+
+<script>
+$(function(){
+  $('#<?php echo $id ?>').bkCkeditor();
+});
+</script>

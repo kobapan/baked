@@ -3,6 +3,77 @@ $(function(){
   baked.setupCkeditor();
   baked.sortableBlocks();
 
+  $(document).on('click', '[data-bk-show-page-manager]', function(){
+    baked.post('system/api_pages/html_manager', {
+      ok: function(r){
+        $.fancybox({
+          'content': r.html,
+        });
+      }
+    });
+  });
+
+  $(document).on('submit', 'form#bk-page-manager-form', function(e){
+    e.preventDefault();
+    if (!baked.busyFilter()) return;
+
+    var params = baked.params($(this));
+
+    baked.post('system/api_pages/update_all', {
+      data: params,
+      ok: function(){
+        baked.reloadDynamic();
+      },
+      complete: function(){
+        baked.busyEnd();
+      }
+    });
+  });
+
+  $(document).on('click', 'ul#bk-page-manager a.bk-up', function(){
+    $li = $(this).parents('li');
+    $target = $li.prev();
+    if ($target.length == 0) return;
+    $li.after($target);
+    baked.alignPageManager();
+  });
+
+  $(document).on('click', 'ul#bk-page-manager a.bk-down', function(){
+    $li = $(this).parents('li');
+    $target = $li.next();
+    if ($target.length == 0) return;
+    $li.before($target);
+    baked.alignPageManager();
+  });
+
+  $(document).on('click', 'ul#bk-page-manager a.bk-left', function(){
+    $li = $(this).parents('li');
+    var depth = parseInt($li.attr('data-bk-depth'));
+    if (depth == 0) return;
+    $li.attr('data-bk-depth', depth-1);
+    baked.alignPageManager();
+  });
+
+  $(document).on('click', 'ul#bk-page-manager a.bk-right', function(){
+    $li = $(this).parents('li');
+    var depth = parseInt($li.attr('data-bk-depth'));
+    if (depth == 2) return;
+    $li.attr('data-bk-depth', depth+1);
+    baked.alignPageManager();
+  });
+
+  $(document).on('click', 'ul#bk-page-manager a.bk-hide', function(){
+    $li = $(this).parents('li');
+    $li.attr('data-bk-hidden', 1);
+    baked.alignPageManager();
+  });
+
+  $(document).on('click', 'ul#bk-page-manager a.bk-open', function(){
+    $li = $(this).parents('li');
+    $li.attr('data-bk-hidden', 0);
+    baked.alignPageManager();
+  });
+
   $(document).on('click', '[data-bk-editor-opener]', function(){
     var $block = $(this).parent();
     baked.openEditor($block);

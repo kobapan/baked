@@ -1,4 +1,4 @@
-<ul id="menu" class="global-navigation">
+<ul id="menu" class="global-navigation" data-bk-dynamic="global-navigation">
   <?php foreach ($menuList as $menu) : ?>
     <?php
     $classes = array();

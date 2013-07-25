@@ -13,8 +13,9 @@
 <?php echo $this->Element('Baked/js') ?>
 </head>
 
-<body id="top">
+<body>
 <?php echo $this->Element('Baked/html') ?>
+<div id="wrap">
 
 <div id="container">
 
@@ -180,6 +181,8 @@ Copyright&copy; 2012 <a href="index.html">不動産業者向け 無料ホーム�
 <span class="pr"><a href="http://template-party.com/" target="_blank">Web Design:Template-Party</a></span>
 </div>
 <!--/footer-->
+
+</div><!--/wrap-->
 
 </body>
 </html>

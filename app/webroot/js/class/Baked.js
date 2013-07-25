@@ -4,9 +4,23 @@ var Baked = function(){
   var showingBlockBox;
   var saveBlockSortTimer;
   var pageId;
+  var busy;
 };
 
 Baked.prototype.blocks = {};
+$.fn.bkCkeditor = function(){
+  $(this).ckeditor({
+    enterMode : CKEDITOR.ENTER_BR
+  });
+};
+
+Baked.prototype.params = function($dom){
+  var params = {};
+  $($dom.serializeArray()).each(function(i, v) {
+    params[v.name] = v.value;
+  });
+  return params;
+};
 
 /**
  * POST
@@ -50,6 +64,7 @@ Baked.prototype.post = function(url, options){
       if ('error' in newOptions) { newOptions.error(r); };
     },
     complete: function() {
+      $.fn.resetSinglesender();
       if ('complete' in newOptions) { newOptions.complete(); };
     }
   });
@@ -88,6 +103,37 @@ Baked.prototype.addBlock = function(pageId, sheet, package, beforeBlockId){
   })
 };
 
+Baked.prototype.alignPageManager = function(){
+  var beforeDepth = -1;
+  var order = 0;
+  $('#bk-page-manager > li').each(function(){
+    $li = $(this);
+    $li.removeClass('bk-bottom-page');
+    var hidden = parseInt($li.attr('data-bk-hidden'));
+    var depth = parseInt($li.attr('data-bk-depth'));
+    newDepth = depth;
+
+    if (newDepth > beforeDepth+1) newDepth = beforeDepth+1;
+    if (beforeDepth == -1
+      || newDepth > beforeDepth
+      || newDepth == 2
+    ) {
+      $li.addClass('bk-bottom-page');
+    }
+
+    beforeDepth = newDepth;
+
+    if (depth != newDepth) {
+      $li.attr('data-bk-depth', newDepth);
+    }
+
+    $li.find('input.order').val(order);
+    $li.find('input.depth').val(newDepth);
+    $li.find('input.hidden').val(hidden);
+    order++;
+  });
+};
+
 /**
  * Load block html.
  *
@@ -107,9 +153,7 @@ Baked.prototype.loadBlock = function(blockId, callbacks){
 };
 
 Baked.prototype.setupCkeditor = function(){
-  $('.ckeditor-textarea').ckeditor({
-    enterMode : CKEDITOR.ENTER_BR
-  });
+  $('.ckeditor-textarea').bkCkeditor();
 };
 
 Baked.prototype.sortableBlocks = function(){
@@ -157,6 +201,22 @@ Baked.prototype.saveSort = function(){
   }, 500);
 };
 
+Baked.prototype.reloadDynamic = function(){
+  $.ajax({
+    url: location.href,
+    type: 'get',
+    dataType: 'html',
+    success: function(r){
+      var $body = $('body');
+      $(r).find('[data-bk-dynamic]').each(function(){
+        var dynamic = $(this).attr('data-bk-dynamic');
+        var selector = '[data-bk-dynamic='+dynamic+']';
+        $body.find(selector).replaceWith(this);
+      });
+    }
+  });
+};
+
 /**
  * Delete the block.
  *
@@ -197,6 +257,17 @@ Baked.prototype.toggleEditor = function($block){
 Baked.prototype.closeAllEditor = function(){
   $('div.bk-block.bk-open').removeClass('bk-open');
 };
+
+Baked.prototype.busyFilter = function(){
+  if (this.busy > 0) return false;
+  if (!this.busy) this.busy = 0;
+  this.busy++;
+  return true;
+}
+
+Baked.prototype.busyEnd = function(){
+  this.busy--;
+}
 
 
 

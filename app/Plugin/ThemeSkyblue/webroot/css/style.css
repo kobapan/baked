@@ -15,7 +15,7 @@ body {
   background: #FFFFFF url(../images/bg.gif) repeat-x center top;  /*左から背景色、背景画像、背景画像をX軸(横軸)にリピート、背景画像を上部に配置する設定*/
 }
 /*トップページでの背景設定*/
-body#top {
+#wrap {
   background: #FFFFFF url(../images/bgtop.gif) repeat-x center top; /*左から背景色、背景画像、背景画像をX軸(横軸)にリピート、背景画像を上部に配置する設定*/
 }
 h1,h2,h3,h4,h5,p,ul,ol,li,dl,dt,dd,form{

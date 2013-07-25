@@ -1,5 +1,41 @@
 @charset "utf-8";
 
+body {
+  padding-top: 40px !important;
+}
+ul#bk-toolbar {
+  height: 38px;
+  position: fixed;
+  z-index: 3000;
+  top: 0;
+  background: #333;
+  right: 0;
+  left: 0;
+  overflow: hidden;
+  border-bottom: solid 2px #00ADE6;
+}
+ul#bk-toolbar > li {
+  float: left;
+  height: 38px;
+  border-left: 1px solid #444;
+}
+ul#bk-toolbar > li:last-child {
+  border-right: 1px solid #444;
+}
+ul#bk-toolbar > li > a {
+  display: block;
+  height: 38px;
+  border-right: 1px solid #222;
+  text-decoration: none;
+  color: #fff;
+  line-height: 38px;
+  padding: 0 10px;
+}
+ul#bk-toolbar > li.active > a,
+ul#bk-toolbar > li > a:hover {
+  background: url(../img/bg-toolbar-hover.png);
+}
+
 div.bk-block {
   border: 1px solid #eee;
   margin: -5px -5px 10px -5px;
@@ -126,10 +162,67 @@ form.bk-form-01 input[type=password] {
   border-radius: 3px;
 }
 
+ul#bk-page-manager {
+  width: 400px;
+  text-align: left;
+}
+ul#bk-page-manager > li {
+  overflow: hidden;
 
-
-
-
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+ul#bk-page-manager > li[data-bk-depth="1"] {
+  padding-left: 15px
+}
+ul#bk-page-manager > li[data-bk-depth="2"] {
+  padding-left: 30px;
+}
+ul#bk-page-manager > li div.input {
+  float: left;
+}
+ul#bk-page-manager > li div.input input {
+  margin: 3px;
+  border: 1px solid transparent;
+  background: transparent url(../img/pen.png) no-repeat 5px center;
+  padding: 3px 0 3px 24px;
+  width: 80px;
+  border-bottom: 1px solid #ccc;
+}
+ul#bk-page-manager > li div.input input:focus {
+  border: 1px solid #999;
+  background-color: #fff;
+}
+ul#bk-page-manager > li a {
+  float: left;
+  display: block;
+  margin-right: 2px;
+}
+ul#bk-page-manager > li a > i {
+  margin: 4px 2px 0 0;
+  display: block;
+}
+ul#bk-page-manager > li:first-child > a.bk-up,
+ul#bk-page-manager > li:last-child > a.bk-down,
+ul#bk-page-manager > li[data-bk-depth="0"] > a.bk-left,
+ul#bk-page-manager > li.bk-bottom-page > a.bk-right {
+  opacity: .3;
+  cursor: default;
+}
+ul#bk-page-manager > li:first-child > a.bk-up:hover,
+ul#bk-page-manager > li:last-child > a.bk-down:hover,
+ul#bk-page-manager > li[data-bk-depth="0"] > a.bk-left:hover,
+ul#bk-page-manager > li.bk-bottom-page > a.bk-right:hover {
+  color: #555;
+}
+ul#bk-page-manager > li[data-bk-hidden="0"] > a.bk-open {
+  display: none;
+}
+ul#bk-page-manager > li[data-bk-hidden="1"] > a.bk-hide {
+  display: none;
+}
 
 
 

@@ -34,6 +34,8 @@ $uploaderId = sprintf('bk-block-text-photo-uploader-%s', $block['Block']['id']);
 
 <script>
 $(function(){
+  $('#<?php echo $id ?>').bkCkeditor();
+
   (function(){
     if (baked.blocks.blockTextPhoto.instances['<?php echo $uploaderId ?>']) return;
     baked.blocks.blockTextPhoto.instances['<?php echo $uploaderId ?>'] =

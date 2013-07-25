@@ -1,5 +1,4 @@
-<div class="sub-navigation">
-
+<div class="sub-navigation" data-bk-dynamic="sub-navigation">
   <?php if ($parentMenu['sub']) : ?>
 
   <h3>SUB MENU</h3>

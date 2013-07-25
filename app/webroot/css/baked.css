@@ -1,5 +1,15 @@
 @charset "utf-8";
 
+.bk-general {
+}
+.bk-general a {
+  text-decoration: none;
+  color: #333;
+}
+.bk-general a:hover {
+  color: #00ADE6;
+}
+
 div.bk-block {
   margin-bottom: 15px;
 }
@@ -24,4 +34,8 @@ div.spacer2 {
 }
 div.spacer3 {
   height: 30px;
+}
+
+div.fancybox-inner {
+  text-align: left;
 }

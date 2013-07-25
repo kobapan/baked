@@ -3,6 +3,8 @@
 <script src="<?php echo URL ?>js/class/Baked.js"></script>
 <script src="<?php echo URL ?>js/interface/baked.interface.js"></script>
 <script src="<?php echo URL ?>js/colorbox/jquery.colorbox-min.js"></script>
+<script src="<?php echo URL ?>js/fancybox/source/jquery.fancybox.js"></script>
+<script src="<?php echo URL ?>js/jquery.plugins/jquery.singlesender.js"></script>
 <?php if (EDITTING) : ?>
   <script src="http://bp.yahooapis.com/2.4.21/browserplus-min.js"></script>
   <script src="<?php echo URL ?>js/interface/baked.editting.interface.js"></script>
@@ -22,6 +24,7 @@
   baked.base = '<?php echo URL ?>';
   baked.token = '<?php echo $_token; ?>';
   baked.pageId = '<?php echo $currentMenu['Page']['id'] ?>';
+  $('form').singlesender();
 </script>
 <?php foreach ($blockEquipments['js'] as $js) : ?>
   <?php if (!EDITTING && $js['editting']) continue ; ?>
