@@ -4,30 +4,12 @@ $(function(){
   baked.sortableBlocks();
 
   $(document).on('click', '[data-bk-show-page-manager]', function(){
-    baked.post('system/api_pages/html_manager', {
-      ok: function(r){
-        $.fancybox({
-          'content': r.html,
-        });
-      }
-    });
+    baked.showPageManager();
   });
 
   $(document).on('submit', 'form#bk-page-manager-form', function(e){
     e.preventDefault();
-    if (!baked.busyFilter()) return;
-
-    var params = baked.params($(this));
-
-    baked.post('system/api_pages/update_all', {
-      data: params,
-      ok: function(){
-        baked.reloadDynamic();
-      },
-      complete: function(){
-        baked.busyEnd();
-      }
-    });
+    baked.savePageManager();
   });
 
   $(document).on('click', 'ul#bk-page-manager a.bk-up', function(){
@@ -72,6 +54,40 @@ $(function(){
     $li = $(this).parents('li');
     $li.attr('data-bk-hidden', 0);
     baked.alignPageManager();
+  });
+
+  $(document).on('click', 'ul#bk-page-manager a.bk-add', function(){
+    $li = $(this).parents('li');
+    var pageId = $li.attr('data-page-id');
+    baked.savePageManager({
+      ok: function(r){
+        baked.insertPage({
+          'before_page_id': pageId
+        }, {
+          ok: function(){
+            baked.showPageManager();
+          }
+        });
+      }
+    });
+  });
+
+  $(document).on('click', 'ul#bk-page-manager a.bk-delete', function(){
+    $li = $(this).parents('li');
+    if ($li.hasClass('bk-home')) return;
+    var pageId = $li.attr('data-page-id');
+    baked.savePageManager({
+      ok: function(r){
+        baked.deletePage({
+          data: {
+            'page_id': pageId
+          },
+          ok: function(r){
+            baked.showPageManager();
+          }
+        })
+      }
+    });
   });
 
   $(document).on('click', '[data-bk-editor-opener]', function(){

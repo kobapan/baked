@@ -7,7 +7,7 @@ echo $this->Form->create('Page', array(
 
 <ul id="bk-page-manager" class="bk-general">
   <?php foreach ($pages as $page) : ?>
-    <li data-page-id="<?php echo $page['Page']['id'] ?>" data-bk-depth="<?php echo $page['Page']['depth'] ?>" data-bk-hidden="<?php echo (int)$page['Page']['hidden'] ?>">
+    <li data-page-id="<?php echo $page['Page']['id'] ?>" data-page-name="<?php echo $page['Page']['name'] ?>" data-bk-depth="<?php echo $page['Page']['depth'] ?>" data-bk-hidden="<?php echo (int)$page['Page']['hidden'] ?>">
       <?php
       echo $this->Form->input("Page.{$page['Page']['id']}.title", array(
         'label' => FALSE,
@@ -46,7 +46,7 @@ echo $this->Form->create('Page', array(
       <a href="javascript:;" class="bk-hide"><i class="icon-eye-open icon-large"></i></a>
       <a href="javascript:;" class="bk-open"><i class="icon-eye-close icon-large"></i></a>
       <a href="javascript:;" class="bk-add"><i class="icon-plus icon-large"></i></a>
-      <a href="javascript:;" class="bk-add"><i class="icon-trash icon-large"></i></a>
+      <a href="javascript:;" class="bk-delete"><i class="icon-trash icon-large"></i></a>
     </li>
   <?php endforeach ; ?>
 </ul>

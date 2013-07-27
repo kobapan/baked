@@ -74,6 +74,90 @@ Baked.prototype.domBlockById = function(blockId){
   return $('#bk-block-'+blockId);
 };
 
+Baked.prototype.showPageManager = function(){
+  this.post('system/api_pages/html_manager', {
+    ok: function(r){
+      $.fancybox({
+        'content': r.html,
+      });
+    }
+  });
+};
+
+Baked.prototype.savePageManager = function(callbacks){
+  if (!this.busyFilter()) return;
+  var self = this;
+
+  $form = $('#bk-page-manager-form');
+  var params = baked.params($form);
+
+  this.post('system/api_pages/update_all', {
+    data: params,
+    ok: function(r){
+      self.reloadDynamic();
+      if (callbacks && callbacks.ok) callbacks.ok(r);
+    },
+    complete: function(){
+      self.busyEnd();
+    }
+  });
+};
+
+Baked.prototype.alignPageManager = function(){
+  var beforeDepth = -1;
+  var order = 0;
+  $('#bk-page-manager > li').each(function(){
+    $li = $(this);
+    $li.removeClass('bk-bottom-page');
+    $li.removeClass('bk-home');
+    var hidden = parseInt($li.attr('data-bk-hidden'));
+    var depth = parseInt($li.attr('data-bk-depth'));
+    var name = $li.find('input.name').val();
+    newDepth = depth;
+
+    if (newDepth > beforeDepth+1) newDepth = beforeDepth+1;
+    if (beforeDepth == -1
+      || newDepth > beforeDepth
+      || newDepth == 2
+    ) {
+      $li.addClass('bk-bottom-page');
+    }
+
+    beforeDepth = newDepth;
+
+    if (depth != newDepth) {
+      $li.attr('data-bk-depth', newDepth);
+    }
+
+    if (newDepth == 0 && name == 'index') {
+      $li.addClass('bk-home');
+    }
+
+    $li.attr('data-bk-name', name);
+    $li.find('input.order').val(order);
+    $li.find('input.depth').val(newDepth);
+    $li.find('input.hidden').val(hidden);
+    order++;
+  });
+};
+
+Baked.prototype.insertPage = function(params, callbacks){
+  var self = this;
+
+  this.post('system/api_pages/insert', {
+    data: params,
+    ok: function(r){
+      if (callbacks && callbacks.ok) callbacks.ok(r);
+    }
+  });
+};
+
+Baked.prototype.deletePage = function(opts){
+  var self = this;
+
+  this.post('system/api_pages/delete', opts);
+};
+
 /**
  * Add the block.
  *
@@ -101,37 +185,6 @@ Baked.prototype.addBlock = function(pageId, sheet, package, beforeBlockId){
       }
     }
   })
-};
-
-Baked.prototype.alignPageManager = function(){
-  var beforeDepth = -1;
-  var order = 0;
-  $('#bk-page-manager > li').each(function(){
-    $li = $(this);
-    $li.removeClass('bk-bottom-page');
-    var hidden = parseInt($li.attr('data-bk-hidden'));
-    var depth = parseInt($li.attr('data-bk-depth'));
-    newDepth = depth;
-
-    if (newDepth > beforeDepth+1) newDepth = beforeDepth+1;
-    if (beforeDepth == -1
-      || newDepth > beforeDepth
-      || newDepth == 2
-    ) {
-      $li.addClass('bk-bottom-page');
-    }
-
-    beforeDepth = newDepth;
-
-    if (depth != newDepth) {
-      $li.attr('data-bk-depth', newDepth);
-    }
-
-    $li.find('input.order').val(order);
-    $li.find('input.depth').val(newDepth);
-    $li.find('input.hidden').val(hidden);
-    order++;
-  });
 };
 
 /**
@@ -259,7 +312,10 @@ Baked.prototype.closeAllEditor = function(){
 };
 
 Baked.prototype.busyFilter = function(){
-  if (this.busy > 0) return false;
+  if (this.busy > 0) {
+    c("Busy!");
+    return false;
+  }
   if (!this.busy) this.busy = 0;
   this.busy++;
   return true;

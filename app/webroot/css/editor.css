@@ -207,14 +207,16 @@ ul#bk-page-manager > li a > i {
 ul#bk-page-manager > li:first-child > a.bk-up,
 ul#bk-page-manager > li:last-child > a.bk-down,
 ul#bk-page-manager > li[data-bk-depth="0"] > a.bk-left,
-ul#bk-page-manager > li.bk-bottom-page > a.bk-right {
+ul#bk-page-manager > li.bk-bottom-page > a.bk-right,
+ul#bk-page-manager > li.bk-home > a.bk-delete {
   opacity: .3;
   cursor: default;
 }
 ul#bk-page-manager > li:first-child > a.bk-up:hover,
 ul#bk-page-manager > li:last-child > a.bk-down:hover,
 ul#bk-page-manager > li[data-bk-depth="0"] > a.bk-left:hover,
-ul#bk-page-manager > li.bk-bottom-page > a.bk-right:hover {
+ul#bk-page-manager > li.bk-bottom-page > a.bk-right:hover,
+ul#bk-page-manager > li.bk-home > a.bk-delete:hover {
   color: #555;
 }
 ul#bk-page-manager > li[data-bk-hidden="0"] > a.bk-open {

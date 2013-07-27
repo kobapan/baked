@@ -36,6 +36,24 @@ class ApiPagesController extends AppController
     ));
   }
 
+  public function insert()
+  {
+    $this->tokenFilterApi();
+
+    $r = $this->Page->insertPage(NULL, NULL, @$this->request->data['before_page_id']);
+    if ($r !== TRUE) $this->Api->ng($r->getMessage());
+    $this->Api->ok();
+  }
+
+  public function delete()
+  {
+    $this->tokenFilterApi();
+
+    $r = $this->Page->delete($this->request->data['page_id']);
+    if ($r !== TRUE) $this->Api->ng($r->getMessage());
+    $this->Api->ok();
+  }
+
   public function update_all()
   {
     $this->tokenFilterApi();

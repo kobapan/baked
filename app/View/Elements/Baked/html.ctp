@@ -7,7 +7,6 @@
 
   <ul id="bk-toolbar">
     <li><a href="<?php echo URL ?>admin"><?php echo __('Dasboard') ?></a></li>
-    <li><a href="javascript:;"><?php echo __('Add page') ?></a></li>
     <li><a href="javascript:;" data-bk-show-page-manager><?php echo __('Manage page') ?></a></li>
   </ul>
 <?php endif ; ?>

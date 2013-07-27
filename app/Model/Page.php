@@ -37,6 +37,99 @@ class Page extends AppModel
     }
   }
 
+  public function insertPage($title = NULL, $name = NULL, $beforePageId = 0)
+  {
+    try {
+      $this->begin();
+
+      if (empty($title)) $title = __('Blank page');
+      if (empty($name)) $name = $this->getNewName();
+
+      $parentPageId = 0;
+      $depth = 0;
+
+      $newPageIds = array();
+      $pageIds = $this->find('list', array(
+        FIELDS => array('Page.id'),
+        ORDER => array('Page.order' => 'asc'),
+      ));
+
+      if (!empty($beforePageId)) {
+        $beforePage = $this->find('first', array(
+          CONDITIONS => array('Page.id' => $beforePageId),
+          FIELDS => array('Page.depth', 'Page.parent_page_id'),
+        ));
+        $parentPageId = $beforePage['Page']['parent_page_id'];
+        $depth = $beforePage['Page']['depth'];
+      }
+
+      $data = array(
+        'title'          => $title,
+        'name'           => $name,
+        'parent_page_id' => $parentPageId,
+        'depth'          => $depth,
+      );
+      $r = $this->add($data, FALSE);
+
+      $inserted = FALSE;
+      foreach ($pageIds as $pageId) {
+        $newPageIds[] = $pageId;
+        if ($pageId == $beforePageId) {
+          $newPageIds[] = $this->id;
+          $inserted = TRUE;
+        }
+      }
+      if (!$inserted) $newPageIds[] = $this->id;
+
+      $this->saveOrder($newPageIds);
+
+      $this->commit();
+      return TRUE;
+    } catch (Exception $e) {
+      $this->rollback();
+      return $e;
+    }
+  }
+
+  public function saveOrder($pageIds)
+  {
+    try {
+      $this->begin();
+
+      $order = 0;
+      foreach ($pageIds as $pageId) {
+        $data = array(
+          'id' => $pageId,
+          'order' => $order,
+        );
+        $r = $this->add($data, TRUE);
+        if ($r !== TRUE) throw $r;
+        $order++;
+      }
+
+      $this->commit();
+      return TRUE;
+    } catch (Exception $e) {
+      $this->rollback();
+      return $e;
+    }
+  }
+
+  public function getNewName()
+  {
+    $i = 1;
+    $name = NULL;
+    while ($i <= 100) {
+      $name = sprintf('page%d', $i);
+      $current = $this->find('first', array(
+        CONDITIONS => array("{$this->name}.name" => $name),
+      ));
+      if (empty($current)) break;
+      $i++;
+    }
+    return $name;
+  }
+
 /**
  * @param array $pages Ordered pages.
  * @return mixed true on success. Exception on failed.
@@ -106,7 +199,7 @@ class Page extends AppModel
         "{$this->name}.hidden" => 0,
       ),
       FIELDS => array(
-        "{$this->name}.id", "{$this->name}.name", "{$this->name}.title", "{$this->name}.parent_page_id",
+        "{$this->name}.id", "{$this->name}.name", "{$this->name}.title", "{$this->name}.parent_page_id", "{$this->name}.depth",
       ),
       ORDER => array(
         #"{$this->name}.parent_page_id" => 'asc',
@@ -120,7 +213,6 @@ class Page extends AppModel
 
     foreach ($pages as &$page) {
       $pointer;
-      $depth = 0;
       if ($page['Page']['parent_page_id'] == 0) {
         $page['Page']['url'] = URL.$page['Page']['name'];
         $pointer = &$menuList;
@@ -130,6 +222,7 @@ class Page extends AppModel
         $pointer = &$p['sub'];
       }
       $page['sub'] = array();
+      $depth = $page['Page']['depth'];
       $page['current'] = (count($path) > $depth && $path[$depth] == $page['Page']['name']);
 
       $pagePointers[$page['Page']['id']] = $page;
@@ -149,6 +242,41 @@ class Page extends AppModel
     }
 
     return $menuList;
+  }
+
+  public function delete($id = null, $cascade = true)
+  {
+    try {
+      $this->begin();
+
+      $current = $this->find('first', array(
+        CONDITIONS => array('Page.id' => $id),
+        FIELDS => array('Page.name', 'Page.depth')
+      ));
+      if ($current['Page']['name'] == 'index' && $current['Page']['depth'] == 0) {
+        throw new Exception(__('Can not delete index page.'));
+      }
+
+      $this->loadModel('Block');
+      $blockIds = $this->Block->find('list', array(
+        FIELDS => array('Block.id'),
+        CONDITIONS => array('Block.page_id' => $id),
+        'limit' => FALSE,
+      ));
+      foreach ($blockIds as $blockId) {
+        $r = $this->Block->delete($blockId);
+        if ($r !== TRUE) throw new Exception(__('Failed to delete blocks #%d (%s)', $blockId, $r->getMessage()));
+      }
+
+      $r = parent::delete($id, $cascade);
+      if ($r !== TRUE) throw new Exception(__('Failed to delete page record.'));
+
+      $this->commit();
+      return TRUE;
+    } catch (Exception $e) {
+      $this->rollback();
+      return $e;
+    }
   }
 
   public function valid_no_hidden($data)
