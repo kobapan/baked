@@ -66,6 +66,13 @@ class DisplayController extends AppController
       if (!preg_match('/^Block/', $plugin)) continue;
       $pluginWebroot = $pluginRoot.$plugin.DS.'webroot'.DS;
 
+      $blockJsPath = $pluginWebroot.'js'.DS.'block.js';
+      if (file_exists($blockJsPath)) {
+        $blockEquipments['js'][] = array(
+          'file' => sprintf('%s/js/block.js', $plugin),
+        );
+      }
+
       $editorJsPath = $pluginWebroot.'js'.DS.'editor.js';
       if (file_exists($editorJsPath)) {
         $blockEquipments['js'][] = array(

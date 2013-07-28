@@ -76,58 +76,61 @@ class BaseModel extends Model {
  * @param bool $onlyValidate
  * @return mixed OK:true / NG:Exception
  */
-    public function add($data, $update = NULL, $useValid = NULL, $validateMode = FALSE)
-    {
-        try {
-            $this->begin();
-            $this->create();
+  public function add($data, $update = NULL, $useValid = NULL, $validateMode = FALSE)
+  {
+    try {
+      $this->begin();
+      if ($this->useTable !== FALSE) $this->create();
 
-            if ($validateMode === FALSE)
-                $validateMode = self::VALIDATION_MODE_REQUIRED;
+      if ($validateMode === FALSE) $validateMode = self::VALIDATION_MODE_REQUIRED;
 
-            if (!isset($data[$this->name])) {
-                $tmp = $data;
-                $data = array($this->name => $tmp);
-            }
+      if (!isset($data[$this->name])) {
+        $tmp = $data;
+        $data = array($this->name => $tmp);
+      }
 
-            $updateFields = $this->updateFields;
+      $updateFields = $this->updateFields;
 
-            $this->set($data);
+      $this->set($data);
 
-            if (($update !== false)
-                && (!empty($this->data[$this->name]['id']) || ($update === true))
-            ) {
-                $this->id = (isset($this->data[$this->name]['id'])) ? $this->data[$this->name]['id'] : NULL ;
-                $this->useValid = 'update';
-                $updateFields = array_keys($data[$this->name]);
-            } else {
-                $this->id = null;
-                unset($this->data[$this->name]['id']);
-                $this->useValid = 'add';
-            }
+      if (($update !== false)
+        && (!empty($this->data[$this->name]['id']) || ($update === true))
+      ) {
+        $this->id = (isset($this->data[$this->name]['id'])) ? $this->data[$this->name]['id'] : NULL ;
+        $this->useValid = 'update';
+        $updateFields = array_keys($data[$this->name]);
+      } else {
+        $this->id = null;
+        unset($this->data[$this->name]['id']);
+        $this->useValid = 'add';
+      }
 
-            if ($useValid) $this->useValid = $useValid;
 
-            if (in_array($validateMode, array(self::VALIDATION_MODE_ONLY, self::VALIDATION_MODE_REQUIRED))) {
-                if (!$this->validates(array('fieldList'=>$updateFields))) {
-                    list($key, $val) = each($this->validationErrors);
-                    throw new Exception($val[0]);
-                }
-            }
+      if ($useValid) $this->useValid = $useValid;
 
-            if (in_array($validateMode, array(self::VALIDATION_MODE_REQUIRED, self::VALIDATION_MODE_SKIP))) {
-                if (!$this->save($this->data, false, $updateFields)) {
-                    throw new Exception('DBへの保存に失敗しました');
-                }
-            }
-
-            $this->commit();
-            return true;
-        } catch (Exception $e) {
-            $this->rollback();
-            return $e;
+      if (in_array($validateMode, array(self::VALIDATION_MODE_ONLY, self::VALIDATION_MODE_REQUIRED))) {
+        #v($this->useTable);
+        $r = $this->validates(array('fieldList' => $updateFields));
+        if (!$r) {
+          list($key, $val) = each($this->validationErrors);
+          throw new Exception($val[0]);
         }
+      }
+
+      if (in_array($validateMode, array(self::VALIDATION_MODE_REQUIRED, self::VALIDATION_MODE_SKIP))) {
+        if (!$this->save($this->data, false, $updateFields)) {
+          throw new Exception('DBへの保存に失敗しました');
+        }
+      }
+
+      $this->commit();
+      return true;
+    } catch (Exception $e) {
+      #$this->log(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS), LOG_INFO);
+      $this->rollback();
+      return $e;
     }
+  }
 
 /**
  * バリデーションルールから入力必須ルールを削除

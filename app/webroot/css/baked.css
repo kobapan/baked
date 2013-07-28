@@ -3,11 +3,13 @@
 .bk-general {
 }
 .bk-general a {
-  text-decoration: none;
-  color: #333;
+  color: #333 !important;
 }
 .bk-general a:hover {
-  color: #00ADE6;
+  color: #00ADE6 !important;
+}
+.bk-general a i {
+  text-decoration: none !important;
 }
 
 div.bk-block {

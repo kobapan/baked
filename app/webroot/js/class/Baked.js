@@ -51,7 +51,7 @@ Baked.prototype.post = function(url, options){
         if (r.result == 'OK') {
           if ('ok' in newOptions) { newOptions.ok(r); };
         } else {
-          alert(r.message);
+          if (r.message) alert(r.message);
           //common.showFloatingMessage(r.mes, 'error');
           if ('ng' in newOptions) { newOptions.ng(r); };
         }

@@ -6,7 +6,7 @@
   ?>
 
   <?php if (EDITTING) : ?>
-    <div class="bk-editor">
+    <div class="bk-editor bk-general">
       <?php
       echo $this->element("{$block['Block']['package']}.editor", array(
         'block' => $block,

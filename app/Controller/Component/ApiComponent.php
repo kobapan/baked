@@ -51,14 +51,20 @@ class ApiComponent extends Component {
         $this->ret($array);
     }
 
-    public function ng($errorMsg = NULL, $code = 0)
-    {
-        $this->ret(array(
-            'message' => $errorMsg,
-            'code' => $code,
-            'result' => 'NG',
-        ));
+  public function ng($errorMsg = NULL, $code = 0)
+  {
+    $ret = array(
+      'code' => $code,
+      'result' => 'NG',
+    );
+    if (is_array($errorMsg)) {
+      $ret += $errorMsg;
+    } else {
+      $ret['message'] = $errorMsg;
     }
+
+    $this->ret($ret);
+  }
 
 /**
  * $dataに配列を代入
