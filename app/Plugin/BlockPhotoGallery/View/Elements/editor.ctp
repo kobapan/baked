@@ -1,15 +1,6 @@
 <?php
 $uploaderId = sprintf('photo-gallary-uploader-%s', $block['Block']['id']);
 ?>
-<ul class="bk-editor-boxes">
-  <li>
-    <div class="bk-title"><?php echo __('Size') ?></div>
-    <a href="javascript:;" data-bk-block-photo-gallery-increase><i class="icon-plus icon-2x"></i></a>
-    <a href="javascript:;" data-bk-block-photo-gallery-decrease><i class="icon-minus icon-2x"></i></a>
-  </li>
-</ul>
-
-<div class="spacer2"></div>
 
 <?php
 echo $this->Form->create('File', array(
@@ -17,36 +8,95 @@ echo $this->Form->create('File', array(
   'class' => 'bk-form-01 bk-photo-gallery-form',
 ));
 ?>
-<ul class="block-photo-gallery-edit-list" id="bk-block-photo-gallery-edit-list-<?php echo $block['Block']['id'] ?>">
-  <?php foreach (@$block['Block']['data']['photos'] as $photo) : ?>
-    <?php
-    $thumbUrl = sprintf('%sfiles/images/square/70/%s.%s', URL, $photo['file']['code'], $photo['file']['ext']);
-    ?>
-    <li style="background-image: url(<?php echo $thumbUrl ?>)" data-bk-file-id="<?php echo $photo['file_id'] ?>">
-      <a href="javascript:;" class="bk-photo-gallery-delete-photo"><i class="icon-remove-sign icon-large"></i></a>
-      <?php
-      echo $this->Form->input("File.{$photo['file_id']}.title", array(
-        'value' => $photo['title'],
-      ));
-      echo $this->Form->input("File.{$photo['file_id']}.alt", array(
-        'value' => $photo['alt'],
-      ));
-      ?>
-    </li>
-  <?php endforeach ; ?>
 
-  <script>
-  $(function(){
-    $('#bk-block-photo-gallery-edit-list-<?php echo $block['Block']['id'] ?>').sortable({
-      axis: 'y',
-      update: function(event, ui) {
-        baked.blocks.blockPhotoGallery.saveSort(<?php echo $block['Block']['id'] ?>);
-      }
-    });
-  });
-  </script>
+<ul class="bk-editor-boxes">
+  <li>
+    <?php
+    $class = array($block['Block']['data']['type'] => 'active');
+    ?>
+    <div class="bk-title"><?php echo __('Type') ?></div>
+    <a href="javascript:;" class="<?php echo @$class['lightbox'] ?>"" data-bk-block-photo-gallery-set-type="lightbox"><i class="icon-th icon-2x"></i></a>
+    <a href="javascript:;" class="<?php echo @$class['slider'] ?>" data-bk-block-photo-gallery-set-type="slider"><i class="icon-picture icon-2x"></i></a>
+  </li>
+  <li class="bk-type-lightbox">
+    <div class="bk-title"><?php echo __('Size') ?></div>
+    <a href="javascript:;" data-bk-block-photo-gallery-increase><i class="icon-plus icon-2x"></i></a>
+    <a href="javascript:;" data-bk-block-photo-gallery-decrease><i class="icon-minus icon-2x"></i></a>
+  </li>
+  <li class="bk-type-slider">
+    <div class="bk-title"><?php echo __('Theme') ?></div>
+    <?php
+    echo $this->Form->input('slider_theme', array(
+      'name' => 'data[slider_theme]',
+      'label' => FALSE,
+      'options' => BlockPhotoGallery::$SLIDER_THEME,
+      'value' => $block['Block']['data']['slider_theme'],
+    ));
+    ?>
+  </li>
+  <li class="bk-type-slider">
+    <div class="bk-title"><?php echo __('Animation') ?></div>
+    <?php
+    echo $this->Form->input('slider_animation', array(
+      'name' => 'data[slider_animation]',
+      'label' => FALSE,
+      'options' => BlockPhotoGallery::$SLIDER_ANIMATION,
+      'value' => $block['Block']['data']['slider_animation'],
+    ));
+    ?>
+  </li>
+  <li class="bk-type-slider">
+    <div class="bk-title"><?php echo __('Pause time') ?></div>
+    <?php
+    echo $this->Form->input('slider_pause_time', array(
+      'name' => 'data[slider_pause_time]',
+      'label' => FALSE,
+      'style' => 'width: 30px',
+      'after' => __('sec'),
+      'value' => $block['Block']['data']['slider_pause_time'],
+    ));
+    ?>
+  </li>
+  <li>
+    <div class="bk-title"><?php echo __('Show images') ?></div>
+    <a href="javascript:;" data-bk-block-photo-gallery-show-images><i class="icon-list icon-2x"></i></a>
+  </li>
 </ul>
+
+<div class="block-photo-gallery-edit-list-outer" style="display: none; padding-top: 20px;">
+  <ul class="block-photo-gallery-edit-list" id="bk-block-photo-gallery-edit-list-<?php echo $block['Block']['id'] ?>">
+    <?php foreach (@$block['Block']['data']['photos'] as $photo) : ?>
+      <?php
+      $thumbUrl = sprintf('%sfiles/images/square/70/%s.%s', URL, $photo['file']['code'], $photo['file']['ext']);
+      ?>
+      <li style="background-image: url(<?php echo $thumbUrl ?>)" data-bk-file-id="<?php echo $photo['file_id'] ?>">
+        <a href="javascript:;" class="bk-photo-gallery-delete-photo"><i class="icon-remove-sign icon-large"></i></a>
+        <?php
+        echo $this->Form->input("File.{$photo['file_id']}.title", array(
+          'value' => $photo['title'],
+        ));
+        echo $this->Form->input("File.{$photo['file_id']}.alt", array(
+          'value' => $photo['alt'],
+        ));
+        ?>
+      </li>
+    <?php endforeach ; ?>
+
+    <script>
+    $(function(){
+      $('#bk-block-photo-gallery-edit-list-<?php echo $block['Block']['id'] ?>').sortable({
+        axis: 'y',
+        update: function(event, ui) {
+          baked.blocks.blockPhotoGallery.saveSort(<?php echo $block['Block']['id'] ?>);
+        }
+      });
+    });
+    </script>
+  </ul>
+</div>
+
 <div class="spacer2"></div>
+
 <button type="submit"><?php echo __('Save') ?></button>
 <?php
 echo $this->Form->end();
@@ -59,6 +109,8 @@ echo $this->Form->end();
 
 <script>
 $(function(){
+  baked.blocks.blockPhotoGallery.alignEditor(<?php echo $block['Block']['id'] ?>);
+
   (function(){
     if (baked.blocks.blockPhotoGallery.instances['<?php echo $uploaderId ?>']) return;
     baked.blocks.blockPhotoGallery.instances['<?php echo $uploaderId ?>'] =
@@ -68,37 +120,18 @@ $(function(){
       url : '<?php echo URL ?>block_photo_gallery/block_photo_gallery_api/upload',
       max_file_size : '1000mb',
       max_file_count: 20, // user can add no more then 20 files at a time
-      //chunk_size : '1mb',
       rename: true,
       multiple_queues : true,
-
-      // Resize images on clientside if we can
-      //resize : {width : 320, height : 240, quality : 90},
-
-      // Rename files by clicking on their titles
-      rename: true,
-
-      // Sort files
-      sortable: true,
-
-      // Specify what files to browse for
       filters : [
         {title : "Image files", extensions : "jpg,gif,png"}
-        //{title : "Zip files", extensions : "zip,avi"}
       ],
-
-      // Flash settings
       flash_swf_url : '<?php echo URL ?>js/plupload/plupload.flash.swf',
-
-      // Silverlight settings
       silverlight_xap_url : '<?php echo URL ?>js/plupload/plupload.silverlight.xap',
-
       init: {
         UploadComplete: function(up, files) {
           baked.blocks.blockPhotoGallery.reload(<?php echo $block['Block']['id'] ?>);
         }
       },
-
       multipart_params : {
         token : baked.token,
         'block_id': <?php echo $block['Block']['id'] ?>

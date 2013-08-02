@@ -49,3 +49,49 @@ $tableId = "block-form-editor-table-{$block['Block']['id']}";
   });
   </script>
 </table>
+
+<div class="spacer2"></div>
+
+<ul class="bk-editor-boxes">
+  <li>
+    <div class="bk-title"><?php echo __('Text after sending') ?></div>
+    <a href="javascript:;" data-bk-block-form-toggle-sent-text="open"><i class="icon-pencil icon-2x"></i></a>
+  </li>
+</ul>
+
+<div class="spacer2"></div>
+
+<?php
+$id = "bk-block-form-text-{$block['Block']['id']}";
+echo $this->Form->create('Block', array(
+  'default' => FALSE,
+  'data-block-form-editor-form',
+));
+echo $this->Form->input('Block.block_id', array(
+  'value' => $block['Block']['id'],
+  'type' => 'hidden',
+));
+?>
+<div class="sent-text-outer" style="display: none">
+  <?php
+  echo $this->Form->input('Block.sent_text', array(
+    'type' => 'textarea',
+    'id' => $id,
+    'label' => FALSE,
+    'value' => $block['Block']['data']['sent_text'],
+    'default' => FALSE,
+    'class' => 'ckeditor-textarea',
+  ));
+  ?>
+</div>
+<div class="spacer1"></div>
+<button type="submit" class="bk-btn-mini"><?php echo __('Save') ?></button>
+<?php
+echo $this->Form->end();
+?>
+
+<script>
+$(function(){
+  $('#<?php echo $id ?>').bkCkeditor();
+});
+</script>

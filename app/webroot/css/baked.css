@@ -11,6 +11,14 @@
 .bk-general a i {
   text-decoration: none !important;
 }
+.bk-general input[type=text],
+.bk-general input[type=number],
+.bk-general input[type=password] {
+  color: #666;
+  font-weight: bold;
+  padding: 3px;
+  border-radius: 3px;
+}
 
 div.bk-block {
   margin-bottom: 15px;

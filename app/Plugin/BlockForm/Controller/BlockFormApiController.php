@@ -5,6 +5,21 @@ class BlockFormApiController extends BlockAppController
 {
   public $uses = array('Block', 'BlockForm.BlockForm');
 
+  public function update()
+  {
+    $this->tokenFilterApi();
+
+    $data = array(
+      'sent_text' => @$this->request->data['Block']['sent_text'],
+    );
+    $r = $this->BlockForm->updateData(@$this->request->data['Block']['block_id'], $data);
+    if ($r !== TRUE) $this->Api->ng($r->getMessage());
+
+    $this->Api->ok(array(
+      'html' => $this->_htmlBlock($this->request->data['Block']['block_id']),
+    ));
+  }
+
   public function html_add()
   {
     $this->tokenFilterApi();
@@ -64,7 +79,10 @@ class BlockFormApiController extends BlockAppController
     if ($r !== TRUE) $this->Api->ng(array(
       'errors' => $this->BlockForm->validationErrors,
     ));
+
+    $data = $this->BlockForm->getData($this->request->data['block_id']);
     $this->Api->ok(array(
+      'data' => $data,
     ));
   }
 

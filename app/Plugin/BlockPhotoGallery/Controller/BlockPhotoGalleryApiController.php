@@ -50,6 +50,9 @@ class BlockPhotoGalleryApiController extends BlockAppController
       $data = $this->BlockPhotoGallery->getData($this->request->data['block_id']);
       if ($data === FALSE) throw new Exception(__('Not found block'));
 
+      $newData = arrayWithKeys($this->request->data, array('slider_theme', 'slider_animation', 'slider_pause_time', 'type'));
+      $data = $newData + $data;
+
       foreach ($data['photos'] as &$photo) {
         $fileId = $photo['file_id'];
         if (!empty($this->request->data['File'][$fileId])) {
@@ -77,7 +80,7 @@ class BlockPhotoGalleryApiController extends BlockAppController
       $data = $this->BlockPhotoGallery->getData($this->request->data['block_id']);
       $data['width'] = (int)$data['width'];
       if ($data['width'] >= 200) throw new Exception(__('Can not to enlarge any more.'));
-      $data['width'] += 20;
+      $data['width'] += 10;
 
       $r = $this->BlockPhotoGallery->updateData($this->request->data['block_id'], $data);
       if ($r !== TRUE) throw $r;
@@ -98,7 +101,7 @@ class BlockPhotoGalleryApiController extends BlockAppController
       $data = $this->BlockPhotoGallery->getData($this->request->data['block_id']);
       $data['width'] = (int)$data['width'];
       if ($data['width'] <= 50) throw new Exception(__('Can not to reduce any more.'));
-      $data['width'] -= 20;
+      $data['width'] -= 10;
 
       $r = $this->BlockPhotoGallery->updateData($this->request->data['block_id'], $data);
       if ($r !== TRUE) throw $r;

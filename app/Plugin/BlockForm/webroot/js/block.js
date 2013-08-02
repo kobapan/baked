@@ -6,6 +6,17 @@ baked.blocks.blockForm = {
     params['data[block_id]'] = blockId;
     baked.post('block_form/block_form_api/send', {
       data: params,
+      ok: function(r){
+        var $form = $('form#bk-block-form-'+blockId);
+        var $sentText = $('<div>', {
+          html: r.data.sent_text,
+          css: {'display': 'none'}
+        });
+        $form.after($sentText);
+        $form.slideUp(function(){
+          $sentText.slideDown();
+        });
+      },
       ng: function(r){
         var $form = $('form#bk-block-form-'+blockId);
         for (var itemId in r.errors) {

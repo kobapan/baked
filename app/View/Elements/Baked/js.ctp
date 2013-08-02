@@ -27,6 +27,11 @@
   $('form').singlesender();
 </script>
 <?php foreach ($blockEquipments['js'] as $js) : ?>
-  <?php if (!EDITTING && $js['editting']) continue ; ?>
+  <?php if (!EDITTING && @$js['editting']) continue ; ?>
   <script src="<?php echo URL.$js['file'] ?>"></script>
 <?php endforeach ; ?>
+
+<?php
+echo $this->fetch('script');
+?>
+

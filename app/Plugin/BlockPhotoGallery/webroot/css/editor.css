@@ -28,9 +28,13 @@ ul.block-photo-gallery-edit-list > li > a.bk-photo-gallery-delete-photo {
   right: 7px;
   top: 7px;
   text-decoration: none;
-  color: #fff;
+  color: #fff !important;
   opacity: 0.8;
 }
 ul.block-photo-gallery-edit-list > li > a.bk-photo-gallery-delete-photo:hover {
   opacity: 1.0;
+}
+
+div.block-photo-gallery {
+  overflow: hidden;
 }

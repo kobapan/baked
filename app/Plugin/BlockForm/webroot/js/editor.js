@@ -108,4 +108,37 @@ $(function(){
   $(document).on('change', '.bk-block-form-editor-box select.select-item-type', function(){
     baked.blocks.blockForm.setup();
   });
+
+  $(document).on('click', '[data-bk-block-form-toggle-sent-text="open"]', function(){
+    var $a = $(this);
+    $bkEditor = $a.parents('div.bk-editor')
+    $a.addClass('active');
+    $a.attr('data-bk-block-form-toggle-sent-text', 'close');
+    $bkEditor.find('div.sent-text-outer').slideDown('fast');
+  });
+
+  $(document).on('click', '[data-bk-block-form-toggle-sent-text="close"]', function(){
+    var $a = $(this);
+    $bkEditor = $a.parents('div.bk-editor')
+    $a.removeClass('active');
+    $a.attr('data-bk-block-form-toggle-sent-text', 'open');
+    $bkEditor.find('div.sent-text-outer').slideUp('fast');
+  });
+
+  $(document).on('submit', '[data-block-form-editor-form]', function(){
+    var $form = $(this);
+    var params = baked.params($form);
+
+    baked.post('block_form/block_form_api/update', {
+      data: params,
+      ok: function(r){
+      }
+    });
+  });
 });
+
+
+
+
+
+

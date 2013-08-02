@@ -16,6 +16,11 @@ class BlockAppModel extends AppModel
     return $block;
   }
 
+  public function getFileInfo($args)
+  {
+    return FALSE;
+  }
+
   public function updateData($id, $data)
   {
     try {

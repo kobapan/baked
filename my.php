@@ -9,6 +9,7 @@ define('MY_DB_NAME', 'baked1');
 define('MY_DB_PREFIX', '');
 define('MY_DB_ENCODING', 'utf8');
 
+define('MY_NAME', '秋山 雅之');
 define('MY_EMAIL', 'okashimo23@gmail.com');
 define('MY_PASSWORD', '02130213');
 

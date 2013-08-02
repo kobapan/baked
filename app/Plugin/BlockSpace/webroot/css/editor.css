@@ -1,5 +1,6 @@
 div.bk-block.bk-open div.bk-block-space {
-  background: #f2f2f2;
+  background: #FFFFFF;
+  border: 1px dotted #ccc;
 }
 div.bk-block div.bk-block-space .ui-resizable-s {
   display: none !important;

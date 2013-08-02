@@ -7,8 +7,32 @@ class FilesController extends AppController
   public static $MIN_IMAGE_SIZE = 20;
   public static $MAX_IMAGE_SIZE = 1000;
   public static $STEP_IMAGE_SIZE = 10;
+  private $_overwrite_dir = NULL;
 
   public function images($type, $size, $name)
+  {
+    $this->__save_image($type, $size, $name);
+    exit;
+  }
+
+  public function block_images()
+  {
+    $args = func_get_args();
+    $package = array_shift($args);
+    if (empty($package)) $this->__show404();
+
+    $package = Inflector::camelize($package);
+    $this->uses[] = sprintf('%s.%s', $package, $package);
+    $this->{$package}->create();
+    $r = $this->{$package}->getFileInfo($args);
+    if ($r === FALSE) $this->__show404();
+
+    if (!empty($r['overwrite_dir'])) $this->_overwrite_dir = $r['overwrite_dir'];
+    $this->__save_image($r['type'], $r['size'], $r['name']);
+    exit;
+  }
+
+  private function __save_image($type, $size, $name)
   {
     if ($size < self::$MIN_IMAGE_SIZE
       || $size > self::$MAX_IMAGE_SIZE
@@ -35,13 +59,12 @@ class FilesController extends AppController
     } else {
       $this->__show404();
     }
-
-    exit;
   }
 
   private function __images_width($size, $file)
   {
     $dir = WWW_ROOT."files/images/width/{$size}";
+    if ($this->_overwrite_dir) $dir = $this->_overwrite_dir;
     $this->__create_dir_if_needed($dir);
     $newPath = sprintf('%s/%s.%s', $dir, $file['File']['code'], $file['File']['ext']);
 
@@ -57,6 +80,7 @@ class FilesController extends AppController
   private function __images_height($size, $file)
   {
     $dir = WWW_ROOT."files/images/height/{$size}";
+    if ($this->_overwrite_dir) $dir = $this->_overwrite_dir;
     $this->__create_dir_if_needed($dir);
     $newPath = sprintf('%s/%s.%s', $dir, $file['File']['code'], $file['File']['ext']);
 
@@ -72,6 +96,7 @@ class FilesController extends AppController
   private function __images_square($size, $file)
   {
     $dir = WWW_ROOT."files/images/square/{$size}";
+    if ($this->_overwrite_dir) $dir = $this->_overwrite_dir;
     $this->__create_dir_if_needed($dir);
     $newPath = sprintf('%s/%s.%s', $dir, $file['File']['code'], $file['File']['ext']);
 

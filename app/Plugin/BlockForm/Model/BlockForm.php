@@ -80,19 +80,35 @@ class BlockForm extends BlockAppModel
       $data = $this->getData($blockId);
 
       $sendValid = array();
+      $emailVars = array();
       foreach ($data['items'] as $item) {
         $rules = array();
         if ($item['required']) $rules[] = 'required';
         if ($item['type'] == 'email') $rules[] = 'email';
-        if ($item['type'] == 'tel') $rules[] = 'tel';
+        if ($item['type'] == 'tel') $rules[] = 'phone';
         if (!empty($rules)) $sendValid[$item['item_id']] = implode('|', $rules);
+
+        $emailVars[$item['item_id']] = array(
+          'item' => $item,
+          'value' => @$params[$item['item_id']],
+        );
       }
       $this->addLabelInValidate = FALSE;
       $this->valid['send'] = $sendValid;
+
       $r = $this->add($params, NULL, 'send', self::VALIDATION_MODE_ONLY);
       if ($r !== TRUE) throw new Exception(__('There is validation errors'));
 
-      App
+      App::uses('CakeEmail', 'Network/Email');
+      $email = new CakeEmail('default');
+      $r = $email
+        ->template('BlockForm.contact', 'BlockForm.default')
+        ->to(MY_EMAIL)
+        ->viewVars(array(
+          'items' => $emailVars
+        ))
+        ->subject(__('Contact from Baked'))
+        ->send();
 
       return TRUE;
     } catch (Exception $e) {

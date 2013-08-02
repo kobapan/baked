@@ -123,7 +123,7 @@ ul.bk-editor-boxes {
 ul.bk-editor-boxes > li {
   float: left;
   background: #eee;
-  margin: 0 0 1px 0;
+  margin: 0;
   border-top: 1px solid #fff;
   border-left: 1px solid #fff;
   border-right: 1px solid #ccc;
@@ -131,6 +131,7 @@ ul.bk-editor-boxes > li {
   line-height: 100%;
   padding: 7px;
   overflow: hidden;
+  height: 48px;
 }
 ul.bk-editor-boxes > li > div.bk-title {
   margin-bottom: 5px;
@@ -145,21 +146,12 @@ ul.bk-editor-boxes > li > a {
 ul.bk-editor-boxes > li > a:last-child {
   margin-right: 0;
 }
-ul.bk-editor-boxes > li > a:hover {
+ul.bk-editor-boxes > li > a:hover,
+ul.bk-editor-boxes > li > a.active {
   background: #fff;
   border: 1px solid #ccc;
   padding: 3px;
-}
-
-form.bk-form-01 {
-}
-form.bk-form-01 input[type=text],
-form.bk-form-01 input[type=number],
-form.bk-form-01 input[type=password] {
-  color: #666;
-  font-weight: bold;
-  padding: 3px;
-  border-radius: 3px;
+  color: #00ADE6;
 }
 
 ul#bk-page-manager {

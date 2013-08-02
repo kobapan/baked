@@ -6,23 +6,55 @@ class BlockPhotoGallery extends BlockAppModel
   public $name = 'BlockPhotoGallery';
   public $valid = array(
     'add' => array(
+      'slider_animation' => 'required | inClassArrayKeys[SLIDER_ANIMATION]',
+      'slider_theme' => 'required | inClassArrayKeys[SLIDER_THEME]',
+      'slider_pause_time' => 'required | inClassArrayKeys[SLIDER_PAUSE_TIME]'
     ),
     'update' => array(
       'id' => 'required | isExist'
     ),
   );
   public $columnLabels = array();
+  public static $SLIDER_THEME = array();
+  public static $SLIDER_ANIMATION = array();
+  public static $SLIDER_PAUSE_TIME = array();
 
   public function __construct($id = false, $table = null, $ds = null)
   {
     parent::__construct($id, $table, $ds);
+
+    self::$SLIDER_THEME = array(
+      'default' => __('Theme: Default'),
+      'bar' => __('Theme: Bar'),
+      'dark' => __('Theme: Dark'),
+      'light' => __('Theme: Light'),
+    );
+
+    self::$SLIDER_ANIMATION = array(
+      'sliceDown' => __('Animation: sliceDown'),
+      'sliceDownLeft' => __('Animation: sliceDownLeft'),
+      'sliceUp' => __('Animation: sliceUp'),
+      'sliceUpLeft' => __('Animation: sliceUpLeft'),
+      'sliceUpDown' => __('Animation: sliceUpDown'),
+      'sliceUpDownLeft' => __('Animation: sliceUpDownLeft'),
+      'fold' => __('Animation: fold'),
+      'fade' => __('Animation: fade'),
+      'random' => __('Animation: random'),
+      'slideInRight' => __('Animation: slideInRight'),
+      'slideInLeft' => __('Animation: slideInLeft'),
+      'boxRandom' => __('Animation: boxRandom'),
+      'boxRain' => __('Animation: boxRain'),
+      'boxRainReverse' => __('Animation: boxRainReverse'),
+      'boxRainGrow' => __('Animation: boxRainGrow'),
+      'boxRainGrowReverse' => __('Animation: boxRainGrowReverse'),
+    );
+
+    self::$SLIDER_PAUSE_TIME = array(
+      1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7, 8 => 8, 9 => 9, 10 => 10,
+    );
+
     $this->columnLabels = array(
     );
-  }
-
-  public function convert($block)
-  {
-    return $block;
   }
 
 /**
@@ -33,8 +65,12 @@ class BlockPhotoGallery extends BlockAppModel
   public function initialData()
   {
     return array(
-      'width'  => 80,
+      'type' => 'lightbox',
+      'width' => 80,
       'photos' => array(),
+      'slider_pause_time' => 3,
+      'slider_animation' => 'random',
+      'slider_theme' => 'default',
     );
   }
 
@@ -134,10 +170,6 @@ class BlockPhotoGallery extends BlockAppModel
       $this->rollback();
       return FALSE;
     }
-  }
-
-  public function insert()
-  {
   }
 
 }
