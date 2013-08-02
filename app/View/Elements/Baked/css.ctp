@@ -1,3 +1,4 @@
+<link href="<?php echo URL ?>css/normalize.css" rel="stylesheet" type="text/css">
 <link href="<?php echo URL ?>css/baked.css" rel="stylesheet" type="text/css">
 <link href="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/themes/base/jquery-ui.css" rel="stylesheet" type="text/css">
 <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">

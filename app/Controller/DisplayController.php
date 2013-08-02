@@ -16,7 +16,7 @@ class DisplayController extends AppController
     $path = func_get_args();
     if (count($path) == 0) $path[] = 'index';
 
-    $this->plugin = 'ThemeSkyblue';
+    $this->plugin = $this->System->value(System::KEY_USE_THEME);
 
     $menuList = $this->Page->menu($path, $parentMenu, $currentMenu, $pageId);
 

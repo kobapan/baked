@@ -1,9 +1,11 @@
-<div id="bk-block-<?php echo $block['Block']['id'] ?>" class="bk-block" data-bk-block-id="<?php echo $block['Block']['id'] ?>">
-  <?php
-  echo $this->element("{$block['Block']['package']}.block", array(
-    'block' => $block,
-  ));
-  ?>
+<div id="bk-block-<?php echo $block['Block']['id'] ?>" class="bk-block <?php echo $block['Block']['package']; ?>" data-bk-block-id="<?php echo $block['Block']['id'] ?>">
+  <div class="bk-block-content">
+    <?php
+    echo $this->element("{$block['Block']['package']}.block", array(
+      'block' => $block,
+    ));
+    ?>
+  </div>
 
   <?php if (EDITTING) : ?>
     <div class="bk-editor bk-general">
