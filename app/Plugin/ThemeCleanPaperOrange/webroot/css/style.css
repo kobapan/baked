@@ -167,7 +167,7 @@ img {
   padding: 0 10px;
 }
 #content h2 {
-  background: url(../images/bg-h2.png) no-repeat;
+  background: url(../images/bg-h2-main.png) no-repeat;
   height: 54px;
   margin: 0;
   line-height: 54px;
@@ -175,6 +175,9 @@ img {
   font-size: 13pt;
   color: #555;
   font-weight: normal;
+}
+#sub h2 {
+  background: url(../images/bg-h2-sub.png) no-repeat;
 }
 #content h3 {
   border: 1px solid #eee;
