@@ -18,36 +18,42 @@ class DisplayController extends AppController
 
     $this->plugin = $this->System->value(System::KEY_USE_THEME);
 
-    $menuList = $this->Page->menu($path, $parentMenu, $currentMenu, $pageId);
+    $menuList = $this->Page->menu($path, $currentMenu, $pageId);
 
-    $options = $this->Block->getOptions(array(Block::OPTION_ORDER_STANDARD), array(
-      CONDITIONS => array('Block.page_id' => $pageId,),
-      FIELDS => array(
-        'Block.id', 'Block.package', 'Block.sheet', 'Block.order', 'Block.data', 'Block.created', 'Block.modified',
-      ),
-    ));
-    $blocks = $this->Block->find('all', $options);
-    $loadedModels = array();
-    foreach ($blocks as $block) {
-      if (in_array($block['Block']['package'], $loadedModels)) continue;
-      $this->uses[] = sprintf('%s.%s', $block['Block']['package'], $block['Block']['package']);
-      $loadedModels[] = $block['Block']['package'];
-      $this->{$block['Block']['package']}->create();
-    }
-    foreach ($blocks as &$block) {
-      $block = $this->{$block['Block']['package']}->convert($block);
+    $blocks = array();
+    $view = 'show';
+
+    if (empty($currentMenu)) {
+      $view = '404';
+    } else {
+      $options = $this->Block->getOptions(array(Block::OPTION_ORDER_STANDARD), array(
+        CONDITIONS => array('Block.page_id' => $pageId,),
+        FIELDS => array(
+          'Block.id', 'Block.package', 'Block.sheet', 'Block.order', 'Block.data', 'Block.created', 'Block.modified',
+        ),
+      ));
+      $blocks = $this->Block->find('all', $options);
+      $loadedModels = array();
+      foreach ($blocks as $block) {
+        if (in_array($block['Block']['package'], $loadedModels)) continue;
+        $this->uses[] = sprintf('%s.%s', $block['Block']['package'], $block['Block']['package']);
+        $loadedModels[] = $block['Block']['package'];
+        $this->{$block['Block']['package']}->create();
+      }
+      foreach ($blocks as &$block) {
+        $block = $this->{$block['Block']['package']}->convert($block);
+      }
     }
 
     $this->_setupBlocks();
 
     $this->set(array(
       'menuList' => $menuList,
-      'parentMenu' => $parentMenu,
       'currentMenu' => $currentMenu,
       'blocks' => $blocks,
     ));
 
-    $this->render(FALSE);
+    $this->render($view);
   }
 
   private function _setupBlocks()

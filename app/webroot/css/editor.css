@@ -6,7 +6,7 @@ body {
 ul#bk-toolbar {
   height: 38px;
   position: fixed;
-  z-index: 3000;
+  z-index: 4000;
   top: 0;
   background: #333;
   right: 0;
@@ -39,6 +39,23 @@ ul#bk-toolbar > li.active > a,
 ul#bk-toolbar > li > a:hover {
   background: url(../img/bg-toolbar-hover.png);
 }
+
+div.bk-sheet {
+  position: relative;
+}
+div.bk-blocks {
+  min-height: 28px;
+}
+div.bk-add-block-outer {
+  position: absolute;
+  bottom: -10px;
+  right: -10px;
+  z-index: 3000;
+}
+div.bk-add-block-outer > a {
+  font-size: 10pt;
+}
+
 
 div.bk-block {
   border: 1px solid #eee;
@@ -98,6 +115,8 @@ div.bk-block.bk-open > div.bk-editor {
 }
 
 ul.bk-controller {
+  list-style: none;
+  margin: 0;
   display: none;
   background: #f6f6f6;
   width: 30px;
@@ -222,9 +241,38 @@ ul#bk-page-manager > li[data-bk-hidden="1"] > a.bk-hide {
   display: none;
 }
 
-
-
-
+ul#bk-available-blocks {
+  display: none;
+  position: absolute;
+  list-style: none;
+  background: #fff;
+  z-index: 3001;
+  border-radius: 5px;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.6);
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+ul#bk-available-blocks > li {
+}
+ul#bk-available-blocks > li > a {
+  padding: 0px 15px;
+  display: block;
+  text-decoration: none;
+  line-height: 30px;
+  transition: all 0.2s ease;
+}
+ul#bk-available-blocks > li:hover > a {
+  background: #00ADE6;
+  color: #fff;
+  text-shadow: 0 1px 0px #666;
+}
+ul#bk-available-blocks > li > a > i {
+  width: 18px;
+  display: inline-block;
+  text-align: center;
+  margin-right: 6px;
+}
 
 
 

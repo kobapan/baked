@@ -4,7 +4,7 @@ baked.blocks.blockForm = {
     $('div.bk-block-form-error').remove();
 
     params['data[block_id]'] = blockId;
-    baked.post('block_form/block_form_api/send', {
+    baked.post('plugin/block_form/block_form_api/send', {
       data: params,
       ok: function(r){
         var $form = $('form#bk-block-form-'+blockId);
@@ -18,6 +18,8 @@ baked.blocks.blockForm = {
         });
       },
       ng: function(r){
+        clearTimeout(baked.blocks.blockForm.hideErrorTimer);
+
         var $form = $('form#bk-block-form-'+blockId);
         for (var itemId in r.errors) {
           var $area = $form.find('div.bk-block-form-item-'+itemId);
@@ -26,13 +28,20 @@ baked.blocks.blockForm = {
             class: 'bk-block-form-error',
           });
           $error.appendTo($area).fadeIn();
+
+          baked.blocks.blockForm.hideErrorTimer = setTimeout(function(){
+            $('div.bk-block-form-error').fadeOut('fast', function(){
+              $(this).remove();
+            });
+          }, 7000);
         }
       },
       complete: function(){
         baked.busyEnd();
       }
     });
-  }
+  },
+  hideErrorTimer: null
 };
 
 $(function(){

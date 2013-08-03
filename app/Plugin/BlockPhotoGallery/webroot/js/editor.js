@@ -20,7 +20,7 @@ baked.blocks.blockPhotoGallery = {
         fileIds.push($(this).attr('data-bk-file-id'));
       });
 
-      baked.post('block_photo_gallery/block_photo_gallery_api/save_sort', {
+      baked.post('plugin/block_photo_gallery/block_photo_gallery_api/save_sort', {
         data: {
           'block_id': blockId,
           'file_ids': fileIds
@@ -67,7 +67,7 @@ $(function(){
     $(this).parent().find('a').removeClass('active');
     $(this).addClass('active');
 
-    baked.post('block_photo_gallery/block_photo_gallery_api/update', {
+    baked.post('plugin/block_photo_gallery/block_photo_gallery_api/update', {
       data: {
         'block_id': bkBlockId,
         'type': type
@@ -83,7 +83,7 @@ $(function(){
     var $block = $(this).parents('div.bk-block');
     var bkBlockId = $block.attr('data-bk-block-id');
 
-    baked.post('block_photo_gallery/block_photo_gallery_api/increase', {
+    baked.post('plugin/block_photo_gallery/block_photo_gallery_api/increase', {
       data: {
         'block_id': bkBlockId
       },
@@ -97,7 +97,7 @@ $(function(){
     var $block = $(this).parents('div.bk-block');
     var bkBlockId = $block.attr('data-bk-block-id');
 
-    baked.post('block_photo_gallery/block_photo_gallery_api/decrease', {
+    baked.post('plugin/block_photo_gallery/block_photo_gallery_api/decrease', {
       data: {
         'block_id': bkBlockId
       },
@@ -116,7 +116,7 @@ $(function(){
       params[v.name] = v.value;
     });
     params['block_id'] = bkBlockId;
-    baked.post('block_photo_gallery/block_photo_gallery_api/update', {
+    baked.post('plugin/block_photo_gallery/block_photo_gallery_api/update', {
       data: params,
       ok: function(r){
         $block.find('.block-photo-gallery').replaceWith($(r.html).find('.block-photo-gallery'));
@@ -130,7 +130,7 @@ $(function(){
     var $photo = $(this).parent();
     var fileId = $photo.attr('data-bk-file-id');
 
-    baked.post('block_photo_gallery/block_photo_gallery_api/delete_photo', {
+    baked.post('plugin/block_photo_gallery/block_photo_gallery_api/delete_photo', {
       data: {
         'block_id': bkBlockId,
         'file_id': fileId

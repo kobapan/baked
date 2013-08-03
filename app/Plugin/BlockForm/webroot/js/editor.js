@@ -21,7 +21,7 @@ baked.blocks.blockForm.saveSort = function(blockId){
       itemIds.push($(this).attr('data-id'));
     });
 
-    baked.post('block_form/block_form_api/save_sort', {
+    baked.post('plugin/block_form/block_form_api/save_sort', {
       data: {
         'block_id': blockId,
         'item_ids': itemIds
@@ -38,7 +38,7 @@ baked.blocks.blockForm.saveSort = function(blockId){
 $(function(){
   $(document).on('click', '.bk-block-form-add-item', function(){
     var blockId = $(this).parents('.bk-block').attr('data-bk-block-id');
-    baked.post('block_form/block_form_api/html_add', {
+    baked.post('plugin/block_form/block_form_api/html_add', {
       data: {
         'data[BlockForm][block_id]': blockId
       },
@@ -54,7 +54,7 @@ $(function(){
     var blockId = $(this).parents('.bk-block').attr('data-bk-block-id');
     var $tr = $(this).parents('tr');
     var itemId = $tr.attr('data-id');
-    baked.post('block_form/block_form_api/delete_item', {
+    baked.post('plugin/block_form/block_form_api/delete_item', {
       data: {
         'data[BlockForm][block_id]': blockId,
         'data[BlockForm][item_id]': itemId
@@ -63,6 +63,10 @@ $(function(){
         $tr.fadeOut(function(){
           $tr.remove();
         });
+
+        var $bkBlock = baked.domBlockById(blockId);
+        selector = 'form.bk-block-form';
+        $bkBlock.find(selector).replaceWith($(r.html).find(selector));
       }
     });
   });
@@ -70,7 +74,7 @@ $(function(){
   $(document).on('click', '.bk-block-form-edit-item', function(){
     var blockId = $(this).parents('.bk-block').attr('data-bk-block-id');
     var itemId = $(this).parents('tr').attr('data-id');
-    baked.post('block_form/block_form_api/html_add', {
+    baked.post('plugin/block_form/block_form_api/html_add', {
       data: {
         'data[BlockForm][block_id]': blockId,
         'data[BlockForm][item_id]': itemId
@@ -88,7 +92,7 @@ $(function(){
     $form = $(this);
     var params = baked.params($form);
 
-    baked.post('block_form/block_form_api/add_item', {
+    baked.post('plugin/block_form/block_form_api/add_item', {
       data: params,
       ok: function(r){
         var $bkBlock = baked.domBlockById(r.blockId);
@@ -129,7 +133,7 @@ $(function(){
     var $form = $(this);
     var params = baked.params($form);
 
-    baked.post('block_form/block_form_api/update', {
+    baked.post('plugin/block_form/block_form_api/update', {
       data: params,
       ok: function(r){
       }

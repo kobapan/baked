@@ -50,7 +50,7 @@ $tableId = "block-form-editor-table-{$block['Block']['id']}";
   </script>
 </table>
 
-<div class="spacer2"></div>
+<div class="spacer1"></div>
 
 <ul class="bk-editor-boxes">
   <li>
@@ -84,8 +84,11 @@ echo $this->Form->input('Block.block_id', array(
   ));
   ?>
 </div>
+
 <div class="spacer1"></div>
-<button type="submit" class="bk-btn-mini"><?php echo __('Save') ?></button>
+
+<button type="submit" class="button button-primary button-pill button-small"><?php echo __('Save') ?></button>
+
 <?php
 echo $this->Form->end();
 ?>
@@ -95,3 +98,8 @@ $(function(){
   $('#<?php echo $id ?>').bkCkeditor();
 });
 </script>
+
+
+
+
+

@@ -6,8 +6,11 @@ echo $this->Form->create('Block', array(
 ));
 ?>
 <textarea name="text" id="<?php echo $id ?>" class="ckeditor-textarea"><?php echo $block['Block']['data']['text'] ?></textarea>
+
 <div class="spacer1"></div>
-<button type="submit" class="bk-btn-mini"><?php echo __('Save') ?></button>
+
+<button type="submit" class="button button-primary button-pill button-small"><?php echo __('Save') ?></button>
+
 <?php
 echo $this->Form->end();
 ?>

@@ -58,7 +58,9 @@ class BlockFormApiController extends BlockAppController
     $r = $this->BlockForm->deleteItem($this->request->data['BlockForm']['block_id'], $this->request->data['BlockForm']['item_id']);
 
     if ($r !== TRUE) $this->Api->ng($r->getMessage());
-    $this->Api->ok();
+    $this->Api->ok(array(
+      'html' => $this->_htmlBlock($this->request->data['BlockForm']['block_id']),
+    ));
   }
 
   public function save_sort()

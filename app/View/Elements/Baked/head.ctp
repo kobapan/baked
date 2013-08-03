@@ -1,9 +1,3 @@
 <?php
-$blockHeadList = Set::extract('{.+?}.head', Configure::read('Blocks'));
-$this->Baked->setElements($blockHeadList);
-
-$blockJsList = Set::extract('{.+?}.js', Configure::read('Blocks'));
-$this->Baked->setElements($blockJsList);
-
-
-
+$this->Html->css(Baked::read('CSS'), NULL, array('inline' => FALSE));
+$this->Html->script(Baked::read('JS'), array('inline' => FALSE));

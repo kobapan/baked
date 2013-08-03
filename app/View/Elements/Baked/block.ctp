@@ -15,7 +15,7 @@
       ));
       ?>
     </div>
-    <ul class="bk-controller">
+    <ul class="bk-controller bk-general">
       <li><a href="javascript:;" data-bk-show-block-list data-bk-sheet="<?php echo $block['Block']['sheet'] ?>" data-bk-before-block-id="<?php echo $block['Block']['id'] ?>"><i class="icon-plus icon-large"></i></a></li>
       <li><a href="javascript:;" data-bk-toggle-editor><i class="icon-folder-open icon-large"></i></a></li>
       <li><a href="javascript:;" data-bk-delete-block="<?php echo $block['Block']['id'] ?>"><i class="icon-remove icon-large"></i></a></li>

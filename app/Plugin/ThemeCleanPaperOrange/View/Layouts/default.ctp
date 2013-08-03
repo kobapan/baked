@@ -10,9 +10,15 @@
 
 <?php echo $this->Element('Baked/js') ?>
 
-<title></title>
+<title><?php
+  $pageTitle = '';
+  if (!empty($title)) $pageTitle = $title.' - ';
+  $pageTitle .= BK_SITE_NAME;
+  echo h($pageTitle);
+?></title>
 </head>
 <body>
+
 <?php echo $this->Element('Baked/html') ?>
 
 <div id="wrap">
@@ -28,6 +34,7 @@
           <?php
           $classes = array();
           if ($menu['current']) $classes[] = 'current';
+          if ($menu['Page']['hidden']) $classes[] = 'hidden';
           ?>
           <li class="<?php echo implode(' ', $classes) ?>">
             <a href="<?php echo $menu['Page']['url'] ?>">
@@ -39,6 +46,7 @@
                 <?php echo h($menu['Page']['title']) ?>
                 <?php if (!empty($menu['sub'])) : ?><span class="more">&raquo;</span><?php endif ; ?>
               </span>
+              <div class="cover"></div>
             </a>
             <?php if (!empty($menu['sub'])) : ?>
               <div class="depth-1 under">
@@ -47,6 +55,7 @@
                     <?php
                     $classes = array();
                     if ($menu['current']) $classes[] = 'current';
+                    if ($menu['Page']['hidden']) $classes[] = 'hidden';
                     ?>
                     <li class="<?php echo implode(' ', $classes) ?>">
                       <a href="<?php echo $menu['Page']['url'] ?>">
@@ -60,6 +69,7 @@
                               <?php
                               $classes = array();
                               if ($menu['current']) $classes[] = 'current';
+                              if ($menu['Page']['hidden']) $classes[] = 'hidden';
                               ?>
                               <li class="<?php echo implode(' ', $classes) ?>">
                                 <a href="<?php echo $menu['Page']['url'] ?>"><?php echo $menu['Page']['title'] ?></a>
@@ -79,38 +89,14 @@
     </div><!-- #primary-header -->
 
     <div id="content">
-
-      <div id="visual">
-        <?php
-        echo $this->element('Baked/sheet', array(
-          'sheet' => 'visual',
-        ));
-        ?>
-      </div>
-
-      <div class="wring">
-
-        <div id="main">
-          <?php
-          echo $this->element('Baked/sheet', array(
-            'sheet' => 'main',
-          ));
-          ?>
-        </div><!-- #main -->
-
-        <div id="sub">
-          <?php
-          echo $this->element('Baked/sheet', array(
-            'sheet' => 'sub',
-          ));
-          ?>
-        </div><!-- #sub -->
-
-      </div><!-- .wring -->
-
+      <?php echo $this->fetch('content') ?>
     </div><!-- #content -->
 
   </div><!-- #paper -->
+
+  <div id="primary-footer">
+    <div class="powered">Powered by <a href="http://bakedcms.org/">Baked</a></div>
+  </div>
 
 </div><!-- #wrap -->
 

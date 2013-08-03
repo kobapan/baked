@@ -15,8 +15,11 @@ echo $this->Form->input('Block.text', array(
   'class' => 'ckeditor-textarea',
 ));
 ?>
+
 <div class="spacer1"></div>
-<button type="submit" class="bk-btn-mini"><?php echo __('Save') ?></button>
+
+<button type="submit" class="button button-primary button-pill button-small"><?php echo __('Save') ?></button>
+
 <?php
 echo $this->Form->end();
 ?>

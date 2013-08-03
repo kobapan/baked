@@ -61,11 +61,16 @@ $(function(){
     var pageId = $li.attr('data-page-id');
     baked.savePageManager({
       ok: function(r){
+        if (!baked.busyFilter()) return;
+
         baked.insertPage({
           'before_page_id': pageId
         }, {
           ok: function(){
             baked.showPageManager();
+          },
+          complete: function(){
+            baked.busyEnd();
           }
         });
       }
@@ -78,12 +83,17 @@ $(function(){
     var pageId = $li.attr('data-page-id');
     baked.savePageManager({
       ok: function(r){
+        if (!baked.busyFilter()) return;
+
         baked.deletePage({
           data: {
             'page_id': pageId
           },
           ok: function(r){
             baked.showPageManager();
+          },
+          complete: function(){
+            baked.busyEnd();
           }
         })
       }

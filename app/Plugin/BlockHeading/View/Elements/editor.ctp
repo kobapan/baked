@@ -30,7 +30,9 @@ echo $this->Form->create('Block', array(
   </li>
 </ul>
 
-<button type="submit" class="bk-btn-mini"><?php echo __('Save') ?></button>
+<div class="spacer1"></div>
+
+<button type="submit" class="button button-primary button-pill button-small"><?php echo __('Save') ?></button>
 
 <?php
 echo $this->Form->end();

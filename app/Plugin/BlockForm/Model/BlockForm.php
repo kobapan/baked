@@ -44,6 +44,7 @@ class BlockForm extends BlockAppModel
   public function initialData()
   {
     return array(
+      'sent_text' => __('The message has been sent.'),
       'lastId' => 4,
       'items' => array(
         1 => array(

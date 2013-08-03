@@ -10,7 +10,7 @@ baked.blocks.blockPhoto = {
   },
   resize: function(blockId, size){
     var $block = baked.domBlockById(blockId);
-    baked.post('block_photo/block_photo_api/update', {
+    baked.post('plugin/block_photo/block_photo_api/update', {
       data: {
         'block_id': blockId,
         'size'    : size.width
@@ -30,7 +30,7 @@ $(function(){
     var $block = $(this).parents('div.bk-block');
     var bkBlockId = $block.attr('data-bk-block-id');
 
-    baked.post('block_photo/block_photo_api/update', {
+    baked.post('plugin/block_photo/block_photo_api/update', {
       data: {
         'block_id': bkBlockId,
         'align'   : align

@@ -11,10 +11,11 @@ div.bk-block-form-item {
 div.bk-block-form-error {
   position: absolute;
   display: none;
-  top: 0px;
+  top: 10px;
   left: 0px;
   cursor: pointer;
-  background: #4CB6E7;
+  /*background: #4CB6E7;*/
+  background: #c00;
   color: #fff;
   border-radius: 3px;
   padding: 3px 5px;

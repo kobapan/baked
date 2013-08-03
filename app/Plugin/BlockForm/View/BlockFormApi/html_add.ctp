@@ -1,4 +1,4 @@
-<div class="bk-block-form-editor-box">
+<div class="bk-block-form-editor-box bk-general">
   <?php
   echo $this->Form->create('BlockForm', array(
     'default' => FALSE,
@@ -33,7 +33,13 @@
     'value' => isset($this->data['BlockForm']['options']) ? implode("\n", $this->data['BlockForm']['options']) : '',
   ));
   ?>
-  <button type="submit"><?php echo __('Save') ?></button>
+
+  <div class="spacer1"></div>
+
+  <div style="height: 30px">
+    <button type="submit" class="button button-primary button-pill button-small"><?php echo __('Save') ?></button>
+  </div>
+
   <?php
   echo $this->Form->end();
   ?>

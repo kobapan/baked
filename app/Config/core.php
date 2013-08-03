@@ -25,6 +25,8 @@ date_default_timezone_set('Asia/Tokyo');
 require_once ROOT.DS.'my.php';
 require_once 'utilities.php';
 
+require_once APP.'Lib'.DS.'Baked.php';
+
 require_once 'environment.php';
 $environment = new Environment();
 $environment->setup();

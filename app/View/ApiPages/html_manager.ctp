@@ -53,7 +53,11 @@
     <?php endforeach ; ?>
   </ul>
 
-  <button type="submit"><?php echo __('Save') ?></button>
+  <div class="spacer2"></div>
+
+  <div style="height: 30px">
+    <button type="submit" class="button button-primary button-pill button-small"><?php echo __('Save') ?></button>
+  </div>
 
   <?php
   echo $this->Form->end();

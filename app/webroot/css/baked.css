@@ -4,11 +4,11 @@
   font-size: 9pt;
 }
 .bk-general a {
-  color: #333 !important;
+  color: #333;
   text-decoration: underline;
 }
 .bk-general a:hover {
-  color: #00ADE6 !important;
+  color: #00ADE6;
 }
 .bk-general a i {
   text-decoration: none !important;
@@ -26,21 +26,16 @@
   margin: 0;
   padding: 0;
 }
+.bk-general .button {
+  text-decoration: none;
+  color: #fff;
+}
+.bk-general .button:hover {
+  color: #fff;
+}
 
 div.bk-block {
   margin-bottom: 15px;
-}
-
-ul#bk-available-blocks {
-  display: none;
-  position: absolute;
-  list-style: none;
-  background: #fff;
-  border: 1px solid #ccc;
-  padding: 10px;
-  z-index: 2000;
-}
-ul#bk-available-blocks li {
 }
 
 div.spacer1 {
@@ -55,4 +50,9 @@ div.spacer3 {
 
 div.fancybox-inner {
   text-align: left;
+}
+
+div.bk-note-01 {
+  text-align: center;
+  padding: 10px;
 }

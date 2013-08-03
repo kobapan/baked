@@ -187,29 +187,26 @@ class Page extends AppModel
  * Get menu list.
  *
  * @param array $path
- * @param pointer &$parentMenuP
  * @param pointer &$currentMenu
  * @param pointer &$pageId
  * @return array
  */
-  public function menu($path, &$parentMenuP, &$currentMenuP, &$pageId)
+  public function menu($path, &$currentMenuP, &$pageId)
   {
+    $cond = array();
+    if (!EDITTING) $cond["{$this->name}.hidden"] = 0;
     $pages = $this->find('all', array(
-      CONDITIONS => array(
-        "{$this->name}.hidden" => 0,
-      ),
+      CONDITIONS => $cond,
       FIELDS => array(
-        "{$this->name}.id", "{$this->name}.name", "{$this->name}.title", "{$this->name}.parent_page_id", "{$this->name}.depth",
+        "{$this->name}.id", "{$this->name}.name", "{$this->name}.title", "{$this->name}.parent_page_id", "{$this->name}.depth", "{$this->name}.hidden",
       ),
       ORDER => array(
-        #"{$this->name}.parent_page_id" => 'asc',
         "{$this->name}.order" => 'asc',
       )
     ));
 
     $menuList = array();
     $pagePointers = array();
-    $parentPageId = NULL;
 
     foreach ($pages as &$page) {
       $pointer;
@@ -218,28 +215,24 @@ class Page extends AppModel
         $pointer = &$menuList;
       } else {
         $p = &$pagePointers[$page['Page']['parent_page_id']];
+        if (empty($p)) continue;
         $page['Page']['url'] = $p['Page']['url'].'/'.$page['Page']['name'];
         $pointer = &$p['sub'];
       }
       $page['sub'] = array();
       $depth = $page['Page']['depth'];
       $page['current'] = (count($path) > $depth && $path[$depth] == $page['Page']['name']);
+      $page['here'] = (count($path)-1 == $depth && $path[$depth] == $page['Page']['name']);
 
       $pagePointers[$page['Page']['id']] = $page;
       $pointer[] = &$pagePointers[$page['Page']['id']];
 
-      if ($page['current']) {
-        $parentPageId = $page['Page']['parent_page_id'];
+      if ($page['here']) {
         $pageId = $page['Page']['id'];
       }
     }
 
-    $currentMenuP = $pagePointers[$pageId];
-    if (!empty($parentPageId)) {
-      $parentMenuP = $pagePointers[$parentPageId];
-    } else {
-      $parentMenuP = $pagePointers[$pageId];
-    }
+    $currentMenuP = @$pagePointers[$pageId];
 
     return $menuList;
   }

@@ -7,6 +7,7 @@ class Block extends AppModel
   public $name = 'Block';
   public $valid = array(
     'add' => array(
+      'page_id' => 'required | isExist[Page,id]',
     ),
     'update' => array(
       'id' => 'required | isExist'

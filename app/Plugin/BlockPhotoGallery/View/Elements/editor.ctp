@@ -97,7 +97,8 @@ echo $this->Form->create('File', array(
 
 <div class="spacer2"></div>
 
-<button type="submit"><?php echo __('Save') ?></button>
+<button type="submit" class="button button-primary button-pill button-small"><?php echo __('Save') ?></button>
+
 <?php
 echo $this->Form->end();
 ?>
@@ -117,7 +118,7 @@ $(function(){
     $('#<?php echo $uploaderId ?>').plupload({
       // General settings
       runtimes : 'html5,flash,browserplus,silverlight,gears,html4',
-      url : '<?php echo URL ?>block_photo_gallery/block_photo_gallery_api/upload',
+      url : '<?php echo URL ?>plugin/block_photo_gallery/block_photo_gallery_api/upload',
       max_file_size : '1000mb',
       max_file_count: 20, // user can add no more then 20 files at a time
       rename: true,

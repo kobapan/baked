@@ -33,6 +33,7 @@ img {
 #paper {
   background: #fff;
   box-shadow: 0 0 20px 1px #ccc;
+  padding-bottom: 60px;
 }
 
 #primary-header {
@@ -67,6 +68,14 @@ img {
   display: block;
   height: 46px;
   overflow: hidden;
+  position: relative;
+}
+#primary-header > ul.navigation > li > a > div.cover {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 #primary-header > ul.navigation > li > a > span {
   display: block;
@@ -88,6 +97,9 @@ img {
 }
 #primary-header > ul.navigation > li.current > a > span.normal {
   color: #FF6600;
+}
+#primary-header > ul.navigation > li.hidden > a > span {
+  text-decoration: line-through;
 }
 #primary-header div.depth-1,
 #primary-header div.depth-2 {
@@ -132,6 +144,10 @@ img {
 }
 #primary-header div.depth-1 {
   padding-top: 5px;
+}
+#primary-header div.depth-1 > ul > li.hidden > a,
+#primary-header div.depth-2 > ul > li.hidden > a {
+  text-decoration: line-through;
 }
 #primary-header div.depth-2 {
   left: 180px;
@@ -236,16 +252,35 @@ img {
   background: #eee;
 }
 
+#content form.bk-block-form {
+}
+#content form.bk-block-form div.bk-block-form-item {
+  margin-bottom: 20px;
+}
+#content form.bk-block-form div.bk-block-form-item label.main {
+}
+#content form.bk-block-form div.bk-block-form-item span.required {
+  color: #f00;
+}
 
-
-
-
-
-
-
-
-
-
+#primary-footer {
+  margin-top: 20px;
+}
+#primary-footer > div.powered {
+  text-align: right;
+  font-size: 10pt;
+  color: #ccc;
+  text-shadow: 0 2px 0px #fff;
+}
+#primary-footer > div.powered > a {
+  font-weight: bold;
+  color: #999;
+  opacity: .8;
+  transition: all 0.2s ease;
+}
+#primary-footer > div.powered > a:hover {
+  opacity: 1.0;
+}
 
 
 

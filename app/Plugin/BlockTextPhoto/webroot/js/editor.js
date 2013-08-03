@@ -10,7 +10,7 @@ baked.blocks.blockTextPhoto = {
   },
   resize: function(blockId, size){
     var $block = baked.domBlockById(blockId);
-    baked.post('block_text_photo/block_text_photo_api/update', {
+    baked.post('plugin/block_text_photo/block_text_photo_api/update', {
       data: {
         'block_id': blockId,
         'size'    : size.width
@@ -34,7 +34,7 @@ $(function(){
     });
     params['block_id'] = blockId;
 
-    baked.post('block_text_photo/block_text_photo_api/update', {
+    baked.post('plugin/block_text_photo/block_text_photo_api/update', {
       data: params,
       ok: function(r){
         $block.find('div.bk-block-text-photo-content').replaceWith($(r.html).find('div.bk-block-text-photo-content'));
@@ -48,7 +48,7 @@ $(function(){
     var $block = $(this).parents('div.bk-block');
     var bkBlockId = $block.attr('data-bk-block-id');
 
-    baked.post('block_text_photo/block_text_photo_api/update', {
+    baked.post('plugin/block_text_photo/block_text_photo_api/update', {
       data: {
         'block_id': bkBlockId,
         'align'   : align

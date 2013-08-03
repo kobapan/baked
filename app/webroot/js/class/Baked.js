@@ -85,7 +85,6 @@ Baked.prototype.showPageManager = function(){
 };
 
 Baked.prototype.savePageManager = function(callbacks){
-  if (!this.busyFilter()) return;
   var self = this;
 
   $form = $('#bk-page-manager-form');
@@ -98,7 +97,6 @@ Baked.prototype.savePageManager = function(callbacks){
       if (callbacks && callbacks.ok) callbacks.ok(r);
     },
     complete: function(){
-      self.busyEnd();
     }
   });
 };
@@ -148,6 +146,9 @@ Baked.prototype.insertPage = function(params, callbacks){
     data: params,
     ok: function(r){
       if (callbacks && callbacks.ok) callbacks.ok(r);
+    },
+    complete: function(){
+      if (callbacks && callbacks.complete) callbacks.complete();
     }
   });
 };
@@ -181,7 +182,7 @@ Baked.prototype.addBlock = function(pageId, sheet, package, beforeBlockId){
         $beforeBlock = self.domBlockById(beforeBlockId);
         $beforeBlock.before(r.html);
       } else {
-        $('#bk-sheet-'+sheet).append(r.html);
+        $('#bk-sheet-'+sheet+' > .bk-blocks').append(r.html);
       }
     }
   })
@@ -211,10 +212,10 @@ Baked.prototype.setupCkeditor = function(){
 
 Baked.prototype.sortableBlocks = function(){
   var self = this;
-  $('.bk-sheet').sortable({
+  $('.bk-blocks').sortable({
     zIndex: 2000,
     handle: 'a.bk-block-move-handle',
-    connectWith: '.bk-sheet',
+    connectWith: '.bk-blocks',
     revert: true,
     tolerance: 'pointer',
     start: function () {
@@ -229,7 +230,7 @@ Baked.prototype.sortableBlocks = function(){
       self.saveSort();
     }
   });
-  $('.bk-sheet').disableSelection();
+  //$('.bk-sheet').disableSelection();
 };
 
 Baked.prototype.saveSort = function(){
@@ -312,6 +313,7 @@ Baked.prototype.closeAllEditor = function(){
 };
 
 Baked.prototype.busyFilter = function(){
+  c("Busy start");
   if (this.busy > 0) {
     c("Busy!");
     return false;
@@ -322,6 +324,7 @@ Baked.prototype.busyFilter = function(){
 }
 
 Baked.prototype.busyEnd = function(){
+  c("Busy end");
   this.busy--;
 }
 
