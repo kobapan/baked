@@ -4,6 +4,7 @@ App::uses('AppController', 'Controller');
 class DisplayController extends AppController
 {
   public $uses = array('Block',);
+  public $components = array('RequestHandler');
 
 /**
  * Displays a page
@@ -16,7 +17,7 @@ class DisplayController extends AppController
     $path = func_get_args();
     if (count($path) == 0) $path[] = 'index';
 
-    $this->plugin = $this->System->value(System::KEY_USE_THEME);
+    $this->_selectTheme();
 
     $menuList = $this->Page->menu($path, $currentMenu, $pageId);
 
@@ -53,7 +54,17 @@ class DisplayController extends AppController
       'blocks' => $blocks,
     ));
 
+    $this->layout = 'default';
     $this->render($view);
+  }
+
+  private function _selectTheme()
+  {
+    if (!$this->RequestHandler->isMobile()) {
+      $this->plugin = $this->System->value(System::KEY_USE_THEME_MOBILE);
+    } else {
+      $this->plugin = $this->System->value(System::KEY_USE_THEME);
+    }
   }
 
   private function _setupBlocks()

@@ -18,7 +18,8 @@ class AppController extends Controller
     if (!defined('BK_SITE_NAME')) define('BK_SITE_NAME', $this->System->value(System::KEY_SITE_NAME));
     if (!defined('BK_SITE_CAPTION')) define('BK_SITE_CAPTION', $this->System->value(System::KEY_SITE_CAPTION));
 
-    if (!defined('EDITTING')) define('EDITTING', empty($this->request->query['e']));
+    define('EDITTING', empty($this->request->query['e']));
+    #define('EDITTING', FALSE);
 
     $this->_setToken();
   }

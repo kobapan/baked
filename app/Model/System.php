@@ -13,6 +13,7 @@ class System extends AppModel
   );
   public $columnLabels = array();
   const KEY_USE_THEME = 'USE_THEME';
+  const KEY_USE_THEME_MOBILE = 'USE_THEME_MOBILE';
   const KEY_SITE_NAME = 'SITE_NAME';
   const KEY_SITE_CAPTION = 'SITE_CAPTION';
 

@@ -44,7 +44,7 @@ $(function(){
     baked.blocks.blockTextPhoto.instances['<?php echo $uploaderId ?>'] =
     $('#<?php echo $uploaderId ?>').plupload({
       runtimes : 'html5,flash,browserplus,silverlight,gears,html4',
-      url : '<?php echo URL ?>block_text_photo/block_text_photo_api/upload',
+      url : '<?php echo URL ?>plugin/block_text_photo/block_text_photo_api/upload',
       max_file_size : '1000mb',
       rename: true,
       multi_selection: false,
