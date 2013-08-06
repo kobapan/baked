@@ -263,14 +263,29 @@ img {
   color: #f00;
 }
 
+#content hr {
+  border: 0;
+  height: 1px;
+  background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.1), rgba(0,0,0,0));
+  background-image:    -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.1), rgba(0,0,0,0));
+  background-image:     -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.1), rgba(0,0,0,0));
+  background-image:      -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.1), rgba(0,0,0,0));
+}
+
 #primary-footer {
   margin-top: 20px;
-}
-#primary-footer > div.powered {
-  text-align: right;
   font-size: 10pt;
   color: #ccc;
   text-shadow: 0 2px 0px #fff;
+}
+#primary-footer > div.copyright {
+  float: left;
+  width: 50%;
+}
+#primary-footer > div.powered {
+  float: right;
+  width: 50%;
+  text-align: right;
 }
 #primary-footer > div.powered > a {
   font-weight: bold;

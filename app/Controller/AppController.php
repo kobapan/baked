@@ -9,6 +9,12 @@ class AppController extends Controller
   {
     parent::beforeFilter();
 
+    if (session_id() != '') {
+      header('HTTP/1.0 404 Not Found');
+      die('404 Not Found');
+    }
+    session_start();
+
     if (!defined('URL')) define('URL', Router::url('/'));
     if (!defined('CURRENT_URL')) {
       $url = Router::url(array(), TRUE);
@@ -18,20 +24,13 @@ class AppController extends Controller
     if (!defined('BK_SITE_NAME')) define('BK_SITE_NAME', $this->System->value(System::KEY_SITE_NAME));
     if (!defined('BK_SITE_CAPTION')) define('BK_SITE_CAPTION', $this->System->value(System::KEY_SITE_CAPTION));
 
-    define('EDITTING', empty($this->request->query['e']));
-    #define('EDITTING', FALSE);
+    define('EDITTING', (@$_SESSION['Staff']['Editmode'] === TRUE));
 
     $this->_setToken();
   }
 
   private function _setToken()
   {
-    if (session_id() != '') {
-      header('HTTP/1.0 404 Not Found');
-      die('404 Not Found');
-    }
-
-    session_start();
     if (empty($_SESSION['token'])) $_SESSION['token'] = getRandomString(32);
     $this->set(array(
       '_token' => $_SESSION['token'],

@@ -5,7 +5,7 @@ $uploaderId = sprintf('photo-gallary-uploader-%s', $block['Block']['id']);
 <?php
 echo $this->Form->create('File', array(
   'default' => FALSE,
-  'class' => 'bk-form-01 bk-photo-gallery-form',
+  'class' => 'bk-photo-gallery-form',
 ));
 ?>
 

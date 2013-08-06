@@ -40,6 +40,10 @@ ul#bk-toolbar > li > a:hover {
   background: url(../img/bg-toolbar-hover.png);
 }
 
+#powerTip {
+  font-size: 8pt;
+}
+
 div.bk-sheet {
   position: relative;
 }

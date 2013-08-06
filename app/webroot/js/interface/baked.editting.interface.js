@@ -143,6 +143,18 @@ $(function(){
     baked.openEditor($block);
   });
 
+  $(document).on('click', '.bk-cancel-editmode', function(){
+    baked.cancelEditmode(function(){
+      baked.reload();
+    });
+  });
+
+  $(document).on('click', '.bk-sign-out', function(){
+    baked.signOut(function(){
+      baked.reload();
+    })
+  });
+
   $(document).on('click', function(e){
     if (!baked.showingBlockBox) return;
 
@@ -153,6 +165,7 @@ $(function(){
     $('#bk-available-blocks').hide();
     baked.showingBlockBox = false;
   });
+
 
 });
 

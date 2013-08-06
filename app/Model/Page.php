@@ -194,7 +194,7 @@ class Page extends AppModel
   public function menu($path, &$currentMenuP, &$pageId)
   {
     $cond = array();
-    if (!EDITTING) $cond["{$this->name}.hidden"] = 0;
+    #if (!EDITTING) $cond["{$this->name}.hidden"] = 0;
     $pages = $this->find('all', array(
       CONDITIONS => $cond,
       FIELDS => array(
@@ -225,7 +225,10 @@ class Page extends AppModel
       $page['here'] = (count($path)-1 == $depth && $path[$depth] == $page['Page']['name']);
 
       $pagePointers[$page['Page']['id']] = $page;
-      $pointer[] = &$pagePointers[$page['Page']['id']];
+
+      if (EDITTING || $page['Page']['hidden'] == 0) {
+        $pointer[] = &$pagePointers[$page['Page']['id']];
+      }
 
       if ($page['here']) {
         $pageId = $page['Page']['id'];

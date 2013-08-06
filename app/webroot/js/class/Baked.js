@@ -14,12 +14,74 @@ $.fn.bkCkeditor = function(){
   });
 };
 
+Baked.prototype.showBox = function(html){
+  $.fancybox({
+    'content': html,
+    'afterShow': function(){
+      $('div.fancybox-inner').find('input:text,input:password,textarea,select').filter(':visible:first').focus();
+    }
+  });
+};
+
 Baked.prototype.params = function($dom){
   var params = {};
   $($dom.serializeArray()).each(function(i, v) {
     params[v.name] = v.value;
   });
   return params;
+};
+
+Baked.prototype.goEditModeOrShowSigninBox = function(){
+  baked.post('system/api_system/signed_in', {
+    ok: function(r){
+      if (r.editmode == 1) {
+        return;
+      } if (r.signed == 1) {
+        baked.goEditmode(function(){
+          baked.reload();
+        });
+      } else {
+        baked.showSigninBox();
+      }
+    }
+  });
+};
+
+Baked.prototype.showSigninBox = function(){
+  baked.post('system/api_system/html_signin', {
+    dataType: 'html',
+    success: function(r){
+      baked.showBox(r);
+    }
+  });
+};
+
+Baked.prototype.goEditmode = function(callback){
+  baked.post('system/api_system/go_editmode', {
+    ok: function(r){
+      if (callback) callback();
+    }
+  });
+}
+
+Baked.prototype.cancelEditmode = function(callback){
+  baked.post('system/api_system/cancel_editmode', {
+    ok: function(r){
+      if (callback) callback();
+    }
+  });
+}
+
+Baked.prototype.signOut = function(callback){
+  baked.post('system/api_system/sign_out', {
+    ok: function(r){
+      if (callback) callback();
+    }
+  });
+}
+
+Baked.prototype.reload = function(){
+  location.href = location.href;
 };
 
 /**
@@ -77,9 +139,7 @@ Baked.prototype.domBlockById = function(blockId){
 Baked.prototype.showPageManager = function(){
   this.post('system/api_pages/html_manager', {
     ok: function(r){
-      $.fancybox({
-        'content': r.html,
-      });
+      baked.showBox(r.html);
     }
   });
 };
@@ -313,19 +373,18 @@ Baked.prototype.closeAllEditor = function(){
 };
 
 Baked.prototype.busyFilter = function(){
-  c("Busy start");
   if (this.busy > 0) {
-    c("Busy!");
     return false;
   }
   if (!this.busy) this.busy = 0;
   this.busy++;
+  $.fancybox.showLoading();
   return true;
 }
 
 Baked.prototype.busyEnd = function(){
-  c("Busy end");
   this.busy--;
+  if (this.busy == 0) $.fancybox.hideLoading();
 }
 
 

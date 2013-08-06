@@ -12,9 +12,10 @@ body {
   text-align: left;
   color: #777;
   font-size: 9pt;
-
+  /*
   margin: 0 auto;
   width: 320px;
+  */
 }
 a {
   text-decoration: none;

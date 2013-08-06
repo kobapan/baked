@@ -14,6 +14,7 @@
 <?php if (EDITTING) : ?>
   <link href="<?php echo URL ?>js/plupload/jquery.ui.plupload/css/jquery.ui.plupload.css" rel="stylesheet" type="text/css">
   <link href="<?php echo URL ?>css/editor.css" rel="stylesheet" type="text/css">
+  <link href="<?php echo URL ?>css/powertip/jquery.powertip.min.css" rel="stylesheet" type="text/css">
 <?php endif ; ?>
 
 <?php

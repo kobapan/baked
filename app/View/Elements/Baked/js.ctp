@@ -20,6 +20,7 @@
   <script src="<?php echo URL ?>js/plupload/i18n/ja.js"></script>
   <script src="<?php echo URL ?>js/ckeditor/ckeditor.js"></script>
   <script src="<?php echo URL ?>js/ckeditor/adapters/jquery.js"></script>
+  <script src="<?php echo URL ?>js/jquery.plugins/jquery.powertip.min.js"></script>
 <?php endif ; ?>
 <script>
   baked.base = '<?php echo URL ?>';

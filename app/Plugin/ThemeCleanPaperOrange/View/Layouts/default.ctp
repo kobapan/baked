@@ -95,6 +95,7 @@
   </div><!-- #paper -->
 
   <div id="primary-footer">
+    <div class="copyright">Copyright <?php echo date('Y') ?>. All rights reserved.</div>
     <div class="powered">Powered by <a href="http://bakedcms.org/">Baked</a></div>
   </div>
 

@@ -41,14 +41,14 @@
           'class' => 'hidden',
         ));
         ?>
-        <a href="javascript:;" class="bk-up"><i class="icon-arrow-up icon-large"></i></a>
-        <a href="javascript:;" class="bk-down"><i class="icon-arrow-down icon-large"></i></a>
-        <a href="javascript:;" class="bk-left"><i class="icon-arrow-left icon-large"></i></a>
-        <a href="javascript:;" class="bk-right"><i class="icon-arrow-right icon-large"></i></a>
-        <a href="javascript:;" class="bk-hide"><i class="icon-eye-open icon-large"></i></a>
-        <a href="javascript:;" class="bk-open"><i class="icon-eye-close icon-large"></i></a>
-        <a href="javascript:;" class="bk-add"><i class="icon-plus icon-large"></i></a>
-        <a href="javascript:;" class="bk-delete"><i class="icon-trash icon-large"></i></a>
+        <a href="javascript:;" class="bk-up" title="<?php echo __('Move this page up') ?>"><i class="icon-arrow-up icon-large"></i></a>
+        <a href="javascript:;" class="bk-down" title="<?php echo __('Move this page down') ?>"><i class="icon-arrow-down icon-large"></i></a>
+        <a href="javascript:;" class="bk-left" title="<?php echo __('Move this page one level up') ?>"><i class="icon-arrow-left icon-large"></i></a>
+        <a href="javascript:;" class="bk-right" title="<?php echo __('Move this page one level down') ?>"><i class="icon-arrow-right icon-large"></i></a>
+        <a href="javascript:;" class="bk-hide" title="<?php echo __('Hide this page in menu') ?>"><i class="icon-eye-open icon-large"></i></a>
+        <a href="javascript:;" class="bk-open" title="<?php echo __('Show this page in menu') ?>"><i class="icon-eye-close icon-large"></i></a>
+        <a href="javascript:;" class="bk-add" title="<?php echo __('Add a new page') ?>"><i class="icon-plus icon-large"></i></a>
+        <a href="javascript:;" class="bk-delete" title="<?php echo __('Delete this page') ?>"><i class="icon-trash icon-large"></i></a>
       </li>
     <?php endforeach ; ?>
   </ul>
@@ -68,6 +68,7 @@
 <script>
 $(function(){
   baked.alignPageManager();
+  $('ul#bk-page-manager li a').powerTip();
 });
 </script>
 
