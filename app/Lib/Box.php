@@ -31,5 +31,6 @@ class Box
 
     return TRUE;
   }
+
 }
 

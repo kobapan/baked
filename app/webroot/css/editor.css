@@ -34,6 +34,7 @@ ul#bk-toolbar > li > a {
   color: #fff;
   line-height: 38px;
   padding: 0 10px;
+  text-shadow: 0 1px 0 #000;
 }
 ul#bk-toolbar > li.active > a,
 ul#bk-toolbar > li > a:hover {

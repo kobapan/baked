@@ -4,11 +4,6 @@ function v($val)
   var_dump($val);
 }
 
-function getDatetime()
-{
-  return date('Y-m-d H:i:s');
-}
-
 function fmdate($datetime) {
   return date('Y/m/d', strtotime($datetime));
 }
@@ -306,35 +301,6 @@ function getRandomString($nLengthRequired = 8){
     $sRes = '';
     for ($i = 0; $i < $nLengthRequired; $i++) $sRes .= $sCharList[mt_rand(0, strlen($sCharList) - 1)];
     return $sRes;
-}
-
-/**
- * フローティングメッセージをセット
- *
- * @param String $mes メッセージ文
- * @param String $type 'success'又は'error' フローティングメッセージの見た目が変わります
- */
-function setFloatingMessage($mes, $type = 'success')
-{
-    return $_SESSION['floating_message'] = array(
-        'message' => $mes,
-      'type' => $type,
-    );
-}
-
-/**
- * フローティングメッセージを取得
- */
-function floatingMessage($delete = true)
-{
-    if (isset($_SESSION['floating_message'])) {
-        $floatingMessage = $_SESSION['floating_message'];
-        if ($delete) unset($_SESSION['floating_message']);
-        return $floatingMessage;
-    }
-    else {
-        return false;
-    }
 }
 
 /**

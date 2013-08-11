@@ -5,7 +5,7 @@
     <?php endforeach ; ?>
   </ul>
 
-  <ul id="bk-toolbar">
+  <ul id="bk-toolbar" class="bk-general">
     <li><a href="<?php echo URL ?>admin"><?php echo __('Dasboard') ?></a></li>
     <li><a href="javascript:;" data-bk-show-page-manager><?php echo __('Manage page') ?></a></li>
     <li><a href="javascript:;" class="bk-cancel-editmode"><?php echo __('Exit editmode') ?></a></li>

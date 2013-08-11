@@ -45,6 +45,14 @@ class AppController extends Controller
     return TRUE;
   }
 
+  protected function tokenFilter()
+  {
+    if ($_SESSION['token'] !== $this->request->data['token']) {
+      die(__('Invalid token.'));
+    }
+    return TRUE;
+  }
+
 /**
  * Get html of block.
  *

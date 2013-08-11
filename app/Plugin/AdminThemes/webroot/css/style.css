@@ -1,0 +1,125 @@
+ul.ul-themes {
+  list-style: none;
+  margin: 0;
+  padding: 10px 0 0 0;
+  overflow: hidden;
+  margin-left: -20px;
+}
+ul.ul-themes > li {
+  float: left;
+  margin-left: -1px;
+  margin-bottom: 20px;
+  border-left: 1px solid #eee;
+  padding-left: 20px;
+  padding-right: 20px;
+  position: relative;
+}
+ul.ul-themes > li img.screen {
+  width: 200px;
+  padding: 3px;
+  border: 1px solid #eee;
+}
+ul.ul-themes > li > div.info > div {
+  padding: 0 5px 3px 5px;
+}
+ul.ul-themes > li div.name {
+}
+ul.ul-themes > li div.name input {
+  margin-right: 3px;
+}
+ul.ul-themes > li i.icon {
+  margin-right: 2px;
+  display: inline-block;
+}
+ul.ul-themes > li div.author {
+  font-size: 9pt;
+}
+ul.ul-themes > li div.meta {
+  font-size: 9pt;
+}
+ul.ul-themes > li div.meta span.meta-item {
+  margin-right: 5px;
+  display: inline-block;
+}
+ul.ul-themes > li div.meta span.meta-item:last-child {
+  margin-right: 0;
+}
+ul.ul-themes > li div.use-in {
+  position: absolute;
+  top: -8px;
+  right: 12px;
+}
+ul.ul-themes > li div.use-in-pc,
+ul.ul-themes > li div.use-in-mobile {
+  background: #00b5e5;
+  padding: 2px 8px;
+  color: #fff;
+  font-size: 7pt;
+  border-radius: 3px;
+  display: inline-block;
+  float: left;
+  margin-right: 5px;
+}
+
+div.editor-set {
+  overflow: hidden;
+}
+div.editor-set > div.editor {
+  float: left;
+  width: 75%;
+}
+div.editor-set > div.explorer {
+  float: left;
+  width: 25%;
+}
+div.editor-set > div.editor textarea {
+  width: 95%;
+  height: 500px;
+}
+div.editor-set > div.explorer > ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  overflow: auto;
+}
+div.editor-set > div.explorer > ul > li > a {
+}
+div.editor-set > div.explorer > ul > li.current > a {
+  color: #666;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
