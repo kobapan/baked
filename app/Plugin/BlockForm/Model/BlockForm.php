@@ -100,11 +100,15 @@ class BlockForm extends BlockAppModel
       $r = $this->add($params, NULL, 'send', self::VALIDATION_MODE_ONLY);
       if ($r !== TRUE) throw new Exception(__('There is validation errors'));
 
+      $this->loadModel('System');
+      $systemEmail = $this->System->value(System::KEY_EMAIL);
+
       App::uses('CakeEmail', 'Network/Email');
       $email = new CakeEmail('default');
       $r = $email
         ->template('BlockForm.contact', 'BlockForm.default')
-        ->to(MY_EMAIL)
+        ->from($systemEmail)
+        ->to($systemEmail)
         ->viewVars(array(
           'items' => $emailVars
         ))

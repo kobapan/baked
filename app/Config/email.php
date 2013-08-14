@@ -8,7 +8,6 @@ class EmailConfig
 
   public function __construct()
   {
-    $this->default['from'] = MY_EMAIL;
   }
 
 }

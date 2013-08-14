@@ -1,6 +1,3 @@
-<?php echo __('To %s', MY_NAME) ?>
-
-
 <?php echo __('You received an inquiry.') ?>
 
 
