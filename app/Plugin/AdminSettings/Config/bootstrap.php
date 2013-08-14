@@ -4,15 +4,15 @@ Configure::write('Admin.AdminSettings', array(
   'navigation' => array(
     'name' => __('設定'),
     'icon' => 'icon-wrench',
-    'href' => 'admin/settings/input/general',
+    'href' => 'admin/settings/general/input',
     'sub' => array(
       array(
         'name' => __('基本設定'),
-        'href' => 'admin/settings/input/general',
+        'href' => 'admin/settings/general/input',
       ),
       array(
         'name' => __('管理者設定'),
-        'href' => 'admin/settings/input/staff',
+        'href' => 'admin/settings/staffs',
       ),
     ),
   ),

@@ -217,17 +217,136 @@ hr.hr-01 {
   margin: 0;
 }
 
+.form-01 {
+}
+.form-01 div.input {
+  margin-bottom: 20px;
+}
+.form-01 div.input > label {
+  display: inline-block;
+  width: 150px;
+  font-weight: bold;
+}
+.form-01 div.input > div.note {
+  margin-left: 150px;
+  font-style: italic;
+  margin-top: 5px;
+}
+.form-01 div.input div.inlined {
+  display: inline-block;
+}
+.form-01 div.input div.error-message {
+  margin-left: 150px;
+  font-style: italic;
+  margin-top: 5px;
+  color: #900;
+  font-weight: bold;
+}
+.form-01 div.input div.inlined div.error-message {
+  margin-left: 0;
+}
+.form-01 input[type="text"],
+.form-01 input[type="password"],
+.form-01 input[type="number"],
+.form-01 textarea {
+  border-radius: 3px;
+  padding: 5px;
+  border: 1px solid #ddd;
+  background: #f9f9f9;
+  min-width: 300px;
+}
 
 
+/**
+ * .table-01
+ */
+.table-01 {
+  color: #555;
+  border: 1px #ddd solid;
+  border-bottom: none;
+  border-radius: 2px;
+  border-collapse: separate;
+}
+.table-01 td,
+.table-01 th {
+  padding: 10px;
+}
+.table-01 tr.check-tr td {
+  background: #ecffe0 !important;
+}
+.table-01 th {
+  background: #f3f3f3;
+  border-top: 1px #fff solid;
+  border-right: 1px #ddd solid;
+  border-bottom: 1px #ddd solid;
+  border-left: 1px #fff solid;
+  font-weight: bold;
+  vertical-align: top;
+  font-size: 12px;
+  padding-top: 13px;
+}
+.table-01.list {
+  width: 100%;
+}
+.table-01.list th {
+  padding-top: 10px;
+}
+.table-01.list tr:hover td {
+  background: #fffde0;
+}
+.table-01 th.no-border {
+  border-right: none;
+}
+.table-01 .c {
+  text-align: center;
+}
+.table-01 a {
+    display: block;
+}
+.table-01 a.aline {
+  display: inline;
+}
+.table-01 td {
+  border-bottom: 1px #ddd solid;
+  vertical-align: middle;
+  font-size: 12px;
+}
+.table-01 div.error-message {
+  color: #900;
+  margin-top: 5px;
+  font-size: 12px;
+}
+form.simple-form .table-01 td div.closure {
+    margin-bottom: 10px;
+}
+form.simple-form .table-01 td div.closure:last-child {
+    margin-bottom: 0;
+}
+table.check tr td.c {
+  width: 1%;
+}
 
-
-
-
-
-
-
-
-
+ul.icon-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+ul.icon-links > li {
+}
+ul.icon-links > li a {
+  color: #128ab7;
+}
+ul.icon-links > li i {
+  color: #999;
+  width: 15px;
+  display: inline-block;
+  text-align: center;
+  padding-right: 2px;
+}
+ul.icon-links > li a:hover i {
+  text-decoration: none;
+  color: #666;
+}
 
 
 

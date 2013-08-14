@@ -1,6 +1,6 @@
 <div class="box">
   <header>
-    <h1>PCテーマの編集</h1>
+    <h1><?php echo __('PCテーマの編集') ?></h1>
   </header>
   <div class="inner">
 

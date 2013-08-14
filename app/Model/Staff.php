@@ -5,10 +5,37 @@ class Staff extends AppModel
 {
   public $valid = array(
     'add' => array(
-      'name'  => 'required | maxLen[50]',
-      'email' => 'required | maxLen[100]',
+      'name'     => 'required | maxLen[50]',
+      'email'    => 'required | email | maxLen[100] | isUnique',
+      'password' => 'required | minLen[6] | maxLen[32]',
+    ),
+    'update' => array(
+      'id' => 'required | isExist'
     ),
   );
+
+  public function addDataHavingPassword($data, $update = NULL)
+  {
+    try {
+      $this->begin();
+
+      $r = $this->add($data, $update, NULL, self::VALIDATION_MODE_ONLY);
+      if ($r !== TRUE) throw $r;
+
+      if (isset($data['password'])) {
+        $data['password'] = $this->hash($data['password']);
+      }
+
+      $r = $this->add($data, $update, NULL, self::VALIDATION_MODE_SKIP);
+      if ($r !== TRUE) throw $r;
+
+      $this->commit();
+      return TRUE;
+    } catch(Exception $e) {
+      $this->rollback();
+      return $e;
+    }
+  }
 
   public function auth($params)
   {

@@ -23,6 +23,7 @@ echo $this->fetch('css');
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
 <script src="<?php echo URL ?>js/class/Baked.js"></script>
+<script src="<?php echo URL ?>js/interface/baked.interface.js"></script>
 <script src="<?php echo URL ?>js/jquery.plugins/jquery.singlesender.js"></script>
 <script src="http://bp.yahooapis.com/2.4.21/browserplus-min.js"></script>
 <?php
@@ -77,8 +78,8 @@ echo $this->fetch('script');
               <?php
               $url = URL.$nav['href'];
               $classes = array();
-              $grep = str_replace('/', "\/", $this->here);
-              if (preg_match("/^{$grep}/i", $url)) $classes[] = 'current';
+              $grep = str_replace('/', "\/", $url);
+              if (preg_match("/^{$grep}/i", $this->here)) $classes[] = 'current';
               ?>
               <li class="<?php echo implode(' ', $classes) ?>"><a href="<?php echo $url ?>"><?php echo h($nav['name']) ?></a></li>
             <?php endforeach ; ?>

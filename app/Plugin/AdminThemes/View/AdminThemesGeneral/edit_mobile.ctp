@@ -1,6 +1,6 @@
 <div class="box">
   <header>
-    <h1>モバイルテーマの編集</h1>
+    <h1><?php echo __('モバイルテーマの編集') ?></h1>
   </header>
   <div class="inner">
 

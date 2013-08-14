@@ -11,18 +11,8 @@ if (preg_match('/^admin\/(.+)/i', $req->url, $matches)) {
     'plugin' => "admin_{$pathes[0]}",
     'controller' => "admin_{$pathes[0]}_{$pathes[1]}",
     'action' => !empty($pathes[2]) ? $pathes[2] : 'index',
-  ));
+  )+@array_slice($pathes, 3));
 }
-
-Router::connect('/admin/dashboard/:action', array(
-  'controller' => 'admin_dashboard',
-  'plugin' => 'admin_dashboard',
-));
-Router::connect('/admin/test/:action', array(
-  'controller' => 'admin_test',
-  'plugin' => 'admin_test',
-));
-
 
 Router::connect('/', array('controller' => 'display', 'action' => 'show'));
 Router::connect('/*', array('controller' => 'display', 'action' => 'show'));

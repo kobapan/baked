@@ -22,6 +22,11 @@ $(function(){
       }
     });
   });
+
+  $(document).on('click', '[data-toggle]', function(e){
+    var selector = $(this).attr('data-toggle');
+    $(selector).toggle('fast');
+  });
 });
 
 function c(val) {

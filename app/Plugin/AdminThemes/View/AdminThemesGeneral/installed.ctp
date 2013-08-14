@@ -1,6 +1,6 @@
 <div class="box">
   <header>
-    <h1>インストール済みテーマ</h1>
+    <h1><?php echo __('インストール済みテーマ') ?></h1>
   </header>
   <div class="inner">
 

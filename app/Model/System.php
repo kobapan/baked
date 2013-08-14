@@ -16,6 +16,7 @@ class System extends AppModel
   const KEY_USE_THEME_MOBILE = 'USE_THEME_MOBILE';
   const KEY_SITE_NAME = 'SITE_NAME';
   const KEY_SITE_CAPTION = 'SITE_CAPTION';
+  const KEY_EMAIL = 'EMAIL';
 
   public function afterFind($results, $primary = false)
   {
@@ -34,6 +35,25 @@ class System extends AppModel
     if (isset($data['value'])) $data['value'] = json_encode($data['value']);
 
     return parent::add($data, $update, $useValid, $validateMode);
+  }
+
+  public function saveMultiply($data)
+  {
+    try {
+      $this->begin();
+
+      foreach ($data as $key => $value) {
+        if (!defined(sprintf('self::KEY_%s', $key))) continue;
+        $r = $this->saveValue($key, $value);
+        if ($r !== TRUE) throw $r;
+      }
+
+      $this->commit();
+      return TRUE;
+    } catch (Exception $e) {
+      $this->rollback();
+      return $e;
+    }
   }
 
   public function value($key)
