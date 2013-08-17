@@ -3,10 +3,16 @@ App::uses('AppModel', 'Model');
 
 class Staff extends AppModel
 {
+  public $name = 'Staff';
   public $valid = array(
     'add' => array(
       'name'     => 'required | maxLen[50]',
       'email'    => 'required | email | maxLen[100] | isUnique',
+      'password' => 'required | minLen[6] | maxLen[32]',
+    ),
+    'first_add' => array(
+      'name'     => 'required | maxLen[50]',
+      'email'    => 'required | email | maxLen[100]',
       'password' => 'required | minLen[6] | maxLen[32]',
     ),
     'update' => array(

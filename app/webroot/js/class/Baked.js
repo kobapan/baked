@@ -8,6 +8,10 @@ var Baked = function(){
 };
 
 Baked.prototype.blocks = {};
+Baked.prototype.events = {
+  opened: {}
+};
+
 $.fn.bkCkeditor = function(){
   $(this).ckeditor({
     enterMode : CKEDITOR.ENTER_BR
@@ -356,6 +360,11 @@ Baked.prototype.deleteBlock = function(blockId){
 Baked.prototype.openEditor = function($block){
   this.closeAllEditor();
   $block.addClass('bk-open');
+
+  var package = $block.attr('data-bk-block-package');
+  if (this.events.opened[package]) {
+    this.events.opened[package]($block.attr('data-bk-block-id'));
+  }
 };
 
 // 編集エリアをToggle

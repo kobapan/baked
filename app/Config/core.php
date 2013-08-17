@@ -18,18 +18,26 @@
  * @since         CakePHP(tm) v 0.2.9
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
-mb_language('ja');
 mb_internal_encoding('utf8');
-date_default_timezone_set('Asia/Tokyo');
+ #mb_language('ja');
+#date_default_timezone_set('Asia/Tokyo');
 
-require_once ROOT.DS.'my.php';
 require_once 'utilities.php';
-
-require_once APP.'Lib'.DS.'Baked.php';
 
 require_once 'environment.php';
 $environment = new Environment();
 $environment->setup();
+
+$myConfPath = ROOT.DS.'my.php';
+if (!file_exists($myConfPath)) {
+  #header(sprintf('Location: %ssetup', $_SERVER['REDIRECT_URL']));
+  #exit;
+} else {
+  require_once $myConfPath;
+}
+
+require_once APP.'Lib'.DS.'Baked.php';
+
 
 /**
  * CakePHP Debug Level:

@@ -138,11 +138,6 @@ $(function(){
     baked.showingBlockBox = true;
   });
 
-  $(document).on('click', '[data-bk-editor-opener]', function(){
-    var $block = $(this).parent();
-    baked.openEditor($block);
-  });
-
   $(document).on('click', '.bk-cancel-editmode', function(){
     baked.cancelEditmode(function(){
       baked.reload();

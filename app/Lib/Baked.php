@@ -3,6 +3,12 @@ require_once 'Box.php';
 
 class Baked extends Box
 {
+  public static function getRequirements()
+  {
+    require_once APP.'Config/requirements.php';
+    return Configure::read('Baked.requirements');
+  }
+
   public static function deleteAllCache()
   {
     App::uses('Folder', 'Utility');

@@ -11,18 +11,26 @@ body {
   text-align: left;
   color: #555;
   font-size: 11pt;
+  line-height: 170%;
 }
 a {
-  color: #FF6600;
-  text-decoration: none;
+  color: #00ADE6;
 }
-.wring {
-  margin: 0 50px;
+strong {
+  color: #FF6600;
 }
 img {
   border: none;
   vertical-align: bottom;
 }
+ul, ol {
+  margin: 0;
+}
+
+.wring {
+  margin: 0 50px;
+}
+
 
 #wrap {
   width: 960px;
@@ -42,11 +50,13 @@ img {
 #primary-header > .logo {
   float: left;
   width: 300px;
-  margin-top: 64px;
+  margin-top: 72px;
 }
 #primary-header > .logo > a {
   font-size: 28px;
   font-weight: bold;
+  color: #FF6600;
+  text-decoration: none;
 }
 #primary-header > ul.navigation {
   float: left;
@@ -54,6 +64,9 @@ img {
   list-style: none;
   padding: 0;
   margin: 62px 0 0 -4px;
+}
+#primary-header > ul.navigation a {
+  text-decoration: none;
 }
 #primary-header > ul.navigation > li {
   float: left;
@@ -177,6 +190,7 @@ img {
   margin: 0;
 }
 #content h1 > span.text {
+  line-height: 150%;
   background: #fff;
   font-size: 40px;
   font-weight: normal;

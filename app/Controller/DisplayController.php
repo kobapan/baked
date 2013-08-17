@@ -3,7 +3,7 @@ App::uses('AppController', 'Controller');
 
 class DisplayController extends AppController
 {
-  public $uses = array('Block',);
+  public $uses = array('Block', 'Page');
   public $components = array('RequestHandler');
 
 /**

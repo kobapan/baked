@@ -27,6 +27,10 @@ $(function(){
     var selector = $(this).attr('data-toggle');
     $(selector).toggle('fast');
   });
+
+  $(document).on('click', '.click-to-disappear', function(){
+    $(this).fadeOut();
+  });
 });
 
 function c(val) {

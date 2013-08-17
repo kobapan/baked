@@ -8,7 +8,7 @@ class System extends AppModel
     'add' => array(
     ),
     'update' => array(
-      'id' => 'required | valid_isExist'
+      'id' => 'required | isExist'
     ),
   );
   public $columnLabels = array();
@@ -17,6 +17,7 @@ class System extends AppModel
   const KEY_SITE_NAME = 'SITE_NAME';
   const KEY_SITE_CAPTION = 'SITE_CAPTION';
   const KEY_EMAIL = 'EMAIL';
+  const KEY_SETUP = 'SETUP';
 
   public function afterFind($results, $primary = false)
   {
@@ -43,6 +44,7 @@ class System extends AppModel
       $this->begin();
 
       foreach ($data as $key => $value) {
+        $key = strtoupper($key);
         if (!defined(sprintf('self::KEY_%s', $key))) continue;
         $r = $this->saveValue($key, $value);
         if ($r !== TRUE) throw $r;

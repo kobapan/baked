@@ -295,12 +295,18 @@ function read_csv($file)
  * ランダムな文字列を取得
  */
 
-function getRandomString($nLengthRequired = 8){
+function getRandomString($nLengthRequired = 8, $onlyNumber = FALSE)
+{
+  if ($onlyNumber) {
+    $sCharList = '0123456789';
+  } else {
     $sCharList = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_';
-    mt_srand();
-    $sRes = '';
-    for ($i = 0; $i < $nLengthRequired; $i++) $sRes .= $sCharList[mt_rand(0, strlen($sCharList) - 1)];
-    return $sRes;
+  }
+
+  mt_srand();
+  $sRes = '';
+  for ($i = 0; $i < $nLengthRequired; $i++) $sRes .= $sCharList[mt_rand(0, strlen($sCharList) - 1)];
+  return $sRes;
 }
 
 /**

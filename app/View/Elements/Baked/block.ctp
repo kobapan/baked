@@ -1,4 +1,4 @@
-<div id="bk-block-<?php echo $block['Block']['id'] ?>" class="bk-block <?php echo $block['Block']['package']; ?>" data-bk-block-id="<?php echo $block['Block']['id'] ?>">
+<div id="bk-block-<?php echo $block['Block']['id'] ?>" class="bk-block <?php echo $block['Block']['package']; ?>" data-bk-block-id="<?php echo $block['Block']['id'] ?>" data-bk-block-package="<?php echo $block['Block']['package']; ?>">
   <div class="bk-block-content">
     <?php
     echo $this->element("{$block['Block']['package']}.block", array(

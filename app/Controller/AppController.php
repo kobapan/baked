@@ -3,7 +3,7 @@ App::uses('Controller', 'Controller');
 
 class AppController extends Controller
 {
-  public $uses = array('System', 'Page', 'Block');
+  public $uses = array('System', 'Block');
 
   public function beforeFilter()
   {
@@ -20,9 +20,13 @@ class AppController extends Controller
       $url = Router::url(array(), TRUE);
       define('CURRENT_URL', $url);
     }
-    if (!defined('BK_URL')) define('BK_URL', Router::url('/'));
-    if (!defined('BK_SITE_NAME')) define('BK_SITE_NAME', $this->System->value(System::KEY_SITE_NAME));
-    if (!defined('BK_SITE_CAPTION')) define('BK_SITE_CAPTION', $this->System->value(System::KEY_SITE_CAPTION));
+
+    if (defined('MY_CONFIGURED')) {
+      if (!defined('BK_URL')) define('BK_URL', Router::url('/'));
+      if (!defined('BK_SITE_NAME')) define('BK_SITE_NAME', $this->System->value(System::KEY_SITE_NAME));
+    } else {
+      if ($this->name !== 'Setup') $this->redirect('/system/setup/start');
+    }
 
     define('EDITTING', (@$_SESSION['Staff']['Editmode'] === TRUE));
 

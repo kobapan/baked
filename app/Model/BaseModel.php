@@ -1,39 +1,48 @@
 <?php
 App::uses('Model', 'Model');
 
-class BaseModel extends Model {
+class BaseModel extends Model
+{
+  public $actsAs = array('BasicValidation');
+  public $addLabelInValidate = TRUE;
+  private $originalFindType = false;
+  static $transactionCount = 0; // トランザクション実行回数
+  const VALIDATION_MODE_ONLY = 10;
+  const VALIDATION_MODE_REQUIRED = 20;
+  const VALIDATION_MODE_SKIP = 30;
 
-    public $actsAs = array('BasicValidation');
-    public $addLabelInValidate = TRUE;
-    private $originalFindType = false;
-    static $transactionCount = 0; // トランザクション実行回数
-    const VALIDATION_MODE_ONLY = 10;
-    const VALIDATION_MODE_REQUIRED = 20;
-    const VALIDATION_MODE_SKIP = 30;
+  protected function begin()
+  {
+    self::$transactionCount++;
+    if (self::$transactionCount != 1) return ;
 
-    protected function begin() {
-        self::$transactionCount++;
-        if (self::$transactionCount != 1) return ;
+    if (!$this->useTable) return;
 
-        $db = ConnectionManager::getDataSource($this->useDbConfig);
-        $db->begin($this);
-    }
+    $db = ConnectionManager::getDataSource($this->useDbConfig);
+    $db->begin($this);
+  }
 
-    protected function commit() {
-        self::$transactionCount--;
-        if (self::$transactionCount != 0) return ;
+  protected function commit()
+  {
+    self::$transactionCount--;
+    if (self::$transactionCount != 0) return ;
 
-        $db = ConnectionManager::getDataSource($this->useDbConfig);
-        $db->commit($this);
-    }
+    if (!$this->useTable) return;
 
-    protected function rollback() {
-        self::$transactionCount--;
-        if (self::$transactionCount != 0) return ;
+    $db = ConnectionManager::getDataSource($this->useDbConfig);
+    $db->commit($this);
+  }
 
-        $db = ConnectionManager::getDataSource($this->useDbConfig);
-        $db->rollback($this);
-    }
+  protected function rollback()
+  {
+    self::$transactionCount--;
+    if (self::$transactionCount != 0) return ;
+
+    if (!$this->useTable) return;
+
+    $db = ConnectionManager::getDataSource($this->useDbConfig);
+    $db->rollback($this);
+  }
 
 /**
  * 文字列からハッシュ値を取得
