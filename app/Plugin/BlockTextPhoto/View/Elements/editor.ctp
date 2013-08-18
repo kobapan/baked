@@ -9,7 +9,7 @@ echo $this->Form->create('Block', array(
 
 <div class="spacer1"></div>
 
-<button type="submit" class="button button-primary button-pill button-small"><?php echo __('Save') ?></button>
+<button type="submit" class="button button-primary button-pill button-small"><?php echo __('保存') ?></button>
 
 <?php
 echo $this->Form->end();
@@ -23,7 +23,7 @@ $uploaderId = sprintf('bk-block-text-photo-uploader-%s', $block['Block']['id']);
 
 <ul class="bk-editor-boxes">
   <li>
-    <div class="bk-title"><?php echo __('Photo position') ?></div>
+    <div class="bk-title"><?php echo __('写真の位置') ?></div>
     <a href="javascript:;" data-bk-block-text-photo-align="1"><i class="icon-align-left icon-2x"></i></a>
     <a href="javascript:;" data-bk-block-text-photo-align="2"><i class="icon-align-right icon-2x"></i></a>
   </li>

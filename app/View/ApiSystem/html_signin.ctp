@@ -10,15 +10,15 @@
 
   <?php
   echo $this->Form->input('Staff.email', array(
-    'label' => __('Email'),
+    'label' => __('メールアドレス'),
   ));
   echo $this->Form->input('Staff.password', array(
-    'label' => __('Password'),
+    'label' => __('パスワード'),
   ));
   ?>
 
   <div style="height: 30px">
-    <button type="submit" class="button button-primary button-pill button-small"><?php echo __('Sign in') ?></button>
+    <button type="submit" class="button button-primary button-pill button-small"><?php echo __('サインイン') ?></button>
   </div>
 
   <?php

@@ -1,6 +1,6 @@
 <?php
 Configure::write('Blocks.BlockHeading', array(
-  'name' => __('Heading'),
+  'name' => __('見出し'),
   'icon' => 'icon-font',
 ));
 

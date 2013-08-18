@@ -53,7 +53,7 @@ require_once APP.'Lib'.DS.'Baked.php';
  * In development mode, you need to click the flash message to continue.
  */
   Configure::write('debug', (!DEVELOPE) ? 0 : 2);
-  Configure::write('debug', 2);
+  #Configure::write('debug', 2);
 
 /**
  * Configure the Error handler used to handle errors for your application.  By default

@@ -2,13 +2,12 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title><?php echo h($title) ?> - <?php echo __('Baked Installer') ?></title>
+<title><?php echo h($title) ?> - <?php echo __('Baked インストーラー') ?></title>
 
 <link rel="stylesheet" href="<?php echo URL ?>css/normalize.css">
 <link rel="stylesheet" href="<?php echo URL ?>css/setup.css">
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css">
 <link rel="stylesheet" href="<?php echo URL ?>css/buttons.css">
-<link rel="shortcut icon" href="<?php echo URL ?>favicon.ico" type="image/x-icon">
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
@@ -38,4 +37,5 @@ $(function(){
 
 </body>
 </html>
+
 

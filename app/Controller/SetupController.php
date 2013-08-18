@@ -11,12 +11,14 @@ class SetupController extends AppController
 
   public function beforeRender()
   {
+    if (defined('MY_CONFIGURED')) $this->redirect('/');
+
     $this->set(array(
       'title' => $this->title,
     ));
   }
 
-  private function __checkRequirements($environemtns = NULL)
+  private function __checkRequirements(&$environemtns = NULL)
   {
     $requirements = Baked::getRequirements();
 
@@ -99,7 +101,7 @@ class SetupController extends AppController
 
       $myConfPath = ROOT.'/my.php';
       $fp = @fopen($myConfPath, 'w');
-      if (!$fp) throw new Exception(__('設定ファイルに書き込みできませんでした。ディレクトリ"%s"のパーミッションを確認してください', ROOT));
+      if (!$fp) throw new Exception(__('設定ファイルに書き込みできませんでした。"%s"のパーミッションを確認してください', $myConfPath));
       fwrite($fp, $configTemplate);
       fclose($fp);
 
@@ -132,7 +134,8 @@ class SetupController extends AppController
 
       $systemData = $_SESSION[self::SESSION_SITE];
       $systemData['email'] = $_SESSION[self::SESSION_STAFF]['email'];
-      pr($systemData);
+      $systemData['use_theme'] = 'ThemeCleanPaperOrange';
+      $systemData['use_theme_mobile'] = 'ThemeJanuary';
       $r = $this->System->saveMultiply($systemData);
       if ($r !== TRUE) throw $r;
 
@@ -147,7 +150,7 @@ class SetupController extends AppController
     $this->title = __('必要要件');
     $environemtns;
 
-    if ($this->__checkRequirements(&$environemtns)) {
+    if ($this->__checkRequirements($environemtns)) {
       $this->redirect('/system/setup/db');
     }
 

@@ -6,10 +6,10 @@
   </ul>
 
   <ul id="bk-toolbar" class="bk-general">
-    <li><a href="<?php echo URL ?>admin"><?php echo __('Dasboard') ?></a></li>
-    <li><a href="javascript:;" data-bk-show-page-manager><?php echo __('Manage page') ?></a></li>
-    <li><a href="javascript:;" class="bk-cancel-editmode"><?php echo __('Exit editmode') ?></a></li>
-    <li><a href="javascript:;" class="bk-sign-out"><?php echo __('Sign out') ?></a></li>
+    <li><a href="<?php echo URL ?>admin/themes/general/installed"><?php echo __('管理画面') ?></a></li>
+    <li><a href="javascript:;" data-bk-show-page-manager><?php echo __('ページ管理') ?></a></li>
+    <li><a href="javascript:;" class="bk-cancel-editmode"><?php echo __('編集モード終了') ?></a></li>
+    <li><a href="javascript:;" class="bk-sign-out"><?php echo __('サインアウト') ?></a></li>
   </ul>
 <?php endif ; ?>
 

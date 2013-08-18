@@ -22,10 +22,10 @@ class BlockPhotoApiController extends BlockAppController
       $data = $this->BlockPhoto->getData($this->request->data['block_id']);
       if (!empty($data['photo'])) {
         $r = $this->File->delete($data['photo']['id']);
-        if ($r !== TRUE) throw new Exception(__('Failed to delete old photo.'));
+        if ($r !== TRUE) throw new Exception(__('古い写真データを削除できませんでした。'));
       }
 
-      if ($data === FALSE) throw new Exception(__('Not found block'));
+      if ($data === FALSE) throw new Exception(__('ブロックが見つかりませんでした'));
       $data['photo'] = $file['File'];
       $r = $this->BlockPhoto->updateData($this->request->data['block_id'], $data);
       if ($r !== TRUE) throw $r;

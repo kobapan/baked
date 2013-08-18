@@ -1,6 +1,6 @@
 <?php
 Configure::write('Blocks.BlockForm', array(
-  'name' => __('Form'),
+  'name' => __('メールフォーム'),
   'icon' => 'icon-envelope-alt',
 ));
 

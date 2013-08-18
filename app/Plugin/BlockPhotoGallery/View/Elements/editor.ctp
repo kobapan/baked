@@ -14,17 +14,17 @@ echo $this->Form->create('File', array(
     <?php
     $class = array($block['Block']['data']['type'] => 'active');
     ?>
-    <div class="bk-title"><?php echo __('Type') ?></div>
+    <div class="bk-title"><?php echo __('タイプ') ?></div>
     <a href="javascript:;" class="<?php echo @$class['lightbox'] ?>"" data-bk-block-photo-gallery-set-type="lightbox"><i class="icon-th icon-2x"></i></a>
     <a href="javascript:;" class="<?php echo @$class['slider'] ?>" data-bk-block-photo-gallery-set-type="slider"><i class="icon-picture icon-2x"></i></a>
   </li>
   <li class="bk-type-lightbox">
-    <div class="bk-title"><?php echo __('Size') ?></div>
+    <div class="bk-title"><?php echo __('サイズ') ?></div>
     <a href="javascript:;" data-bk-block-photo-gallery-increase><i class="icon-plus icon-2x"></i></a>
     <a href="javascript:;" data-bk-block-photo-gallery-decrease><i class="icon-minus icon-2x"></i></a>
   </li>
   <li class="bk-type-slider">
-    <div class="bk-title"><?php echo __('Theme') ?></div>
+    <div class="bk-title"><?php echo __('テーマ') ?></div>
     <?php
     echo $this->Form->input('slider_theme', array(
       'name' => 'data[slider_theme]',
@@ -35,7 +35,7 @@ echo $this->Form->create('File', array(
     ?>
   </li>
   <li class="bk-type-slider">
-    <div class="bk-title"><?php echo __('Animation') ?></div>
+    <div class="bk-title"><?php echo __('アニメーション') ?></div>
     <?php
     echo $this->Form->input('slider_animation', array(
       'name' => 'data[slider_animation]',
@@ -46,19 +46,19 @@ echo $this->Form->create('File', array(
     ?>
   </li>
   <li class="bk-type-slider">
-    <div class="bk-title"><?php echo __('Pause time') ?></div>
+    <div class="bk-title"><?php echo __('停止時間') ?></div>
     <?php
     echo $this->Form->input('slider_pause_time', array(
       'name' => 'data[slider_pause_time]',
       'label' => FALSE,
       'style' => 'width: 30px',
-      'after' => __('sec'),
+      'after' => __('秒'),
       'value' => $block['Block']['data']['slider_pause_time'],
     ));
     ?>
   </li>
   <li>
-    <div class="bk-title"><?php echo __('Show images') ?></div>
+    <div class="bk-title"><?php echo __('写真一覧') ?></div>
     <a href="javascript:;" data-bk-block-photo-gallery-show-images><i class="icon-list icon-2x"></i></a>
   </li>
 </ul>
@@ -97,7 +97,7 @@ echo $this->Form->create('File', array(
 
 <div class="spacer2"></div>
 
-<button type="submit" class="button button-primary button-pill button-small"><?php echo __('Save') ?></button>
+<button type="submit" class="button button-primary button-pill button-small"><?php echo __('保存') ?></button>
 
 <?php
 echo $this->Form->end();

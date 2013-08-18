@@ -4,11 +4,11 @@
  */
 class Environment
 {
-  private $_hosts = array('baked.dev', 'Edison.local');
-  
+  private $_hosts = array('baked.dev', 'Edison.local', 'localhost');
+
 /**
  * Set up environment config.
- * 
+ *
  * @return void
  */
   public function setup()
@@ -17,7 +17,7 @@ class Environment
     define('DEVELOPE', in_array($hostName, $this->_hosts));
     define('SHOW_LOG', DEVELOPE);
   }
-  
+
 }
 
 define('CONDITIONS', 'conditions');

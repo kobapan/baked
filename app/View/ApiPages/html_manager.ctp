@@ -41,14 +41,14 @@
           'class' => 'hidden',
         ));
         ?>
-        <a href="javascript:;" class="bk-up" title="<?php echo __('Move this page up') ?>"><i class="icon-arrow-up icon-large"></i></a>
-        <a href="javascript:;" class="bk-down" title="<?php echo __('Move this page down') ?>"><i class="icon-arrow-down icon-large"></i></a>
-        <a href="javascript:;" class="bk-left" title="<?php echo __('Move this page one level up') ?>"><i class="icon-arrow-left icon-large"></i></a>
-        <a href="javascript:;" class="bk-right" title="<?php echo __('Move this page one level down') ?>"><i class="icon-arrow-right icon-large"></i></a>
-        <a href="javascript:;" class="bk-hide" title="<?php echo __('Hide this page in menu') ?>"><i class="icon-eye-open icon-large"></i></a>
-        <a href="javascript:;" class="bk-open" title="<?php echo __('Show this page in menu') ?>"><i class="icon-eye-close icon-large"></i></a>
-        <a href="javascript:;" class="bk-add" title="<?php echo __('Add a new page') ?>"><i class="icon-plus icon-large"></i></a>
-        <a href="javascript:;" class="bk-delete" title="<?php echo __('Delete this page') ?>"><i class="icon-trash icon-large"></i></a>
+        <a href="javascript:;" class="bk-up" title="<?php echo __('このページを上へ') ?>"><i class="icon-arrow-up icon-large"></i></a>
+        <a href="javascript:;" class="bk-down" title="<?php echo __('このページを下へ') ?>"><i class="icon-arrow-down icon-large"></i></a>
+        <a href="javascript:;" class="bk-left" title="<?php echo __('このページを1階層上げる') ?>"><i class="icon-arrow-left icon-large"></i></a>
+        <a href="javascript:;" class="bk-right" title="<?php echo __('このページを1階層下げる') ?>"><i class="icon-arrow-right icon-large"></i></a>
+        <a href="javascript:;" class="bk-hide" title="<?php echo __('このページを非表示にする') ?>"><i class="icon-eye-open icon-large"></i></a>
+        <a href="javascript:;" class="bk-open" title="<?php echo __('このページを表示する') ?>"><i class="icon-eye-close icon-large"></i></a>
+        <a href="javascript:;" class="bk-add" title="<?php echo __('ページを追加する') ?>"><i class="icon-plus icon-large"></i></a>
+        <a href="javascript:;" class="bk-delete" title="<?php echo __('このページを削除する') ?>"><i class="icon-trash icon-large"></i></a>
       </li>
     <?php endforeach ; ?>
   </ul>
@@ -56,7 +56,7 @@
   <div class="spacer2"></div>
 
   <div style="height: 30px">
-    <button type="submit" class="button button-primary button-pill button-small"><?php echo __('Save') ?></button>
+    <button type="submit" class="button button-primary button-pill button-small"><?php echo __('保存') ?></button>
   </div>
 
   <?php

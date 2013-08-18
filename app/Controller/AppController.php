@@ -21,13 +21,6 @@ class AppController extends Controller
       define('CURRENT_URL', $url);
     }
 
-    if (defined('MY_CONFIGURED')) {
-      if (!defined('BK_URL')) define('BK_URL', Router::url('/'));
-      if (!defined('BK_SITE_NAME')) define('BK_SITE_NAME', $this->System->value(System::KEY_SITE_NAME));
-    } else {
-      if ($this->name !== 'Setup') $this->redirect('/system/setup/start');
-    }
-
     define('EDITTING', (@$_SESSION['Staff']['Editmode'] === TRUE));
 
     $this->_setToken();
@@ -44,7 +37,7 @@ class AppController extends Controller
   protected function tokenFilterApi()
   {
     if ($_SESSION['token'] !== $this->request->data['token']) {
-      $this->Api->ng(__('Invalid token.'));
+      $this->Api->ng(__('不正なトークンです。'));
     }
     return TRUE;
   }
@@ -52,7 +45,7 @@ class AppController extends Controller
   protected function tokenFilter()
   {
     if ($_SESSION['token'] !== $this->request->data['token']) {
-      die(__('Invalid token.'));
+      die(__('不正なトークンです。'));
     }
     return TRUE;
   }

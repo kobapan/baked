@@ -21,11 +21,11 @@ class AdminThemesGeneralController extends AppAdminController
     ) {
       try {
         if ($this->request->data['ThemePackage']['mode'] === 'set_pc') {
-          $r = $this->ThemePackage->set($this->request->data['ThemePackage']['plugin'], 'pc');
+          $r = $this->ThemePackage->setUsed($this->request->data['ThemePackage']['plugin'], 'pc');
           if ($r !== TRUE) throw $r;
           Baked::setFlash(__('PC用テーマに設定しました'), 'success');
         } elseif ($this->request->data['ThemePackage']['mode'] === 'set_mobile') {
-          $r = $this->ThemePackage->set($this->request->data['ThemePackage']['plugin'], 'mobile');
+          $r = $this->ThemePackage->setUsed($this->request->data['ThemePackage']['plugin'], 'mobile');
           if ($r !== TRUE) throw $r;
           Baked::setFlash(__('モバイル用テーマに設定しました'), 'success');
         } elseif ($this->request->data['ThemePackage']['mode'] === 'delete') {

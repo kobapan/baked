@@ -20,9 +20,9 @@ class Page extends AppModel
   public function __construct($id = false, $table = null, $ds = null)
   {
     $this->columnLabels = array(
-      'title'  => __('Page title'),
-      'name'   => __('Page name'),
-      'hidden' => __('Hide setting'),
+      'title'  => __('タイトル'),
+      'name'   => __('ページ名 (英数字)'),
+      'hidden' => __('非表示'),
     );
 
     return parent::__construct($id, $table, $ds);
@@ -33,7 +33,7 @@ class Page extends AppModel
     parent::loadValidate();
 
     if (isset($this->validate['hidden']['valid_no_hidden'])) {
-      $this->validate['hidden']['valid_no_hidden']['message'] = __('Cat not set the index page hidden.');
+      $this->validate['hidden']['valid_no_hidden']['message'] = __('トップページをセットできませんでした。');
     }
   }
 
@@ -42,7 +42,7 @@ class Page extends AppModel
     try {
       $this->begin();
 
-      if (empty($title)) $title = __('Blank page');
+      if (empty($title)) $title = __('新規ページ');
       if (empty($name)) $name = $this->getNewName();
 
       $parentPageId = 0;
@@ -166,14 +166,14 @@ class Page extends AppModel
         $beforePage = $page;
       }
 
-      if (!$hasIndex) throw new Exception('There is no index page.');
+      if (!$hasIndex) throw new Exception(__('トップページが存在しません。'));
 
       $subQuery = "EXISTS (SELECT TmpPage.id FROM pages as TmpPage WHERE TmpPage.id <> Page.id AND TmpPage.name = Page.name AND TmpPage.parent_page_id = Page.parent_page_id)";
       $page = $this->find('first', array(
         CONDITIONS => array($subQuery),
         FIELDS => array('Page.id', 'Page.name'),
       ));
-      if (!empty($page)) throw new Exception(__('There is more than one page of the same name (%s) in the same directory.', $page['Page']['name']));
+      if (!empty($page)) throw new Exception(__('同じ階層に同名のページが2つ以上存在しています。', $page['Page']['name']));
 
       $this->commit();
       return TRUE;
@@ -250,7 +250,7 @@ class Page extends AppModel
         FIELDS => array('Page.name', 'Page.depth')
       ));
       if ($current['Page']['name'] == 'index' && $current['Page']['depth'] == 0) {
-        throw new Exception(__('Can not delete index page.'));
+        throw new Exception(__('トップページは削除できません。'));
       }
 
       $this->loadModel('Block');
@@ -261,11 +261,11 @@ class Page extends AppModel
       ));
       foreach ($blockIds as $blockId) {
         $r = $this->Block->delete($blockId);
-        if ($r !== TRUE) throw new Exception(__('Failed to delete blocks #%d (%s)', $blockId, $r->getMessage()));
+        if ($r !== TRUE) throw new Exception(__('ブロックの削除に失敗しました。 #%d (%s)', $blockId, $r->getMessage()));
       }
 
       $r = parent::delete($id, $cascade);
-      if ($r !== TRUE) throw new Exception(__('Failed to delete page record.'));
+      if ($r !== TRUE) throw new Exception(__('Pageレコードの削除に失敗しました。'));
 
       $this->commit();
       return TRUE;

@@ -41,7 +41,7 @@ class ApiSystemController extends AppController
   {
     $this->tokenFilterApi();
 
-    if (empty($_SESSION['Staff'])) $this->Api->ng(__('Please sign in.'));
+    if (empty($_SESSION['Staff'])) $this->Api->ng(__('サインインしてください。'));
 
     $_SESSION['Staff']['Editmode'] = TRUE;
     $this->Api->ok();

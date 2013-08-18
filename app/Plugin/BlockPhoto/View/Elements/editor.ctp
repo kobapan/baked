@@ -4,7 +4,7 @@ $uploaderId = sprintf('bk-block-photo-uploader-%s', $block['Block']['id']);
 
 <ul class="bk-editor-boxes">
   <li>
-    <div class="bk-title"><?php echo __('Position') ?></div>
+    <div class="bk-title"><?php echo __('位置') ?></div>
     <a href="javascript:;" data-bk-block-photo-align="1"><i class="icon-align-left icon-2x"></i></a>
     <a href="javascript:;" data-bk-block-photo-align="2"><i class="icon-align-center icon-2x"></i></a>
     <a href="javascript:;" data-bk-block-photo-align="3"><i class="icon-align-right icon-2x"></i></a>

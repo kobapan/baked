@@ -20,7 +20,7 @@ echo $this->Form->create('Form', array(
       ?>
     </div>
   <?php endforeach ; ?>
-  <button type="submit" class="button button-primary button-pill"><?php echo __('Submit') ?></button>
+  <button type="submit" class="button button-primary button-pill"><?php echo __('送信する') ?></button>
 <?php
 echo $this->Form->end();
 ?>

@@ -1,4 +1,5 @@
 <?php
+/*
 Configure::write('Admin.AdminDashboard', array(
   'order' => 0,
   'navigation' => array(
@@ -13,4 +14,4 @@ Configure::write('Admin.AdminDashboard', array(
     ),
   ),
 ));
-
+*/

@@ -1,6 +1,6 @@
 <?php
 Configure::write('Blocks.BlockSpace', array(
-  'name' => __('Space'),
+  'name' => __('スペース'),
   'icon' => 'icon-resize-vertical',
 ));
 

@@ -13,7 +13,6 @@
 <link rel="stylesheet" href="<?php echo URL ?>css/admin.css">
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css">
 <link rel="stylesheet" href="<?php echo URL ?>css/buttons.css">
-<link rel="shortcut icon" href="<?php echo URL ?>favicon.ico" type="image/x-icon">
 <?php
 if (Baked::read('ADMIN_CSS')) {
   $this->Html->css(Baked::read('ADMIN_CSS'), NULL, array('inline' => FALSE));

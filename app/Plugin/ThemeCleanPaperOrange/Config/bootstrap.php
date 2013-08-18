@@ -5,6 +5,7 @@ Configure::write('Themes.ThemeCleanPaperOrange', array(
   'url' => 'http://bakedcms.org/',
   'support' => array(
     'pc'     => TRUE,
+    #'mobile' => TRUE,
     'mobile' => FALSE,
   ),
 ));

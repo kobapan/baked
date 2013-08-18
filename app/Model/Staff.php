@@ -45,8 +45,8 @@ class Staff extends AppModel
 
   public function auth($params)
   {
-    if (empty($params['email'])) throw new Exception(__('Email is required.'));
-    if (empty($params['password'])) throw new Exception(__('Password is required.'));
+    if (empty($params['email'])) throw new Exception(__('メールアドレスは必須です。'));
+    if (empty($params['password'])) throw new Exception(__('パスワードは必須です。'));
 
     $staff = $this->find('first', array(
       CONDITIONS => array(
@@ -57,7 +57,7 @@ class Staff extends AppModel
         'Staff.id',
       ),
     ));
-    if (empty($staff)) throw new Exception(__('Email or password is incorrect'));
+    if (empty($staff)) throw new Exception(__('メールアドレス又はパスワードが間違っています。'));
 
     $this->signIn($staff['Staff']['id']);
 

@@ -22,7 +22,9 @@ echo $this->Form->input('name', array(
   'label' => __('データベース名'),
 ));
 echo $this->Form->input('prefix', array(
-  'label' => __('接頭辞'),
+  #'label' => __('接頭辞'),
+  'type' => 'hidden',
+  'value' => '',
 ));
 ?>
 

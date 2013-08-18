@@ -1,6 +1,6 @@
 <?php
 Configure::write('Blocks.BlockCode', array(
-  'name' => __('Code'),
+  'name' => __('コード'),
   'icon' => 'icon-code',
 ));
 

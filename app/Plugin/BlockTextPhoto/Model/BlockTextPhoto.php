@@ -21,7 +21,7 @@ class BlockTextPhoto extends BlockAppModel
   public function initialData()
   {
     return array(
-      'text' => __('Input text.'),
+      'text' => __('テキストを入力してください。'),
       'align' => 2,
       'size'  => 200,
       'photo' => NULL,
@@ -32,7 +32,7 @@ class BlockTextPhoto extends BlockAppModel
   {
     try {
       $data = $this->getData($blockId);
-      if (empty($data)) throw new Exception(__('Not found block.'));
+      if (empty($data)) throw new Exception(__('ブロックが見つかりませんでした。'));
 
       if (!empty($data['photo'])) {
         $this->loadModel('File');

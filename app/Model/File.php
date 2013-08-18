@@ -60,7 +60,7 @@ class File extends AppModel
     try {
       $this->begin();
 
-      if (!file_exists($path)) throw new Exception(__('Not found file.'));
+      if (!file_exists($path)) throw new Exception(__('ファイルが見つかりませんでした。'));
 
       $code = $this->generateUniqueCode(16);
       $ext = extWithMime($mimeType);
@@ -70,7 +70,7 @@ class File extends AppModel
       if (!file_exists($absDir)) {
         App::uses('Folder', 'Utility');
         $folder = new Folder();
-        if (!$folder->create($absDir, 0707)) throw new Exception(__('Failed to create folder.'));
+        if (!$folder->create($absDir, 0707)) throw new Exception(__('フォルダの作成に失敗しました。'));
       }
 
       $dbPath = sprintf('%s%s.%s', $dir, $code, $ext);
@@ -87,7 +87,7 @@ class File extends AppModel
       if ($r !== TRUE) throw $r;
 
       $absPath = sprintf('%s%s.%s', $absDir, $code, $ext);
-      if (!move_uploaded_file($path, $absPath)) throw new Exception(__('Failed to move the file.'));
+      if (!move_uploaded_file($path, $absPath)) throw new Exception(__('ファイルの移動に失敗しました。'));
 
       $this->commit();
       return TRUE;
@@ -119,13 +119,13 @@ class File extends AppModel
         CONDITIONS => array('File.id' => $id),
         FIELDS => array('File.path'),
       ));
-      if (empty($file)) throw new Exception(__('Not found file recode.'));
+      if (empty($file)) throw new Exception(__('Fileレコードが見つかりませんでした。'));
 
       $r = unlink($file['File']['absolute_path']);
-      if ($r !== TRUE) throw new Exception(__('Failed to delete file source.'));
+      if ($r !== TRUE) throw new Exception(__('ファイルソースを削除できませんでした。'));
 
       $r = parent::delete($id, $cascade);
-      if ($r !== TRUE) throw new Exception(__('Failed to delete file recode.'));
+      if ($r !== TRUE) throw new Exception(__('Fileレコードを削除できませんでした。'));
 
       $this->commit();
       return TRUE;

@@ -46,7 +46,7 @@ class AdminSettingsStaffsController extends AppAdminController
       } else {
         Baked::setFlash(__('入力内容に不備があります'), 'error');
       }
-    } else {
+    } else if ($staffId) {
       $this->request->data['Staff'] = $staff['Staff'];
     }
   }

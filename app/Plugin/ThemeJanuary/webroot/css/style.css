@@ -10,8 +10,8 @@ body {
   font-family: 'メイリオ','Meiryo',sans-serif;
   background: #fafafa;
   text-align: left;
-  color: #777;
-  font-size: 9pt;
+  color: #333;
+  font-size: 10pt;
   /*
   margin: 0 auto;
   width: 320px;
@@ -44,7 +44,7 @@ img {
 #primary-header > div.inner {
 }
 #primary-header a {
-  color: #666;
+  color: #333;
 }
 #primary-header a:hover {
   text-decoration: none;
@@ -62,7 +62,7 @@ img {
   line-height: 48px;
   display: block;
   text-align: center;
-  font-size: 10pt;
+  font-size: 11pt;
 }
 
 #content {
@@ -145,6 +145,14 @@ img {
   text-align: center;
   background: #fff;
 }
+.bk-block-content ul,
+.bk-block-content ol {
+  margin: 0;
+  padding-left: 22px;
+}
+.bk-block-content ul iframe {
+  max-width: 100%;
+}
 
 #visual {
 }
@@ -157,10 +165,10 @@ img {
 }
 
 #primary-footer {
-  padding: 15px 5px;
+  padding: 15px 5px 20px 5px;
   text-align: center;
   color: #aaa;
-  font-size: 7pt;
+  font-size: 9pt;
 }
 
 #slider-navigation {

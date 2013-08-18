@@ -24,18 +24,18 @@ class BlockForm extends BlockAppModel
   public function __construct($id = false, $table = null, $ds = null)
   {
     $this->columnLabels = array(
-      'name' => __('Item name'),
-      'type' => __('Item type'),
+      'name' => __('項目名'),
+      'type' => __('タイプ'),
     );
     self::$TYPE = array(
-      'text'      => __('Text'),
-      'textarea'  => __('Textarea'),
-      'email'     => __('Email'),
-      'tel'       => __('Tel'),
-      'ja_states' => __('Japanese states'),
-      'select'    => __('Select'),
-      'checkbox'  => __('Check box'),
-      'radio'     => __('Radio button'),
+      'text'      => __('テキスト'),
+      'textarea'  => __('複数行テキスト'),
+      'email'     => __('メールアドレス'),
+      'tel'       => __('電話番号'),
+      'ja_states' => __('都道府県'),
+      'select'    => __('セレクトエリア'),
+      'checkbox'  => __('チェックボックス'),
+      'radio'     => __('ラジオボタン'),
     );
 
     return parent::__construct($id, $table, $ds);
@@ -44,30 +44,30 @@ class BlockForm extends BlockAppModel
   public function initialData()
   {
     return array(
-      'sent_text' => __('The message has been sent.'),
+      'sent_text' => __('メッセージは正常に送信されました。'),
       'lastId' => 4,
       'items' => array(
         1 => array(
           'item_id'  => 1,
-          'name'     => __('Name'),
+          'name'     => __('お名前'),
           'type'     => 'text',
           'required' => 1,
         ),
         2 => array(
           'item_id'  => 2,
-          'name'     => __('Email'),
+          'name'     => __('メールアドレス'),
           'type'     => 'email',
           'required' => 1,
         ),
         3 => array(
           'item_id'  => 3,
-          'name'     => __('Tel'),
+          'name'     => __('お電話番号'),
           'type'     => 'tel',
           'required' => 0,
         ),
         4 => array(
           'item_id'  => 4,
-          'name'     => __('Message'),
+          'name'     => __('お問い合わせ内容'),
           'type'     => 'textarea',
           'required' => 1,
         ),
@@ -98,7 +98,7 @@ class BlockForm extends BlockAppModel
       $this->valid['send'] = $sendValid;
 
       $r = $this->add($params, NULL, 'send', self::VALIDATION_MODE_ONLY);
-      if ($r !== TRUE) throw new Exception(__('There is validation errors'));
+      if ($r !== TRUE) throw new Exception(__('入力内容に不備があります。'));
 
       $this->loadModel('System');
       $systemEmail = $this->System->value(System::KEY_EMAIL);
@@ -112,7 +112,7 @@ class BlockForm extends BlockAppModel
         ->viewVars(array(
           'items' => $emailVars
         ))
-        ->subject(__('Contact from Baked'))
+        ->subject(__('[Baked] メールフォームからのお問い合わせ'))
         ->send();
 
       return TRUE;
@@ -128,7 +128,7 @@ class BlockForm extends BlockAppModel
 
       $blockId = $item['block_id'];
       $data = $this->getData($blockId);
-      if (empty($data)) throw new Exception(__('Failed to get data'));
+      if (empty($data)) throw new Exception(__('データを取得できませんでした'));
 
       if (isset($item['options_text'])) {
         $item['options'] = str_replace(array("\r\n", "\r"), "\n", $item['options_text']);
@@ -169,7 +169,7 @@ class BlockForm extends BlockAppModel
       $this->begin();
 
       $data = $this->getData($blockId);
-      if (empty($data)) throw new Exception('Not found block.');
+      if (empty($data)) throw new Exception(__('ブロックが見つかりませんでした'));
 
       $newItems = array();
       foreach ($itemIds as $itemId) {
@@ -194,7 +194,7 @@ class BlockForm extends BlockAppModel
       $this->begin();
 
       $data = $this->getData($blockId);
-      if (empty($data)) throw new Exception(__('Failed to get data'));
+      if (empty($data)) throw new Exception(__('データを取得できませんでした'));
 
       foreach ($data['items'] as $id => $item) {
         if ($itemId == $id) unset($data['items'][$id]);

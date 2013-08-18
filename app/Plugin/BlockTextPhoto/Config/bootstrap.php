@@ -1,6 +1,6 @@
 <?php
 Configure::write('Blocks.BlockTextPhoto', array(
-  'name' => __('Text & Photo'),
+  'name' => __('テキスト と 写真'),
   'icon' => 'icon-file-text',
 ));
 

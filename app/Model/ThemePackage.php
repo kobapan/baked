@@ -33,7 +33,7 @@ class ThemePackage extends AppModel
     }
   }
 
-  public function set($package, $type)
+  public function setUsed($package, $type)
   {
     try {
       $this->begin();

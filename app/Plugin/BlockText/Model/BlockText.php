@@ -18,7 +18,7 @@ class BlockText extends BlockAppModel
   {
     parent::__construct($id, $table, $ds);
     $this->columnLabels = array(
-      'text' => __('Text'),
+      'text' => __('テキスト'),
     );
   }
 
@@ -30,7 +30,7 @@ class BlockText extends BlockAppModel
   public function initialData()
   {
     return array(
-      'text' => __('Input text.'),
+      'text' => __('テキストを入力してください。'),
     );
   }
 

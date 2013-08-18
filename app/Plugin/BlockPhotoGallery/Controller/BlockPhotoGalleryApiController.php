@@ -19,7 +19,7 @@ class BlockPhotoGalleryApiController extends BlockAppController
       ));
 
       $data = $this->BlockPhotoGallery->getData($this->request->data['block_id']);
-      if ($data === FALSE) throw new Exception(__('Not found block'));
+      if ($data === FALSE) throw new Exception(__('ブロックが見つかりませんでした。'));
       if (!isset($data['photos'])) $data['photos'] = array();
       $photo = array(
         'file_id' => $file['File']['id'],
@@ -48,7 +48,7 @@ class BlockPhotoGalleryApiController extends BlockAppController
 
     try {
       $data = $this->BlockPhotoGallery->getData($this->request->data['block_id']);
-      if ($data === FALSE) throw new Exception(__('Not found block'));
+      if ($data === FALSE) throw new Exception(__('ブロックが見つかりませんでした'));
 
       $newData = arrayWithKeys($this->request->data, array('slider_theme', 'slider_animation', 'slider_pause_time', 'type'));
       $data = $newData + $data;
@@ -79,7 +79,7 @@ class BlockPhotoGalleryApiController extends BlockAppController
     try {
       $data = $this->BlockPhotoGallery->getData($this->request->data['block_id']);
       $data['width'] = (int)$data['width'];
-      if ($data['width'] >= 200) throw new Exception(__('Can not to enlarge any more.'));
+      if ($data['width'] >= 200) throw new Exception(__('これ以上大きくできません。'));
       $data['width'] += 10;
 
       $r = $this->BlockPhotoGallery->updateData($this->request->data['block_id'], $data);
@@ -100,7 +100,7 @@ class BlockPhotoGalleryApiController extends BlockAppController
     try {
       $data = $this->BlockPhotoGallery->getData($this->request->data['block_id']);
       $data['width'] = (int)$data['width'];
-      if ($data['width'] <= 50) throw new Exception(__('Can not to reduce any more.'));
+      if ($data['width'] <= 50) throw new Exception(__('これ以上小さくできません。'));
       $data['width'] -= 10;
 
       $r = $this->BlockPhotoGallery->updateData($this->request->data['block_id'], $data);
@@ -137,7 +137,7 @@ class BlockPhotoGalleryApiController extends BlockAppController
 
     try {
       $r = $this->BlockPhotoGallery->deletePhoto($this->request->data['block_id'], $this->request->data['file_id']);
-      if ($r !== TRUE) throw new Exception(__('Failed to delete photo.'));
+      if ($r !== TRUE) throw new Exception(__('写真を削除できませんでした。'));
     } catch (Exception $e) {
       $this->Api->ng($e->getMessage());
     }

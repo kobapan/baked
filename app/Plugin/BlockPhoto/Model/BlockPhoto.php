@@ -30,12 +30,12 @@ class BlockPhoto extends BlockAppModel
   {
     try {
       $data = $this->getData($blockId);
-      if (empty($data)) throw new Exception(__('Not found block.'));
+      if (empty($data)) throw new Exception(__('ブロックが見つかりませんでした。'));
 
       if (!empty($data['photo'])) {
         $this->loadModel('File');
         $r = $this->File->delete($data['photo']['id']);
-        if ($r !== TRUE) throw new Exception('Failed to delete photo.');
+        if ($r !== TRUE) throw new Exception(__('写真を削除できませんでした。'));
       }
 
       return TRUE;

@@ -1,6 +1,6 @@
 <?php
 Configure::write('Blocks.BlockPhotoGallery', array(
-  'name' => __('Photo Gallery'),
+  'name' => __('フォトギャラリー'),
   'icon' => 'icon-picture',
 ));
 

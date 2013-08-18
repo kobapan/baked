@@ -125,7 +125,7 @@ class FilesController extends AppController
     if (!file_exists($dir)) {
       App::uses('Folder', 'Utility');
       $folder = new Folder();
-      if (!$folder->create($dir, 0707)) throw new Exception(__('Failed to create the folder.'));
+      if (!$folder->create($dir, 0707)) throw new Exception(__('フォルダの作成に失敗しました。'));
     }
   }
 

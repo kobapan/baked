@@ -9,22 +9,22 @@
     ));
   }
   echo $this->Form->input('BlockForm.name', array(
-    'label' => __('Item name'),
+    'label' => __('項目名'),
   ));
   echo $this->Form->input('BlockForm.block_id', array(
     'type' => 'hidden',
   ));
   echo $this->Form->input('BlockForm.required', array(
-    'label' => __('Required'),
+    'label' => __('入力必須'),
     'type' => 'checkbox',
   ));
   echo $this->Form->input('BlockForm.type', array(
-    'label' => __('Item type'),
+    'label' => __('タイプ'),
     'options' => BlockForm::$TYPE,
     'class' => 'select-item-type',
   ));
   echo $this->Form->input('BlockForm.options_text', array(
-    'label' => __('Options'),
+    'label' => __('選択肢'),
     'type' => 'textarea',
     'div' => array(
       'class' => 'input options',
@@ -37,7 +37,7 @@
   <div class="spacer1"></div>
 
   <div style="height: 30px">
-    <button type="submit" class="button button-primary button-pill button-small"><?php echo __('Save') ?></button>
+    <button type="submit" class="button button-primary button-pill button-small"><?php echo __('保存') ?></button>
   </div>
 
   <?php

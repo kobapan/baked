@@ -1,4 +1,4 @@
-<?php echo __('You received an inquiry.') ?>
+<?php echo __('お問い合わせがありました。') ?>
 
 
 --

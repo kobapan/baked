@@ -26,8 +26,8 @@ class BlockHeading extends BlockAppModel
       3 => 'Small',
     );
     $this->columnLabels = array(
-      'h'    => __('Size'),
-      'text' => __('Text'),
+      'h'    => __('サイズ'),
+      'text' => __('テキスト'),
     );
   }
 
@@ -40,7 +40,7 @@ class BlockHeading extends BlockAppModel
   {
     return array(
       'h' => 1,
-      'text' => __('Heading'),
+      'text' => __('見出し'),
     );
   }
 
@@ -50,7 +50,7 @@ class BlockHeading extends BlockAppModel
  * @param int $blockId
  * @boolean
  */
-  public function willDelete()
+  public function willDelete($blockId)
   {
     return TRUE;
   }

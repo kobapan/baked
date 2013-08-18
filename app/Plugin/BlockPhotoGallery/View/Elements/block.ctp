@@ -7,7 +7,7 @@ $class = "photo-gallery-{$block['Block']['id']}";
   <ul id="<?php echo $id ?>" class="block-photo-gallery" data-bk-type="<?php echo $block['Block']['data']['type'] ?>">
 
     <?php if (empty($block['Block']['data']['photos'])) : ?>
-      <div class="bk-note-01"><?php echo __('Please upload photos.') ?></div>
+      <div class="bk-note-01"><?php echo __('写真をアップロードしてください。') ?></div>
     <?php endif ; ?>
 
     <?php foreach (@$block['Block']['data']['photos'] as $photo) : ?>
@@ -22,7 +22,7 @@ $class = "photo-gallery-{$block['Block']['id']}";
 
     <script>
     $(function(){
-      $('a.<?php echo $class ?>').colorbox({rel:'<?php echo $class ?>'});
+      $('a.<?php echo $class ?>').colorbox({rel:'<?php echo $class ?>',maxWidth:'100%',maxHeight:'100%'});
     });
     </script>
   </ul>

@@ -9,7 +9,7 @@ $boxId = "bk-block-photo-image-{$block['Block']['id']}";
   ?>
   <div class="outer"><img src="<?php echo $imgUrl ?>" id="bk-block-photo-image-<?php echo $block['Block']['id'] ?>"></div>
 <?php else : ?>
-  <div class="bk-note-01"><?php echo __('Upload an image.') ?></div>
+  <div class="bk-note-01"><?php echo __('写真をアップロードしてください。') ?></div>
 <?php endif ; ?>
 
   <?php if (EDITTING && !empty($block['Block']['data']['photo'])): ?>

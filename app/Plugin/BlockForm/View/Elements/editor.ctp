@@ -5,10 +5,10 @@ $tableId = "block-form-editor-table-{$block['Block']['id']}";
   <thead>
     <tr>
       <th></th>
-      <th><?php echo __('Item name') ?></th>
-      <th><?php echo __('Item type') ?></th>
-      <th><?php echo __('Options') ?></th>
-      <th><?php echo __('Required') ?></th>
+      <th><?php echo __('項目名') ?></th>
+      <th><?php echo __('対応') ?></th>
+      <th><?php echo __('選択肢') ?></th>
+      <th><?php echo __('必須') ?></th>
       <th></th>
     </tr>
   </thead>
@@ -26,7 +26,7 @@ $tableId = "block-form-editor-table-{$block['Block']['id']}";
   </tbody>
   <tfoot>
     <tr>
-      <td colspan="100%"><a href="javascript:;" class="bk-block-form-add-item"><?php echo __('Add form item') ?></a></td>
+      <td colspan="100%"><a href="javascript:;" class="bk-block-form-add-item"><?php echo __('項目を追加する') ?></a></td>
     </tr>
   </tfoot>
 
@@ -54,7 +54,7 @@ $tableId = "block-form-editor-table-{$block['Block']['id']}";
 
 <ul class="bk-editor-boxes">
   <li>
-    <div class="bk-title"><?php echo __('Text after sending') ?></div>
+    <div class="bk-title"><?php echo __('送信後のテキスト') ?></div>
     <a href="javascript:;" data-bk-block-form-toggle-sent-text="open"><i class="icon-pencil icon-2x"></i></a>
   </li>
 </ul>
@@ -87,7 +87,7 @@ echo $this->Form->input('Block.block_id', array(
 
 <div class="spacer1"></div>
 
-<button type="submit" class="button button-primary button-pill button-small"><?php echo __('Save') ?></button>
+<button type="submit" class="button button-primary button-pill button-small"><?php echo __('保存') ?></button>
 
 <?php
 echo $this->Form->end();

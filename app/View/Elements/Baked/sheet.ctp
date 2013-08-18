@@ -13,7 +13,7 @@
 
   <?php if (EDITTING) : ?>
     <div class="bk-general bk-add-block-outer">
-      <a href="javascript:;" class="button button-primary button-pill button-small" data-bk-show-block-list data-bk-sheet="<?php echo $sheet ?>"><?php echo __('New Block') ?></a>
+      <a href="javascript:;" class="button button-primary button-pill button-small" data-bk-show-block-list data-bk-sheet="<?php echo $sheet ?>"><?php echo __('新規ブロック') ?></a>
     </div>
   <?php endif ; ?>
 

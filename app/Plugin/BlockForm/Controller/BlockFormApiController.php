@@ -29,7 +29,7 @@ class BlockFormApiController extends BlockAppController
     if (!empty($this->request->data['BlockForm']['item_id'])) {
       $data = $this->BlockForm->getData(@$this->request->data['BlockForm']['block_id']);
       $item = @$data['items'][$this->request->data['BlockForm']['item_id']];
-      if (empty($item)) $this->Api->ng(__('Not found item'));
+      if (empty($item)) $this->Api->ng(__('項目が見つかりませんでした'));
       $this->request->data['BlockForm'] += $item;
     }
 

@@ -17,7 +17,7 @@ echo $this->Form->input('Block.code', array(
 
 <div class="spacer1"></div>
 
-<button type="submit" class="button button-primary button-pill button-small"><?php echo __('Save') ?></button>
+<button type="submit" class="button button-primary button-pill button-small"><?php echo __('保存') ?></button>
 
 <?php
 echo $this->Form->end();

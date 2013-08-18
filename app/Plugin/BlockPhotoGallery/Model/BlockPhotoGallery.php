@@ -24,10 +24,10 @@ class BlockPhotoGallery extends BlockAppModel
     parent::__construct($id, $table, $ds);
 
     self::$SLIDER_THEME = array(
-      'default' => __('Theme: Default'),
-      'bar' => __('Theme: Bar'),
-      'dark' => __('Theme: Dark'),
-      'light' => __('Theme: Light'),
+      'default' => __('テーマ: デフォルト'),
+      'bar' => __('テーマ: バー'),
+      'dark' => __('テーマ: ダーク'),
+      'light' => __('テーマ: ライト'),
     );
 
     self::$SLIDER_ANIMATION = array(
@@ -84,11 +84,11 @@ class BlockPhotoGallery extends BlockAppModel
   {
     try {
       $data = $this->getData($blockId);
-      if (empty($data)) throw new Exception(__('Not found block.'));
+      if (empty($data)) throw new Exception(__('ブロックが見つかりませんでした。'));
 
       foreach ($data['photos'] as $fileId => $photo) {
         $r = $this->deletePhoto($blockId, $fileId);
-        if ($r !== TRUE) throw new Exception('Failed to delete photo.');
+        if ($r !== TRUE) throw new Exception(__('写真を削除できませんでした。'));
       }
 
       return TRUE;
@@ -111,7 +111,7 @@ class BlockPhotoGallery extends BlockAppModel
       $this->loadModel('File');
 
       $data = $this->getData($blockId);
-      if (empty($data)) throw new Exception('Not found block.');
+      if (empty($data)) throw new Exception(__('ブロックが見つかりませんでした'));
 
       $newPhotos = array();
       foreach ($fileIds as $fileId) {
@@ -157,9 +157,7 @@ class BlockPhotoGallery extends BlockAppModel
         }
       }
 
-      if ($deleted === FALSE) {
-        throw new Exception(__('Failed to delete file.'));
-      }
+      if ($deleted === FALSE) throw new Exception(__('ファイルを削除できませんでした。'));
 
       $r = $this->updateData($blockId, $data);
       if ($r !== TRUE) throw $r;

@@ -79,7 +79,7 @@ class Block extends AppModel
       $blockIds = $this->find('list', $options);
       $blockIds = array_values($blockIds);
 
-      if ($initialData === FALSE) throw new Exception(__('Failed to get initial data.'));
+      if ($initialData === FALSE) throw new Exception(__('初期化データの取得に失敗しました。'));
       if (is_array($initialData)) $data['data'] = $initialData;
       $r = $this->add($data, FALSE);
       if ($r !== TRUE) throw $r;
@@ -153,7 +153,7 @@ class Block extends AppModel
         CONDITIONS => array('Block.id' => $id),
         FIELDS => array('Block.id', 'Block.data'),
       ));
-      if (empty($block)) throw new Exception(__('Not found block'));
+      if (empty($block)) throw new Exception(__('ブロックが見つかりませんでした'));
 
       $data += $block['Block']['data'];
 
@@ -178,7 +178,7 @@ class Block extends AppModel
  * @param int $id
  * @return boolean $cascade
  */
-  public function delete($id, $cascade = true)
+  public function delete($id = NULL, $cascade = true)
   {
     try {
       $this->begin();
@@ -187,15 +187,15 @@ class Block extends AppModel
         CONDITIONS => array('Block.id' => $id),
         FIELDS => array('Block.id', 'Block.package', ),
       ));
-      if (empty($block)) throw new Exception(__('Not found block'));
+      if (empty($block)) throw new Exception(__('ブロックが見つかりませんでした。'));
 
       $package = $block['Block']['package'];
       $blockModel = $this->initPackageModel($package);
       $r = $blockModel->willDelete($id);
-      if ($r === FALSE) throw new Exception(__('Failed to delete block because of the callback.'));
+      if ($r === FALSE) throw new Exception(__('コールバックメソッドにより、ブロックの削除を停止しました。'));
 
       $r = parent::delete($id, $cascade);
-      if ($r === FALSE) throw new Exception(__('Failed to delete block.'));
+      if ($r === FALSE) throw new Exception(__('ブロックの削除に失敗しました。'));
 
       $this->commit();
       return TRUE;
