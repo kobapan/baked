@@ -312,11 +312,39 @@ ul, ol {
   opacity: 1.0;
 }
 
-
-
-
-
-
+#pankuzu {
+  margin-bottom: 30px;
+}
+#pankuzu > ul {
+  list-style: none;
+  padding: 0 50px;
+  margin: 0;
+  overflow: hidden;
+  background: #fcfcfc;
+  border: 1px solid #eee;
+  border-width: 1px 0;
+}
+#pankuzu > ul > li {
+  float: left;
+}
+#pankuzu > ul > li > a,
+#pankuzu > ul > li > span {
+  display: block;
+  height: 40px;
+  padding: 0 18px 0 10px;
+  line-height: 40px;
+  font-size: 8pt;
+}
+#pankuzu > ul > li > a {
+  text-decoration: none;
+  background: url(../images/bg-pankuzu-a.png) no-repeat right center;
+}
+#pankuzu > ul > li > a:hover {
+  color: #FF6600;
+}
+#pankuzu > ul > li > span {
+  color: #999;
+}
 
 
 

@@ -14,11 +14,8 @@ class DisplayController extends AppController
  */
   public function show()
   {
-    if (defined('MY_CONFIGURED')) {
-      if (!defined('BK_URL')) define('BK_URL', Router::url('/'));
-      if (!defined('BK_SITE_NAME')) define('BK_SITE_NAME', $this->System->value(System::KEY_SITE_NAME));
-    } else {
-      if ($this->name !== 'Setup') $this->redirect('/system/setup/start');
+    if (!defined('MY_CONFIGURED')) {
+      $this->redirect('/system/setup/start');
     }
 
     $path = func_get_args();

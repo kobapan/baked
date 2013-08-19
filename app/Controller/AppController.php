@@ -15,13 +15,14 @@ class AppController extends Controller
     }
     session_start();
 
-    if (!defined('URL')) define('URL', Router::url('/'));
-    if (!defined('CURRENT_URL')) {
-      $url = Router::url(array(), TRUE);
-      define('CURRENT_URL', $url);
-    }
-
+    define('URL', Router::url('/'));
+    $url = Router::url(array(), TRUE);
+    define('CURRENT_URL', $url);
     define('EDITTING', (@$_SESSION['Staff']['Editmode'] === TRUE));
+
+    if (defined('MY_CONFIGURED')) {
+      define('BK_SITE_NAME', $this->System->value(System::KEY_SITE_NAME));
+    }
 
     $this->_setToken();
   }

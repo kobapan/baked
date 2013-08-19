@@ -22,9 +22,7 @@
 <?php echo $this->Element('Baked/html') ?>
 
 <div id="wrap">
-
   <div id="paper" class="clearfix">
-
     <div id="primary-header" class="wring">
       <div class="logo">
         <a href="<?php echo URL ?>"><?php echo BK_SITE_NAME ?></a>
@@ -87,6 +85,51 @@
         <?php endforeach ; ?>
       </ul>
     </div><!-- #primary-header -->
+
+    <?php if ($currentMenu['Page']['depth'] != 0 || $currentMenu['Page']['name'] != 'index') : ?>
+      <div id="pankuzu">
+        <?php
+        $pankuzu = array();
+        foreach ($menuList as $menu) {
+          if ($menu['current']) {
+            $pankuzu[] = array(
+              'url' => $menu['Page']['url'],
+              'title' => $menu['Page']['title'],
+            );
+            foreach ($menu['sub'] as $menu) {
+              if ($menu['current']) {
+                $pankuzu[] = array(
+                  'url' => $menu['Page']['url'],
+                  'title' => $menu['Page']['title'],
+                );
+                foreach ($menu['sub'] as $menu) {
+                  if ($menu['current']) {
+                    $pankuzu[] = array(
+                      'url' => $menu['Page']['url'],
+                      'title' => $menu['Page']['title'],
+                    );
+                    break;
+                  }
+                }
+                break;
+              }
+            }
+            break;
+          }
+        }
+        ?>
+        <ul>
+          <li><a href="<?php echo URL ?>"><i class="icon icon-home"></i></a></li>
+          <?php for ($i = 0; !empty($pankuzu[$i]); $i++) : ?>
+            <?php if (count($pankuzu)-1 == $i) : ?>
+              <li><span><?php echo h($pankuzu[$i]['title']) ?></span></li>
+            <?php else : ?>
+              <li><a href="<?php echo $pankuzu[$i]['url'] ?>"><?php echo h($pankuzu[$i]['title']) ?></a></li>
+            <?php endif ; ?>
+          <?php endfor ; ?>
+        </ul>
+      </div>
+    <?php endif ; ?>
 
     <div id="content">
       <?php echo $this->fetch('content') ?>
