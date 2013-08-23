@@ -9,6 +9,11 @@ class SetupController extends AppController
   const SESSION_SITE = 'setup_site';
   const SESSION_STAFF = 'setup_staff';
 
+  public function beforeFilter()
+  {
+    parent::beforeFilter();
+  }
+
   public function beforeRender()
   {
     if (defined('MY_CONFIGURED')) $this->redirect('/');

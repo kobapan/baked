@@ -19,14 +19,10 @@
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 mb_internal_encoding('utf8');
- #mb_language('ja');
+#mb_language('ja');
 #date_default_timezone_set('Asia/Tokyo');
 
 require_once 'utilities.php';
-
-require_once 'environment.php';
-$environment = new Environment();
-$environment->setup();
 
 $myConfPath = ROOT.DS.'my.php';
 if (!file_exists($myConfPath)) {
@@ -35,6 +31,10 @@ if (!file_exists($myConfPath)) {
 } else {
   require_once $myConfPath;
 }
+
+require_once 'environment.php';
+$environment = new Environment();
+$environment->setup();
 
 require_once APP.'Lib'.DS.'Baked.php';
 
@@ -285,7 +285,6 @@ Cache::config('_cake_core_', array(
   'path' => CACHE . 'persistent' . DS,
   'serialize' => ($engine === 'File'),
   'duration' => $duration,
-  'mask' => 0666,
 ));
 
 /**
@@ -298,7 +297,6 @@ Cache::config('_cake_model_', array(
   'path' => CACHE . 'models' . DS,
   'serialize' => ($engine === 'File'),
   'duration' => $duration,
-  'mask' => 0666,
 ));
 
 

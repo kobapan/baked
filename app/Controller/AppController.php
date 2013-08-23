@@ -10,6 +10,7 @@ class AppController extends Controller
     parent::beforeFilter();
 
     if (session_id() != '') {
+      die("４０４〜");
       header('HTTP/1.0 404 Not Found');
       die('404 Not Found');
     }
