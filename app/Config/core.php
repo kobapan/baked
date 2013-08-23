@@ -25,10 +25,7 @@ mb_internal_encoding('utf8');
 require_once 'utilities.php';
 
 $myConfPath = ROOT.DS.'my.php';
-if (!file_exists($myConfPath)) {
-  #header(sprintf('Location: %ssetup', $_SERVER['REDIRECT_URL']));
-  #exit;
-} else {
+if (file_exists($myConfPath)) {
   require_once $myConfPath;
 }
 
@@ -38,6 +35,7 @@ $environment->setup();
 
 require_once APP.'Lib'.DS.'Baked.php';
 
+define('BK_VERSION', '0.0');
 
 /**
  * CakePHP Debug Level:
