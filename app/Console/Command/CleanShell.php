@@ -37,11 +37,8 @@ class CleanShell extends AppShell
 
       $tmpDirPath = WWW_ROOT.'files'.DS.'images';
       $folder = new Folder($tmpDirPath);
-      $files = $folder->findRecursive();
-      foreach ($files as $file) {
-        $r = @unlink($file);
-        if ($r === FALSE) throw new Exception("Failed to delete {$file}");
-      }
+      $r = $folder->delete();
+      if ($r === FALSE) throw new Exception("Failed to delete {$tmpDirPath}");
       $this->out("Clear: {$tmpDirPath}");
 
 
