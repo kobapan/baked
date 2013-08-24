@@ -35,18 +35,28 @@ class CleanShell extends AppShell
       $this->out("Clear: {$tmpDirPath}");
 
 
-      $tmpDirPath = WWW_ROOT.'files'.DS.'images';
-      $folder = new Folder($tmpDirPath);
-      $r = $folder->delete();
-      if ($r === FALSE) throw new Exception("Failed to delete {$tmpDirPath}");
-      $this->out("Clear: {$tmpDirPath}");
+      $paths = array(
+        ROOT.DS.'.git',
+        ROOT.DS.'workfiles',
+        WWW_ROOT.'files'.DS.'images',
+      );
+      foreach ($paths as $path) {
+        if (!file_exists($path)) continue;
+        $folder = new Folder($path);
+        $r = $folder->delete();
+        if ($r === FALSE) throw new Exception("Failed to delete {$path}");
+        $this->out("Clear: {$path}");
+      }
 
 
-      $tmpDirPath = ROOT.DS.'workfiles';
-      $folder = new Folder($tmpDirPath);
-      $r = $folder->delete();
-      if ($r === FALSE) throw new Exception("Failed to delete {$tmpDirPath}");
-      $this->out("Clear: {$tmpDirPath}");
+      $paths = array(
+        ROOT.DS.'.gitignore',
+        ROOT.DS.'.project',
+      );
+      foreach ($paths as $path) {
+        if (!file_exists($path)) continue;
+        if (!@unlink($path)) throw new Exception("Failed to delete {$path}");
+      }
 
     } catch (Exception $e) {
       $this->error($e->getMessage());
