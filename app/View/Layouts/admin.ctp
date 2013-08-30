@@ -26,6 +26,8 @@ echo $this->fetch('css');
 <script src="<?php echo URL ?>js/interface/baked.interface.js"></script>
 <script src="<?php echo URL ?>js/jquery.plugins/jquery.singlesender.js"></script>
 <script src="http://bp.yahooapis.com/2.4.21/browserplus-min.js"></script>
+<script src="<?php echo URL ?>js/ckeditor/ckeditor.js"></script>
+<script src="<?php echo URL ?>js/ckeditor/adapters/jquery.js"></script>
 <?php
 if (Baked::read('ADMIN_JS')) {
   $this->Html->script(Baked::read('ADMIN_JS'), array('inline' => FALSE));
@@ -34,6 +36,8 @@ echo $this->fetch('script');
 ?>
 <script>
 $(function(){
+  baked.base = '<?php echo URL ?>';
+  baked.token = '<?php echo $_token; ?>';
   $('form').singlesender();
 });
 </script>

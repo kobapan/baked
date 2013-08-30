@@ -19,6 +19,7 @@ class AdminThemesGeneralController extends AppAdminController
     if (!empty($this->request->data['ThemePackage']['mode'])
       && !empty($this->request->data['ThemePackage']['plugin'])
     ) {
+      $this->tokenFilter();
       try {
         if ($this->request->data['ThemePackage']['mode'] === 'set_pc') {
           $r = $this->ThemePackage->setUsed($this->request->data['ThemePackage']['plugin'], 'pc');

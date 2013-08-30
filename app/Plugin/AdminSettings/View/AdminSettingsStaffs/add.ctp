@@ -38,7 +38,7 @@
         ?>
       </div>
     </div>
-    <button class="button button-primary button-pill button-small"><?php echo __('Save') ?></button>
+    <button class="button button-primary button-pill button-small"><?php echo __('保存') ?></button>
     <?php
     echo $this->Form->end();
     ?>

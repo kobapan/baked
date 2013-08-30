@@ -47,7 +47,7 @@
       if ($menu['Page']['hidden']) $classes[] = 'hidden';
       ?>
       <li class="<?php echo implode(' ', $classes) ?>">
-        <a href="<?php echo $menu['Page']['url'] ?>"><?php echo h($menu['Page']['title']) ?></a>
+        <a href="<?php echo $menu['Page']['path'] ?>"><?php echo h($menu['Page']['title']) ?></a>
         <?php if (!empty($menu['sub'])) : ?>
           <ul>
             <?php foreach ($menu['sub'] as $menu) : ?>
@@ -57,7 +57,7 @@
               if ($menu['Page']['hidden']) $classes[] = 'hidden';
               ?>
               <li class="<?php echo implode(' ', $classes) ?>">
-                <a href="<?php echo $menu['Page']['url'] ?>"><?php echo $menu['Page']['title'] ?></a>
+                <a href="<?php echo $menu['Page']['path'] ?>"><?php echo $menu['Page']['title'] ?></a>
                 <?php if (!empty($menu['sub'])) : ?>
                 <ul>
                   <?php foreach ($menu['sub'] as $menu) : ?>
@@ -67,7 +67,7 @@
                     if ($menu['Page']['hidden']) $classes[] = 'hidden';
                     ?>
                     <li class="<?php echo implode(' ', $classes) ?>">
-                      <a href="<?php echo $menu['Page']['url'] ?>"><?php echo $menu['Page']['title'] ?></a>
+                      <a href="<?php echo $menu['Page']['path'] ?>"><?php echo $menu['Page']['title'] ?></a>
                     </li>
                   <?php endforeach ; ?>
                 </ul>

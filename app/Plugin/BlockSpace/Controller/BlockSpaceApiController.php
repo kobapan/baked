@@ -8,6 +8,7 @@ class BlockSpaceApiController extends BlockAppController
   public function update()
   {
     $this->tokenFilterApi();
+    $this->staffFilterApi();
 
     $data = array(
       'size' => @$this->request->data['size'],

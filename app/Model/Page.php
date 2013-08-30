@@ -11,11 +11,21 @@ class Page extends AppModel
       'parent_page_id' => 'isExist[Page,id]',
       'hidden'         => 'valid_no_hidden',
     ),
+    'data' => array(
+      'entries_per_page' => 'notEmpty | numeric | range[0,101]',
+      'can_comment'      => 'inClassArrayKeys[CAN_COMMENT]',
+      'sent_text'        => 'notEmpty | maxLen[1000]',
+    ),
     'update' => array(
       'id' => 'required | valid_isExist'
     ),
   );
+  public $virtualFields = array(
+    'entries_count' => 'SELECT COUNT(Entry.id) FROM entries as Entry WHERE Entry.page_id = Page.id',
+    'comments_count' => 'SELECT COUNT(Comment.id) FROM comments as Comment WHERE Comment.entry_id IN (SELECT Entry.id FROM entries as Entry WHERE Entry.page_id = Page.id)',
+  );
   public $columnLabels = array();
+  public static $CAN_COMMENT = array();
 
   public function __construct($id = false, $table = null, $ds = null)
   {
@@ -25,7 +35,122 @@ class Page extends AppModel
       'hidden' => __('非表示'),
     );
 
+    self::$CAN_COMMENT = array(
+      0 => __('不可'),
+      1 => __('承認制'),
+      2 => __('許可'),
+    );
+
     return parent::__construct($id, $table, $ds);
+  }
+
+  public function afterFind($results, $primary = false)
+  {
+    foreach ($results as &$result) {
+      if (empty($result[$this->name])) continue;
+
+      if (isset($result[$this->name]['data'])) {
+        $result[$this->name]['data'] = json_decode($result[$this->name]['data'], TRUE);
+      }
+
+      if (@$result[$this->name]['package'] == 'PageBlog') {
+        if (!isset($result[$this->name]['data']['entries_per_page'])) {
+          $result[$this->name]['data']['entries_per_page'] = 10;
+        }
+        if (!isset($result[$this->name]['data']['can_comment'])) {
+          $result[$this->name]['data']['can_comment'] = 2;
+        }
+        if (!isset($result[$this->name]['data']['sent_text'])) {
+          $result[$this->name]['data']['sent_text'] = __('コメントを送信しました。<br>管理者の承認後にコメントが表示される場合があります。');
+        }
+      }
+    }
+
+    return $results;
+  }
+
+  public function updatePathAll()
+  {
+    try {
+      $this->begin();
+
+      $pages = $this->find('all', array(
+        FIELDS => array(
+          "{$this->name}.id", "{$this->name}.name", "{$this->name}.parent_page_id",
+        ),
+        ORDER => array(
+          "{$this->name}.order" => 'asc',
+        )
+      ));
+
+      $pagePointers = array();
+
+      foreach ($pages as &$page) {
+        if ($page['Page']['parent_page_id'] == 0) {
+          $page['Page']['url'] = URL.$page['Page']['name'];
+        } else {
+          $p = &$pagePointers[$page['Page']['parent_page_id']];
+          if (empty($p)) continue;
+          $page['Page']['url'] = $p['Page']['url'].'/'.$page['Page']['name'];
+        }
+        $pagePointers[$page['Page']['id']] = $page;
+      }
+
+      foreach ($pagePointers as $pagePointer) {
+        $data = array(
+          'id' => $pagePointer['Page']['id'],
+          'path' => $pagePointer['Page']['url'],
+        );
+        $r = $this->add($data, TRUE, NULL, self::VALIDATION_MODE_SKIP);
+        if ($r !== TRUE) throw $r;
+      }
+
+      $this->commit();
+      return TRUE;
+    } catch (Exception $e) {
+      $this->rollback();
+      return $e;
+    }
+  }
+
+/**
+ * IDとdata配列を渡して更新
+ *
+ * @param int $id
+ * @param array $data
+ * @return mixed true on success. Exception on failed.
+ */
+  public function updateData($id, $data, $useValid = false)
+  {
+    try {
+      $this->begin();
+
+      $page = $this->find('first', array(
+        CONDITIONS => array('Page.id' => $id),
+        FIELDS => array('Page.id', 'Page.data', 'Page.package'),
+      ));
+      if (empty($page)) throw new Exception(__('ページが見つかりませんでした'));
+
+      if ($useValid) {
+        $r = $this->add($data, NULL, $useValid, self::VALIDATION_MODE_ONLY);
+        if ($r !== TRUE) throw $r;
+      }
+
+      $data += $page['Page']['data'];
+
+      $modelData = array(
+        'id'   => $id,
+        'data' => json_encode($data),
+      );
+      $r = $this->add($modelData, TRUE);
+      if ($r !== TRUE) throw $r;
+
+      $this->commit();
+      return TRUE;
+    } catch (Exception $e) {
+      $this->rollback();
+      return $e;
+    }
   }
 
   public function loadValidate()
@@ -37,12 +162,15 @@ class Page extends AppModel
     }
   }
 
-  public function insertPage($title = NULL, $name = NULL, $beforePageId = 0)
+  public function insertPage($title = NULL, $name = NULL, $package = 'PagePlain', $beforePageId = 0)
   {
     try {
       $this->begin();
 
-      if (empty($title)) $title = __('新規ページ');
+      if (empty($title)) {
+        $title = __('新規ページ');
+        if ($package == 'PageBlog') $title = __('新規ブログ');
+      }
       if (empty($name)) $name = $this->getNewName();
 
       $parentPageId = 0;
@@ -66,10 +194,12 @@ class Page extends AppModel
       $data = array(
         'title'          => $title,
         'name'           => $name,
+        'package'        => $package,
         'parent_page_id' => $parentPageId,
         'depth'          => $depth,
       );
       $r = $this->add($data, FALSE);
+      if ($r !== TRUE) throw $r;
 
       $inserted = FALSE;
       foreach ($pageIds as $pageId) {
@@ -82,6 +212,7 @@ class Page extends AppModel
       if (!$inserted) $newPageIds[] = $this->id;
 
       $this->saveOrder($newPageIds);
+      if ($r !== TRUE) throw $r;
 
       $this->commit();
       return TRUE;
@@ -106,6 +237,9 @@ class Page extends AppModel
         if ($r !== TRUE) throw $r;
         $order++;
       }
+
+      $r = $this->updatePathAll();
+      if ($r !== TRUE) throw $r;
 
       $this->commit();
       return TRUE;
@@ -175,6 +309,9 @@ class Page extends AppModel
       ));
       if (!empty($page)) throw new Exception(__('同じ階層に同名のページが2つ以上存在しています。', $page['Page']['name']));
 
+      $r = $this->updatePathAll();
+      if ($r !== TRUE) throw $r;
+
       $this->commit();
       return TRUE;
     } catch (Exception $e) {
@@ -198,7 +335,7 @@ class Page extends AppModel
     $pages = $this->find('all', array(
       CONDITIONS => $cond,
       FIELDS => array(
-        "{$this->name}.id", "{$this->name}.name", "{$this->name}.title", "{$this->name}.parent_page_id", "{$this->name}.depth", "{$this->name}.hidden",
+        "{$this->name}.id", "{$this->name}.name", "{$this->name}.package", "{$this->name}.title", "{$this->name}.parent_page_id", "{$this->name}.path", "{$this->name}.data", "{$this->name}.depth", "{$this->name}.hidden",
       ),
       ORDER => array(
         "{$this->name}.order" => 'asc',
@@ -211,12 +348,10 @@ class Page extends AppModel
     foreach ($pages as &$page) {
       $pointer;
       if ($page['Page']['parent_page_id'] == 0) {
-        $page['Page']['url'] = URL.$page['Page']['name'];
         $pointer = &$menuList;
       } else {
         $p = &$pagePointers[$page['Page']['parent_page_id']];
         if (empty($p)) continue;
-        $page['Page']['url'] = $p['Page']['url'].'/'.$page['Page']['name'];
         $pointer = &$p['sub'];
       }
       $page['sub'] = array();
@@ -247,7 +382,7 @@ class Page extends AppModel
 
       $current = $this->find('first', array(
         CONDITIONS => array('Page.id' => $id),
-        FIELDS => array('Page.name', 'Page.depth')
+        FIELDS => array('Page.name', 'Page.depth', 'Page.package'),
       ));
       if ($current['Page']['name'] == 'index' && $current['Page']['depth'] == 0) {
         throw new Exception(__('トップページは削除できません。'));
@@ -264,8 +399,48 @@ class Page extends AppModel
         if ($r !== TRUE) throw new Exception(__('ブロックの削除に失敗しました。 #%d (%s)', $blockId, $r->getMessage()));
       }
 
+      $r = TRUE;
+      switch ($current['Page']['package']) {
+        case 'PagePlain': $r = $this->__deletePagePlain($id); break;
+        case 'PageBlog':  $r = $this->__deletePageBlog($id);  break;
+      }
+      if ($r !== TRUE) throw $r;
+
       $r = parent::delete($id, $cascade);
       if ($r !== TRUE) throw new Exception(__('Pageレコードの削除に失敗しました。'));
+
+      $r = $this->updatePathAll();
+      if ($r !== TRUE) throw $r;
+
+      $this->commit();
+      return TRUE;
+    } catch (Exception $e) {
+      $this->rollback();
+      return $e;
+    }
+  }
+
+  private function __deletePagePlain($pageId)
+  {
+    return TRUE;
+  }
+
+  private function __deletePageBlog($pageId)
+  {
+    try {
+      $this->begin();
+
+      $this->loadModel('Entry');
+      $entryIds = $this->Entry->find('list', array(
+        CONDITIONS => array(
+          'Entry.page_id' => $pageId,
+        ),
+        FIELDS => array('Entry.id'),
+      ));
+      foreach ($entryIds as $entryId) {
+        $r = $this->Entry->delete($entryId);
+        if ($r !== TRUE) throw $r;
+      }
 
       $this->commit();
       return TRUE;

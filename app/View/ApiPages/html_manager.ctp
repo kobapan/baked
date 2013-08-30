@@ -47,7 +47,7 @@
         <a href="javascript:;" class="bk-right" title="<?php echo __('このページを1階層下げる') ?>"><i class="icon-arrow-right icon-large"></i></a>
         <a href="javascript:;" class="bk-hide" title="<?php echo __('このページを非表示にする') ?>"><i class="icon-eye-open icon-large"></i></a>
         <a href="javascript:;" class="bk-open" title="<?php echo __('このページを表示する') ?>"><i class="icon-eye-close icon-large"></i></a>
-        <a href="javascript:;" class="bk-add" title="<?php echo __('ページを追加する') ?>"><i class="icon-plus icon-large"></i></a>
+        <a href="javascript:;" class="bk-add" title="<?php echo __('ページを追加する') ?>" data-bk-show-page-list="<?php echo $page['Page']['id'] ?>"><i class="icon-plus icon-large"></i></a>
         <a href="javascript:;" class="bk-delete" title="<?php echo __('このページを削除する') ?>"><i class="icon-trash icon-large"></i></a>
       </li>
     <?php endforeach ; ?>

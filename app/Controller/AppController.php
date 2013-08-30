@@ -10,7 +10,6 @@ class AppController extends Controller
     parent::beforeFilter();
 
     if (session_id() != '') {
-      die("４０４〜");
       header('HTTP/1.0 404 Not Found');
       die('404 Not Found');
     }
@@ -36,19 +35,31 @@ class AppController extends Controller
     ));
   }
 
-  protected function tokenFilterApi()
+  public function tokenFilterApi()
   {
-    if ($_SESSION['token'] !== $this->request->data['token']) {
+    if (@$_SESSION['token'] !== @$this->request->data['token']) {
       $this->Api->ng(__('不正なトークンです。'));
     }
     return TRUE;
   }
 
-  protected function tokenFilter()
+  public function tokenFilter()
   {
-    if ($_SESSION['token'] !== $this->request->data['token']) {
+    if (@$_SESSION['token'] !== @$this->request->data['token']) {
       die(__('不正なトークンです。'));
     }
+    return TRUE;
+  }
+
+  public function staffFilterApi()
+  {
+    if (empty($_SESSION['Staff'])) $this->Api->ng(__('サインインしてください。'));
+    return TRUE;
+  }
+
+  public function staffFilter()
+  {
+    if (empty($_SESSION['Staff'])) die(__('サインインしてください。'));
     return TRUE;
   }
 

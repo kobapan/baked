@@ -26,7 +26,7 @@
     <div class="spacer2"></div>
 
     <ul class="icon-links">
-      <li><a href="<?php echo URL ?>admin/settings/staffs/add"><i class="icon-plus-sign"></i>追加</a></li>
+      <li><a href="<?php echo URL ?>admin/settings/staffs/add"><i class="icon-plus-sign"></i><?php echo __('追加') ?></a></li>
     </ul>
 
   </div>

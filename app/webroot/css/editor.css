@@ -246,33 +246,33 @@ ul#bk-page-manager > li[data-bk-hidden="1"] > a.bk-hide {
   display: none;
 }
 
-ul#bk-available-blocks {
+ul.ul-01 {
   display: none;
   position: absolute;
   list-style: none;
   background: #fff;
-  z-index: 3001;
+  z-index: 10001;
   border-radius: 5px;
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.6);
   padding: 0;
   margin: 0;
   overflow: hidden;
 }
-ul#bk-available-blocks > li {
+ul.ul-01 > li {
 }
-ul#bk-available-blocks > li > a {
+ul.ul-01 > li > a {
   padding: 0px 15px;
   display: block;
   text-decoration: none;
   line-height: 30px;
   transition: all 0.2s ease;
 }
-ul#bk-available-blocks > li:hover > a {
+ul.ul-01 > li:hover > a {
   background: #00ADE6;
   color: #fff;
   text-shadow: 0 1px 0px #666;
 }
-ul#bk-available-blocks > li > a > i {
+ul.ul-01 > li > a > i {
   width: 18px;
   display: inline-block;
   text-align: center;

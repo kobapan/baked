@@ -8,6 +8,7 @@ class BlockFormApiController extends BlockAppController
   public function update()
   {
     $this->tokenFilterApi();
+    $this->staffFilterApi();
 
     $data = array(
       'sent_text' => @$this->request->data['Block']['sent_text'],
@@ -23,6 +24,7 @@ class BlockFormApiController extends BlockAppController
   public function html_add()
   {
     $this->tokenFilterApi();
+    $this->staffFilterApi();
 
     $this->layout = 'ajax';
 
@@ -41,6 +43,7 @@ class BlockFormApiController extends BlockAppController
   public function add_item()
   {
     $this->tokenFilterApi();
+    $this->staffFilterApi();
 
     $r = $this->BlockForm->addItem($this->request->data['BlockForm']);
     if ($r !== TRUE) $this->Api->ng($r->getMessage());
@@ -54,6 +57,7 @@ class BlockFormApiController extends BlockAppController
   public function delete_item()
   {
     $this->tokenFilterApi();
+    $this->staffFilterApi();
 
     $r = $this->BlockForm->deleteItem($this->request->data['BlockForm']['block_id'], $this->request->data['BlockForm']['item_id']);
 
@@ -66,6 +70,7 @@ class BlockFormApiController extends BlockAppController
   public function save_sort()
   {
     $this->tokenFilterApi();
+    $this->staffFilterApi();
 
     $r = $this->BlockForm->saveSort($this->request->data['block_id'], $this->request->data['item_ids']);
 
@@ -77,6 +82,8 @@ class BlockFormApiController extends BlockAppController
 
   public function send()
   {
+    $this->tokenFilterApi();
+
     $r = $this->BlockForm->send($this->request->data['block_id'], $this->request->data['items']);
     if ($r !== TRUE) $this->Api->ng(array(
       'errors' => $this->BlockForm->validationErrors,

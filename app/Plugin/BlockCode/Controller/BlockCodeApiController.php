@@ -8,6 +8,7 @@ class BlockCodeApiController extends BlockAppController
   public function update()
   {
     $this->tokenFilterApi();
+    $this->staffFilterApi();
 
     $data = array(
       'code' => @$this->request->data['Block']['code'],

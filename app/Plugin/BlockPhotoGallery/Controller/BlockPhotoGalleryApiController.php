@@ -8,6 +8,7 @@ class BlockPhotoGalleryApiController extends BlockAppController
   public function upload()
   {
     $this->tokenFilterApi();
+    $this->staffFilterApi();
 
     try {
       $this->BlockPhotoGallery->begin();
@@ -45,6 +46,7 @@ class BlockPhotoGalleryApiController extends BlockAppController
   public function update()
   {
     $this->tokenFilterApi();
+    $this->staffFilterApi();
 
     try {
       $data = $this->BlockPhotoGallery->getData($this->request->data['block_id']);
@@ -75,6 +77,7 @@ class BlockPhotoGalleryApiController extends BlockAppController
   public function increase()
   {
     $this->tokenFilterApi();
+    $this->staffFilterApi();
 
     try {
       $data = $this->BlockPhotoGallery->getData($this->request->data['block_id']);
@@ -96,6 +99,7 @@ class BlockPhotoGalleryApiController extends BlockAppController
   public function decrease()
   {
     $this->tokenFilterApi();
+    $this->staffFilterApi();
 
     try {
       $data = $this->BlockPhotoGallery->getData($this->request->data['block_id']);
@@ -118,6 +122,7 @@ class BlockPhotoGalleryApiController extends BlockAppController
   public function save_sort()
   {
     $this->tokenFilterApi();
+    $this->staffFilterApi();
 
     try {
       $r = $this->BlockPhotoGallery->saveSort($this->request->data['block_id'], $this->request->data['file_ids']);
@@ -134,6 +139,7 @@ class BlockPhotoGalleryApiController extends BlockAppController
   public function delete_photo()
   {
     $this->tokenFilterApi();
+    $this->staffFilterApi();
 
     try {
       $r = $this->BlockPhotoGallery->deletePhoto($this->request->data['block_id'], $this->request->data['file_id']);

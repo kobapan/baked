@@ -8,6 +8,7 @@ class BlockPhotoApiController extends BlockAppController
   public function upload()
   {
     $this->tokenFilterApi();
+    $this->staffFilterApi();
 
     try {
       $this->BlockPhoto->begin();
@@ -43,6 +44,7 @@ class BlockPhotoApiController extends BlockAppController
   public function update()
   {
     $this->tokenFilterApi();
+    $this->staffFilterApi();
 
     $data = arrayWithKeys($this->request->data, array('align', 'size'));
     if (isset($data['size'])) {

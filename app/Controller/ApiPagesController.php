@@ -19,6 +19,7 @@ class ApiPagesController extends AppController
   public function html_manager()
   {
     $this->tokenFilterApi();
+    $this->staffFilterApi();
 
     $pages = $this->Page->find('all', array(
       ORDER => array(
@@ -39,8 +40,9 @@ class ApiPagesController extends AppController
   public function insert()
   {
     $this->tokenFilterApi();
+    $this->staffFilterApi();
 
-    $r = $this->Page->insertPage(NULL, NULL, @$this->request->data['before_page_id']);
+    $r = $this->Page->insertPage(NULL, NULL, @$this->request->data['package'], @$this->request->data['before_page_id']);
     if ($r !== TRUE) $this->Api->ng($r->getMessage());
     $this->Api->ok();
   }
@@ -48,6 +50,7 @@ class ApiPagesController extends AppController
   public function delete()
   {
     $this->tokenFilterApi();
+    $this->staffFilterApi();
 
     $r = $this->Page->delete($this->request->data['page_id']);
     if ($r !== TRUE) $this->Api->ng($r->getMessage());
@@ -57,6 +60,7 @@ class ApiPagesController extends AppController
   public function update_all()
   {
     $this->tokenFilterApi();
+    $this->staffFilterApi();
 
     usort($this->request->data['Page'], function($a, $b) {
       return $a['order'] > $b['order'];

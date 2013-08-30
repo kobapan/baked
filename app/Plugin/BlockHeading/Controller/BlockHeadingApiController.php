@@ -8,6 +8,7 @@ class BlockHeadingApiController extends BlockAppController
   public function update()
   {
     $this->tokenFilterApi();
+    $this->staffFilterApi();
 
     $data = array(
       'h'    => @$this->request->data['h'],

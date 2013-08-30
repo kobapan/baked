@@ -56,15 +56,17 @@ $(function(){
     baked.alignPageManager();
   });
 
-  $(document).on('click', 'ul#bk-page-manager a.bk-add', function(){
-    $li = $(this).parents('li');
-    var pageId = $li.attr('data-page-id');
+  $(document).on('click', '[data-bk-add-page]', function(){
+    var package = $(this).attr('data-bk-add-page');
+    var $ul = $(this).parents('ul');
+    var pageId = $ul.attr('data-bk-page-id')
     baked.savePageManager({
       ok: function(r){
         if (!baked.busyFilter()) return;
 
         baked.insertPage({
-          'before_page_id': pageId
+          'before_page_id': pageId,
+          'package': package
         }, {
           ok: function(){
             baked.showPageManager();
@@ -138,6 +140,18 @@ $(function(){
     baked.showingBlockBox = true;
   });
 
+  $(document).on('click', '[data-bk-show-page-list]', function(e){
+    var pageId = $(this).attr('data-bk-show-page-list');
+    $('#bk-available-pages')
+      .attr('data-bk-page-id', pageId)
+      .css({
+        top: e.pageY,
+        left: e.pageX
+      })
+      .show();
+    baked.showingPageBox = true;
+  });
+
   $(document).on('click', '.bk-cancel-editmode', function(){
     baked.cancelEditmode(function(){
       baked.reload();
@@ -159,6 +173,17 @@ $(function(){
 
     $('#bk-available-blocks').hide();
     baked.showingBlockBox = false;
+  });
+
+  $(document).on('click', function(e){
+    if (!baked.showingPageBox) return;
+
+    var attr = $(e.target).attr('data-bk-show-page-list');
+    if ('undefined' != typeof attr) return;
+    if ($(e.target).parents('[data-bk-show-page-list]').length > 0) return;
+
+    $('#bk-available-pages').hide();
+    baked.showingPageBox = false;
   });
 
 

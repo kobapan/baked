@@ -1,29 +1,68 @@
 var Baked = function(){
-  var token;
-  var base;
-  var showingBlockBox;
-  var saveBlockSortTimer;
-  var pageId;
-  var busy;
+  this.token;
+  this.base;
+  this.showingBlockBox;
+  this.showingPageBox = false;
+  this.saveBlockSortTimer;
+  this.pageId;
+  this.busy;
+  this.blocks = {};
+  this.events = {opened: {}};
 };
 
-Baked.prototype.blocks = {};
-Baked.prototype.events = {
-  opened: {}
+//Baked.prototype.blocks = {};
+//Baked.prototype.events = {opened: {}};
+
+$.fn.bkCkeditor = function(options){
+  var defaults = {
+    enterMode : CKEDITOR.ENTER_BR,
+    extraPlugins : 'youtube',
+    allowedContent : true,
+    toolbar : [
+      ['Bold','Italic']
+      ,['NumberedList','BulletedList','-','Outdent','Indent','Blockquote']
+      ,['JustifyLeft','JustifyCenter','JustifyRight']
+      ,['Table']
+      ,['Link','Unlink']
+      ,['TextColor','BGColor']
+      ,['Undo','Redo']
+      ,['ShowBlocks']
+      ,['Youtube']
+      ,['Source']
+    ]
+  };
+  if (options) {
+    $.extend(defaults, options);
+  }
+  $(this).ckeditor(defaults);
 };
 
-$.fn.bkCkeditor = function(){
-  $(this).ckeditor({
-    enterMode : CKEDITOR.ENTER_BR
+Baked.prototype.saveSession = function(name, data, callback){
+  this.post('system/api_system/save_session', {
+    data: {
+      'data[name]': name,
+      'data[data]': data
+    },
+    ok: function(r){
+      if (callback) callback(r);
+    }
   });
-};
+}
 
 Baked.prototype.showBox = function(html){
   $.fancybox({
     'content': html,
     'afterShow': function(){
       $('div.fancybox-inner').find('input:text,input:password,textarea,select').filter(':visible:first').focus();
-    }
+    },
+    beforeClose: function(){
+      $('#bk-available-pages').hide();
+      baked.showingPageBox = false;
+
+      $('#bk-available-blocks').hide();
+      baked.showingBlockBox = false;
+    },
+    'minHeight': 50
   });
 };
 
@@ -33,6 +72,15 @@ Baked.prototype.params = function($dom){
     params[v.name] = v.value;
   });
   return params;
+};
+
+Baked.prototype.getPageInfo = function(params, callback){
+  this.post('system/api_system/page_info', {
+    data: params,
+    ok: function(r){
+      callback(r);
+    }
+  });
 };
 
 Baked.prototype.goEditModeOrShowSigninBox = function(){
@@ -379,6 +427,34 @@ Baked.prototype.toggleEditor = function($block){
 // 全ての編集エリアを閉じる
 Baked.prototype.closeAllEditor = function(){
   $('div.bk-block.bk-open').removeClass('bk-open');
+};
+
+// コメント投稿エリアを表示
+Baked.prototype.showCommentEditorBox = function(entryId){
+  var self = this;
+
+  baked.post('system/api_comments/html_editor', {
+    data: {
+      'entry_id': entryId
+    },
+    dataType: 'html',
+    success: function(r){
+      self.showBox(r);
+    }
+  });
+};
+
+// コメントを送信
+Baked.prototype.submitComment = function(params){
+  var self = this;
+
+  this.post('system/api_comments/send', {
+    data: params,
+    ok: function(r){
+      self.showBox(r.html);
+      baked.reloadDynamic();
+    }
+  })
 };
 
 Baked.prototype.busyFilter = function(){

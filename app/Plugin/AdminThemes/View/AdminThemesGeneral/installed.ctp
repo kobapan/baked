@@ -8,6 +8,7 @@
     echo $this->Form->create('ThemePackage', array(
       'url' => '/admin/themes/general/installed',
     ));
+    echo $this->Baked->hiddenToken();
     ?>
 
     <ul class="ul-themes">
@@ -64,7 +65,7 @@
       'options' => array(
         'set_pc' => __('PC用テーマに設定'),
         'set_mobile' => __('モバイル用テーマに設定'),
-        'delete' => __('削除'),
+        //'delete' => __('削除'),
       ),
       'empty' => TRUE,
       'div' => FALSE,

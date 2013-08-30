@@ -35,7 +35,7 @@
           if ($menu['Page']['hidden']) $classes[] = 'hidden';
           ?>
           <li class="<?php echo implode(' ', $classes) ?>">
-            <a href="<?php echo $menu['Page']['url'] ?>">
+            <a href="<?php echo $menu['Page']['path'] ?>">
               <span class="normal">
                 <?php echo h($menu['Page']['title']) ?>
                 <?php if (!empty($menu['sub'])) : ?><span class="more">&raquo;</span><?php endif ; ?>
@@ -56,7 +56,7 @@
                     if ($menu['Page']['hidden']) $classes[] = 'hidden';
                     ?>
                     <li class="<?php echo implode(' ', $classes) ?>">
-                      <a href="<?php echo $menu['Page']['url'] ?>">
+                      <a href="<?php echo $menu['Page']['path'] ?>">
                         <?php echo $menu['Page']['title'] ?>
                         <?php if (!empty($menu['sub'])) : ?><span class="more">&raquo;</span><?php endif ; ?>
                       </a>
@@ -70,7 +70,7 @@
                               if ($menu['Page']['hidden']) $classes[] = 'hidden';
                               ?>
                               <li class="<?php echo implode(' ', $classes) ?>">
-                                <a href="<?php echo $menu['Page']['url'] ?>"><?php echo $menu['Page']['title'] ?></a>
+                                <a href="<?php echo $menu['Page']['path'] ?>"><?php echo $menu['Page']['title'] ?></a>
                               </li>
                             <?php endforeach ; ?>
                           </ul>
@@ -93,19 +93,19 @@
         foreach ($menuList as $menu) {
           if ($menu['current']) {
             $pankuzu[] = array(
-              'url' => $menu['Page']['url'],
+              'url' => $menu['Page']['path'],
               'title' => $menu['Page']['title'],
             );
             foreach ($menu['sub'] as $menu) {
               if ($menu['current']) {
                 $pankuzu[] = array(
-                  'url' => $menu['Page']['url'],
+                  'url' => $menu['Page']['path'],
                   'title' => $menu['Page']['title'],
                 );
                 foreach ($menu['sub'] as $menu) {
                   if ($menu['current']) {
                     $pankuzu[] = array(
-                      'url' => $menu['Page']['url'],
+                      'url' => $menu['Page']['path'],
                       'title' => $menu['Page']['title'],
                     );
                     break;

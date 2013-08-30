@@ -3,12 +3,39 @@ App::uses('AppController', 'Controller');
 
 class ApiSystemController extends AppController
 {
-  public $uses = array('System', 'Staff');
+  public $uses = array('System', 'Staff', 'Page', );
   public $components = array('Api');
 
   public function beforeFilter()
   {
     parent::beforeFilter();
+  }
+
+  public function save_session()
+  {
+    $this->tokenFilterApi();
+    $_SESSION[$this->request->data['name']] = $this->request->data['data'];
+    $this->Api->ok();
+  }
+
+/**
+ * ページ情報を取得
+ */
+  public function page_info()
+  {
+    $this->tokenFilterApi();
+    $this->staffFilterApi();
+
+    $page = $this->Page->find('first', array(
+      CONDITIONS => array(
+        'Page.id' => @$this->request->data['page_id'],
+      ),
+    ));
+    if (empty($page)) $this->Api->ng(__('ページが見つかりませんでした'));
+
+    $this->Api->ok(array(
+      'page' => $page,
+    ));
   }
 
   public function sign_in()
@@ -27,6 +54,7 @@ class ApiSystemController extends AppController
   public function sign_out()
   {
     $this->tokenFilterApi();
+    $this->staffFilterApi();
 
     try {
       $this->Staff->signOut();
@@ -50,6 +78,7 @@ class ApiSystemController extends AppController
   public function cancel_editmode()
   {
     $this->tokenFilterApi();
+    $this->staffFilterApi();
 
     $_SESSION['Staff']['Editmode'] = FALSE;
     $this->Api->ok();
