@@ -189,6 +189,7 @@ img {
 }
 #entries > div.entry {
   margin-bottom: 30px;
+  overflow: hidden;
 }
 #entries > div.entry:last-child {
   margin-bottom: 0;

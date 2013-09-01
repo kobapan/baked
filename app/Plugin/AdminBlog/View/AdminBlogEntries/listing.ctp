@@ -39,7 +39,7 @@
             <td><a href="<?php echo URL ?>admin/blog/entries/add/<?php echo $entry['Entry']['id'] ?>"><?php echo h($entry['Entry']['title']) ?></a></td>
             <td><?php echo h($entry['Staff']['name']) ?></td>
             <td class="center"><a href="<?php echo URL ?>admin/blog/comments/listing?page_id=<?php echo $page['Page']['id'] ?>&entry_id=<?php echo $entry['Entry']['id'] ?>"><?php echo number_format($entry['Entry']['comments_count']) ?></a> (<a href="<?php echo URL ?>admin/blog/comments/listing?page_id=<?php echo $page['Page']['id'] ?>&entry_id=<?php echo $entry['Entry']['id'] ?>&noapproved=1"><?php echo number_format($entry['Entry']['unapproved_comments_count']) ?></a>)</td>
-            <td><?php echo fmdatetime($entry['Entry']['published']) ?></td>
+            <td><?php echo Baked::dateFormat($entry['Entry']['published'], 'Y/m/d H:i') ?></td>
           </tr>
         <?php endforeach ; ?>
       </tbody>

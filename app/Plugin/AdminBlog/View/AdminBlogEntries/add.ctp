@@ -31,6 +31,7 @@
     echo $this->Form->input('published', array(
       'label' => __('公開日時'),
       'type' => 'text',
+      'value' => Baked::dateFormat($this->data['Entry']['published'], 'Y-m-d H:i'),
     ));
     ?>
     <div class="full">

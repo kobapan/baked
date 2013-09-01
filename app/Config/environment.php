@@ -24,5 +24,3 @@ define('CONDITIONS', 'conditions');
 define('FIELDS', 'fields');
 define('ORDER', 'order');
 
-if (!ini_get('date.timezone')) ini_set('date.timezone', 'Asia/Tokyo');
-

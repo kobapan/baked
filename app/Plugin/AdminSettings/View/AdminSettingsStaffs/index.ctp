@@ -17,7 +17,7 @@
           <tr>
             <td><a href="<?php echo URL ?>admin/settings/staffs/add/<?php echo $staff['Staff']['id'] ?>"><?php echo h($staff['Staff']['name']) ?></a></td>
             <td><?php echo h($staff['Staff']['email']) ?></td>
-            <td><?php echo fmdate($staff['Staff']['created']) ?></td>
+            <td><?php echo Baked::dateFormat($staff['Staff']['created'], 'Y/m/d H:i') ?></td>
           </tr>
         <?php endforeach ; ?>
       </tbody>

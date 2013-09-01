@@ -20,7 +20,6 @@
  */
 mb_internal_encoding('utf8');
 #mb_language('ja');
-#date_default_timezone_set('Asia/Tokyo');
 
 require_once 'utilities.php';
 
@@ -249,7 +248,7 @@ define('BK_VERSION', '0.0.1');
  * Uncomment this line and correct your server timezone to fix
  * any date & time related errors.
  */
-  //date_default_timezone_set('UTC');
+  date_default_timezone_set('UTC');
 
 /**
  * Pick the caching engine to use.  If APC is enabled use it.

@@ -1,7 +1,7 @@
 <div class="entry">
   <div class="title"><a href="<?php echo $entry['Entry']['path'] ?>"><h2><?php echo $entry['Entry']['title'] ?></h2></a></div>
   <div class="sub">
-    <span class="published"><?php echo date('F jS, Y', strtotime($entry['Entry']['published'])) ?></span><?php
+    <span class="published"><?php echo Baked::dateFormat($entry['Entry']['published'], 'F jS, Y'); ?></span><?php
     ?><span class="comments"><a href="<?php echo $entry['Entry']['path'] ?>#comments"><?php echo __('コメント') ?>(<?php echo $entry['Entry']['approved_comments_count'] ?>)</a></span>
   </div>
   <div class="body">

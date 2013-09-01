@@ -19,6 +19,7 @@ class AdminSettingsGeneralController extends AppAdminController
       $this->request->data['System'] = array(
         System::KEY_SITE_NAME => $this->System->value(System::KEY_SITE_NAME),
         System::KEY_EMAIL     => $this->System->value(System::KEY_EMAIL),
+        System::KEY_TIMEZONE  => $this->System->value(System::KEY_TIMEZONE),
       );
     }
   }

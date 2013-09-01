@@ -1,6 +1,6 @@
 <?php
 Configure::write('Admin.AdminBlog', array(
-  'order' => 30,
+  'order' => 20,
   'navigation' => array(
     'name' => __('ブログ'),
     'icon' => 'icon-pencil',

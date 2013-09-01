@@ -37,7 +37,7 @@ $this->set('title', $title);
           <?php foreach ($comments as $comment) : ?>
             <li>
               <div class="name"><?php echo $comment['Comment']['name'] ?></div>
-              <div class="created"><?php echo date('Y/m/d H:i', strtotime($comment['Comment']['created'])) ?></div>
+              <div class="created"><?php echo Baked::dateFormat($comment['Comment']['created'], 'Y/m/d H:i') ?></div>
               <div class="body"><?php echo nl2br(h($comment['Comment']['body'])) ?></div>
             </li>
           <?php endforeach ; ?>

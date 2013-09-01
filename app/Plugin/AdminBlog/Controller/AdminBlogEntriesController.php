@@ -82,6 +82,7 @@ class AdminBlogEntriesController extends AppAdminBlogController
         'id', 'page_id', 'title', 'body1', 'body2', 'published',
       ));
       if (empty($data['id'])) $data['staff_id'] = $_SESSION['Staff']['id'];
+      if (!empty($data['published'])) $data['published'] = Baked::utc($data['published']);
       $r = $this->Entry->add($data);
       if ($r === TRUE) {
         Baked::setFlash(__('記事を保存しました'), 'success');

@@ -1,6 +1,6 @@
 <?php
 Configure::write('Admin.AdminSettings', array(
-  'order' => 20,
+  'order' => 30,
   'navigation' => array(
     'name' => __('設定'),
     'icon' => 'icon-wrench',

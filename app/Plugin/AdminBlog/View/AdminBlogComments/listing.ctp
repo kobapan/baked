@@ -95,7 +95,7 @@
                 <em class="em-01"><?php echo Comment::$APPROVED[$comment['Comment']['approved']] ?></em>
               <?php endif ; ?>
             </td>
-            <td><?php echo fmdate($comment['Comment']['created']) ?></td>
+            <td><?php echo Baked::dateFormat($comment['Comment']['created'], 'Y/m/d H:i') ?></td>
         <?php endforeach ; ?>
       </tbody>
     </table>

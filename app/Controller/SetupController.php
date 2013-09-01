@@ -141,6 +141,7 @@ class SetupController extends AppController
       $systemData['email'] = $_SESSION[self::SESSION_STAFF]['email'];
       $systemData['use_theme'] = 'ThemeCleanPaperOrange';
       $systemData['use_theme_mobile'] = 'ThemeJanuary';
+      $systemData['timezone'] = 'Asia/Tokyo';
       $r = $this->System->saveMultiply($systemData);
       if ($r !== TRUE) throw $r;
 

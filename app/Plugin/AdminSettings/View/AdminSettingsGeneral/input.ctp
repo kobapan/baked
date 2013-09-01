@@ -18,6 +18,16 @@
       'label' => __('メールアドレス'),
       'after' => sprintf('%s%s%s', '<div class="note">', __('問い合わせフォームの宛先などに使用されます。'), '</div>'),
     ));
+    $timezones = DateTimeZone::listIdentifiers();
+    foreach ($timezones as $key => $timezone) {
+      $timezones[$timezone] = $timezone;
+      unset($timezones[$key]);
+    }
+    echo $this->Form->input(System::KEY_TIMEZONE, array(
+      'label' => __('タイムゾーン'),
+      'options' => $timezones,
+      'empty' => TRUE,
+    ));
     ?>
     <button class="button button-primary button-pill button-small"><?php echo __('保存') ?></button>
     <?php
