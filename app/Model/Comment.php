@@ -56,6 +56,8 @@ class Comment extends AppModel
       $this->begin();
 
       if (empty($data['name'])) $data['name'] = 'Guest';
+      if (empty($data['ip'])) $data['ip'] = $_SERVER["REMOTE_ADDR"];
+      if (empty($data['host'])) $data['host'] = gethostbyaddr($data['ip']);
 
       $this->loadModel('Entry');
       $options = $this->Entry->getOptions(array(Entry::OPTION_BIND_PAGE), array(
