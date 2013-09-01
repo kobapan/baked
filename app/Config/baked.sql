@@ -1,25 +1,6 @@
--- phpMyAdmin SQL Dump
--- version 3.5.0
--- http://www.phpmyadmin.net
---
--- ホスト: localhost
--- 生成日時: 2013 年 9 月 01 日 19:59
--- サーバのバージョン: 5.5.20
--- PHP のバージョン: 5.3.10
-
+set names utf8;
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
-set names utf8;
-
---
--- データベース: `baked2`
---
-
--- --------------------------------------------------------
-
---
--- テーブルの構造 `blocks`
---
 
 DROP TABLE IF EXISTS `blocks`;
 CREATE TABLE `blocks` (
@@ -34,13 +15,9 @@ CREATE TABLE `blocks` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- テーブルのデータのダンプ `blocks`
---
-
 INSERT INTO `blocks` (`id`, `page_id`, `package`, `sheet`, `order`, `data`, `created`, `modified`) VALUES
 (71, 6, 'BlockHeading', 'main', 0, '{"h":"1","text":"\\u304a\\u554f\\u3044\\u5408\\u308f\\u305b"}', '2013-07-24 10:30:54', '2013-08-19 00:52:51'),
-(124, 17, 'BlockPhotoGallery', 'visual', 1, '{"slider_theme":"default","slider_animation":"random","slider_pause_time":"5","type":"slider","width":80,"photos":{"234":{"file_id":"234","file":{"id":"234","mime":"image\\/png","ext":"png","size":"384770","code":"FbO4qax5RasAx43C","path":"original\\/2013\\/08\\/FbO4qax5RasAx43C.png","created":"2013-08-22 08:25:35","modified":"2013-08-22 08:25:35","absolute_path":"\\/Library\\/WebServer\\/Documents\\/baked\\/app\\/webroot\\/files\\/original\\/2013\\/08\\/FbO4qax5RasAx43C.png"},"title":"","caption":null,"alt":""},"235":{"file_id":"235","file":{"id":"235","mime":"image\\/png","ext":"png","size":"562758","code":"G0SuHijV079H8oSb","path":"original\\/2013\\/08\\/G0SuHijV079H8oSb.png","created":"2013-08-22 08:25:36","modified":"2013-08-22 08:25:36","absolute_path":"\\/Library\\/WebServer\\/Documents\\/baked\\/app\\/webroot\\/files\\/original\\/2013\\/08\\/G0SuHijV079H8oSb.png"},"title":"","caption":null,"alt":""},"236":{"file_id":"236","file":{"id":"236","mime":"image\\/png","ext":"png","size":"483746","code":"KEC92GDg1Mi5ePfp","path":"original\\/2013\\/08\\/KEC92GDg1Mi5ePfp.png","created":"2013-08-22 08:25:36","modified":"2013-08-22 08:25:36","absolute_path":"\\/Library\\/WebServer\\/Documents\\/baked\\/app\\/webroot\\/files\\/original\\/2013\\/08\\/KEC92GDg1Mi5ePfp.png"},"title":"","caption":null,"alt":""}}}', '2013-08-03 05:45:21', '2013-09-01 10:59:07'),
+(124, 17, 'BlockPhotoGallery', 'visual', 1, '{"slider_theme":"default","slider_animation":"fold","slider_pause_time":"5","type":"slider","width":80,"photos":{"234":{"file_id":"234","file":{"id":"234","mime":"image\\/png","ext":"png","size":"384770","code":"FbO4qax5RasAx43C","path":"original\\/2013\\/08\\/FbO4qax5RasAx43C.png","created":"2013-08-22 08:25:35","modified":"2013-08-22 08:25:35","absolute_path":"\\/Library\\/WebServer\\/Documents\\/baked\\/app\\/webroot\\/files\\/original\\/2013\\/08\\/FbO4qax5RasAx43C.png"},"title":"","caption":null,"alt":""},"235":{"file_id":"235","file":{"id":"235","mime":"image\\/png","ext":"png","size":"562758","code":"G0SuHijV079H8oSb","path":"original\\/2013\\/08\\/G0SuHijV079H8oSb.png","created":"2013-08-22 08:25:36","modified":"2013-08-22 08:25:36","absolute_path":"\\/Library\\/WebServer\\/Documents\\/baked\\/app\\/webroot\\/files\\/original\\/2013\\/08\\/G0SuHijV079H8oSb.png"},"title":"","caption":null,"alt":""},"236":{"file_id":"236","file":{"id":"236","mime":"image\\/png","ext":"png","size":"483746","code":"KEC92GDg1Mi5ePfp","path":"original\\/2013\\/08\\/KEC92GDg1Mi5ePfp.png","created":"2013-08-22 08:25:36","modified":"2013-08-22 08:25:36","absolute_path":"\\/Library\\/WebServer\\/Documents\\/baked\\/app\\/webroot\\/files\\/original\\/2013\\/08\\/KEC92GDg1Mi5ePfp.png"},"title":"","caption":null,"alt":""}}}', '2013-08-03 05:45:21', '2013-09-01 11:01:21'),
 (128, 17, 'BlockHeading', 'main', 0, '{"h":"1","text":"Welcome to Baked !!"}', '2013-08-03 06:08:56', '2013-08-30 15:15:12'),
 (160, 6, 'BlockForm', 'main', 3, '{"sent_text":"The message has been sent.","lastId":8,"items":{"1":{"item_id":"1","name":"\\u304a\\u540d\\u524d","required":"1","type":"text"},"2":{"item_id":"2","name":"\\u30e1\\u30fc\\u30eb\\u30a2\\u30c9\\u30ec\\u30b9","required":"1","type":"email"},"8":{"name":"\\u90fd\\u9053\\u5e9c\\u770c","required":"1","type":"ja_states","item_id":8},"3":{"item_id":"3","name":"\\u304a\\u96fb\\u8a71\\u756a\\u53f7","required":"0","type":"tel"},"4":{"item_id":"4","name":"\\u304a\\u554f\\u3044\\u5408\\u308f\\u305b\\u5185\\u5bb9","required":"1","type":"textarea"}}}', '2013-08-03 23:03:23', '2013-08-19 00:52:51'),
 (181, 39, 'BlockText', 'main', 1, '{"text":"<table border=\\"1\\" cellpadding=\\"1\\" cellspacing=\\"1\\" style=\\"width:100%\\">\\r\\n\\t<tbody>\\r\\n\\t\\t<tr>\\r\\n\\t\\t\\t<th scope=\\"row\\" style=\\"width:60px\\">\\u540d\\u524d<\\/th>\\r\\n\\t\\t\\t<td style=\\"width:100px\\">\\u30d1\\u30f3\\u5927\\u597d\\u304d<\\/td>\\r\\n\\t\\t<\\/tr>\\r\\n\\t\\t<tr>\\r\\n\\t\\t\\t<th scope=\\"row\\">\\u8077\\u696d<\\/th>\\r\\n\\t\\t\\t<td>\\u30d1\\u30f3\\u5c4b<\\/td>\\r\\n\\t\\t<\\/tr>\\r\\n\\t\\t<tr>\\r\\n\\t\\t\\t<th scope=\\"row\\">\\u51fa\\u8eab\\u5730<\\/th>\\r\\n\\t\\t\\t<td>\\u6771\\u4eac\\u90fd\\u56fd\\u5206\\u5bfa\\u5e02\\u5185\\u85e4\\u753a<\\/td>\\r\\n\\t\\t<\\/tr>\\r\\n\\t\\t<tr>\\r\\n\\t\\t\\t<th scope=\\"row\\">\\u751f\\u5e74\\u6708\\u65e5<\\/th>\\r\\n\\t\\t\\t<td>2013\\u5e745\\u670824\\u65e5<\\/td>\\r\\n\\t\\t<\\/tr>\\r\\n\\t\\t<tr>\\r\\n\\t\\t\\t<th scope=\\"row\\">\\u81ea\\u5df1\\u7d39\\u4ecb<\\/th>\\r\\n\\t\\t\\t<td>\\u3053\\u306e\\u30c6\\u30ad\\u30b9\\u30c8\\u306f\\u30b5\\u30f3\\u30d7\\u30eb\\u30c6\\u30ad\\u30b9\\u30c8\\u3067\\u3059\\u3002<br \\/>\\r\\n\\t\\t\\t\\u3053\\u308c\\u3089\\u306e\\u30c6\\u30ad\\u30b9\\u30c8\\u306f\\u7c21\\u5358\\u306b\\u7de8\\u96c6\\u3067\\u304d\\u307e\\u3059\\u3002<br \\/>\\r\\n\\t\\t\\t\\u307e\\u305f\\u3001\\uff0b\\u30a2\\u30a4\\u30b3\\u30f3\\u3092\\u30af\\u30ea\\u30c3\\u30af\\u3059\\u308c\\u3070\\u3001\\u65b0\\u3057\\u3044\\u30b3\\u30f3\\u30c6\\u30f3\\u30c4\\u3092\\u8ffd\\u52a0\\u3067\\u304d\\u307e\\u3059\\u3002<\\/td>\\r\\n\\t\\t<\\/tr>\\r\\n\\t<\\/tbody>\\r\\n<\\/table>\\r\\n"}', '2013-08-04 00:03:42', '2013-08-21 04:20:02'),
@@ -77,12 +54,6 @@ INSERT INTO `blocks` (`id`, `page_id`, `package`, `sheet`, `order`, `data`, `cre
 (271, 17, 'BlockTextPhoto', 'sub', 5, '{"text":"<strong>\\u30d6\\u30ed\\u30c3\\u30af&nbsp;<\\/strong>\\u306f \\uff11\\u56fa\\u307e\\u308a\\u306e\\u30b3\\u30f3\\u30c6\\u30f3\\u30c4\\u3067\\u3059\\u3002\\u4f8b\\u3048\\u3070\\u3001\\u666e\\u901a\\u306e\\u30c6\\u30ad\\u30b9\\u30c8\\u3001\\u753b\\u50cf\\u3001\\u30e9\\u30a4\\u30f3\\u3001\\u30e1\\u30fc\\u30eb\\u30d5\\u30a9\\u30fc\\u30e0\\u3001\\u30b9\\u30e9\\u30a4\\u30c9\\u30b7\\u30e7\\u30fc\\u306a\\u3069\\u3001\\u305d\\u308c\\u305e\\u308c\\u306e\\u30b3\\u30f3\\u30c6\\u30f3\\u30c4\\u3092\\u30d6\\u30ed\\u30c3\\u30af\\u3068\\u547c\\u3073\\u307e\\u3059\\u3002<br \\/>\\r\\n\\uff11\\u30da\\u30fc\\u30b8\\u306b\\u8907\\u6570\\u306e\\u30d6\\u30ed\\u30c3\\u30af\\u3092\\u7a4d\\u307f\\u91cd\\u306d\\u3066\\u3001\\u30b5\\u30a4\\u30c8\\u3092\\u69cb\\u7bc9\\u3057\\u3066\\u3044\\u304d\\u307e\\u3059\\u3002","align":2,"size":200,"photo":null}', '2013-08-31 03:00:53', '2013-08-31 03:00:56'),
 (275, 77, 'BlockText', 'sub', 1, '{"text":"<iframe allowfullscreen=\\"\\" frameborder=\\"0\\" height=\\"160\\" scrolling=\\"no\\" src=\\"\\/\\/www.youtube.com\\/embed\\/LF-pBTuL2mI\\" width=\\"320\\"><\\/iframe>"}', '2013-09-01 14:30:28', '2013-09-01 10:56:02');
 
--- --------------------------------------------------------
-
---
--- テーブルの構造 `comments`
---
-
 DROP TABLE IF EXISTS `comments`;
 CREATE TABLE `comments` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -98,18 +69,8 @@ CREATE TABLE `comments` (
   KEY `entry_id` (`entry_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- テーブルのデータのダンプ `comments`
---
-
 INSERT INTO `comments` (`id`, `entry_id`, `approved`, `name`, `body`, `ip`, `host`, `created`, `modified`) VALUES
 (1, 1, 1, 'Guest', 'コメントの投稿も可能です。\nブログごとに、以下のようにコメントの扱いを設定できます。\n・許可\n・管理者による承認制\n・不可\n\nコメントの承認・管理は管理画面から行えます。', '::1', 'localhost', '2013-09-01 12:00:00', '2013-09-01 14:49:04');
-
--- --------------------------------------------------------
-
---
--- テーブルの構造 `entries`
---
 
 DROP TABLE IF EXISTS `entries`;
 CREATE TABLE `entries` (
@@ -126,19 +87,8 @@ CREATE TABLE `entries` (
   KEY `page_id` (`page_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- テーブルのデータのダンプ `entries`
---
-
 INSERT INTO `entries` (`id`, `page_id`, `staff_id`, `title`, `body1`, `body2`, `published`, `created`, `modified`) VALUES
-(1, 80, 1, '記事を投稿しよう', 'Baked にはブログ機能が付いています。<br />\r\n編集モードでブログページ（例えばこのページ）を開くと、上部のメニューに「新規投稿」ボタンが表示されます。', '<span style="line-height: 1.6em;"><img alt="" src="/baked/app/webroot/files/upload/images/blog-social-media-strategy.jpeg" style="width: 280px; float: right; margin-left: 10px; margin-right: 10px; height: 186px;" />このように続きとして記事を書く事も可能です。</span>もちろん画像のアップロードも。', '2013-09-01 10:00:00', '2013-09-01 14:44:49', '2013-09-01 14:44:49'),
-(2, 80, 1, 'テスト', '<iframe allowfullscreen="" frameborder="0" height="360" src="//www.youtube.com/embed/aPsGJLT8JC4" width="640"></iframe>', '', '2013-09-01 11:00:00', '2013-09-01 10:54:03', '2013-09-01 10:54:03');
-
--- --------------------------------------------------------
-
---
--- テーブルの構造 `files`
---
+(1, 80, 1, '記事を投稿しよう', 'Baked にはブログ機能が付いています。<br />\r\n編集モードでブログページ（例えばこのページ）を開くと、上部のメニューに「新規投稿」ボタンが表示されます。', '<span style="line-height: 1.6em;"><img alt="" src="/baked/app/webroot/files/upload/images/blog-social-media-strategy.jpeg" style="width: 280px; float: right; margin-left: 10px; margin-right: 10px; height: 186px;" />このように続きとして記事を書く事も可能です。</span>もちろん画像のアップロードも。', '2013-09-01 10:00:00', '2013-09-01 14:44:49', '2013-09-01 14:44:49');
 
 DROP TABLE IF EXISTS `files`;
 CREATE TABLE `files` (
@@ -153,10 +103,6 @@ CREATE TABLE `files` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `code` (`code`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
-
---
--- テーブルのデータのダンプ `files`
---
 
 INSERT INTO `files` (`id`, `mime`, `ext`, `size`, `code`, `path`, `created`, `modified`) VALUES
 (197, 'image/jpeg', 'jpg', 76976, '_LXsGMDqHdY0kL8r', 'original/2013/08/_LXsGMDqHdY0kL8r.jpg', '2013-08-17 10:20:13', '2013-08-17 10:20:13'),
@@ -190,12 +136,6 @@ INSERT INTO `files` (`id`, `mime`, `ext`, `size`, `code`, `path`, `created`, `mo
 (235, 'image/png', 'png', 562758, 'G0SuHijV079H8oSb', 'original/2013/08/G0SuHijV079H8oSb.png', '2013-08-22 08:25:36', '2013-08-22 08:25:36'),
 (236, 'image/png', 'png', 483746, 'KEC92GDg1Mi5ePfp', 'original/2013/08/KEC92GDg1Mi5ePfp.png', '2013-08-22 08:25:36', '2013-08-22 08:25:36');
 
--- --------------------------------------------------------
-
---
--- テーブルの構造 `pages`
---
-
 DROP TABLE IF EXISTS `pages`;
 CREATE TABLE `pages` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -213,23 +153,13 @@ CREATE TABLE `pages` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- テーブルのデータのダンプ `pages`
---
-
 INSERT INTO `pages` (`id`, `parent_page_id`, `package`, `depth`, `name`, `path`, `title`, `data`, `order`, `hidden`, `created`, `modified`) VALUES
-(6, 0, 'PagePlain', 0, 'contact', '/baked/contact', '問い合わせ', '', 5, 0, '0000-00-00 00:00:00', '2013-09-01 10:58:54'),
-(17, 0, 'PagePlain', 0, 'index', '/baked/index', 'HOME', '', 0, 0, '2013-07-27 03:12:28', '2013-09-01 10:58:54'),
-(39, 0, 'PagePlain', 0, 'profile', '/baked/profile', 'プロフィール', '', 1, 0, '2013-07-27 17:03:03', '2013-09-01 10:58:54'),
-(67, 0, 'PagePlain', 0, 'movie', '/baked/movie', '動画', '', 4, 0, '2013-08-06 03:36:12', '2013-09-01 10:58:54'),
-(77, 39, 'PagePlain', 1, 'photos', '/baked/profile/photos', '写真集', '', 2, 0, '2013-08-17 09:30:23', '2013-09-01 10:58:54'),
-(80, 0, 'PageBlog', 0, 'news', '/baked/news', 'お知らせ', '{"entries_per_page":"5","can_comment":"1","sent_text":"\\u30b3\\u30e1\\u30f3\\u30c8\\u3092\\u9001\\u4fe1\\u3057\\u307e\\u3057\\u305f\\u3002<br>\\u7ba1\\u7406\\u8005\\u306e\\u627f\\u8a8d\\u5f8c\\u306b\\u30b3\\u30e1\\u30f3\\u30c8\\u304c\\u8868\\u793a\\u3055\\u308c\\u308b\\u5834\\u5408\\u304c\\u3042\\u308a\\u307e\\u3059\\u3002"}', 3, 0, '2013-08-25 16:54:48', '2013-09-01 10:58:54');
-
--- --------------------------------------------------------
-
---
--- テーブルの構造 `staffs`
---
+(6, 0, 'PagePlain', 0, 'contact', '/baked/contact', '問い合わせ', '', 5, 0, '0000-00-00 00:00:00', '2013-09-01 11:30:15'),
+(17, 0, 'PagePlain', 0, 'index', '/baked/index', 'HOME', '', 0, 0, '2013-07-27 03:12:28', '2013-09-01 11:30:15'),
+(39, 0, 'PagePlain', 0, 'profile', '/baked/profile', 'プロフィール', '', 1, 0, '2013-07-27 17:03:03', '2013-09-01 11:30:15'),
+(67, 0, 'PagePlain', 0, 'movie', '/baked/movie', '動画', '', 4, 0, '2013-08-06 03:36:12', '2013-09-01 11:30:15'),
+(77, 39, 'PagePlain', 1, 'photos', '/baked/profile/photos', '写真集', '', 2, 0, '2013-08-17 09:30:23', '2013-09-01 11:30:15'),
+(80, 0, 'PageBlog', 0, 'news', '/baked/news', 'お知らせ', '{"entries_per_page":"5","can_comment":"1","sent_text":"\\u30b3\\u30e1\\u30f3\\u30c8\\u3092\\u9001\\u4fe1\\u3057\\u307e\\u3057\\u305f\\u3002<br>\\u7ba1\\u7406\\u8005\\u306e\\u627f\\u8a8d\\u5f8c\\u306b\\u30b3\\u30e1\\u30f3\\u30c8\\u304c\\u8868\\u793a\\u3055\\u308c\\u308b\\u5834\\u5408\\u304c\\u3042\\u308a\\u307e\\u3059\\u3002"}', 3, 0, '2013-08-25 16:54:48', '2013-09-01 11:30:15');
 
 DROP TABLE IF EXISTS `staffs`;
 CREATE TABLE `staffs` (
@@ -242,12 +172,6 @@ CREATE TABLE `staffs` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- --------------------------------------------------------
-
---
--- テーブルの構造 `systems`
---
-
 DROP TABLE IF EXISTS `systems`;
 CREATE TABLE `systems` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -255,3 +179,4 @@ CREATE TABLE `systems` (
   `value` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='システムデータを保持';
+

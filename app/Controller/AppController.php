@@ -22,11 +22,10 @@ class AppController extends Controller
 
     if (defined('MY_CONFIGURED')) {
       define('BK_SITE_NAME', $this->System->value(System::KEY_SITE_NAME));
+      $timezone = $this->System->value(System::KEY_TIMEZONE);
+      if (!$timezone) $timezone = 'UTC';
+      Baked::setTimezone($timezone);
     }
-
-    $timezone = $this->System->value(System::KEY_TIMEZONE);
-    if (!$timezone) $timezone = 'UTC';
-    Baked::setTimezone($timezone);
 
     $this->_setToken();
   }
