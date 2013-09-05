@@ -58,6 +58,12 @@ class CleanShell extends AppShell
         if (!@unlink($path)) throw new Exception("Failed to delete {$path}");
       }
 
+
+      $files = array('.DS_Store');
+      foreach ($files as $file) {
+        system(sprintf('find %s -name "%s" -delete', ROOT, $file));
+      }
+
     } catch (Exception $e) {
       $this->error($e->getMessage());
     }
