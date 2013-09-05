@@ -1,0 +1,39 @@
+@charset "utf-8";
+
+.clearfix:after {
+  content: "";
+  clear: both;
+  display: block;
+}
+body {
+  text-align: center;
+}
+
+#wrap {
+  width: 960px;
+  margin: 30px auto;
+  text-align: left;
+  border: 1px solid #ccc;
+  padding: 0 20px;
+}
+
+#primary-header {
+  height: 100px;
+  line-height: 100px;
+}
+#primary-header > a {
+  display: inline-block;
+}
+
+#content {
+}
+#main {
+  float: right;
+  text-align: left;
+  width: 690px;
+}
+#sub {
+  float: left;
+  width: 250px;
+  margin-right: 20px;
+}

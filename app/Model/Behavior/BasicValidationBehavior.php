@@ -6,7 +6,7 @@ class BasicValidationBehavior extends ModelBehavior {
     var $loaded = false;
     var $autoConvert = true;
     var $convert = array();
-    
+
     #########################################################################
     /**
      * エラーメッセージ
@@ -75,8 +75,8 @@ class BasicValidationBehavior extends ModelBehavior {
         'valid_justLen'     => '%s文字で入力してください',
         'valid_dateLaterToday' => '本日以降の日時を選択してください',
     );
-    
-    
+
+
     #########################################################################
     /**
      * データ整形用にカラムとルールの対応を保存
@@ -85,7 +85,7 @@ class BasicValidationBehavior extends ModelBehavior {
     function SetConvert(&$model, $col, $rule) {
         $this->convert[][$col] = $rule;
     }
-    
+
     #########################################################################
     /**
      * バリデーション定義毎のデータ整形
@@ -121,17 +121,17 @@ class BasicValidationBehavior extends ModelBehavior {
                 // 1バイト文字
                 $v = mb_convert_kana($v, 'ras');
                 break;
-            
+
             case 'valid_zen':
                 // 全角文字
                 $v = mb_convert_kana($v, 'ASKV');
                 break;
-        
+
             case 'valid_kana':
                 // 全角カタカナ文字
                 $v = mb_convert_kana($v, 'KVC');
                 break;
-                
+
             case 'valid_hirakana':
                 // 全角ひらかな文字
                 $v = mb_convert_kana($v, 'HVc');
@@ -154,7 +154,7 @@ class BasicValidationBehavior extends ModelBehavior {
         }
         return $v;
     }
-    
+
     #########################################################################
     /**
      * 必須項目の出力文字列設定
@@ -164,7 +164,7 @@ class BasicValidationBehavior extends ModelBehavior {
     function setRequireString(&$model, $str) {
         $this->require_string = $str;
     }
-    
+
     #########################################################################
     /**
      * 必須項目の場合は設定文字列を返す
@@ -182,7 +182,7 @@ class BasicValidationBehavior extends ModelBehavior {
         }
         return '';
     }
-    
+
     #########################################################################
     /**
      * 配列にキーが存在していればその値を返す
@@ -199,20 +199,20 @@ class BasicValidationBehavior extends ModelBehavior {
         }
         return $ret;
     }
-    
+
     #########################################################################
     /**
      * バリデーションの実行前に初期化を行う
      */
     #########################################################################
-    function beforeValidate(Model $model, $options = NULL) {
+    function beforeValidate(Model $model) {
         // バリデーション定義の読み込み
         //if (method_exists($model, 'loadValidate') && !$this->loaded){
         if (method_exists($model, 'loadValidate')){
             $model->loadValidate();
             $this->loaded = TRUE;
         }
-        
+
         // 整形処理実行
         if($this->autoConvert){
             foreach($this->convert as $i => $arr){
@@ -220,9 +220,10 @@ class BasicValidationBehavior extends ModelBehavior {
                 $this->convertData($model, $col, $rule);
             }
         }
+
         return TRUE;
     }
-    
+
     #########################################################################
     /**
      * バリデーション配列を引数の共通項のみとする
@@ -259,7 +260,7 @@ class BasicValidationBehavior extends ModelBehavior {
         }
         $model->validate = array_intersect_key($model->validate, $okVali);
     }
-    
+
     #########################################################################
     /**
      * バリデーションの展開
@@ -270,9 +271,9 @@ class BasicValidationBehavior extends ModelBehavior {
             $validate = str_replace(" ", "", $validate);
             $validate = trim($validate, '|');
             $vali_arr = explode('|', $validate);
-            
+
             foreach($vali_arr as $rule){
-                
+
                 // 必須項目判定
                 if ($rule == 'required') {
                     $allowEmpty = FALSE;
@@ -319,10 +320,10 @@ class BasicValidationBehavior extends ModelBehavior {
                     }
                     $msg = vsprintf($msg, $tmp_p);
                 }
-                
+
                 // 項目ラベルを表示する場合
                 $label = $col;
-                if(method_exists($model, 'getLabel')) { 
+                if(method_exists($model, 'getLabel')) {
                     if(!($label = $model->getLabel($col))){
                         $label = $col;
                     }
@@ -330,15 +331,15 @@ class BasicValidationBehavior extends ModelBehavior {
                 if(strstr($msg, '{%label%}')){
                     $msg = str_replace('{%label%}', $label, $msg);
                 }
-                
+
                 // 項目がリスト型の場合、文言を変更する
-                if ($model->Behaviors->attached('List')) { 
+                if ($model->Behaviors->attached('List')) {
                     $list = $model->getList($col);
                     if($rule == 'valid_required' && !empty($list)){
                         $msg = str_replace('入力', '選択', $msg);
                     }
                 }
-                
+
                 $my_rule = $rule;
                 if($param != ''){
                     $my_rule = array($rule);
@@ -365,10 +366,10 @@ class BasicValidationBehavior extends ModelBehavior {
                 $this->SetConvert($model, $col, $rule);
             }
         }
-        
+
         $this->loaded = TRUE;
     }
-    
+
     #########################################################################
     /**
      * メッセージのカスタマイズ
@@ -382,7 +383,7 @@ class BasicValidationBehavior extends ModelBehavior {
             $model->validate[$col][$rule]['message'] = $message;
         }
     }
-    
+
     #########################################################################
     /**
      * バリデーションのクリア
@@ -393,7 +394,7 @@ class BasicValidationBehavior extends ModelBehavior {
         $model->validate = array();
         $this->convert = array();
     }
-    
+
     #########################################################################
     /**
      * 必須項目チェック
@@ -401,13 +402,13 @@ class BasicValidationBehavior extends ModelBehavior {
     #########################################################################
     function valid_required(&$model, $data) {
         list($k, $v) = each($data);
-        
+
         // ファイルの場合
         if (is_array($v) && array_key_exists('tmp_name', $v)) {
             if ($v['size'] > 0) return TRUE;
             return FALSE;
         }
-        
+
         // 配列の場合(チェックボックス用)
         if (is_array($v)) {
             foreach($v as $arr_v){
@@ -417,14 +418,14 @@ class BasicValidationBehavior extends ModelBehavior {
             }
             return FALSE;
         }
-        
+
         if(!isset($v) || ($v == '')) {
             return FALSE;
         }else{
             return TRUE;
         }
     }
-    
+
     #########################################################################
     /**
      * 等価チェック
@@ -434,10 +435,10 @@ class BasicValidationBehavior extends ModelBehavior {
         list($k, $v) = each($data);
         if (is_array($v)) list($k, $v) = each($v);
         if($v === '') return TRUE;
-        
+
         return ($v == $val);
     }
-    
+
     #########################################################################
     /**
      * 最大文字数チェック
@@ -445,14 +446,14 @@ class BasicValidationBehavior extends ModelBehavior {
     #########################################################################
     function valid_maxLen(&$model, $data, $len) {
         list($k, $v) = each($data);
-        
+
         if(mb_strlen(str_replace("\r\n", "\n", $v)) > $len){
             return FALSE;
         }else{
             return TRUE;
         }
     }
-    
+
     #########################################################################
     /**
      * 最少文字数チェック
@@ -479,7 +480,7 @@ class BasicValidationBehavior extends ModelBehavior {
             return TRUE;
         }
     }
-    
+
     #########################################################################
     /**
      * 電話番号簡易チェック
@@ -488,14 +489,14 @@ class BasicValidationBehavior extends ModelBehavior {
     function valid_phone_easy(&$model, $data) {
         list($k, $v) = each($data);
         if($v === '') return TRUE;
-        
+
         if (preg_match("/^[\d-]*$/", $v)) {
             return TRUE;
         }else{
             return FALSE;
         }
     }
-    
+
     #########################################################################
     /**
      * 電話番号チェック
@@ -504,14 +505,14 @@ class BasicValidationBehavior extends ModelBehavior {
     function valid_phone(&$model, $data) {
         list($k, $v) = each($data);
         if($v === '') return TRUE;
-        
+
         if (preg_match("/^\d{2,5}\-\d{1,4}\-\d{1,4}$/", $v)) {
             return TRUE;
         }else{
             return FALSE;
         }
     }
-    
+
     #########################################################################
     /**
      * 郵便番号チェック
@@ -520,14 +521,14 @@ class BasicValidationBehavior extends ModelBehavior {
     function valid_zip(&$model, $data) {
         list($k, $v) = each($data);
         if($v === '') return TRUE;
-        
+
         if (preg_match("/^\d{3}\-\d{4}$/", $v)) {
             return TRUE;
         }else{
             return FALSE;
         }
     }
-    
+
     #########################################################################
     /**
      * 全角チェック
@@ -542,7 +543,7 @@ class BasicValidationBehavior extends ModelBehavior {
         }
         return FALSE;
     }
-    
+
     #########################################################################
     /**
      * カタカナチェック
@@ -551,14 +552,14 @@ class BasicValidationBehavior extends ModelBehavior {
     function valid_kana(&$model, $data) {
         list($k, $v) = each($data);
         if($v === '') return TRUE;
-        
+
         $v = mb_convert_encoding($v, 'UTF-8');
         if (preg_match("/^(?:\xE3\x82[\xA1-\xBF]|\xE3\x83[\x80-\xB6]|ー)+$/", $v)) {
             return TRUE;
         }
         return FALSE;
     }
-    
+
     #########################################################################
     /**
      * ひらかなチェック
@@ -573,7 +574,7 @@ class BasicValidationBehavior extends ModelBehavior {
         }
         return FALSE;
     }
-    
+
     #########################################################################
     /**
      * 環境依存文字・旧漢字などJISに変換できない文字チェック
@@ -592,7 +593,7 @@ class BasicValidationBehavior extends ModelBehavior {
         }
         return FALSE;
     }
-    
+
     #########################################################################
     /**
      *  1バイト文字列チェック
@@ -601,13 +602,13 @@ class BasicValidationBehavior extends ModelBehavior {
     function valid_single(&$model, $data) {
         list($k, $v) = each($data);
         if($v === '') return TRUE;
-        
+
         if(strlen($v) != mb_strlen($v)){
             return FALSE;
         }
         return TRUE;
     }
-        
+
     #########################################################################
     /**
      *  確認入力用
@@ -623,7 +624,7 @@ class BasicValidationBehavior extends ModelBehavior {
         }
         return FALSE;
     }
-    
+
     #########################################################################
     /**
      *  大なり
@@ -631,7 +632,7 @@ class BasicValidationBehavior extends ModelBehavior {
     #########################################################################
     function valid_greaterThan(&$model, $data, $col, $acceptEqual = 1) {
         list($k, $v) = each($data);
-        
+
         if(!isset($model->data[$model->name][$col])){
             return FALSE;
         }
@@ -642,7 +643,7 @@ class BasicValidationBehavior extends ModelBehavior {
         }
         return FALSE;
     }
-    
+
     #########################################################################
     /**
      *  小なり
@@ -660,7 +661,7 @@ class BasicValidationBehavior extends ModelBehavior {
         }
         return FALSE;
     }
-    
+
     #########################################################################
     /**
      *  メールアドレス妥当性チェック
@@ -669,17 +670,17 @@ class BasicValidationBehavior extends ModelBehavior {
     function valid_email(&$model, $data ) {
         list($k, $v) = each($data);
         if($v === '') return TRUE;
-        
+
         $__pattern = '(?:[a-z0-9][-a-z0-9]*\.)*(?:[a-z0-9][-a-z0-9]{0,62})\.(?:(?:[a-z]{2}\.)?[a-z]{2,4}|museum|travel)';
         $__regex   = '/^[a-z0-9!#$%&\'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+\/=?^_`{|}~-]+)*@' . $__pattern . '$/i';
-        
+
         if (preg_match($__regex, $v)) {
             return true;
         } else {
             return false;
         }
     }
-    
+
     #########################################################################
     /**
      *  メールアドレス妥当性チェック(複数カンマ区切り)
@@ -688,7 +689,7 @@ class BasicValidationBehavior extends ModelBehavior {
     function valid_emailMulti(&$model, $data ) {
         list($k, $v) = each($data);
         if($v === '') return TRUE;
-        
+
         $mails = explode(',', $v);
         foreach($mails as $m){
             $myData = array($k=>$m);
@@ -698,7 +699,7 @@ class BasicValidationBehavior extends ModelBehavior {
         }
         return TRUE;
     }
-    
+
     #########################################################################
     /**
      *  YYYY-MM-DD形式かどうか
@@ -707,7 +708,7 @@ class BasicValidationBehavior extends ModelBehavior {
     function valid_ymd(&$model, $data, $col ) {
         list($k, $v) = each($data);
         if($v === '') return TRUE;
-        
+
         $tmp = explode('-', $v);
         if(count($tmp) != 3) return false;
         $yyyy = $tmp[0];
@@ -715,7 +716,7 @@ class BasicValidationBehavior extends ModelBehavior {
         $dd = $tmp[2];
         return checkdate($mm, $dd, $yyyy);
     }
-    
+
     #########################################################################
     /**
      *  値が他のレコードで使われていないか
@@ -726,7 +727,7 @@ class BasicValidationBehavior extends ModelBehavior {
     function valid_isUniqueWithStatus(&$model, $data, $col ) {
         list($k, $v) = each($data);
         if($v === '') return TRUE;
-        
+
         return !(0 < $model->find('count', array(
             'conditions' => array(
                 "{$model->name}.status" => 1,
@@ -735,7 +736,7 @@ class BasicValidationBehavior extends ModelBehavior {
             )
         )));
     }
-    
+
     #########################################################################
     /**
      *  値が"他の論理的に削除されていないレコード"で使われていないか
@@ -744,7 +745,7 @@ class BasicValidationBehavior extends ModelBehavior {
     function valid_isUniqueLogically(&$model, $data, $col ) {
         list($k, $v) = each($data);
         if($v === '') return TRUE;
-        
+
         return !(0 < $model->find('count', array(
             'conditions' => array(
                 "{$model->name}.{$k}" => $v,
@@ -753,7 +754,7 @@ class BasicValidationBehavior extends ModelBehavior {
             )
         )));
     }
-    
+
     #########################################################################
     /**
      *  値が"論理的に存在するレコード"に含まれているか
@@ -762,7 +763,7 @@ class BasicValidationBehavior extends ModelBehavior {
     function valid_isExistLogically(&$model, $data, $modelName = NULL, $col = NULL) {
         list($k, $v) = each($data);
         if(empty($v)) return TRUE;
-        
+
         if (is_array($modelName)) {
             $modelName = $model->name;
             $modelToUse = $model;
@@ -770,17 +771,17 @@ class BasicValidationBehavior extends ModelBehavior {
             $modelToUse = ClassRegistry::init($modelName);
             $k = $col;
         }
-        
+
         $r = (0 < $modelToUse->find('count', array(
             'conditions' => array(
                 "{$modelName}.{$k}" => $v,
                 "{$modelName}.is_deleted" => 0,
             )
         )));
-        
+
         return $r;
     }
-    
+
     #########################################################################
     /**
      *  値が"論理的に存在するレコード"に含まれており、また追加の条件もクリアしているか
@@ -798,14 +799,14 @@ class BasicValidationBehavior extends ModelBehavior {
         foreach ($cols as $col) {
             $cond["{$model->name}.{$col}"] = $model->data[$model->name][$col];
         }
-        
+
         $r = (0 < $model->find('count', array(
             'conditions' => $cond,
         )));
 
         return $r;
     }
-    
+
     #########################################################################
     /**
      *  値が物理的に存在しており、また追加の条件もクリアしているか
@@ -822,14 +823,14 @@ class BasicValidationBehavior extends ModelBehavior {
         foreach ($cols as $col) {
             $cond["{$model->name}.{$col}"] = $model->data[$model->name][$col];
         }
-        
+
         $r = (0 < $model->find('count', array(
             'conditions' => $cond,
         )));
 
         return $r;
     }
-    
+
     #########################################################################
     /**
      *  同一の値が条件付きで物理的に存在していないか
@@ -843,12 +844,12 @@ class BasicValidationBehavior extends ModelBehavior {
 
         foreach ($cols as $col)
             $cond["{$model->name}.{$col}"] = $model->data[$model->name][$col];
-        
+
         return (0 === $model->find('count', array(
             'conditions' => $cond,
         )));
     }
-    
+
     #########################################################################
     /**
      *  値が存在しているか
@@ -865,16 +866,16 @@ class BasicValidationBehavior extends ModelBehavior {
             $modelToUse = ClassRegistry::init($modelName);
             $k = $col;
         }
-        
+
         $r = (0 < $modelToUse->find('count', array(
             'conditions' => array(
                 "{$modelName}.{$k}" => $v,
             )
         )));
-        
+
         return $r;
     }
-    
+
     function valid_inClassArrayKeys(&$model, $data, $arrayName)
     {
         list($k, $v) = each($data);
@@ -882,7 +883,7 @@ class BasicValidationBehavior extends ModelBehavior {
 
         return (in_array($v, array_keys($model::${$arrayName})));
     }
-    
+
     #########################################################################
     /**
      *  半角数字しか含まれていないか
@@ -891,10 +892,10 @@ class BasicValidationBehavior extends ModelBehavior {
     function valid_int(&$model, $data, $col ) {
         list($k, $v) = each($data);
         if($v === '') return TRUE;
-        
+
         return (preg_match('/^[0-9]*$/', $v));
     }
-    
+
     #########################################################################
     /**
      *  整数かどうか
@@ -903,10 +904,10 @@ class BasicValidationBehavior extends ModelBehavior {
     function valid_positive_number(&$model, $data, $col ) {
         list($k, $v) = each($data);
         if(($v === '') || $v == '0') return TRUE;
-        
+
         return (preg_match('/^[1-9][0-9]*$/', $v));
     }
-    
+
     #########################################################################
     /**
      *  アップロードが成功したか
@@ -915,7 +916,7 @@ class BasicValidationBehavior extends ModelBehavior {
     function valid_upload(&$model, $data) {
         list($k, $v) = each($data);
         if($v === '') return TRUE;
-        
+
         if ((isset($v['error']) && $v['error'] == 0)
             || (!empty($v['tmp_name']) && $v['tmp_name'] != 'none')
         ) {
@@ -924,7 +925,7 @@ class BasicValidationBehavior extends ModelBehavior {
             return false;
         }
     }
-    
+
     #########################################################################
     /**
      *  x個の要素(空要素は除く)を持つ配列かどうか
@@ -933,12 +934,12 @@ class BasicValidationBehavior extends ModelBehavior {
     public function valid_array_having_values(&$model, $data, $col ) {
         list($k, $v) = each($data);
         if($v === '') return TRUE;
-        
+
         if (empty($v) || !is_array($v)) return false;
         if ($col > count(array_diff($v, array('')))) return false;
         return true;
     }
-    
+
     #########################################################################
     /**
      *  日付が範囲内から確認
@@ -947,12 +948,12 @@ class BasicValidationBehavior extends ModelBehavior {
     public function valid_date_range(&$model, $data, $col ) {
         list($k, $v) = each($data);
         if($v === '') return TRUE;
-        
+
         if (($v < $col[0]) || ($v > $col[1])) return false;
-        
+
         return true;
     }
-    
+
     #########################################################################
     /**
      *  NGワードが含まれていないか確認
@@ -961,21 +962,21 @@ class BasicValidationBehavior extends ModelBehavior {
     public function valid_text_has_ng_word(&$model, $data) {
         list($k, $v) = each($data);
         if($v === '') return TRUE;
-        
+
         require_once APP.'Vendor/ForpeaceAPI.php';
         $ForpeaceAPI = new ForpeaceAPI();
-        
+
         $r = $ForpeaceAPI->post('http://4ps.jp/ngword/api/text_has_ng_word', array(
             'text' => $v
         ));
-        
+
         if (($r != false) && ($r->result == 'OK')) {
             return true;
         }
 
         return false;
     }
-    
+
     #########################################################################
     /**
      *  文字数が一致するか確認
@@ -983,14 +984,14 @@ class BasicValidationBehavior extends ModelBehavior {
     #########################################################################
     public function valid_justLen(&$model, $data, $len) {
         list($k, $v) = each($data);
-        
+
         if (mb_strlen($v) == $len){
             return TRUE;
         } else {
             return FALSE;
         }
     }
-    
+
     #########################################################################
     /**
      *  今日以降の日付か確認
@@ -1001,12 +1002,12 @@ class BasicValidationBehavior extends ModelBehavior {
     {
         list($k, $v) = each($data);
         if($v === '') return TRUE;
-        
+
         $timeTarget = (int)date('U', strtotime($v));
         $timeNow = (int)date('U') + ($move * 3600);
-        
+
         return ($timeTarget > $timeNow);
-    }   
+    }
 }
 
 

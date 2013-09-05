@@ -114,12 +114,12 @@ class BaseModel extends Model
         $this->useValid = 'add';
       }
 
-
       if ($useValid) $this->useValid = $useValid;
 
       if (in_array($validateMode, array(self::VALIDATION_MODE_ONLY, self::VALIDATION_MODE_REQUIRED))) {
         #v($this->useTable);
         $r = $this->validates(array('fieldList' => $updateFields));
+
         if (!$r) {
           list($key, $val) = each($this->validationErrors);
           throw new Exception($val[0]);

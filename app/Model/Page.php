@@ -29,7 +29,7 @@ class Page extends AppModel
 
   public function __construct($id = false, $table = null, $ds = null)
   {
-    $this->columnLabels = array(
+    $this->___columnLabels = array(
       'title'  => __('タイトル'),
       'name'   => __('ページ名 (英数字)'),
       'hidden' => __('非表示'),
@@ -295,7 +295,9 @@ class Page extends AppModel
         }
         $page['parent_page_id'] = $parentPageIds[count($parentPageIds)-1];
         $r = $this->add($page, TRUE);
-        if ($r !== TRUE) throw $r;
+        if ($r !== TRUE) {
+          throw $r;
+        }
 
         $beforePage = $page;
       }

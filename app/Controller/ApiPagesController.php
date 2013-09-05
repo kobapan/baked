@@ -67,7 +67,10 @@ class ApiPagesController extends AppController
     });
     $r = $this->Page->update($this->request->data['Page']);
 
-    if ($r !== TRUE) $this->Api->ng($r->getMessage());
+    if ($r !== TRUE) $this->Api->ng(array(
+      'message'=>$r->getMessage(),
+      'before'=>$this->request->data['Page'],
+    ));
 
     $this->Api->ok();
   }
