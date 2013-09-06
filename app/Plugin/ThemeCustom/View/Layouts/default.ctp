@@ -32,7 +32,7 @@
       <?php echo $this->fetch('content') ?>
     </div>
     <div id="sub">
-      <div id="primary-navigation">
+      <div id="primary-navigation" data-bk-dynamic="global-navigation">
         <ul>
           <?php foreach ($menuList as $menu) : ?>
             <?php
