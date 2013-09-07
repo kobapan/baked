@@ -205,11 +205,11 @@ class BasicValidationBehavior extends ModelBehavior {
      * バリデーションの実行前に初期化を行う
      */
     #########################################################################
-    public function beforeValidate($options = array()) {
-        // バリデーション定義の読み込み
+    public function beforeFind(Model $Model)
+    {
         //if (method_exists($model, 'loadValidate') && !$this->loaded){
-        if (method_exists($model, 'loadValidate')){
-            $model->loadValidate();
+        if (method_exists($Model, 'loadValidate')){
+            $Model->loadValidate();
             $this->loaded = TRUE;
         }
 
@@ -217,7 +217,7 @@ class BasicValidationBehavior extends ModelBehavior {
         if($this->autoConvert){
             foreach($this->convert as $i => $arr){
                 list($col, $rule) = each($arr);
-                $this->convertData($model, $col, $rule);
+                $this->convertData($Model, $col, $rule);
             }
         }
 

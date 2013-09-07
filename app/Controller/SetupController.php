@@ -3,7 +3,7 @@ App::uses('AppController', 'Controller');
 
 class SetupController extends AppController
 {
-  public $uses = array('Validation', 'Staff');
+  public $uses = array('Validator', 'Staff');
   public $layout = 'setup';
   const SESSION_DATABASE = 'setup_database';
   const SESSION_SITE = 'setup_site';
@@ -174,20 +174,20 @@ class SetupController extends AppController
 
     if ($this->request->data) {
       try {
-        $r = $this->Validation->add($this->request->data['Validation'], null, 'database', Validation::VALIDATION_MODE_ONLY);
+        $r = $this->Validator->add($this->request->data['Validator'], null, 'database', Validator::VALIDATION_MODE_ONLY);
         if ($r !== TRUE) throw new Exception(__('入力内容に不備があります'));
 
-        if (!$this->__validDatabase($this->request->data['Validation']))
+        if (!$this->__validDatabase($this->request->data['Validator']))
           throw new Exception(__('データベースへの接続に失敗しました。設定が正しいかどうか、確認してください。'));
 
-        $_SESSION[self::SESSION_DATABASE] = $this->request->data['Validation'];
+        $_SESSION[self::SESSION_DATABASE] = $this->request->data['Validator'];
 
         $this->redirect('/system/setup/site');
       } catch (Exception $e) {
         Baked::setFlash($e->getMessage(), 'error');
       }
     } else if (!empty($_SESSION[self::SESSION_DATABASE])) {
-      $this->request->data['Validation'] = $_SESSION[self::SESSION_DATABASE];
+      $this->request->data['Validator'] = $_SESSION[self::SESSION_DATABASE];
     }
   }
 
@@ -200,10 +200,10 @@ class SetupController extends AppController
 
     if ($this->request->data) {
       try {
-        $r = $this->Validation->add($this->request->data['Validation'], FALSE, 'site', Validation::VALIDATION_MODE_ONLY);
+        $r = $this->Validator->add($this->request->data['Validator'], FALSE, 'site', Validator::VALIDATION_MODE_ONLY);
         if ($r !== TRUE) throw new Exception(__('入力内容に不備があります'));
 
-        $_SESSION[self::SESSION_SITE] = $this->request->data['Validation'];
+        $_SESSION[self::SESSION_SITE] = $this->request->data['Validator'];
         if ($r !== TRUE) throw $r;
 
         $this->redirect('/system/setup/staff');
@@ -211,7 +211,7 @@ class SetupController extends AppController
         Baked::setFlash($e->getMessage(), 'error');
       }
     } else if (!empty($_SESSION[self::SESSION_SITE])) {
-      $this->request->data['Validation'] = $_SESSION[self::SESSION_SITE];
+      $this->request->data['Validator'] = $_SESSION[self::SESSION_SITE];
     }
   }
 

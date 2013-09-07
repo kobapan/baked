@@ -3,7 +3,7 @@
 </p>
 
 <?php
-echo $this->Form->create('Validation', array(
+echo $this->Form->create('Validator', array(
   'url' => '/system/setup/db',
   'class' => 'form-01',
 ));

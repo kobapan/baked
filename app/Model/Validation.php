@@ -1,9 +1,9 @@
 <?php
 App::uses('AppModel', 'Model');
 
-class Validation extends AppModel
+class Validator extends AppModel
 {
-  public $name = 'Validation';
+  public $name = 'Validator';
   public $valid = array(
     'add' => array(
     ),
