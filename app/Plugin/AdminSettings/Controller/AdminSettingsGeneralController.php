@@ -7,6 +7,8 @@ class AdminSettingsGeneralController extends AppAdminController
 
   public function input()
   {
+    $this->title = __('基本設定');
+
     if ($this->request->data) {
       $this->tokenFilter();
       $r = $this->System->saveMultiply($this->request->data['System']);

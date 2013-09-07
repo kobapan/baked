@@ -66,15 +66,17 @@ div.editor-set {
 }
 div.editor-set > div.editor {
   float: left;
-  width: 75%;
+  width: 73%;
 }
 div.editor-set > div.explorer {
-  float: left;
+  float: right;
   width: 25%;
 }
 div.editor-set > div.editor textarea {
   width: 95%;
-  height: 500px;
+}
+div.editor-set div.CodeMirror {
+  border: 1px solid #ccc;
 }
 div.editor-set > div.explorer > ul {
   list-style: none;

@@ -255,6 +255,8 @@ ul, ol {
 #content ul.block-photo-gallery {
   margin: -10px 0 0 -10px;
   padding: 0;
+  overflow: hidden;
+  list-style: none;
 }
 #content ul.block-photo-gallery > li {
   float: left;

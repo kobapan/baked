@@ -5,7 +5,7 @@
 <title><?php
   $pageTitle = '';
   if (!empty($title)) $pageTitle = $title.' - ';
-  $pageTitle .= BK_SITE_NAME;
+  $pageTitle .= __('Baked');
   echo h($pageTitle);
 ?></title>
 
@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="<?php echo URL ?>css/admin.css">
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css">
 <link rel="stylesheet" href="<?php echo URL ?>css/buttons.css">
+<link rel="stylesheet" href="<?php echo URL ?>/js/codemirror/lib/codemirror.css">
 <?php
 if (Baked::read('ADMIN_CSS')) {
   $this->Html->css(Baked::read('ADMIN_CSS'), NULL, array('inline' => FALSE));
@@ -28,6 +29,14 @@ echo $this->fetch('css');
 <script src="http://bp.yahooapis.com/2.4.21/browserplus-min.js"></script>
 <script src="<?php echo URL ?>js/ckeditor/ckeditor.js"></script>
 <script src="<?php echo URL ?>js/ckeditor/adapters/jquery.js"></script>
+<script src="<?php echo URL ?>js/codemirror/lib/codemirror.js"></script>
+<script src="<?php echo URL ?>js/codemirror/mode/xml/xml.js"></script>
+<script src="<?php echo URL ?>js/codemirror/mode/javascript/javascript.js"></script>
+<script src="<?php echo URL ?>js/codemirror/mode/php/php.js"></script>
+<script src="<?php echo URL ?>js/codemirror/mode/clike/clike.js"></script>
+<script src="<?php echo URL ?>js/codemirror/mode/css/css.js"></script>
+<script src="<?php echo URL ?>js/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+<script src="<?php echo URL ?>js/codemirror/mode/htmlembedded/htmlembedded.js"></script>
 <?php
 if (Baked::read('ADMIN_JS')) {
   $this->Html->script(Baked::read('ADMIN_JS'), array('inline' => FALSE));

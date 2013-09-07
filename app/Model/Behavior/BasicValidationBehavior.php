@@ -205,7 +205,7 @@ class BasicValidationBehavior extends ModelBehavior {
      * バリデーションの実行前に初期化を行う
      */
     #########################################################################
-    function beforeValidate(Model $model) {
+    public function beforeValidate($options = array()) {
         // バリデーション定義の読み込み
         //if (method_exists($model, 'loadValidate') && !$this->loaded){
         if (method_exists($model, 'loadValidate')){

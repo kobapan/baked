@@ -7,6 +7,8 @@ class AdminSettingsStaffsController extends AppAdminController
 
   public function index()
   {
+    $this->title = __('管理者一覧');
+
     $staffs = $this->Staff->find('all', array(
       ORDER => array('Staff.created' => 'desc'),
       FIELDS => array(
@@ -21,6 +23,8 @@ class AdminSettingsStaffsController extends AppAdminController
 
   public function add($staffId = NULL)
   {
+    $this->title = __('管理者詳細');
+
     if ($staffId) {
       $staff = $this->Staff->find('first', array(
         CONDITIONS => array('Staff.id' => $staffId),

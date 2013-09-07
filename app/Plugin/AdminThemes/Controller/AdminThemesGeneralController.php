@@ -14,6 +14,8 @@ class AdminThemesGeneralController extends AppAdminController
 
   public function installed()
   {
+    $this->title = __('インストール済みテーマ');
+
     $themePackages = $this->ThemePackage->installed();
 
     if (!empty($this->request->data['ThemePackage']['mode'])
@@ -50,11 +52,15 @@ class AdminThemesGeneralController extends AppAdminController
 
   public function edit_pc()
   {
+    $this->title = __('PCテーマの編集');
+
     $this->__setupForEdit('pc');
   }
 
   public function edit_mobile()
   {
+    $this->title = __('モバイルテーマの編集');
+
     $this->__setupForEdit('mobile');
   }
 

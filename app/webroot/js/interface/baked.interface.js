@@ -23,6 +23,16 @@ $(function(){
     });
   });
 
+  $('textarea.code-mirror').each(function(){
+    if (!CodeMirror) return;
+    var cm = CodeMirror.fromTextArea(this, {
+      mode: 'application/x-httpd-php',
+      lineNumbers: true,
+      indentUnit: 2
+    });
+    cm.setSize(null, 500);
+  });
+
   $(document).on('click', '[data-toggle]', function(e){
     var selector = $(this).attr('data-toggle');
     $(selector).toggle('fast');

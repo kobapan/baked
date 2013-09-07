@@ -7,6 +7,8 @@ class AdminBlogCommentsController extends AppAdminBlogController
 
   public function listing()
   {
+    $this->title = __('コメント一覧');
+
     if (!empty($this->request->data['Comment']['mode']) && !empty($this->request->data['Comment']['id'])) {
       $this->tokenFilter();
       switch ($this->request->data['Comment']['mode']) {

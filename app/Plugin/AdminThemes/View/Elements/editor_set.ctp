@@ -15,6 +15,7 @@
       echo $this->Form->input('file', array(
         'label' => FALSE,
         'type' => 'textarea',
+        'class' => 'code-mirror',
         'value' => file_get_contents($currentFile['path']),
       ));
       ?>

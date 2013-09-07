@@ -33,6 +33,8 @@ class AdminBlogEntriesController extends AppAdminBlogController
       $this->redirect('/admin/blog/blogs/listing');
     }
 
+    $this->title = __('「%s」のエントリ一覧', $page['Page']['title']);
+
     $this->paginate = $this->Entry->getOptions(array(Entry::OPTION_BIND_STAFF_NO_RESET), array(
       CONDITIONS => array(
         'Entry.page_id' => $pageId,
@@ -42,7 +44,7 @@ class AdminBlogEntriesController extends AppAdminBlogController
         'Staff.id', 'Staff.name',
       ),
       ORDER => array('Entry.published' => 'desc'),
-      'limit' => 5,
+      'limit' => 20,
       'paramType' => 'querystring',
     ));
     $entries = $this->paginate('Entry');
@@ -55,6 +57,8 @@ class AdminBlogEntriesController extends AppAdminBlogController
 
   public function add($entryId = NULL)
   {
+    $this->title = __('エントリを書く');
+
     if ($entryId) {
       $entry = $this->Entry->find('first', array(
         CONDITIONS => array(

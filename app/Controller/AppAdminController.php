@@ -5,6 +5,7 @@ class AppAdminController extends AppController
 {
   public $uses = array('System', );
   public $helpers = array('Baked');
+  protected $title = NULL;
 
   public function beforeFilter()
   {
@@ -18,6 +19,13 @@ class AppAdminController extends AppController
     $this->set(array(
       'adminInfo' => $adminInfo,
     ));
+  }
+
+  public function beforeRender()
+  {
+    if (!empty($this->title)) {
+      $this->set('title', $this->title);
+    }
   }
 
 }

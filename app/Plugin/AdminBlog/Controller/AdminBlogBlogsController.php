@@ -7,6 +7,8 @@ class AdminBlogBlogsController extends AppAdminBlogController
 
   public function listing()
   {
+    $this->title = __('ブログ一覧');
+
     $this->paginate = $this->Page->getOptions(array(), array(
       CONDITIONS => array(
         'Page.package' => 'PageBlog',
@@ -25,6 +27,8 @@ class AdminBlogBlogsController extends AppAdminBlogController
 
   public function settings($pageId = NULL)
   {
+    $this->title = __('ブログ設定');
+
     $page = $this->Page->find('first', array(
       CONDITIONS => array(
         'Page.id' => $pageId,

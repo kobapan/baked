@@ -110,8 +110,6 @@ class SetupController extends AppController
       fwrite($fp, $configTemplate);
       fclose($fp);
 
-      Baked::deleteAllCache();
-
       return TRUE;
     } catch (Exception $e) {
       return $e;
@@ -133,6 +131,10 @@ class SetupController extends AppController
       if ($connect->errno)
         throw new Exception(__('クエリの実行に失敗しました (%s)', $connect->error));
       $connect->close();
+
+      Baked::deleteAllCache();
+
+      sleep(2);
 
       $r = $this->Staff->addDataHavingPassword($_SESSION[self::SESSION_STAFF], FALSE);
       if ($r !== TRUE) throw $r;
