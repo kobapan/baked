@@ -205,7 +205,7 @@ class BasicValidationBehavior extends ModelBehavior {
      * バリデーションの実行前に初期化を行う
      */
     #########################################################################
-    public function beforeFind(Model $Model)
+    function beforeValidate(Model $Model)
     {
         //if (method_exists($model, 'loadValidate') && !$this->loaded){
         if (method_exists($Model, 'loadValidate')){
