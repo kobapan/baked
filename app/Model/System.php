@@ -16,6 +16,9 @@ class System extends AppModel
   const KEY_USE_THEME_MOBILE = 'USE_THEME_MOBILE';
   const KEY_SITE_NAME = 'SITE_NAME';
   const KEY_SITE_CAPTION = 'SITE_CAPTION';
+  const KEY_COMPANY = 'COMPANY';
+  const KEY_ADDRESS = 'ADDRESS';
+  const KEY_TEL = 'TEL';
   const KEY_TIMEZONE = 'TIMEZONE';
   const KEY_EMAIL = 'EMAIL';
   const KEY_SETUP = 'SETUP';

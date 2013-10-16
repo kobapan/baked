@@ -1,0 +1,156 @@
+@charset "utf-8";
+
+.clearfix:after {
+  content: "";
+  clear: both;
+  display: block;
+}
+body {
+  text-align: center;
+  background: #c7b287;
+  font-family: 'メイリオ', Meiryo;
+  color: #665430;
+  font-size: 11pt;
+}
+a {
+  color: #5790ca;
+}
+a:hover {
+  color: #c95858;
+}
+
+#wrap {
+  position: relative;
+  margin: auto;
+  width: 860px;
+  padding: 0 30px;
+  text-align: left;
+  background: #f7f3e9;
+  box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+#primary-header {
+  border-bottom: 3px solid #a08f6c;
+  padding: 30px 0;
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+#primary-header > div.main {
+  float: left;
+}
+#primary-header > div.main > div.logo > a {
+  text-decoration: none;
+  color: #6f5c33;
+  font-size: 20pt;
+}
+#primary-header > div.main > div.caption {
+  color: #6f5c33;
+  font-size: 9pt;
+}
+#primary-header > div.aside {
+  position: absolute;
+  font-size: 9pt;
+  padding: 8px 14px;
+  background: #e5dcaf;
+  box-shadow: 0 3px 5px rgba(0,0,0,0.5);
+  top: 22px;
+  right: 30px;
+}
+
+#main {
+  float: right;
+  text-align: left;
+  width: 630px;
+  margin-left: 30px;
+}
+#sub {
+  float: left;
+  width: 200px;
+}
+
+#primary-navigation {
+  margin: 0 0 20px 0;
+  padding: 0;
+  list-style: none;
+}
+#primary-navigation ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+#primary-navigation li > a {
+  display: block;
+  font-size: 14px;
+  text-decoration: none;
+  color: #6c6335;
+  transition: all 0.2s ease;
+}
+#primary-navigation li > a:hover {
+  color: #c95858;
+}
+#primary-navigation li.here > a {
+  font-weight: bold;
+}
+
+#primary-navigation > li > a {
+  padding: 10px 10px 10px 15px;
+  background: #e5dcb4;
+  border-bottom: solid 1px #d1c99e;
+}
+#primary-navigation > li > a:hover {
+  background: #faf8eb;
+}
+#primary-navigation > li.current > a {
+  background: #efe8c7;
+}
+
+#primary-navigation > li > ul {
+  padding: 5px 0;
+}
+#primary-navigation > li > ul > li > a {
+  padding: 5px 5px 5px 19px;
+  background: url(../img/bg-nav-li-a.gif) no-repeat 8px center;
+  font-size: 10pt;
+}
+
+#primary-navigation > li > ul > li > ul {
+}
+#primary-navigation > li > ul > li > ul > li > a {
+  font-size: 10pt;
+  padding: 5px 5px 5px 19px;
+}
+
+.bk-block-content > h1 {
+  background: #a08f6c;
+  margin: 0;
+  color: #fff;
+  font-weight: normal;
+  padding: 10px;
+  font-size: 13pt;
+  border-radius: 3px;
+  text-shadow: 0 1px 0 rgba(0,0,0,0.3);
+}
+.bk-block-content > h2 {
+  border: 1px solid #a08f6c;
+  display: block;
+  margin: 0;
+  font-weight: bold;
+  padding: 10px 10px;
+  font-size: 13pt;
+  border-width: 1px 0px;
+}
+.bk-block-content > h3 {
+  border-bottom: #a08f6c 2px solid;
+  font-size: 12pt;
+  padding: 0 10px 5px 10px;
+}
+
+
+
+
+
+
+
+
+
+

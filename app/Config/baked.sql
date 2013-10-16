@@ -118,7 +118,7 @@ CREATE TABLE `entries` (
 --
 
 INSERT INTO `entries` (`id`, `page_id`, `staff_id`, `title`, `body1`, `body2`, `published`, `created`, `modified`) VALUES
-(1, 80, 1, '記事を投稿しよう', 'Baked にはブログ機能が付いています。<br />\r\n編集モードでブログページ（例えばこのページ）を開くと、上部のメニューに「新規投稿」ボタンが表示されます。', '<span style="line-height: 1.6em;"><img alt="" src="/baked/app/webroot/files/upload/images/blog-social-media-strategy.jpeg" style="width: 280px; float: right; margin-left: 10px; margin-right: 10px; height: 186px;" />このように続きとして記事を書く事も可能です。</span>もちろん画像のアップロードも。', '2013-09-01 10:00:00', '2013-09-01 14:44:49', '2013-09-01 14:44:49');
+(1, 80, 1, '記事を投稿しよう', 'Baked にはブログ機能が付いています。<br />\r\n編集モードでブログページ（例えばこのページ）を開くと、上部のメニューに「新規投稿」ボタンが表示されます。', '<span style="line-height: 1.6em;"><img alt="" src="<:url>files/upload/images/blog-social-media-strategy.jpeg" style="width: 280px; float: right; margin-left: 10px; margin-right: 10px; height: 186px;" />このように続きとして記事を書く事も可能です。</span>もちろん画像のアップロードも。', '2013-09-01 10:00:00', '2013-09-01 14:44:49', '2013-09-01 14:44:49');
 
 -- --------------------------------------------------------
 

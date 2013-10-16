@@ -22,8 +22,14 @@ class AdminSettingsGeneralController extends AppAdminController
         System::KEY_SITE_NAME => $this->System->value(System::KEY_SITE_NAME),
         System::KEY_EMAIL     => $this->System->value(System::KEY_EMAIL),
         System::KEY_TIMEZONE  => $this->System->value(System::KEY_TIMEZONE),
+        System::KEY_SITE_CAPTION  => Reception::read('site_caption'),
+        System::KEY_COMPANY   => Reception::read('company'),
+        System::KEY_ADDRESS   => Reception::read('address'),
+        System::KEY_TEL       => Reception::read('tel'),
       );
     }
+
+    Reception::read('address');
   }
 
 }

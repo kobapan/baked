@@ -109,8 +109,14 @@ img {
   background: #fff;
 }
 #content ul.block-photo-gallery {
-  margin: 0;
+  margin: -5px 0 0 -5px;
   padding: 0;
+  list-style: none;
+  overflow: hidden;
+}
+#content ul.block-photo-gallery > li {
+  display: inline-block;
+  margin: 5px 0 0 5px;;
 }
 #content ul.block-photo-gallery a {
   display: block;

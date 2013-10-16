@@ -121,6 +121,7 @@ class SetupController extends AppController
     try {
       $sqlPath = APP.'Config/baked.sql';
       $sql = file_get_contents($sqlPath);
+      $sql = $this->__filterQuery($sql);
       if (!$sql) throw new Exception(__('SQLファイルが見つかりませんでした'));
 
       $db = $_SESSION[self::SESSION_DATABASE];
@@ -151,6 +152,12 @@ class SetupController extends AppController
     } catch (Exception $e) {
       return $e;
     }
+  }
+
+  private function __filterQuery($sql)
+  {
+    $sql = str_replace('<:url>', URL, $sql);
+    return $sql;
   }
 
   public function start()

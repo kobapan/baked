@@ -14,6 +14,10 @@ Configure::write('Admin.AdminSettings', array(
         'name' => __('管理者設定'),
         'href' => 'admin/settings/staffs',
       ),
+      array(
+        'name' => __('アップデート'),
+        'href' => 'admin/settings/update',
+      ),
     ),
   ),
 ));

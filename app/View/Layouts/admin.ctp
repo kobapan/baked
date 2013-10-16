@@ -77,15 +77,16 @@ $(function(){
   <ul>
     <?php
     $admins = Configure::read('Admin');
-    usort($admins, function($a, $b){
+    uasort($admins, function($a, $b){
       return $a['order'] > $b['order'];
     });
     ?>
-    <?php foreach ($admins as $admin) : ?>
+    <?php foreach ($admins as $key => $admin) : ?>
       <?php
       $nav = $admin['navigation'];
-      $classes = array();
       $url = URL.$nav['href'];
+      $classes = array();
+      if ($this->plugin == $key) $classes[] = 'current';
       ?>
       <li class="<?php echo implode(' ', $classes) ?>">
         <a href="<?php echo $url ?>"><i class="icon <?php echo $nav['icon'] ?>"></i><?php echo h($nav['name']) ?></a>

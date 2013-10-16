@@ -247,6 +247,7 @@ ul#bk-page-manager > li[data-bk-hidden="1"] > a.bk-hide {
 }
 
 ul.ul-01 {
+  text-align: left;
   display: none;
   position: absolute;
   list-style: none;
