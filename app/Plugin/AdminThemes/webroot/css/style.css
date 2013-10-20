@@ -19,8 +19,10 @@ ul.ul-themes > li img.screen {
   padding: 3px;
   border: 1px solid #eee;
 }
+ul.ul-themes > li > div.info {
+}
 ul.ul-themes > li > div.info > div {
-  padding: 0 5px 3px 5px;
+  padding: 5px 5px 0px 5px;
 }
 ul.ul-themes > li div.name {
 }
@@ -54,7 +56,7 @@ ul.ul-themes > li div.use-in-mobile {
   background: #00b5e5;
   padding: 2px 8px;
   color: #fff;
-  font-size: 7pt;
+  font-size: 8pt;
   border-radius: 3px;
   display: inline-block;
   float: left;

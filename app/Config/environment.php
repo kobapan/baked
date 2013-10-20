@@ -15,6 +15,11 @@ class Environment
   {
     $hostName = (isset($_SERVER['HTTP_HOST'])) ? $_SERVER['HTTP_HOST'] : exec('hostname');
     define('DEVELOPE', in_array($hostName, $this->_hosts));
+    if (DEVELOPE) {
+      define('OFFICIAL_HOST', 'bakedcms.dev');
+    } else {
+      define('OFFICIAL_HOST', 'bakedcms.org');
+    }
     define('SHOW_LOG', DEVELOPE);
   }
 

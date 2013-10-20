@@ -1,7 +1,7 @@
 <div class="editor-set">
   <div class="editor">
     <?php if (empty($currentFile)) : ?>
-      <div><?php echo __('Select file on the right panel.') ?></div>
+      <div><em><?php echo __('編集するファイルを選択してください') ?></em></div>
     <?php else : ?>
       <?php
       echo $this->Form->create('Editor', array(
@@ -21,7 +21,7 @@
       ?>
 
       <div class="spacer2"></div>
-      <button type="submit" class="button button-primary button-pill button-small"><?php echo __('Save') ?></button>
+      <button type="submit" class="button button-primary button-pill button-small"><?php echo __('保存') ?></button>
 
       <?php
       echo $this->Form->end();

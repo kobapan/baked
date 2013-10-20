@@ -1,13 +1,13 @@
 @charset "utf-8";
 
 body {
-  font-family: serif;
   color: #666;
+  font-family: 'Lucida Grande', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
   font-size: 10pt;
 }
 a {
   text-decoration: none;
-  color: #00ADE6;
+  color: #00a1cb;
 }
 a:hover {
   text-decoration: underline;
@@ -15,11 +15,29 @@ a:hover {
 label {
   cursor: pointer;
 }
+p {
+  margin: 0 0 15px 0;
+}
+p:last-child {
+  margin-bottom: 0;
+}
 .full {
   width: 100%;
 }
 .center {
   text-align: center;
+}
+.color-primary {
+  color: #00a1cb;
+}
+.color-caution {
+  color: #e54028;
+}
+.color-highlight {
+  color: #f18d05;
+}
+.color-action {
+  color: #7db500;
 }
 
 ul#toolbar {
@@ -128,8 +146,8 @@ ul#toolbar > li > a:hover {
 #primary-navigation > ul > li > ul {
 }
 #primary-navigation > ul > li > ul > li > a {
-  height: 28px;
-  line-height: 28px;
+  height: 32px;
+  line-height: 32px;
   font-size: 10pt;
   padding-left: 10px;
   border-bottom: 1px solid #eee;

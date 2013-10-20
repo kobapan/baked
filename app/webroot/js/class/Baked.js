@@ -47,7 +47,7 @@ Baked.prototype.saveSession = function(name, data, callback){
       if (callback) callback(r);
     }
   });
-}
+};
 
 Baked.prototype.showBox = function(html){
   $.fancybox({
@@ -114,7 +114,7 @@ Baked.prototype.goEditmode = function(callback){
       if (callback) callback();
     }
   });
-}
+};
 
 Baked.prototype.cancelEditmode = function(callback){
   baked.post('system/api_system/cancel_editmode', {
@@ -122,7 +122,7 @@ Baked.prototype.cancelEditmode = function(callback){
       if (callback) callback();
     }
   });
-}
+};
 
 Baked.prototype.signOut = function(callback){
   baked.post('system/api_system/sign_out', {
@@ -130,7 +130,7 @@ Baked.prototype.signOut = function(callback){
       if (callback) callback();
     }
   });
-}
+};
 
 Baked.prototype.reload = function(){
   location.href = location.href;
@@ -297,7 +297,7 @@ Baked.prototype.addBlock = function(pageId, sheet, package, beforeBlockId){
         $('#bk-sheet-'+sheet+' > .bk-blocks').append(r.html);
       }
     }
-  })
+  });
 };
 
 /**
@@ -315,7 +315,7 @@ Baked.prototype.loadBlock = function(blockId, callbacks){
     ok: function(r){
       if (callbacks && callbacks.ok) callbacks.ok(r);
     }
-  })
+  });
 };
 
 Baked.prototype.setupCkeditor = function(){
@@ -401,7 +401,7 @@ Baked.prototype.deleteBlock = function(blockId){
         $block.remove();
       });
     }
-  })
+  });
 };
 
 // 編集エリアを表示
@@ -454,7 +454,7 @@ Baked.prototype.submitComment = function(params){
       self.showBox(r.html);
       baked.reloadDynamic();
     }
-  })
+  });
 };
 
 Baked.prototype.busyFilter = function(){
@@ -465,12 +465,12 @@ Baked.prototype.busyFilter = function(){
   this.busy++;
   $.fancybox.showLoading();
   return true;
-}
+};
 
 Baked.prototype.busyEnd = function(){
   this.busy--;
   if (this.busy == 0) $.fancybox.hideLoading();
-}
+};
 
 
 
