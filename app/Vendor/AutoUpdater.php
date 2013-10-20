@@ -39,8 +39,6 @@ class AutoUpdater
       $this->_extractZip($this->zipUrl, $this->_targetDirPath);
       $this->_copyPeculiarFiles();
 
-      throw new Exception("OK!", 1);
-
       return TRUE;
     } catch (Exception $e) {
       if ($this->_progMovedCurrent) {
