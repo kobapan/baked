@@ -90,7 +90,9 @@ form.bk-form-01 div.input {
   height: 30px;
 }
 
-
+#bk-sign-in-form input {
+  min-width: 160px;
+}
 
 
 

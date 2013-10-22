@@ -100,7 +100,7 @@ class AdminThemesGeneralController extends AppAdminController
 
       $r = $this->ThemePackage->write($this->request->data['Editor']['path'], $this->request->data['Editor']['file']);
       if ($r === TRUE) {
-        Baked::setFlash(__('Saved the file.'), 'success');
+        Baked::setFlash(__('ファイルの編集を保存しました'), 'success');
       } else {
         Baked::setFlash($r->getMessage(), 'error');
       }

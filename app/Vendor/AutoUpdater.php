@@ -110,8 +110,7 @@ class AutoUpdater
   private function _copyPeculiarFiles()
   {
     $filePrefixes = array(
-      '/my.php',
-      '/app/webroot/files',
+      '/.htaccess', '/app/.htaccess', '/app/webroot/.htaccess', '/my.php', '/app/webroot/files',
     );
 
     foreach ($filePrefixes as $filePrefix) {

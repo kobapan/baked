@@ -23,10 +23,10 @@ class ThemePackage extends AppModel
   {
     try {
       $fp = @fopen($path, 'r+');
-      if (!$fp) throw new Exception(__('Failed to open file (%s).', $path));
+      if (!$fp) throw new Exception(__('ファイルを開けませんでした (%s)', $path));
 
       $r = fwrite($fp, $text);
-      if (!$r) throw new Exception(__('Failed to write text to %s.', $path));
+      if (!$r) throw new Exception(__('書き込みに失敗しました (%s)', $path));
       return TRUE;
     } catch (Exception $e) {
       return $e;
@@ -39,10 +39,10 @@ class ThemePackage extends AppModel
       $this->begin();
 
       $themePackage = Configure::read("Themes.{$package}");
-      if (empty($themePackage)) throw new Exception(__('Not found the theme.'));
+      if (empty($themePackage)) throw new Exception(__('テーマが見つかりませんでした'));
 
-      if (!in_array($type, array('pc', 'mobile'))) throw new Exception(__('The type is invalid.'));
-      if (!$themePackage['support'][$type]) throw new Exception(__('The theme cannot support to %s.', $type));
+      if (!in_array($type, array('pc', 'mobile'))) throw new Exception(__('テーマタイプが不正です'));
+      if (!$themePackage['support'][$type]) throw new Exception(__('このテーマは選択したタイプに対応していません (type:%s)', $type));
 
       $this->loadModel('System');
 
@@ -67,19 +67,19 @@ class ThemePackage extends AppModel
       $this->begin();
 
       $themePackage = Configure::read("Themes.{$package}");
-      if (empty($themePackage)) throw new Exception(__('Not found the theme.'));
+      if (empty($themePackage)) throw new Exception(__('テーマが見つかりませんでした'));
 
       $this->loadModel('System');
       $useTheme = $this->System->value(System::KEY_USE_THEME);
       $useThemeMobile = $this->System->value(System::KEY_USE_THEME_MOBILE);
 
       if (in_array($package, array($useTheme, $useThemeMobile))) {
-        throw new Exception(__('Cannot delete the theme in use.'));
+        throw new Exception(__('使用中のテーマは削除できません'));
       }
 
       $this->loadModel('Plugin');
       $r = $this->Plugin->remove($package);
-      if ($r !== TRUE) throw new Exception(__('Failed to delete plugin.'));
+      if ($r !== TRUE) throw new Exception(__('プラグインの削除に失敗しました'));
 
       Baked::deleteAllCache();
 

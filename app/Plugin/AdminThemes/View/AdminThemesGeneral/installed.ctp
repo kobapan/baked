@@ -71,7 +71,7 @@
       'div' => FALSE,
     ));
     ?>
-    <button type="submit" class="button button-primary button-tiny button-pill"><?php echo __('Save') ?></button>
+    <button type="submit" class="button button-primary button-tiny button-pill"><?php echo __('保存') ?></button>
 
     <?php
     echo $this->Form->end();
