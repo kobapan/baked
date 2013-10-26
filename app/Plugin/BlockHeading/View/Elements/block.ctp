@@ -1,1 +1,1 @@
-<h<?php echo $block['Block']['data']['h']; ?>><span class="text"><?php echo h($block['Block']['data']['text']) ?></span></h<?php echo $block['Block']['data']['h']; ?>>
+<?php echo sprintf('<h%s><span class="text">%s</span></h%s>', $block['Block']['data']['h'], $block['Block']['data']['text'], $block['Block']['data']['h']) ?>

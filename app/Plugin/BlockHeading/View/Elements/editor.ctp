@@ -5,10 +5,9 @@ echo $this->Form->create('Block', array(
 ));
 ?>
 
-
 <ul class="bk-editor-boxes">
   <li>
-    <div class="bk-title"><?php echo __('サイズ') ?></div>
+    <div class="bk-title"><?php echo __d('BlockHeading', 'サイズ') ?></div>
     <?php
     echo $this->Form->input('Block.h', array(
       'value' => $block['Block']['data']['h'],
@@ -19,7 +18,7 @@ echo $this->Form->create('Block', array(
     ?>
   </li>
   <li>
-    <div class="bk-title"><?php echo __('テキスト') ?></div>
+    <div class="bk-title"><?php echo __d('BlockHeading', 'テキスト') ?></div>
     <?php
     echo $this->Form->input('Block.text', array(
       'value' => $block['Block']['data']['text'],
@@ -32,9 +31,8 @@ echo $this->Form->create('Block', array(
 
 <div class="spacer1"></div>
 
-<button type="submit" class="button button-primary button-pill button-small"><?php echo __('保存') ?></button>
+<button type="submit" class="button button-primary button-pill button-small"><?php echo __d('BlockHeading', '保存') ?></button>
 
 <?php
 echo $this->Form->end();
-
 
