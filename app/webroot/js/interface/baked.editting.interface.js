@@ -59,7 +59,7 @@ $(function(){
   $(document).on('click', '[data-bk-add-page]', function(){
     var package = $(this).attr('data-bk-add-page');
     var $ul = $(this).parents('ul');
-    var pageId = $ul.attr('data-bk-page-id')
+    var pageId = $ul.attr('data-bk-page-id');
     baked.savePageManager({
       ok: function(r){
         if (!baked.busyFilter()) return;
@@ -97,7 +97,7 @@ $(function(){
           complete: function(){
             baked.busyEnd();
           }
-        })
+        });
       }
     });
   });
@@ -161,7 +161,7 @@ $(function(){
   $(document).on('click', '.bk-sign-out', function(){
     baked.signOut(function(){
       baked.reload();
-    })
+    });
   });
 
   $(document).on('click', function(e){

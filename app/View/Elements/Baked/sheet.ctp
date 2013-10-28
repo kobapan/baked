@@ -1,15 +1,16 @@
-<div id="bk-sheet-<?php echo $sheet; ?>" class="bk-sheet" data-bk-sheet="<?php echo $sheet; ?>">
+<?php
+$commonDisplay = !empty($common) ? '1' : '0';
+?>
+<div id="bk-sheet-<?php echo $sheet; ?>" class="bk-sheet" data-bk-sheet="<?php echo $sheet; ?>" data-bk-common="<?php echo $commonDisplay ?>">
 
-  <div class="bk-blocks">
-    <?php foreach ($blocks as $block) : ?>
-      <?php
+  <div class="bk-blocks"><?php
+    foreach ($blocks as $block) :
       if ($block['Block']['sheet'] != $sheet) continue;
       echo $this->element('Baked/block', array(
         'block' => $block,
       ));
-      ?>
-    <?php endforeach ; ?>
-  </div>
+    endforeach ;
+  ?></div>
 
   <?php if (EDITTING) : ?>
     <div class="bk-general bk-add-block-outer">

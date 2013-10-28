@@ -100,10 +100,13 @@ Baked.prototype.goEditModeOrShowSigninBox = function(){
 };
 
 Baked.prototype.showSigninBox = function(){
-  baked.post('system/api_system/html_signin', {
+  var self = this;
+  this.showLoading();
+  this.post('system/api_system/html_signin', {
     dataType: 'html',
     success: function(r){
-      baked.showBox(r);
+      self.showBox(r);
+      self.hideLoging();
     }
   });
 };
@@ -133,7 +136,7 @@ Baked.prototype.signOut = function(callback){
 };
 
 Baked.prototype.reload = function(){
-  location.href = location.href;
+  location.reload();
 };
 
 /**
@@ -329,6 +332,7 @@ Baked.prototype.sortableBlocks = function(){
     handle: 'a.bk-block-move-handle',
     connectWith: '.bk-blocks',
     revert: true,
+    placeholder: 'bk-sortable-placeholder',
     tolerance: 'pointer',
     start: function () {
       $('.ckeditor-textarea').each(function () {
@@ -472,7 +476,13 @@ Baked.prototype.busyEnd = function(){
   if (this.busy == 0) $.fancybox.hideLoading();
 };
 
+Baked.prototype.showLoading = function(){
+  $.fancybox.showLoading();
+};
 
+Baked.prototype.hideLoading = function(){
+  $.fancybox.hideLoading();
+};
 
 
 
