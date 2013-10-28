@@ -3,7 +3,7 @@
  * AutoUpdater
  *
  * @author Masayuki Akiyama
- * @version 0.0.0
+ * @version 0.0.1
  */
 class AutoUpdater
 {
@@ -38,6 +38,7 @@ class AutoUpdater
       $this->_moveCurrent();
       $this->_extractZip($this->zipUrl, $this->_targetDirPath);
       $this->_copyPeculiarFiles();
+      $this->_copyPlugins();
 
       return TRUE;
     } catch (Exception $e) {
@@ -130,28 +131,27 @@ class AutoUpdater
       }
     }
 
+    return TRUE;
+  }
+
+  private function _copyPlugins()
+  {
     $fromPluginPath = $this->_backupPath.DIRECTORY_SEPARATOR.'app'.DIRECTORY_SEPARATOR.'Plugin';
     $destPluginPath = $this->_targetDirPath.DIRECTORY_SEPARATOR.'app'.DIRECTORY_SEPARATOR.'Plugin';
     $dir = opendir($fromPluginPath);
     while (FALSE !== ($file = readdir($dir))) {
       if (($file == '.') || ($file == '..')) continue;
-      if (!preg_match("/^Theme/", $file)) continue;
 
       $frompath = $fromPluginPath.DIRECTORY_SEPARATOR.$file;
       $destpath = $destPluginPath.DIRECTORY_SEPARATOR.$file;
 
-      if (!is_dir($frompath)) continue;
+      // Skip to next if the directory/file exists in the directory of the new Baked.
+      if (file_exists($destpath)) continue;
 
-      if (file_exists($destpath)) {
-        $r = $this->_deleteDir($destpath);
-        if (!$r) throw new Exception(__('ディレクトリを削除できませんでした (%s)', $destpath));
-      }
       $r = $this->_copyRecursively($frompath, $destpath);
       if (!$r) throw new Exception(__('ディレクトリをコピーできませんでした (%s -> %s)', $frompath, $destpath));
     }
     closedir($dir);
-
-    return TRUE;
   }
 
   private function _rollbackCurrent()
