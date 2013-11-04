@@ -5,6 +5,63 @@ class Baked extends Box
 {
   public static $_timezone = 'UTC';
 
+/**
+ * テーマプラグインの設定ファイルに記述されたリソースファイルを読み込む
+ *
+ * @return void
+ */
+  public static function loadThemePluginResources($plugin)
+  {
+    $resourcesList = Configure::read("Themes.{$plugin}.resources");
+    if ($resourcesList) {
+      foreach ($resourcesList as $key => $resources) {
+        Baked::add($key, $resources);
+      }
+    }
+  }
+
+/**
+ * 各種ブロックに必要なリソースを読み込むよう設定
+ *
+ * @return void
+ */
+  public static function setupBlocks()
+  {
+    $searchFilesList = array(
+      'CSS' => array(
+        '/css/block.css',
+      ),
+      'CSS_EDITTING' => array(
+        '/css/editor.css',
+      ),
+      'JS' => array(
+        '/js/block.js',
+      ),
+      'JS_EDITTING' => array(
+        '/js/editor.js',
+      ),
+    );
+
+    App::uses('Folder', 'Utility');
+    $pluginsRoot = APP.'Plugin';
+    $folder = new Folder($pluginsRoot);
+    list($plugins, $files) = $folder->read();
+
+    foreach ($plugins as $plugin) {
+      if (!preg_match('/^Block/', $plugin)) continue;
+
+      foreach ($searchFilesList as $key => $searchFiles) {
+        foreach ($searchFiles as $searchFile) {
+          $realpath = $pluginsRoot.'/'.$plugin.'/webroot'.$searchFile;
+          if (file_exists($realpath)) {
+            $path = '/'.$plugin.$searchFile;
+            Baked::add($key, $path);
+          }
+        }
+      }
+    }
+  }
+
   public static function setTimezone($timezone)
   {
     self::$_timezone = $timezone;

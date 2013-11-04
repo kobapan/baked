@@ -1,7 +1,7 @@
 <?php
 Configure::write('Themes.ThemeCustom', array(
   'name' => __('カスタマイズ用テーマ'),
-  'author' => 'Baked.org',
+  'author' => 'bakedcms.org',
   'url' => 'http://bakedcms.org/',
   'support' => array(
     'pc'     => TRUE,

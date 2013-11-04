@@ -57,7 +57,8 @@ class DisplayController extends AppController
       }
     }
 
-    $this->_setupBlocks();
+    #$this->_setupBlocks();
+    Baked::setupBlocks();
 
     $this->set(array(
       'menuList' => $menuList,
@@ -76,58 +77,8 @@ class DisplayController extends AppController
     } else {
       $this->plugin = $this->System->value(System::KEY_USE_THEME);
     }
-  }
 
-  private function _setupBlocks()
-  {
-    $blockEquipments = array(
-      'js'  => array(),
-      'css' => array(),
-    );
-
-    App::uses('Folder', 'Utility');
-    $folder = new Folder(APP.'Plugin');
-    list($plugins, $files) = $folder->read();
-    $pluginRoot = APP.'Plugin'.DS;
-
-    foreach ($plugins as $plugin) {
-      if (!preg_match('/^Block/', $plugin)) continue;
-      $pluginWebroot = $pluginRoot.$plugin.DS.'webroot'.DS;
-
-      $blockJsPath = $pluginWebroot.'js'.DS.'block.js';
-      if (file_exists($blockJsPath)) {
-        $blockEquipments['js'][] = array(
-          'file' => sprintf('%s/js/block.js', $plugin),
-        );
-      }
-
-      $editorJsPath = $pluginWebroot.'js'.DS.'editor.js';
-      if (file_exists($editorJsPath)) {
-        $blockEquipments['js'][] = array(
-          'file' => sprintf('%s/js/editor.js', $plugin),
-          'editting' => TRUE,
-        );
-      }
-
-      $blockCssPath = $pluginWebroot.'css'.DS.'block.css';
-      if (file_exists($blockCssPath)) {
-        $blockEquipments['css'][] = array(
-          'file' => sprintf('%s/css/block.css', $plugin),
-        );
-      }
-
-      $editorCssPath = $pluginWebroot.'css'.DS.'editor.css';
-      if (file_exists($editorCssPath)) {
-        $blockEquipments['css'][] = array(
-          'file' => sprintf('%s/css/editor.css', $plugin),
-          'editting' => TRUE,
-        );
-      }
-    }
-
-    $this->set(array(
-      'blockEquipments' => $blockEquipments,
-    ));
+    Baked::loadThemePluginResources($this->plugin);
   }
 
 }

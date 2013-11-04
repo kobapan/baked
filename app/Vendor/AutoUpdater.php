@@ -134,6 +134,13 @@ class AutoUpdater
     return TRUE;
   }
 
+/**
+ * 新しいBakedには無くて現行のBakedには存在するPluginディレクトリ以下のディレクトリを全てコピー
+ * ただしThemeのプレフィクスを持つディレクトリは新しいBakedに同名のディレクトリがある場合は上書きコピーする
+ *
+ * @return void
+ * @throws Exception
+ */
   private function _copyPlugins()
   {
     $fromPluginPath = $this->_backupPath.DIRECTORY_SEPARATOR.'app'.DIRECTORY_SEPARATOR.'Plugin';
@@ -145,11 +152,24 @@ class AutoUpdater
       $frompath = $fromPluginPath.DIRECTORY_SEPARATOR.$file;
       $destpath = $destPluginPath.DIRECTORY_SEPARATOR.$file;
 
-      // Skip to next if the directory/file exists in the directory of the new Baked.
-      if (file_exists($destpath)) continue;
+      if (!is_dir($frompath)) continue;
+
+      // Theme Plugin
+      if (preg_match('/^Theme/', $file)) {
+        // Delete the theme plugin if the plugin exists in new Baked plugin directory.
+        if (file_exists($destpath)) {
+          $r = $this->_deleteDir($destpath);
+          if (!$r) throw new Exception(__('ディレクトリを削除できませんでした (%s)', $destpath));
+        }
+      }
+      // Other Plugin
+      else {
+        // Skip to next if the directory/file exists in the directory of the new Baked.
+        if (file_exists($destpath)) continue;
+      }
 
       $r = $this->_copyRecursively($frompath, $destpath);
-      if (!$r) throw new Exception(__('ディレクトリをコピーできませんでした (%s -> %s)', $frompath, $destpath));
+      if (!$r) throw new Exception(__('プラグインをコピーできませんでした (%s -> %s)', $frompath, $destpath));
     }
     closedir($dir);
   }
