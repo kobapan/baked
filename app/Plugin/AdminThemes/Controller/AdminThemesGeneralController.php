@@ -1,16 +1,7 @@
 <?php
-App::uses('AppAdminController', 'Controller');
-
-class AdminThemesGeneralController extends AppAdminController
+class AdminThemesGeneralController extends AdminThemesAppController
 {
   public $uses = array('ThemePackage', 'System');
-
-  public function beforeFilter()
-  {
-    parent::beforeFilter();
-
-    Baked::add('ADMIN_CSS', array('/AdminThemes/css/style.css'));
-  }
 
   public function installed()
   {

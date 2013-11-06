@@ -37,6 +37,14 @@ $.fn.bkCkeditor = function(options){
   $(this).ckeditor(defaults);
 };
 
+Baked.prototype.confirm = function(message){
+  return window.confirm(message);
+};
+
+Baked.prototype.alert = function(message){
+  alert(message);
+};
+
 Baked.prototype.saveSession = function(name, data, callback){
   this.post('system/api_system/save_session', {
     data: {

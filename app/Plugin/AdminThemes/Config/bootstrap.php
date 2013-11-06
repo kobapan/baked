@@ -18,6 +18,10 @@ Configure::write('Admin.AdminThemes', array(
         'name' => __('モバイルテーマの編集'),
         'href' => 'admin/themes/general/edit_mobile',
       ),
+      array(
+        'name' => __('テーマ検索'),
+        'href' => 'admin/themes/search',
+      ),
     ),
   ),
 ));

@@ -6,6 +6,43 @@ class ThemePackage extends AppModel
   public $name = 'ThemePackage';
   public $useTable = FALSE;
 
+  public function extractZip($zippath, $plugin, &$pluginPath)
+  {
+    $zipOpened = FALSE;
+
+    try {
+      $tmpDir = rtrim(sys_get_temp_dir(), DS);
+      $uniqId = uniqid('baked-theme-');
+
+      $parsed = parse_url($zippath);
+      if (!empty($parsed['scheme']) && in_array($parsed['scheme'], array('http', 'https', 'ftp', 'ftps'))) {
+        $newZippath = $tmpDir.DS.$uniqId.'.zip';
+        $r = @copy($zippath, $newZippath);
+        if ($r === FALSE) throw new Exception(__('ZIPファイルをダウンロードできませんでした'));
+        $zippath = $newZippath;
+      }
+
+      $zip = new ZipArchive;
+      $r = $zip->open($zippath);
+      if ($r !== TRUE) throw new Exception(__('ZIPファイルを開けませんでした (%s)', $zippath));
+      $zipOpened = TRUE;
+
+      $extractPath = $tmpDir.DS.$uniqId;
+      $zip->extractTo($extractPath);
+      $zip->close();
+      $zipOpened = FALSE;
+
+      $pluginPath = $extractPath.DS.$plugin;
+      if (!file_exists($pluginPath)) throw new Exception(__('解凍したテーマディレクトリの中に %s プラグインが見つかりませんでした', $plugin));
+
+      return TRUE;
+    } catch (Exception $e) {
+      if ($zipOpened) $zip->close();
+
+      return $e;
+    }
+  }
+
   public function installed()
   {
     $themePackages = Configure::read('Themes');

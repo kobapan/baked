@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="<?php echo URL ?>css/normalize.css">
 <link rel="stylesheet" href="<?php echo URL ?>css/admin.css">
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css">
+<link rel="stylesheet" href="<?php echo URL ?>js/fancybox/source/jquery.fancybox.css">
 <link rel="stylesheet" href="<?php echo URL ?>css/buttons.css">
 <link rel="stylesheet" href="<?php echo URL ?>js/codemirror/lib/codemirror.css">
 <?php
@@ -23,8 +24,10 @@ echo $this->fetch('css');
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+<script src="<?php echo URL ?>js/buttons.js"></script>
 <script src="<?php echo URL ?>js/class/Baked.js"></script>
 <script src="<?php echo URL ?>js/interface/baked.interface.js"></script>
+<script src="<?php echo URL ?>js/fancybox/source/jquery.fancybox.js"></script>
 <script src="<?php echo URL ?>js/jquery.plugins/jquery.singlesender.js"></script>
 <script src="http://bp.yahooapis.com/2.4.21/browserplus-min.js"></script>
 <script src="<?php echo URL ?>js/ckeditor/ckeditor.js"></script>

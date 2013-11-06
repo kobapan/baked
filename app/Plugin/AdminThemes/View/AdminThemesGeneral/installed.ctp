@@ -11,7 +11,7 @@
     echo $this->Baked->hiddenToken();
     ?>
 
-    <ul class="ul-themes">
+    <ul class="ul-themes-01">
       <?php foreach ($themePackages as $p => $themePackage) : ?>
         <?php
         $screenImg = URL.$p."/_meta/screen.png";
@@ -38,7 +38,7 @@
               <?php if (empty($themePackage['url'])) : ?>
                 <i class="icon icon-user"></i><?php echo h(@$themePackage['author']) ?>
               <?php else : ?>
-                <a href="<?php echo h($themePackage['url']) ?>"><i class="icon icon-user"></i><?php echo h(@$themePackage['author']) ?></a>
+                <a href="<?php echo h($themePackage['url']) ?>" target="_blank"><i class="icon icon-user"></i><?php echo h(@$themePackage['author']) ?></a>
               <?php endif ; ?>
             </div>
           </div>
@@ -65,7 +65,7 @@
       'options' => array(
         'set_pc' => __('PC用テーマに設定'),
         'set_mobile' => __('モバイル用テーマに設定'),
-        //'delete' => __('削除'),
+        'delete' => __('削除'),
       ),
       'empty' => TRUE,
       'div' => FALSE,

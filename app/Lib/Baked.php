@@ -6,6 +6,64 @@ class Baked extends Box
   public static $_timezone = 'UTC';
 
 /**
+ * Check if the plugn is installed.
+ *
+ * @param string Plugin name
+ * @return boolean
+ */
+  public static function installedPlugin($plugin)
+  {
+    App::uses('Folder', 'Utility');
+    $folder = new Folder(APP.'Plugin');
+    list ($plugins) = $folder->read();
+    return in_array($plugin, $plugins);
+  }
+
+/**
+ * Rename the new plug-in directory into Baked plug-ins directory.
+ *
+ * @param string New plug-in path
+ * @param string Plug-in name
+ * @return boolean
+ */
+  public function renamePlugin($pluginPath, $plugin = NULL, &$error)
+  {
+    $deleted = FALSE;
+
+    $tmpDir = rtrim(sys_get_temp_dir(), DS);
+    if (empty($plugin)) $plugin = basename($pluginPath);
+    $destPath = APP.'Plugin'.DS.$plugin;
+    $deletePath = $tmpDir.DS.uniqid();
+
+    try {
+      if (!file_exists($pluginPath)) throw new Exception(__('ディレクトリが見つかりませんでした (%s)', $pluginPath));
+
+      if (!is_writable(APP.'Plugin')) throw new Exception(__('プラグインルートに書き込み権限がありません (%s)', APP.'Plugin'));
+
+      if (file_exists($destPath)) {
+        $r = copyRecursively($destPath, $deletePath);
+        if (!$r) throw new Exception(__('既存のプラグインをバックアップできませんでした'));
+
+        $r = deleteDir($destPath);
+        if (!$r) throw new Exception(__('既存のプラグインをアンインストールできませんでした'));
+
+        $deleted = TRUE;
+      }
+
+      $r = rename($pluginPath, $destPath);
+      if (!$r) throw new Exception(__('プラグインをインストールできませんでした'));
+
+      return TRUE;
+    } catch (Exception $e) {
+      if ($deleted) rename($deletePath, $destPath);
+
+      $error = $e->getMessage();
+
+      return FALSE;
+    }
+  }
+
+/**
  * テーマプラグインの設定ファイルに記述されたリソースファイルを読み込む
  *
  * @return void

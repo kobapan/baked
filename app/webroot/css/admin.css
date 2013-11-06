@@ -5,6 +5,11 @@ body {
   font-family: 'Lucida Grande', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
   font-size: 10pt;
 }
+.clearfix:after {
+  content: "";
+  clear: both;
+  display: block;
+}
 a {
   text-decoration: none;
   color: #00a1cb;

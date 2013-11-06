@@ -342,7 +342,48 @@ function arrayWithKeys($array, $keys)
   return $array;
 }
 
+function deleteDir($dir)
+{
+  if (!is_dir($dir)) {
+    return FALSE;
+  } else {
+    $filelist = scandir($dir);
+    foreach ($filelist as $filename) {
+      if ($filename == '.' || $filename == '..') continue;
+      $path = $dir.DIRECTORY_SEPARATOR.$filename;
+      if (is_dir($path)) {
+        deleteDir($path);
+      } else {
+        unlink($path);
+      }
+    }
+  }
+  rmdir($dir);
+  return TRUE;
+}
 
+function copyRecursively($src, $dest)
+{
+  $src = rtrim($src, DIRECTORY_SEPARATOR);
+  $dest = rtrim($dest, DIRECTORY_SEPARATOR);
+
+  $dir = opendir($src);
+  mkdir($dest);
+  while (FALSE !== ($file = readdir($dir))) {
+    if (($file != '.') && ($file != '..')) {
+      if (is_dir($src.DIRECTORY_SEPARATOR.$file)) {
+        $r = copyRecursively($src.DIRECTORY_SEPARATOR.$file, $dest.DIRECTORY_SEPARATOR.$file);
+        if (!$r) return FALSE;
+      } else {
+        $r = copy($src.DIRECTORY_SEPARATOR.$file, $dest.DIRECTORY_SEPARATOR.$file);
+        if (!$r) return FALSE;
+      }
+    }
+  }
+  closedir($dir);
+
+  return TRUE;
+}
 
 
 

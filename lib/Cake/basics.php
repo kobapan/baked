@@ -225,7 +225,7 @@ function pluginSplit($name, $dotAppend = false, $plugin = null) {
  */
 function pr($var) {
   if (Configure::read('debug') > 0) {
-    echo '<pre style="background: #fff; font-size: 9pt; text-align: left;">';
+    echo '<pre style="background: #fff; font-size: 9pt; text-align: left; z-index: 10000; border: 1px solid #ccc;">';
     print_r($var);
     echo '</pre>';
   }
