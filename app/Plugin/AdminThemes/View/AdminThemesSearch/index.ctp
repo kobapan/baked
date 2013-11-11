@@ -18,7 +18,7 @@
               <?php endif ; ?>
             </ul>
             <div class="name"><?php echo h($theme['theme_name']) ?></div>
-            <div class="description"><?php echo h($theme['theme_description']) ?></div>
+            <div class="description"><?php echo nl2br(h($theme['theme_description'])) ?></div>
 
             <div class="buttons">
               <span class="button-dropdown" data-buttons="dropdown">

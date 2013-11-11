@@ -64,6 +64,23 @@ class CleanShell extends AppShell
         system(sprintf('find %s -name "%s" -delete', ROOT, $file));
       }
 
+
+      $pluginPath = APP.'Plugin';
+      $folder->path = $pluginPath;
+      $excepted = array('ThemeCleanPaperOrange', 'ThemeJanuary', 'ThemeCustom');
+      list($dirs, $files) = $folder->read();
+      foreach ($dirs as $dir) {
+        if (in_array($dir, $excepted)) continue;
+
+        if (preg_match('/^Theme/', $dir)) {
+          $path = $pluginPath.DS.$dir;
+          $folder->path = $path;
+          $r = $folder->delete();
+          if ($r === FALSE) throw new Exception("Failed to delete {$path}");
+          $this->out("Deleted: {$path}");
+        }
+      }
+
     } catch (Exception $e) {
       $this->error($e->getMessage());
     }

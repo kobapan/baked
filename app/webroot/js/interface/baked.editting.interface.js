@@ -93,6 +93,7 @@ $(function(){
           },
           ok: function(r){
             baked.showPageManager();
+            baked.reloadDynamic();
           },
           complete: function(){
             baked.busyEnd();

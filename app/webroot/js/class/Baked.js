@@ -269,6 +269,7 @@ Baked.prototype.insertPage = function(params, callbacks){
     data: params,
     ok: function(r){
       if (callbacks && callbacks.ok) callbacks.ok(r);
+      self.reloadDynamic();
     },
     complete: function(){
       if (callbacks && callbacks.complete) callbacks.complete();
@@ -386,7 +387,8 @@ Baked.prototype.reloadDynamic = function(){
     dataType: 'html',
     success: function(r){
       var $body = $('body');
-      $(r).find('[data-bk-dynamic]').each(function(){
+      var $html = $('<div>'+r+'</div>');
+      $html.find('[data-bk-dynamic]').each(function(){
         var dynamic = $(this).attr('data-bk-dynamic');
         var selector = '[data-bk-dynamic='+dynamic+']';
         $body.find(selector).replaceWith(this);

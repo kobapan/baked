@@ -88,10 +88,12 @@ class Page extends AppModel
       foreach ($pages as &$page) {
         if ($page['Page']['parent_page_id'] == 0) {
           $page['Page']['url'] = URL.$page['Page']['name'];
+          $page['Page']['depth'] = 0;
         } else {
           $p = &$pagePointers[$page['Page']['parent_page_id']];
           if (empty($p)) continue;
           $page['Page']['url'] = $p['Page']['url'].'/'.$page['Page']['name'];
+          $page['Page']['depth'] = $p['Page']['depth'] + 1;
         }
         $pagePointers[$page['Page']['id']] = $page;
       }
@@ -100,6 +102,7 @@ class Page extends AppModel
         $data = array(
           'id' => $pagePointer['Page']['id'],
           'path' => $pagePointer['Page']['url'],
+          'depth' => $pagePointer['Page']['depth'],
         );
         $r = $this->add($data, TRUE, NULL, self::VALIDATION_MODE_SKIP);
         if ($r !== TRUE) throw $r;
@@ -384,10 +387,24 @@ class Page extends AppModel
 
       $current = $this->find('first', array(
         CONDITIONS => array('Page.id' => $id),
-        FIELDS => array('Page.name', 'Page.depth', 'Page.package'),
+        FIELDS => array('Page.parent_page_id', 'Page.name', 'Page.depth', 'Page.package'),
       ));
       if ($current['Page']['name'] == 'index' && $current['Page']['depth'] == 0) {
         throw new Exception(__('トップページは削除できません。'));
+      }
+
+      $childPageIds = $this->find('list', array(
+        CONDITIONS => array('Page.parent_page_id' => $id,),
+        FIELDS => array('Page.id'),
+        'limit' => FALSE,
+      ));
+      foreach ($childPageIds as $childPageId) {
+        $data = array(
+          'id' => $childPageId,
+          'parent_page_id' => $current['Page']['parent_page_id'],
+        );
+        $r = $this->add($data, TRUE);
+        if ($r !== TRUE) throw new Exception(__('子ページのアップデートに失敗しました (%s)', $r->getMessage()));
       }
 
       $this->loadModel('Block');
