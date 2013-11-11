@@ -8,11 +8,12 @@ ul.ul-themes-01 {
 ul.ul-themes-01 > li {
   float: left;
   margin-left: -1px;
-  margin-bottom: 20px;
+  height: 250px;
   border-left: 1px solid #eee;
   padding-left: 20px;
   padding-right: 20px;
   position: relative;
+  margin-bottom: 20px;
 }
 ul.ul-themes-01 > li img.screen {
   width: 200px;
