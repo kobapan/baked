@@ -9,11 +9,11 @@ Configure::write('Themes.ThemeJanuary', array(
   ),
   'resources' => array(
     'CSS' => array(
-      '/ThemeJanuary.css/jquery.sidr.light.css',
+      'ThemeJanuary.jquery.sidr.light.css',
     ),
     'JS' => array(
-      '/ThemeJanuary.js/jquery.sidr.min.js',
-      '/ThemeJanuary.js/interface.js',
+      'ThemeJanuary.jquery.sidr.min.js',
+      'ThemeJanuary.interface.js',
     )
   ),
 ));

@@ -35,7 +35,7 @@ $environment->setup();
 require_once APP.'Lib'.DS.'Baked.php';
 require_once APP.'Lib'.DS.'Reception.php';
 
-define('BK_VERSION', '0.1.2');
+define('BK_VERSION', '0.1.2.1');
 
 /**
  * CakePHP Debug Level:
