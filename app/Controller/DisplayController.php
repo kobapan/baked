@@ -72,7 +72,7 @@ class DisplayController extends AppController
 
   private function _selectTheme()
   {
-    if (!$this->RequestHandler->isMobile()) {
+    if ($this->RequestHandler->isMobile()) {
       $this->plugin = $this->System->value(System::KEY_USE_THEME_MOBILE);
     } else {
       $this->plugin = $this->System->value(System::KEY_USE_THEME);
