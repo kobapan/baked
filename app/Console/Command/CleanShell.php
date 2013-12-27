@@ -8,6 +8,12 @@ class CleanShell extends AppShell
   public function getOptionParser()
   {
     $parser = parent::getOptionParser();
+    $parser->addOptions(array(
+      'build_path' => array(
+        'short' => 'b',
+        'help' => 'The path to baked_build directory.'
+      ),
+    ));
     return $parser;
   }
 
@@ -15,8 +21,44 @@ class CleanShell extends AppShell
   {
     $this->__prepare();
 
+    $tmpDirPath = rtrim(sys_get_temp_dir(), DS);
+    $trashDirPath = $tmpDirPath.DS.uniqid();
+    $originalFilesDirPath = WWW_ROOT.'files';
+
+    $this->out(sprintf('Tmp: %s', $tmpDirPath));
+
+    $movedFilesDir = FALSE;
+    $copiedFilesDir = FALSE;
+
     try {
       App::uses('Folder', 'Utility');
+
+      $r = mkdir($trashDirPath);
+      if ($r === FALSE) throw new Exception('Failed to make TMP dir. (%s)', $tmpDirPath);
+
+
+      if (empty($this->params['build_path'])) {
+        throw new Exception('Empty build_path option.');
+      }
+
+      if (!file_exists($this->params['build_path'])) {
+        throw new Exception(sprintf('The build_path path is wrong. (%s)', $this->params['build_path']));
+      }
+
+      if (file_exists($originalFilesDirPath)) {
+        $r = rename($originalFilesDirPath, $trashDirPath.DS.'files');
+        if ($r !== TRUE) throw new Exception(sprintf('Failed to move the files path is wrong. (%s)', $originalFilesDirPath));
+        $trashDirPath = TRUE;
+      }
+
+      $filesDirPath = $this->params['build_path'].DS.'files';
+      if (!file_exists($filesDirPath)) {
+        throw new Exception(sprintf('The files path is wrong. (%s)', $filesDirPath));
+      }
+      $r = copyRecursively($filesDirPath, $originalFilesDirPath);
+      if ($r !== TRUE) throw new Exception(sprintf('Failed to copy %s to %s.', $filesDirPath, $originalFilesDirPath));
+      $copiedFilesDir = TRUE;
+
 
       $myConfPath = ROOT.DS.'my.php';
       $fp = @fopen($myConfPath, 'w');
@@ -83,6 +125,13 @@ class CleanShell extends AppShell
 
     } catch (Exception $e) {
       $this->error($e->getMessage());
+
+      if ($movedFilesDir) {
+
+      }
+      if ($copiedFilesDir) {
+
+      }
     }
 
     $this->out('All done').
