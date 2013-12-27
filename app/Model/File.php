@@ -121,8 +121,10 @@ class File extends AppModel
       ));
       if (empty($file)) throw new Exception(__('Fileレコードが見つかりませんでした。'));
 
-      $r = unlink($file['File']['absolute_path']);
-      if ($r !== TRUE) throw new Exception(__('ファイルソースを削除できませんでした。'));
+      if (file_exists($file['File']['absolute_path'])) {
+        $r = @unlink($file['File']['absolute_path']);
+        if ($r !== TRUE) throw new Exception(__('ファイルソースを削除できませんでした。'));
+      }
 
       $r = parent::delete($id, $cascade);
       if ($r !== TRUE) throw new Exception(__('Fileレコードを削除できませんでした。'));
