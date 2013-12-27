@@ -15,7 +15,10 @@ class AdminSettingsUpdateController extends AppAdminController
 
     $bakedApi = new BakedApi;
     $r = $bakedApi->get('versions/check_update', array(
+      'url' => Router::url('/', TRUE),
       'current_version' => BK_VERSION,
+      'host' => gethostname(),
+      'ip' => $_SERVER['REMOTE_ADDR'],
     ));
     if ($r === FALSE) {
       Baked::setFlash($bakedApi->error(), 'error');
