@@ -16,6 +16,7 @@ AdminBlog.prototype.setupEditor = function($dom){
       ,['Source']
     ],
     height: 400,
+    forcePasteAsPlainText: true,
     filebrowserBrowseUrl: baked.base+'js/kcfinder/browse.php?type=files',
     filebrowserImageBrowseUrl: baked.base+'js/kcfinder/browse.php?type=images',
     filebrowserFlashBrowseUrl: baked.base+'js/kcfinder/browse.php?type=flash',
