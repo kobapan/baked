@@ -48,6 +48,9 @@ ul#bk-toolbar > li > a:hover {
 div.bk-sheet {
   position: relative;
 }
+div.bk-sheet.highlight {
+  background: url(../img/icons/bg-move-handle.png);
+}
 div.bk-blocks {
   min-height: 28px;
 }

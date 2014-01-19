@@ -165,6 +165,14 @@ $(function(){
     });
   });
 
+  $(document).on('mouseenter', '.bk-add-block-outer', function(){
+    $(this).parents('.bk-sheet').addClass('highlight');
+  });
+
+  $(document).on('mouseleave', '.bk-add-block-outer', function(){
+    $('.bk-sheet.highlight').removeClass('highlight');
+  });
+
   $(document).on('click', function(e){
     if (!baked.showingBlockBox) return;
 
@@ -186,7 +194,6 @@ $(function(){
     $('#bk-available-pages').hide();
     baked.showingPageBox = false;
   });
-
 
 });
 
