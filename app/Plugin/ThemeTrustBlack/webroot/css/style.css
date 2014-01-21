@@ -24,6 +24,10 @@ ul, ol {
   margin: 0;
 }
 
+#cboxCurrent {
+  font-size: 9pt;
+}
+
 #wrap {
   background: #fff;
   width: 960px;
