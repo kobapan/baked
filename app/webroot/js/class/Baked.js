@@ -18,6 +18,7 @@ $.fn.bkCkeditor = function(options){
     enterMode : CKEDITOR.ENTER_BR,
     extraPlugins : 'youtube',
     allowedContent : true,
+    forcePasteAsPlainText: true,
     toolbar : [
       ['Bold','Italic']
       ,['NumberedList','BulletedList','-','Outdent','Indent','Blockquote']
