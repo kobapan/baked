@@ -10,6 +10,7 @@ class AppController extends Controller
     parent::beforeFilter();
 
     if (session_id() != '') {
+      return;
       header('HTTP/1.0 404 Not Found');
       die('404 Not Found');
     }
@@ -28,6 +29,15 @@ class AppController extends Controller
     }
 
     $this->_setToken();
+  }
+
+  public function beforeRender()
+  {
+    parent::beforeRender();
+
+    $this->set(array(
+      'title' => $this->title,
+    ));
   }
 
   private function _setToken()

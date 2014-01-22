@@ -16,11 +16,9 @@ class SetupController extends AppController
 
   public function beforeRender()
   {
-    if (defined('MY_CONFIGURED')) $this->redirect('/');
+    parent::beforeRender();
 
-    $this->set(array(
-      'title' => $this->title,
-    ));
+    if (defined('MY_CONFIGURED')) $this->redirect('/');
   }
 
   private function __checkRequirements(&$environemtns = NULL)

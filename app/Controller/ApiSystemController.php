@@ -71,7 +71,7 @@ class ApiSystemController extends AppController
 
     if (empty($_SESSION['Staff'])) $this->Api->ng(__('サインインしてください。'));
 
-    $_SESSION['Staff']['Editmode'] = TRUE;
+    $this->Staff->editmode(TRUE);
     $this->Api->ok();
   }
 
@@ -80,7 +80,7 @@ class ApiSystemController extends AppController
     $this->tokenFilterApi();
     $this->staffFilterApi();
 
-    $_SESSION['Staff']['Editmode'] = FALSE;
+    $this->Staff->editmode(FALSE);
     $this->Api->ok();
   }
 

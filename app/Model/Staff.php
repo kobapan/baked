@@ -43,6 +43,11 @@ class Staff extends AppModel
     }
   }
 
+  public function editmode($switch = TRUE)
+  {
+    $_SESSION['Staff']['Editmode'] = $switch;
+  }
+
   public function auth($params)
   {
     if (empty($params['email'])) throw new Exception(__('メールアドレスは必須です。'));

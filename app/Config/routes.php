@@ -1,5 +1,6 @@
 <?php
 Router::connect('/system/:controller/:action/*');
+Router::connect('/system/:controller/*');
 Router::connect('/files/:action/*', array('controller' => 'files'));
 Router::connect('/plugin/:plugin/:controller/:action/*');
 
