@@ -1,0 +1,16 @@
+<div class="entry">
+  <a href="<?php echo $entry['Entry']['path'] ?>" class="title"><h2><?php echo $entry['Entry']['title'] ?></h2></a>
+  <div class="sub">
+    <span class="published"><?php echo Baked::dateFormat($entry['Entry']['published'], 'Y年n月j日 H:i'); ?></span><?php
+    ?><span class="comments"><a href="<?php echo $entry['Entry']['path'] ?>#comments"><?php echo __('コメント') ?>(<?php echo $entry['Entry']['approved_comments_count'] ?>)</a></span>
+  </div>
+  <div class="body">
+    <div class="body1"><?php echo $entry['Entry']['body1'] ?></div>
+    <?php if (@$full) : ?>
+      <div class="body2"><?php echo $entry['Entry']['body2'] ?></div>
+    <?php endif ; ?>
+  </div>
+  <?php if (!@$full && !empty($entry['Entry']['body2'])) : ?>
+    <a href="<?php echo $entry['Entry']['path'] ?>" class="more-read button button-rounded button-flat-primary"><?php echo __('続きを見る') ?></a>
+  <?php endif ; ?>
+</div>
