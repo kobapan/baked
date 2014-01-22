@@ -222,6 +222,10 @@ ul, ol {
 #primary-footer .powered a:hover {
   color: #eee;
 }
+#primary-footer .powered .signin {
+  display: inline-block;
+  margin-right: 10px;
+}
 
 
 /**************************************/

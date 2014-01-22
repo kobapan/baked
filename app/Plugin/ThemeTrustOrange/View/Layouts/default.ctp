@@ -71,7 +71,10 @@
 
   <div id="primary-footer">
     <div class="copyright">Copyright <?php echo date('Y') ?>. All rights reserved.</div>
-    <div class="powered">Powered by <a href="http://bakedcms.org/">Baked</a></div>
+    <div class="powered">
+      <div class="signin"><?php echo $this->element('Baked/signin') ?></div>
+      Powered by <a href="http://bakedcms.org/">Baked</a>
+    </div>
   </div>
 
 </div><!-- #wrap -->
