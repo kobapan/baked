@@ -1,0 +1,453 @@
+@charset "utf-8";
+
+/**************************************/
+/* レイアウト */
+/**************************************/
+
+.clearfix:after {
+  content: "";
+  clear: both;
+  display: block;
+}
+body {
+  text-align: center;
+  font-size: 11pt;
+  background: #eee;
+  color: #333;
+}
+img {
+  border: none;
+  vertical-align: bottom;
+  max-width: 100%;
+}
+ul, ol {
+  margin: 0;
+}
+
+#cboxCurrent {
+  font-size: 9pt;
+}
+
+#wrap {
+  background: #fff;
+  width: 960px;
+  text-align: left;
+  margin: auto;
+  box-shadow: 0 0 10px rgba(0,0,0,.2);
+  border: 1px solid #ddd\9;
+  border-width: 0 1px\9;
+}
+.default #wrap {
+  overflow: hidden;
+}
+
+#primary-navigation {
+  overflow: hidden;
+  background: #FF6600;
+}
+#primary-navigation > ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+#primary-navigation > ul > li {
+  float: left;
+}
+#primary-navigation > ul > li > a {
+  display: block;
+  color: #fff;
+  padding: 15px 40px;
+  font-size: 9pt;
+  transition: all 0.4s ease;
+  color: #e9e9e9;
+  font-weight: bold;
+  text-decoration: none;
+}
+#primary-navigation > ul > li > a:hover {
+  background: #ff892e;
+  color: #fff;
+}
+#primary-navigation > ul > li.current > a {
+  color: #fff;
+}
+
+#primary-header {
+  position: relative;
+  height: 92px;
+}
+#primary-header > .logo {
+  position: absolute;
+  top: 24px;
+  left: 30px;
+  font-size: 20pt;
+  color: #FF6600;
+  text-decoration: none;
+  opacity: .7;
+  opacity: 1\9;
+  transition: all .3s ease;
+}
+#primary-header > .logo:hover {
+  opacity: 1;
+}
+#primary-header > dl {
+  position: absolute;
+  right: 30px;
+  top: 14px;
+  margin: 0;
+  font-size: 10pt;
+}
+#primary-header > dl > dd {
+  margin: 0;
+}
+
+#main-visual {
+  margin-bottom: 30px;
+}
+#main-visual .nivo-controlNav {
+  padding-bottom: 0;
+}
+
+#content {
+}
+#content iframe {
+  max-width: 100%;
+}
+
+#main {
+  float: right;
+  width: 620px;
+  margin-right: 30px;
+  position: relative;
+  z-index: 1;
+}
+
+#side {
+  float: left;
+  width: 250px;
+  margin-left: 30px;
+}
+
+#global-navigation {
+  padding-bottom: 30px;
+  overflow: hidden;
+}
+#global-navigation ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+#global-navigation a {
+  color: #333;
+  text-decoration: none;
+}
+#global-navigation > ul {
+  border-top: 2px solid #FF6600;
+  box-shadow: 0 2px 10px rgba(0,0,0,.1);
+}
+#global-navigation > ul > li {
+  border: 1px solid #ddd;
+  border-width: 0 1px 1px;
+}
+#global-navigation > ul > li.current,
+#global-navigation > ul > li:hover {
+  background: url(../images/bg-gradient-01.png) repeat-x 0 -24px;
+}
+#global-navigation > ul > li > a {
+  display: block;
+  padding: 8px 10px 8px 26px;
+  font-size: 10pt;
+  background: url(../images/arrow-square-right-gray.png) no-repeat 8px 11px;
+}
+#global-navigation > ul > li.current > a {
+  background-image: url(../images/arrow-square-right-black.png);
+}
+#global-navigation > ul > li > ul {
+  border-top: 1px solid #ddd;
+}
+#global-navigation > ul > li > ul > li {
+}
+#global-navigation > ul > li > ul > li > a {
+  display: block;
+  border-top: 1px dotted #ccc;
+  padding: 6px 10px 6px 30px;
+  background: url(../images/arrow-right.png) no-repeat 18px 12px;
+  font-size: 10pt;
+}
+#global-navigation > ul > li > ul > li:first-child > a {
+  border-top: none;
+}
+#global-navigation > ul > li > ul > li.current > a,
+#global-navigation > ul > li > ul > li > a:hover {
+  background-color: #f6f6f2;
+}
+#global-navigation > ul > li > ul > li > ul {
+  border-top: 1px dotted #ccc;
+}
+#global-navigation > ul > li > ul > li > ul > li {
+  border-bottom: 1px solid #fff;
+}
+#global-navigation > ul > li > ul > li > ul > li > a {
+  display: block;
+  font-size: 10pt;
+  padding: 5px 10px 5px 30px;
+}
+#global-navigation > ul > li > ul > li > ul > li.current > a,
+#global-navigation > ul > li > ul > li > ul > li > a:hover {
+  color: #900
+}
+
+#primary-footer {
+  margin-top: 40px;
+  background: #333;
+  overflow: hidden;
+  color: #999;
+  padding: 30px;
+  font-size: 9pt;
+  text-shadow: 0 1px 0 rgba(0,0,0,.2);
+}
+#primary-footer .copyright {
+  float: left;
+  width: 50%;
+}
+#primary-footer .powered {
+  float: right;
+  width: 50%;
+  text-align: right;
+}
+#primary-footer .powered a {
+  color: #999;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+#primary-footer .powered a:hover {
+  color: #eee;
+}
+#primary-footer .powered .signin {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+
+/**************************************/
+/* 各ブロックのスタイル */
+/**************************************/
+
+/* 見出し */
+.BlockHeading > .bk-block-content {
+  overflow: hidden;
+}
+.bk-block-content h1 {
+  margin: 0 0 15px;
+  border: 1px solid #ddd;
+  border-top: 2px solid #FF6600;
+  padding: 14px 14px;
+  background: url(../images/bg-gradient-01.png) repeat-x bottom;
+  box-shadow: 0 2px 10px rgba(0,0,0,.2);
+  font-size: 16pt;
+  color: #FF6600;
+}
+.bk-block-content h2 {
+  margin: 0 0 10px;
+  font-size: 13pt;
+  background: #FF6600;
+  padding: 8px 12px;
+  border-radius: 3px;
+  color: #fff;
+  font-weight: normal;
+}
+.bk-block-content h3 {
+  margin: 0 0 20px;
+  border-bottom: 1px dotted #ccc;
+  padding: 0 5px 5px;
+}
+
+/* テーブル */
+.bk-block-content table {
+  border: 2px solid #ccc;
+  background: #fff;
+  width: 100%;
+}
+.bk-block-content table th {
+  background: #eee;
+  font-weight: bold;
+  vertical-align: top;
+}
+.bk-block-content table th,
+.bk-block-content table td {
+  padding: 8px;
+}
+
+/* リスト */
+.bk-block-content ul,
+.bk-block-content ol {
+}
+
+/* 引用 */
+.bk-block-content blockquote {
+  border-left: 4px solid #ccc;
+  padding-left: 10px;
+  font-style: italic;
+}
+
+/* フォーム */
+.bk-block-content form {
+}
+.bk-block-content .bk-block-form-item {
+  margin-bottom: 20px;
+}
+.bk-block-content .bk-block-form-item label {
+  margin-bottom: 3px;
+  display: inline-block;
+}
+.bk-block-content .bk-block-form-item input[type="text"],
+.bk-block-content .bk-block-form-item textarea {
+  width: 90%;
+  max-width: 500px;
+  background: #eee;
+  border: none;
+  border-radius: 3px;
+  padding: 5px;
+  box-shadow: inset 0 2px 2px rgba(0,0,0,.4);
+}
+.bk-block-form div.bk-block-form-item span.required {
+  color: #f00;
+}
+.bk-block-form div.bk-block-form-error {
+  right: 10%;
+  top: 10px;
+  left: auto;
+}
+
+/* ライン */
+.bk-block-content hr {
+  height: 1px;
+  background: #ccc;
+  border: none;
+}
+
+/* ブロック「写真」の画像 */
+.bk-block-photo-box img {
+}
+
+/* ブロック「テキストと写真」と画像 */
+.bk-block-text-photo-image-box {
+}
+.bk-block-text-photo-image-box > img {
+}
+
+/* フォトギャラリー */
+ul.block-photo-gallery {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+ul.block-photo-gallery > li {
+  display: inline-block;
+  margin: 2px;
+}
+ul.block-photo-gallery > li img {
+  border: 1px solid #ddd;
+  padding: 1px;
+}
+
+/**************************************/
+/* ブログ */
+/**************************************/
+
+#entries {
+}
+/* 記事 */
+.entry {
+  margin-bottom: 40px;
+  overflow: hidden;
+}
+/* 記事タイトル */
+.entry > .title {
+  display: block;
+  text-decoration: none;
+}
+/* 投稿日時、コメント数など記事情報 */
+.entry > .sub {
+  text-align: right;
+  margin-bottom: 15px;
+  font-size: 10pt;
+}
+.entry > .sub > span {
+  display: inline-block;
+  margin: 0 6px;
+}
+/* 本文 */
+.entry > .body {
+}
+/* 続き前の本文 */
+.entry > .body > .body1 {
+  margin-bottom: 10px;
+}
+/* 続きの本文 */
+.entry > .body > .body2 {
+}
+/* 続きを読むボタン */
+.entry > a.more-read {
+}
+
+/* ページネーター */
+.bk-paginator {
+  margin-bottom: 20px;
+  text-align: right;
+}
+.bk-paginator > span.current,
+.bk-paginator > span a {
+  display: inline-block;
+  margin-left: 10px;
+  text-align: center;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 2px;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+.bk-paginator > span.current {
+}
+.bk-paginator > span a {
+  color: #333;
+  border: 1px solid #eee;
+}
+.bk-paginator > span.current,
+.bk-paginator > span a:hover {
+  background: #FF6600;
+  box-shadow: inset 0 0 10px #666;
+  color: #fff;
+  border: 1px solid transparent;
+}
+
+/* コメント */
+#comments > ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+#comments > ul > li {
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+  padding: 0 10px 15px 10px;
+}
+#comments > ul > li > div.name {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+#comments > ul > li > div.created {
+  font-size: 9pt;
+  margin-bottom: 10px;
+}
+#comments > ul > li > div.body {
+}
+
+
+
+
+
+
+
+
