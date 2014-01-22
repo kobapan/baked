@@ -3,7 +3,7 @@
  * AutoUpdater
  *
  * @author Masayuki Akiyama
- * @version 0.0.1
+ * @version 0.0.2
  */
 class AutoUpdater
 {
@@ -25,6 +25,10 @@ class AutoUpdater
   public function update()
   {
     try {
+      Configure::write('debug', 2);
+      ini_set('memory_limit', -1);
+      set_time_limit(0);
+
       if (!$this->zipUrl) throw new Exception(__('ZIP URLが不正です'));
       if (!$this->_targetDirPath) throw new Exception(__('インストールパスが不正です'));
 
