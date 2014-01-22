@@ -27,4 +27,16 @@ class SigninController extends AppController
     $this->title = __('サインイン');
   }
 
+  public function editmode($whitch = 1)
+  {
+    $this->staffFilter();
+    $this->Staff->editmode((BOOLEAN)$whitch);
+
+    $f = '/';
+    if (!empty($this->request->query['f'])) {
+      $f = urldecode($this->request->query['f']);
+    }
+    $this->redirect($f);
+  }
+
 }
