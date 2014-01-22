@@ -7,7 +7,7 @@ class Page extends AppModel
   public $valid = array(
     'add' => array(
       'title'          => 'required | maxLen[255]',
-      'name'           => 'required | maxLen[255] | alphaNumeric',
+      'name'           => 'required | maxLen[255] | alphaNumeric | available',
       'parent_page_id' => 'isExist[Page,id]',
       'hidden'         => 'valid_no_hidden',
     ),
@@ -24,7 +24,10 @@ class Page extends AppModel
     'entries_count' => 'SELECT COUNT(Entry.id) FROM entries as Entry WHERE Entry.page_id = Page.id',
     'comments_count' => 'SELECT COUNT(Comment.id) FROM comments as Comment WHERE Comment.entry_id IN (SELECT Entry.id FROM entries as Entry WHERE Entry.page_id = Page.id)',
   );
-  public $columnLabels = array();
+  public $columnLabels = array(
+    'title' => 'タイトル',
+    'name' => 'ページ名',
+  );
   public static $CAN_COMMENT = array();
 
   public function __construct($id = false, $table = null, $ds = null)
@@ -162,6 +165,9 @@ class Page extends AppModel
 
     if (isset($this->validate['hidden']['valid_no_hidden'])) {
       $this->validate['hidden']['valid_no_hidden']['message'] = __('トップページをセットできませんでした。');
+    }
+    if (isset($this->validate['name']['valid_available'])) {
+      $this->validate['name']['valid_available']['message'] = sprintf('"%s"という文字列は使用できません', $this->data[$this->name]['name']);
     }
   }
 

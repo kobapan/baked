@@ -3,6 +3,10 @@ CakePlugin::loadAll(array(
   array('bootstrap' => TRUE),
 ));
 
+Configure::write('Config.unavailable', array(
+  'system', 'plugin', 'admin', 'files',
+));
+
 Cache::config('default', array('engine' => 'File'));
 
 Configure::write('Dispatcher.filters', array(
