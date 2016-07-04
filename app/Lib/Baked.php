@@ -50,7 +50,7 @@ class Baked extends Box
         $deleted = TRUE;
       }
 
-      $r = rename($pluginPath, $destPath);
+      $r = copyRecursively($pluginPath, $destPath);
       if (!$r) throw new Exception(__('プラグインをインストールできませんでした'));
 
       return TRUE;
